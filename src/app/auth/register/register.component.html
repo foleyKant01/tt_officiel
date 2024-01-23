@@ -3,7 +3,7 @@
   <img src="" alt="Logo Trouvez Tous">
 </div>
 <div id="wrapper">
-  <form>
+  <form [formGroup]="createuser" (submit)="Createuser()">
     <h2>Login</h2>
     <hr><br>
     <div class="div-input">

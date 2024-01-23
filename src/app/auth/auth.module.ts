@@ -6,6 +6,8 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 
 @NgModule({
@@ -13,6 +15,8 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     AuthComponent,
     LoginComponent,
     RegisterComponent,
+    ReactiveFormsModule,
+    RouterModule
     ForgotpasswordComponent
   ],
   imports: [
