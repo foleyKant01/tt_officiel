@@ -16,7 +16,7 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
     LoginComponent,
     RegisterComponent,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
     ForgotpasswordComponent
   ],
   imports: [
