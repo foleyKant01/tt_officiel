@@ -1,20 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  ngOnInit(value: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private api: HttpClient) { }
 
   CreateUser(body:any){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/ json'
+        'Content-Type': 'application/json',
       })
     }
     return this.api.post("http://127.0.0.1:5000/api/user/create", body, httpOptions)
+  }
+
+
+  LoginUser(body:any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+    return this.api.post('http://127.0.0.1:5000/api/user/login', body, httpOptions);
   }
 
 

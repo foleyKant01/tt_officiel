@@ -11,21 +11,21 @@ import { ApiService } from 'src/app/api.service';
 export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
 
   constructor(private router: Router, private http: ApiService){}
 
   createuser: FormGroup = new FormGroup(
     {
-      username: new FormControl(null, Validators.required),
       firstname: new FormControl(null, Validators.required),
       lastname: new FormControl(null, Validators.required),
-      email: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
+      username: new FormControl(null, Validators.required),
       mobile: new FormControl(null, Validators.required),
       address: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required)
+      email: new FormControl(null, Validators.required),
+      city: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
     }
   )
 

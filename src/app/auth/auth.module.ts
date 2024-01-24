@@ -15,13 +15,16 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    ReactiveFormsModule,
-    RouterModule,
+
+    // RouterModule,
     ForgotpasswordComponent
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    RouterOutlet,
+    RouterModule
   ]
 })
 export class AuthModule { }

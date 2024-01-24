@@ -3,11 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from'@angular/common/http';
 
-// import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [NotfoundComponent],
@@ -16,6 +15,7 @@ import { Router, RouterModule } from '@angular/router';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    // RouterModule.forRoot({routes:Router})
 
   ],
   providers: [],
