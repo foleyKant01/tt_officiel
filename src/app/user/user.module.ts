@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { UsHomeComponent } from './us-home/us-home.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    UsHomeComponent
+    UsHomeComponent,
+    SidebarComponent,
   ],
   imports: [
     CommonModule,
