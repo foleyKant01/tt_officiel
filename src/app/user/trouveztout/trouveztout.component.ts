@@ -25,7 +25,7 @@ selectItems(items: string) {
 }
 
 submitForm() {
-  if (!this.filteredItems.includes(this.searchIterms)) {
+  if (!this.items.includes(this.searchIterms)) {
     this.showError = true;
     setTimeout(() => {
       this.showError = false;
