@@ -11,6 +11,7 @@
 	<meta name="author" content="SemiColonWeb">
 	<meta name="description" content="Create Academic Websites with Canvas Template. Get Canvas to build powerful websites easily with the Highly Customizable &amp; Best Selling Bootstrap Template, today.">
 
+
   <link rel="stylesheet" href="https://use.typekit.net/mym7qil.css">
 	<link rel="stylesheet" href="/assets/style.css">
 	<link rel="stylesheet" href="/assets/css/font-icons.css">
@@ -19,13 +20,81 @@
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700;900&family=Roboto:wght@700;900&family=Roboto+Slab&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="/assets/include/rs-plugin/css/settings.css" media="screen">
+	<link rel="stylesheet" href="/assets/include/rs-plugin/css/layers.css">
+	<link rel="stylesheet" href="/assets/include/rs-plugin/css/navigation.css">
+
+  <style>
+		.tp-video-play-button { display: none !important; }
+		.tp-caption { white-space: nowrap; }
+	</style>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-<body class="stretched side-header dark">
+<body class="stretched side-header ">
   <app-root></app-root>
 
   <script src="/assets/js/plugins.min.js"></script>
   <script src="/assets/js/functions.bundle.js"></script>
+
+  <script src="/assets/include/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+	<script src="/assets/include/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+	<script src="/assets/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+	<script src="/assets/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+	<script src="/assets/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+	<script src="/assets/include/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+
+	<script>
+		var tpj=jQuery;
+		var revapi98;
+
+		tpj(document).ready(function() {
+			if(tpj("#rev_slider_98_1").revolution == undefined){
+				revslider_showDoubleJqueryError("#rev_slider_98_1");
+			}else{
+				revapi98 = tpj("#rev_slider_98_1").show().revolution({
+					sliderType:"hero",
+					jsFileLocation:"include/rs-plugin/js/",
+					sliderLayout:"fullscreen",
+					dottedOverlay:"none",
+					delay:9000,
+					navigation: {
+					},
+					responsiveLevels:[1200,992,768,480,320],
+					gridwidth:[1140,940,720,420,280],
+					gridheight:[600,500,400,300,200],
+					lazyType:"none",
+					parallax: {
+						type:"mouse",
+						origo:"slidercenter",
+						speed:2000,
+						levels:[2,3,4,5,6,7,12,16,10,50],
+					},
+					fullScreenOffsetContainer:"header",
+					shadow:0,
+					spinner:"off",
+					autoHeight:"off",
+					disableProgressBar:"on",
+					hideThumbsOnMobile:"off",
+					hideSliderAtLimit:0,
+					hideCaptionAtLimit:0,
+					hideAllCaptionAtLilmit:0,
+					debugMode:false,
+					fallbacks: {
+						simplifyAll:"off",
+						disableFocusListener:false,
+					}
+				});
+			}
+		});	/*ready*/
+	</script>
+
+
 </body>
 </html>

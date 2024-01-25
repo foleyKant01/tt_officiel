@@ -1,0 +1,21 @@
+<div style="height: 905px;" class="container-fluid">
+  <div style="width: 90%!important;" class="container">
+    <h1 class="op-06">Looking for something</h1><br>
+    <form class="form-inline m-0 p-0" (ngSubmit)="submitForm()">
+      <div style="display: flex;" class="form-group">
+        <input style="width: 80%;" type="text" class="form-control m-0" id="searchIterms" [(ngModel)]="searchIterms" name="searchIterms"(input)="filterItems()" placeholder="Enter something">
+        <button style="width: 20%;" type="submit" class="btn btn-primary m-0 p-0">Search</button>
+      </div>
+    </form>
+    <div style="margin-left: -1px; width: 80.3%;" *ngIf="searchIterms && filteredItems.length > 0">
+      <ul class="ulsearch">
+        <li *ngFor="let name of filteredItems" (click)="selectItems(name)">{{ name }}</li>
+      </ul>
+    </div>
+    <div *ngIf="showError" class="error-message">
+      <p>Erreur: Veuillez sélectionner un element dans la liste.</p>
+    </div>
+  </div>
+</div>
+
+

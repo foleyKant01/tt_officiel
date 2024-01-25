@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Localisation automatique</title>
+</head>
+<body>
+
+  <h1>Localisation automatique</h1>
+
+  <button onclick="getLocation()">Obtenir la localisation</button>
+
+  <p id="demo"></p>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        document.getElementById("demo").innerHTML = "La géolocalisation n'est pas supportée par votre navigateur.";
+      }
+    }
+
+    function showPosition(position) {
+      console.log("Position obtenue avec succès :", position);
+
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      document.getElementById("demo").innerHTML = "Latitude : " + latitude + "<br>Longitude : " + longitude;
+    }
+
+    function showError(error) {
+      console.error("Erreur de géolocalisation :", error);
+
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          document.getElementById("demo").innerHTML = "L'utilisateur a refusé la demande de localisation."
+          break;
+        case error.POSITION_UNAVAILABLE:
+          document.getElementById("demo").innerHTML = "Les informations de localisation ne sont pas disponibles."
+          break;
+        case error.TIMEOUT:
+          document.getElementById("demo").innerHTML = "La demande de localisation a expiré."
+          break;
+        case error.UNKNOWN_ERROR:
+          document.getElementById("demo").innerHTML = "Une erreur inconnue s'est produite."
+          break;
+      }
+    }
+  </script>
+
+</body>
+</html>

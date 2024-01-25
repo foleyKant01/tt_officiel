@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
-import { UsHomeComponent } from './us-home/us-home.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { TrouveztoutComponent } from './trouveztout/trouveztout.component';
+import { PubliciteComponent } from './publicite/publicite.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    UsHomeComponent,
-    SidebarComponent,
+    TrouveztoutComponent,
+    PubliciteComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     UserRoutingModule
   ]
 })
