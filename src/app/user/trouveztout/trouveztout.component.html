@@ -12,8 +12,11 @@
         <li *ngFor="let items of filteredItems" (click)="selectItems(items)">{{ items }}</li>
       </ul>
     </div>
-    <div *ngIf="showError" class="error-message">
-      <p>Erreur: Veuillez sélectionner un element dans la liste qui vous est proposée.</p>
+    <div *ngIf="showError" class="error-message" Class="mb-0">
+      <p Class="mb-0">Erreur: Veuillez sélectionner un element dans la liste qui vous est proposée.</p>
+    </div>
+    <div style="text-align: center; margin-top: 50px;" class="op-06">
+      <p>Localisation: </p>
     </div>
   </div>
 </div>

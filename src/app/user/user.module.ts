@@ -6,6 +6,7 @@ import { UserComponent } from './user.component';
 import { TrouveztoutComponent } from './trouveztout/trouveztout.component';
 import { PubliciteComponent } from './publicite/publicite.component';
 import { FormsModule } from '@angular/forms';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     UserComponent,
     TrouveztoutComponent,
     PubliciteComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,

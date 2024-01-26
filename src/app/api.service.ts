@@ -10,7 +10,19 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
 
+  private apiUrl = 'http://127.0.0.1:5000/api/categories/readall';
+
+
   constructor(private api: HttpClient) { }
+
+
+   // Api Categories
+
+   ReadAllCategories(): Observable<any>{
+    return this.api.get<any[]>("http://127.0.0.1:5000/api/categories/readall")
+  }
+
+  // Api user
 
   CreateUser(body:any){
     const httpOptions = {
@@ -32,8 +44,8 @@ export class ApiService {
   }
 
 
-  ReadAllUser(){
-    return this.api.get("http://127.0.0.1:5000/api/user/readall")
+  ReadAllUser(): Observable<any>{
+    return this.api.get<any>("http://127.0.0.1:5000/api/user/readall")
   }
 
 
@@ -71,4 +83,10 @@ export class ApiService {
     return this.api.post("http://127.0.0.1:5000/api/user/delete", body, httpOptions)
   }
 
+
+
+
+
 }
+
+
