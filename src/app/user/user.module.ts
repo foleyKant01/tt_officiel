@@ -5,8 +5,9 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { TrouveztoutComponent } from './trouveztout/trouveztout.component';
 import { PubliciteComponent } from './publicite/publicite.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './settings/settings.component';
+import { SearchresultComponent } from './searchresult/searchresult.component';
 
 
 @NgModule({
@@ -15,10 +16,12 @@ import { SettingsComponent } from './settings/settings.component';
     TrouveztoutComponent,
     PubliciteComponent,
     SettingsComponent,
+    SearchresultComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     UserRoutingModule
   ]
 })

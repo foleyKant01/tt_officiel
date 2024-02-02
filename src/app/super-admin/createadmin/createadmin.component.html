@@ -4,16 +4,8 @@
 </div>
 <div id="wrapper">
   <form [formGroup]="createuser" (submit)="Createuser()">
-    <h2>Register</h2>
+    <h2>Create Admin</h2>
     <hr><br>
-    <div class="div-input">
-      <label for="exampleInputEmail1" class="form-label">Firstname:</label>
-      <input type="email" class="form-control" formControlName="firstname" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div><br>
-    <div class="mt-2 div-input">
-      <label for="exampleInputEmail1" class="form-label">Lastname:</label>
-      <input type="email" class="form-control" formControlName="lastname" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div><br>
     <div class="mt-2 div-input">
       <label for="exampleInputEmail1" class="form-label">Username:</label>
       <input type="email" class="form-control" formControlName="username" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -21,10 +13,6 @@
     <div class="mt-2 div-input">
       <label for="exampleInputEmail1" class="form-label">Mobile:</label>
       <input type="email" class="form-control" formControlName="mobile" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div><br>
-    <div class="mt-2 div-input">
-      <label for="exampleInputEmail1" class="form-label">Address:</label>
-      <input type="email" class="form-control" formControlName="address" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div><br>
     <div class="mt-2 div-input">
       <label for="exampleInputEmail1" class="form-label">Email:</label>
@@ -37,11 +25,10 @@
     <div class="mt-2 div-input">
       <label for="exampleInputPassword1" class="">Password:</label>
       <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1">
-    </div><br><br>
+    </div><br>
     <div class="mt-2" style="display: flex; justify-content: space-between;">
-      <button type="submit" class="btn btn-primary">Register:</button>
-     <a routerLink="/auth/login/">Do you have an account</a>
+      <button type="submit" class="btn btn-primary">Create:</button>
     </div><br>
   </form>
 </div>
-<div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div>
+<br><br>

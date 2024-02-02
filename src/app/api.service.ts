@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
+import { Observable, catchError, pipe, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,10 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
 
-  private apiUrl = 'http://127.0.0.1:5000/api/categories/readall';
+  private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
 
 
-  constructor(private api: HttpClient) { }
+  constructor(private api: HttpClient) {}
 
 
    // Api Categories
@@ -41,6 +41,7 @@ export class ApiService {
       })
     }
     return this.api.post('http://127.0.0.1:5000/api/user/login', body, httpOptions);
+    // return this.api.post('mysql+pymysql://root:@localhost/tt_officiel', body, httpOptions)
   }
 
 

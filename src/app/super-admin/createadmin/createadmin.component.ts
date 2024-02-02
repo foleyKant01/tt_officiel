@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  selector: 'app-createadmin',
+  templateUrl: './createadmin.component.html',
+  styleUrls: ['./createadmin.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class CreateadminComponent {
+
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
 
   constructor(private router: Router, private http: ApiService){}
 
-  updateuser: FormGroup = new FormGroup(
+  createuser: FormGroup = new FormGroup(
     {
       firstname: new FormControl(null, Validators.required),
       lastname: new FormControl(null, Validators.required),
@@ -28,9 +29,9 @@ export class SettingsComponent implements OnInit {
     }
   )
 
-  Updateuser(){
-    this.http.UpdateUser(this.updateuser.value).subscribe({
-      next: (reponse:any) => (
+  Createuser(){
+    this.http.CreateUser(this.createuser.value).subscribe({
+      next: (reponse:any)=>(
         console.log(reponse)
       )
     })
