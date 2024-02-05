@@ -1,6 +1,11 @@
-#wrapper{
+#wrappe{
   padding-top: 5%;
   display: flex;
+  width: auto !important;
+  margin-bottom: 0px;
+  position: relative;
+  float: none;
+  margin-left: 0px!important;
   justify-content: space-around;
 }
 
@@ -38,7 +43,7 @@ a{
 }
 
 .Copyrights{
-  margin-top: 25px;
+  margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
@@ -53,4 +58,14 @@ label{
   display: flex;
   justify-content: space-between;
   padding-right: 75px;
+}
+
+label{
+  min-width: 90px!important;
+  color: #656565;
+  padding-top: 6px;
+}
+
+input{
+  height: 35px;
 }
