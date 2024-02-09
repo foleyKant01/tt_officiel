@@ -9,7 +9,7 @@ import { AdHomeComponent } from './ad-home/ad-home.component';
 @NgModule({
   declarations: [
     AdminComponent,
-    AdHomeComponent
+    AdHomeComponent,
   ],
   imports: [
     CommonModule,

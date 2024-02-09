@@ -50,7 +50,7 @@ export class ApiService {
   }
 
 
-  ReadSingleUser(body:any){
+  ReadSingleUser(u_uid:any){
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -58,7 +58,7 @@ export class ApiService {
       })
     };
 
-    return this.api.post("http://127.0.0.1:5000/api/user/readsingle", body, httpOptions)
+    return this.api.get("http://127.0.0.1:5000/api/user/readsingle/${u_uid}", httpOptions);
   }
 
   UpdateUser(body:any){

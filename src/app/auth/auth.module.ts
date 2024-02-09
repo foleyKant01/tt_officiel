@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { ReadsingleComponent } from './readsingle/readsingle.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
     RegisterComponent,
 
     // RouterModule,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    ReadsingleComponent
   ],
   imports: [
     CommonModule,
