@@ -22,7 +22,7 @@ import { SearchresultComponent } from './searchresult/searchresult.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    UserRoutingModule
+    UserRoutingModule,
   ]
 })
 export class UserModule { }

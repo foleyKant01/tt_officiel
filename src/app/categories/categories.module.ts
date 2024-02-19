@@ -8,6 +8,9 @@ import { ReadsingleCategoriesComponent } from './readsingle-categories/readsingl
 import { ReadallCategoriesComponent } from './readall-categories/readall-categories.component';
 import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
 import { DeleteCategoriesComponent } from './delete-categories/delete-categories.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AppComponent } from '../app.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
@@ -17,11 +20,15 @@ import { DeleteCategoriesComponent } from './delete-categories/delete-categories
     ReadsingleCategoriesComponent,
     ReadallCategoriesComponent,
     UpdateCategoriesComponent,
-    DeleteCategoriesComponent
+    DeleteCategoriesComponent,
+    SpinnerComponent,
+
   ],
   imports: [
+    AppComponent,
     CommonModule,
-    CategoriesRoutingModule
+    ReactiveFormsModule,
+    CategoriesRoutingModule,
   ]
 })
 export class CategoriesModule { }

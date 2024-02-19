@@ -14,11 +14,10 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
-    // RouterModule.forRoot({routes:Router})
-
+    ReactiveFormsModule,
+    RouterOutlet,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

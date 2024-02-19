@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CreateCategoriesComponent } from './categories/create-categories/create-categories.component';
 
 @Component({
   selector: 'app-root',

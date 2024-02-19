@@ -16,12 +16,6 @@ export class ApiService {
   constructor(private api: HttpClient) {}
 
 
-   // Api Categories
-
-   ReadAllCategories(): Observable<any>{
-    return this.api.get<any[]>("http://127.0.0.1:5000/api/categories/readall")
-  }
-
   // Api user
 
   CreateUser(body:any){
@@ -85,9 +79,22 @@ export class ApiService {
   }
 
 
+   // Api Categories
+
+   ReadAllCategories(): Observable<any>{
+    return this.api.get<any[]>("http://127.0.0.1:5000/api/categories/readall")
+  }
 
 
 
+  CreateCategories(body:any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+    return this.api.post("http://127.0.0.1:5000/api/categories/create", body, httpOptions)
+  }
 }
 
 

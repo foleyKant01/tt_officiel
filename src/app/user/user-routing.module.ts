@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
-import { TrouveztoutComponent } from './trouveztout/trouveztout.component';
 import { PubliciteComponent } from './publicite/publicite.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SearchresultComponent } from './searchresult/searchresult.component';
+import { TrouveztoutComponent } from './trouveztout/trouveztout.component';
 
 const routes: Routes = [
   { path:'', component: UserComponent,
