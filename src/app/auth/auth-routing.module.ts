@@ -9,9 +9,9 @@ import { ReadsingleComponent } from './readsingle/readsingle.component';
 const routes: Routes = [
   { path:'', component:AuthComponent,
   children: [
-    { path:'', redirectTo:'login', pathMatch:'full' },
-    { path:'login', component:LoginComponent },
+    { path:'', redirectTo:'register', pathMatch:'full' },
     { path:'register', component:RegisterComponent },
+    { path:'login', component:LoginComponent },
     { path:'forgotpassword', component:ForgotpasswordComponent },
     { path:'readsingle', component:ReadsingleComponent },
 

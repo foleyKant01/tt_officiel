@@ -3,13 +3,16 @@
     <h1 class="op-06">Looking for something</h1><br>
     <form class="form-inline m-0 p-0" (ngSubmit)="submitForm()">
       <div style="display: flex;" class="form-group">
-        <input style="width: 80%;" type="text" class="form-control m-0" id="searchIterms" [(ngModel)]="searchIterms" name="searchIterms"(input)="filterItems()" placeholder="Entrer une catégorie">
+        <input style="width: 80%;" type="text" class="form-control m-0" id="searchIterms"
+        [(ngModel)]="searchIterms" name="searchIterms"(input)="filterItems()" placeholder="Entrer une catégorie">
         <button style="width: 20%;" type="submit" class="btn btn-primary m-0 p-0">Search</button>
       </div>
     </form>
     <div style="margin-left: -1px; width: 80.3%;" *ngIf="searchIterms && filteredItems.length > 0">
       <ul class="ulsearch">
-        <li *ngFor="let items of filteredItems" (click)="selectItems(items)">{{ items }}</li>
+        <li *ngFor="let category of filteredItems" (click)="selectItems(category)">
+          {{ category }}
+        </li>
       </ul>
     </div>
     <div *ngIf="showError" class="error-message" Class="mb-0">
@@ -20,5 +23,30 @@
     </div>
   </div>
 </div>
+
+
+<!-- <br><br><br><br>
+<div style="text-align: center;" class="container">
+  <h2>RAPPORT DES AGENTS</h2><br>
+  <div class="row-ex row container">
+
+
+    <div class="card" style="width: 16rem; margin-left: 5px; cursor: pointer;" *ngFor="let item of data; let i = index">
+      <h6 class="card-subtitle mt-1 text-body-secondary" style="margin-left: 6em;">
+        <button type="submit" class="btn-close" (click)="closeCard(card)"></button>
+      </h6> -->
+      <!-- <div class="card-body" [routerLink]="['/superviseur', 'view_report', item?.uid, item?.report_id]"> -->
+        <!-- <div class="d-flex">
+          <h5 class="card-title"> {{item?.name}} </h5>
+          <h5 class="card-title"> {{item?.description}} </h5>
+          <h5 class="card-title"> {{item?.ca_uid}} </h5>
+
+        </div> -->
+        <!-- <p class="card-text"> {{item?.comment}} </p> -->
+      <!-- </div>
+    </div>
+
+
+</div> -->
 
 

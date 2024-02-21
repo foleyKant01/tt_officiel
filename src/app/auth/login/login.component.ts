@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         console.log(reponse);
         if (reponse.success) {
           console.log("Redirection vers la page profil");
-          this.router.navigate(['/user/trouveztout']);
+          this.router.navigate(['/user',' trouveztout']);
         }
       }
     })

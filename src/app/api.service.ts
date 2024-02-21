@@ -7,8 +7,9 @@ import { Observable, catchError, pipe, throwError } from 'rxjs';
 })
 export class ApiService {
   ngOnInit(value: any) {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
+
 
   private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
 

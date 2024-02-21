@@ -9,33 +9,48 @@ import { ApiService } from 'src/app/api.service';
 })
 export class TrouveztoutComponent implements OnInit {
 
-  categories: any;
-  items: string[] = ['John', 'Jane', 'Doe', 'Alice', 'Bob'];
+  category: any;
+  item: any;
+  searchCategories: string[] = [];
+  // items: string[] = ['John', 'Jane', 'Doe', 'Alice', 'Bob'];
+  searchItems: string[] = [];
   searchIterms: string = '';
   filteredItems: string[] = [];
+  filteredCategories: string[] = [];
   showError: boolean = false;
+  data: any;
 
   constructor(private router: Router, private http: ApiService){}
 
 
   ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.http.ReadAllCategories()?.subscribe({
+      next: (response:any) =>{
+        this.data = response?.categories
+        this.searchCategories = this.data.map((category: any) => category?.name);
+        console.log(this.searchCategories)
+      }
+    });
   }
 
   filterItems() {
-    this.filteredItems = this.items.filter(items =>
-      items.toLowerCase().includes(this.searchIterms.toLowerCase())
+    this.filteredItems = this.searchCategories.filter((category: string) =>
+      category.toLowerCase().includes(this.searchIterms.toLowerCase())
     );
-}
+  }
 
-selectItems(items: string) {
-  this.searchIterms = items;
-  this.filteredItems = [];
-  this.showError = false;
-
-}
+  selectItems(category: string) {
+    this.searchIterms = category;
+    this.filteredItems = [];
+    this.showError = false;
+  }
 
 submitForm() {
-  if (!this.items.includes(this.searchIterms)) {
+  if (!this.searchCategories.includes(this.searchIterms)) {
     this.showError = true;
     setTimeout(() => {
       this.showError = false;

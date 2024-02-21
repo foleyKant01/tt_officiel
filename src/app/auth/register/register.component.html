@@ -7,12 +7,8 @@
     <h2>Register</h2>
     <hr><br>
     <div class="div-input">
-      <label for="exampleInputEmail1" class="form-label">Firstname:</label>
-      <input type="text" class="form-control" formControlName="firstname" aria-describedby="emailHelp">
-    </div><br>
-    <div class="mt-2 div-input">
-      <label for="exampleInputEmail1" class="form-label">Lastname:</label>
-      <input type="text" class="form-control" formControlName="lastname" aria-describedby="emailHelp">
+      <label for="exampleInputEmail1" class="form-label">Full name:</label>
+      <input type="text" class="form-control" formControlName="fullname" aria-describedby="emailHelp">
     </div><br>
     <div class="mt-2 div-input">
       <label for="exampleInputEmail1" class="form-label">Username:</label>
@@ -37,10 +33,10 @@
     <div class="mt-2 div-input">
       <label for="exampleInputPassword1" class="">Password:</label>
       <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1">
-    </div><br><br>
+    </div><br>
     <div class="mt-2" style="display: flex; justify-content: space-between;">
       <button type="submit" class="btn btn-primary">Register:</button>
-     <a routerLink="/auth/login/">Do you have an account</a>
+     <a style="color: rgb(18, 129, 255);" routerLink="/auth/login/">Do you have an account</a>
     </div><br>
   </form>
 </div>

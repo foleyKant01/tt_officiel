@@ -18,8 +18,7 @@ export class RegisterComponent implements OnInit{
 
   createuser: FormGroup = new FormGroup(
     {
-      firstname: new FormControl(null, Validators.required),
-      lastname: new FormControl(null, Validators.required),
+      fullname: new FormControl(null, Validators.required),
       username: new FormControl(null, Validators.required),
       mobile: new FormControl(null, Validators.required),
       address: new FormControl(null, Validators.required),
