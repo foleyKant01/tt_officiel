@@ -5,7 +5,7 @@ import { CreateCategoriesComponent } from './categories/create-categories/create
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AppComponent],
+  imports: [RouterOutlet,AppComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

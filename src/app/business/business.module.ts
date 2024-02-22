@@ -7,6 +7,8 @@ import { ReadallBusinessComponent } from './readall-business/readall-business.co
 import { ReadsingleBusinessComponent } from './readsingle-business/readsingle-business.component';
 import { UpdateBusinessComponent } from './update-business/update-business.component';
 import { DeleteBusinessComponent } from './delete-business/delete-business.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { DeleteBusinessComponent } from './delete-business/delete-business.compo
     DeleteBusinessComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
+    FormsModule,
     BusinessRoutingModule
   ]
 })

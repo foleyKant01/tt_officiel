@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from'@angular/common/http';
 
 import { NotfoundComponent } from './notfound/notfound.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AppComponent } from './app.component';
 
@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
   declarations: [NotfoundComponent],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
