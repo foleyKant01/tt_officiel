@@ -5,15 +5,23 @@
       <div class="container mw-md">
         <h3 class="h1 fw-bolder mb-4">Create Business</h3><br><br><br>
         <div class="row col-mb-30 gutter-50">
-          <form class="row" method="post" enctype="multipart/form-data">
+          <form class="row" (ngSubmit)="submitForm()" method="post" enctype="multipart/form-data">
             <div class="col-md-6">
               <div class="col-12 form-group">
                 <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Categorie:</label>
-                <select ngModel="category" name="categorie" id="categorie" class="form-control fw-semibold">
+                    <input style="width: 80%;" type="text" class="form-control m-0" id="searchIterms"
+                    [(ngModel)]="searchIterm" name="searchIterm"(input)="filterItems()">
+                <div style="margin-left: -1px; width: 80.3%;" *ngIf="searchIterm && filteredItems.length > 0">
+                  <ul class="ulsearch">
+                    <li *ngFor="let category of filteredItems" (click)="selectItems(category)">
+                      {{ category }}
+                    </li>
+                  </ul>
+                </div>
+                <!-- <select class="form-control fw-semibold" name="" id="">
                   <option value="">Choose</option>
-                  <!-- <option *ngFor="let category of searchCategories" [value]="category">{{ category }}</option> -->
-                  <option>{{ category }}</option>
-                </select>
+                  <div  *ngFor="let category of searchCategories" (click)="selectItems(category)">{{category}}</div>
+                </select> -->
               </div>
               <div class="clear"></div>
               <div class="col-12 form-group">

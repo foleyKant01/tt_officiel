@@ -7,22 +7,21 @@ import { ReadallBusinessComponent } from './readall-business/readall-business.co
 import { ReadsingleBusinessComponent } from './readsingle-business/readsingle-business.component';
 import { UpdateBusinessComponent } from './update-business/update-business.component';
 import { DeleteBusinessComponent } from './delete-business/delete-business.component';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    CreateBusinessComponent,
+    // CreateBusinessComponent,
     ReadallBusinessComponent,
     ReadsingleBusinessComponent,
     UpdateBusinessComponent,
     DeleteBusinessComponent
   ],
   imports: [
-    BrowserModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BusinessRoutingModule
   ]
 })

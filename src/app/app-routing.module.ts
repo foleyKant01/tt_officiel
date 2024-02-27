@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { CreateBusinessComponent } from './business/create-business/create-business.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
     path: 'advertisement',
     loadChildren: () => import('./advertisement/advertisement.module').then((m) => m.AdvertisementModule)
   },
+  { path: 'create-business', component: CreateBusinessComponent },
   { path: '**', component: NotfoundComponent }
 ];
 

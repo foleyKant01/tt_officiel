@@ -64,7 +64,7 @@ export class ApiService {
       })
     };
 
-    return this.api.post("http://127.0.0.1:5000/api/user/update", body, httpOptions)
+    return this.api.patch("http://127.0.0.1:5000/api/user/update", body, httpOptions)
   }
 
 
@@ -87,6 +87,17 @@ export class ApiService {
   }
 
 
+  ReadSingleCategories(u_uid:any){
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      })
+    };
+
+    return this.api.get("http://127.0.0.1:5000/api/categories/readsingle/${u_uid}", httpOptions);
+  }
+
 
   CreateCategories(body:any){
     const httpOptions = {
@@ -96,6 +107,67 @@ export class ApiService {
     }
     return this.api.post("http://127.0.0.1:5000/api/categories/create", body, httpOptions)
   }
+
+
+
+  DeleteCategories(body:any){
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      })
+    };
+
+    return this.api.post("http://127.0.0.1:5000/api/categories/delete", body, httpOptions)
+  }
+
+
+  UpdateCategories(body:any){
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      })
+    };
+
+    return this.api.patch("http://127.0.0.1:5000/api/categories/update", body, httpOptions)
+  }
+
+
+    // Api Business
+
+    ReadAllBusiness(): Observable<any>{
+      return this.api.get<any[]>("http://127.0.0.1:5000/api/business/readall")
+    }
+
+
+
+    CreateBusiness(body:any){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }
+      return this.api.post("http://127.0.0.1:5000/api/business/create", body, httpOptions)
+    }
+
+
+    // Api Advertisement
+
+    ReadAllAdvertisement(): Observable<any>{
+      return this.api.get<any[]>("http://127.0.0.1:5000/api/advertisement/readall")
+    }
+
+
+
+    CreateAdvertisement(body:any){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }
+      return this.api.post("http://127.0.0.1:5000/api/advertisement/create", body, httpOptions)
+    }
 }
 
 

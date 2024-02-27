@@ -1,1 +1,41 @@
-<p>readall-categories works!</p>
+<div style="padding: 20px;" class="container-fluid m-0">
+  <div style="background-color: white;" class="col-12 p-0 m-0">
+    <div class="col-12 p-0 m-0" style="display: flex;">
+      <div class="col-3 m-0">
+        <label style="color: black;" for=""> <b>Categories</b> </label>
+      </div>
+      <div class="col-9 m-0">
+        <label style="color: black;" for=""><b>Description</b></label>
+      </div>
+    </div>
+    <ul style="display: flex; border-bottom: 1px solid #ced4da;" class="m-0 p-0" *ngFor="let category of response.categories">
+      <li style="border: 1px solid #ced4da; border-bottom: 0px; padding-top: 5px; padding-bottom: 5px; padding-left: 10px;" class="col-3 m-0">{{ category.name }}</li>
+      <li style="border: 1px solid #ced4da; border-bottom: 0px; padding-top: 5px; padding-bottom: 5px; padding-left: 10px;"class="col-8 m-0">{{ category.description }}</li>
+      <div style="display: flex;" class="col-1">
+        <button (click)="editCategory(category.ca_uid)" style="border: 1px solid #ced4da; border-bottom: 0px;" class="col-6"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button style="border: 1px solid #ced4da; border-bottom: 0px;" class="col-6"><i class="fa-solid fa-trash-can"></i></button>
+      </div>
+    </ul>
+    <!-- <ul style="border-bottom: 1px solid #ced4da;" class="col-3 m-0">
+      <label style="color: black;" for=""> <b>Categories</b> </label>
+      <li style="border: 1px solid #ced4da; border-bottom: 0px; padding-top: 5px; padding-bottom: 5px; padding-left: 10px;" *ngFor="let category of searchCategories">
+        <span>{{category}}</span>
+      </li>
+    </ul>
+    <ul style="border-bottom: 1px solid #ced4da;"class="col-9 m-0">
+      <label style="color: black;" for=""><b>Description</b></label>
+      <li style="border: 1px solid #ced4da; border-bottom: 0px; padding-top: 5px; padding-bottom: 5px; padding-left: 10px;" *ngFor="let note of searchNote">
+        <span>{{note}}</span>
+      </li>
+    </ul> -->
+  </div>
+  <!-- <div *ngFor="let categoryId of [1, 2, 3]">
+    <h2>Catégorie {{ categoryId }}</h2>
+    <ul>
+      <li *ngFor="let element of getElementsByCategory(categoryId)">
+        {{ element.categoryId }}
+      </li>
+    </ul>
+  </div> -->
+
+</div>

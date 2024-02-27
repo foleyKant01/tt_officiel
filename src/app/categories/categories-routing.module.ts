@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriesComponent } from './categories.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ReadallCategoriesComponent } from './readall-categories/readall-categories.component';
+import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
 
 const routes: Routes = [
   { path:'', component:CategoriesComponent,
@@ -10,6 +11,7 @@ const routes: Routes = [
     { path:'', redirectTo:'create-categories', pathMatch:'full' },
     { path:'create-categories', component:CategoriesComponent },
     { path:'readall-categories', component:ReadallCategoriesComponent },
+    { path:'update-categories', component:UpdateCategoriesComponent },
     { path:'spinner', component:SpinnerComponent },
     // { path:'register', component:RegisterComponent },
     // { path:'forgotpassword', component:ForgotpasswordComponent },

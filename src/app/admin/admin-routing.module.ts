@@ -6,6 +6,7 @@ import { CreateCategoriesComponent } from '../categories/create-categories/creat
 import { ReadallCategoriesComponent } from '../categories/readall-categories/readall-categories.component';
 import { CreateBusinessComponent } from '../business/create-business/create-business.component';
 import { ReadallBusinessComponent } from '../business/readall-business/readall-business.component';
+import { UpdateCategoriesComponent } from '../categories/update-categories/update-categories.component';
 
 const routes: Routes = [
   { path:'', component: AdminComponent,
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path:'ad-home', component: AdHomeComponent },
     { path:'create-categories', component: CreateCategoriesComponent },
     { path:'readall-categories', component: ReadallCategoriesComponent },
+    { path:'update-categories/:ca_uid', component: UpdateCategoriesComponent },
     { path:'create-business', component: CreateBusinessComponent },
     { path:'readall-business', component: ReadallBusinessComponent },
     {path: 'settings',loadChildren: () => import('./settings/settings.module').then((m) => m.SettingsModule)},

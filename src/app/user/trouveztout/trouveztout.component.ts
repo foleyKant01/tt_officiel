@@ -13,7 +13,7 @@ export class TrouveztoutComponent implements OnInit {
   item: any;
   searchCategories: string[] = [];
   // items: string[] = ['John', 'Jane', 'Doe', 'Alice', 'Bob'];
-  searchItems: string[] = [];
+  searchItems: any[] = [];
   searchIterms: string = '';
   filteredItems: string[] = [];
   filteredCategories: string[] = [];

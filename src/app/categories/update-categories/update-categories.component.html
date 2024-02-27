@@ -1,1 +1,16 @@
-<p>update-categories works!</p>
+<!-- update-categories.component.html -->
+
+<div>
+  <h2>Modifier une catégorie</h2>
+  <form [formGroup]="updateCategoryForm" (ngSubmit)="updateCategory()">
+    <div>
+      <label for="name">Nom de la catégorie</label>
+      <input type="text" id="name" formControlName="name">
+    </div>
+    <div>
+      <label for="description">Description de la catégorie</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+    <button type="submit" [disabled]="loading">Modifier la catégorie</button>
+  </form>
+</div>
