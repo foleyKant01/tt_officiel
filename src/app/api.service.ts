@@ -95,7 +95,7 @@ export class ApiService {
       })
     };
 
-    return this.api.get("http://127.0.0.1:5000/api/categories/readsingle/${u_uid}", httpOptions);
+    return this.api.get("http://127.0.0.1:5000/api/categories/readsingle/${ca_uid}", httpOptions);
   }
 
 

@@ -1,16 +1,16 @@
-<!-- update-categories.component.html -->
-
-<div>
-  <h2>Modifier une catégorie</h2>
-  <form [formGroup]="updateCategoryForm" (ngSubmit)="updateCategory()">
-    <div>
-      <label for="name">Nom de la catégorie</label>
-      <input type="text" id="name" formControlName="name">
-    </div>
-    <div>
-      <label for="description">Description de la catégorie</label>
-      <textarea id="description" formControlName="description"></textarea>
-    </div>
-    <button type="submit" [disabled]="loading">Modifier la catégorie</button>
-  </form>
+<div class="update_ca_div container-fluid m-0">
+  <div class="update_ca">
+    <h2 style="margin-bottom: 30px;">Modifier une catégorie</h2>
+    <form [formGroup]="updateCategoryForm" (ngSubmit)="updateCategory()">
+      <div class="enter">
+        <label for="name">Nom de la catégorie: </label>
+        <input class="form-control" type="text" id="name" formControlName="name">
+      </div>
+      <div class="enter">
+        <label for="description">Description de la catégorie: </label>
+        <textarea class="form-control" id="description" formControlName="description"></textarea>
+      </div>
+      <button class="btn btn-primary m-0" type="submit" [disabled]="loading"><b>Modifier la catégorie</b></button>
+    </form>
+  </div>
 </div>

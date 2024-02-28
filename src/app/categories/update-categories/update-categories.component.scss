@@ -1,0 +1,47 @@
+.update_ca_div{
+  background-color: rgb(240, 240, 240);
+  padding: 50px;
+}
+.update_ca{
+  // border: 1px solid red;
+  background-color: white;
+  padding: 30px;
+  text-align: center;
+  height: auto;
+  width: 500px;
+  border-radius: 10px;
+  box-shadow: -1px 2px 12px #b1b1b1,
+    -8px -8px 10px #ffffff;
+
+}
+.enter{
+  height: 35px;
+  display: flex;
+  text-align: right;
+  margin-bottom: 20px;
+}
+.enter > label{
+  height: 100%;
+  padding: 6px;
+  width: 47.5%;
+  margin-right: 5%;
+}
+.enter > input{
+  height: 100%;
+  width: 47.5%;
+}
+.enter > textarea{
+  min-height: 100%;
+  width: 47.5%;
+
+}
+button{
+  background-color: black;
+  font-size: small;
+  border: 0px;
+}
+
+button:hover{
+  background-color: rgb(249, 190, 121);
+  font-size: small;
+}

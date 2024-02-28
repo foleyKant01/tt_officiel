@@ -14,7 +14,7 @@ import { ApiService } from 'src/app/api.service';
 export class UpdateCategoriesComponent implements OnInit {
   updateCategoryForm: FormGroup;
   loading = false;
-  categoryId: string = "";
+  categoryId: any;
 
   constructor(private router: ActivatedRoute, private http: ApiService, private formBuilder: FormBuilder){
     this.updateCategoryForm = this.formBuilder.group({
@@ -44,7 +44,7 @@ this.http.ReadSingleCategories(this.categoryId).subscribe((category: any) => {
       this.loading = true;
 
       const updatedCategory = {
-        id: this.categoryId,
+        ca_uid: this.categoryId,
         name: this.updateCategoryForm.value.name,
         description: this.updateCategoryForm.value.description
       };
