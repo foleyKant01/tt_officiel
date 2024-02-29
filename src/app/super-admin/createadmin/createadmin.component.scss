@@ -2,12 +2,13 @@
   padding-top: 5%;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 200px;
 }
 
 form{
 
   padding: 10px 30px 10px 30px;
-  min-width: 330px;
+  min-width: 450px;
   margin-left: -300px!important;
   margin-right: 5px;
   border-radius: 10px;
@@ -71,4 +72,16 @@ input{
 .div-input{
   display: flex;
   justify-content: space-between;
+}
+
+.blur-background {
+  filter: blur(5px); /* Appliquer un flou au contenu de la page */
+}
+.overlay {
+  position: fixed;
+  top: 65%;
+  left: 57.7%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Positionner le patienteur au-dessus du contenu de la page */
+  /* Autres styles pour le positionnement et l'apparence du patienteur */
 }

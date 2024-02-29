@@ -8,6 +8,7 @@ import { AllAdminComponent } from './all-admin/all-admin.component';
 import { CreateadminComponent } from './createadmin/createadmin.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../categories/spinner/spinner.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SaHomeComponent,
     AllAdminComponent,
     CreateadminComponent,
+    SpinnerComponent,
     SettingsComponent
   ],
   imports: [

@@ -22,7 +22,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
     UpdateCategoriesComponent,
     DeleteCategoriesComponent,
     SpinnerComponent,
-
   ],
   imports: [
     AppComponent,
