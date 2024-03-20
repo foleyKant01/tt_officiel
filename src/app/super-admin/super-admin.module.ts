@@ -8,7 +8,7 @@ import { AllAdminComponent } from './all-admin/all-admin.component';
 import { CreateadminComponent } from './createadmin/createadmin.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SpinnerComponent } from '../categories/spinner/spinner.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({

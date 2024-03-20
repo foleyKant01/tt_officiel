@@ -1,7 +1,7 @@
 <main class="container-fluid m-0">
-<span style="">Les données de ce tte page ne sont pas contantes ils évoluent en fonction du trafic sur le site </span>
-  <div style="border: 1px solid rgb(206, 206, 206); margin: 30px 0px auto 0px; background-color: white; border-radius: 3px;" class="row">
-    <div style="border-bottom: 1px solid rgb(206, 206, 206); padding: 10px;" class="col-12 m-0">Portfolio Performance</div>
+<span style="">Les données de ce tte page ne sont pas constantes ils évoluent en fonction du trafic sur le site </span>
+  <div style="border: 1px solid rgb(226, 226, 226); margin: 30px 0px auto 0px; background-color: white; border-radius: 3px;" class="row">
+    <div style=" padding: 10px;" class="col-12 m-0">Portfolio Performance</div>
     <div style="display: flex; padding: 20px 20px 0px 20px;" class="col-12 m-0">
       <div style="" class="col-4">
         <div style="text-align: center;" class="col-12">Categories</div>
@@ -54,9 +54,9 @@
     </div>
   </div><br><br>
   <div style="display: flex;" class="col-12">
-    <div style="" class="col-2"></div>
-    <figure style="border: 1px solid red; height: 300px; border-radius: 3px; background-color: white;" class="figure col-3">
-      <div class="col-12" style="height: 260px; border: 1px solid red; margin-bottom: 10px;">
+    <div class="col-2"></div>
+    <figure style=" height: 300px; border-radius: 3px; background-color: white;" class="figure col-3 p-1">
+      <div class="col-12" style="height: 260px; margin-bottom: 10px;">
         <!-- <div style="width: 100%; height: 100%;">
           <canvas id="trafficChart"></canvas>
         </div> -->
@@ -74,14 +74,13 @@
         </div>
 
         <canvas id="myChart"></canvas> -->
-        <div>
-          <input type="date" (change)="onDateChange($event)">
+        <div style=" height: 35px;" class="form-group col-6 d-flex">
+          <!-- <label class="col-4" for="from_date">From Date</label> -->
+          <input type="date"  class="form-control" id="from_date" aria-describedby="from_date" placeholder="dd/mm/yyyy">
         </div>
-        <canvas id="trafficChart" width="400" height="400"></canvas>
-
-
+        <canvas style="margin-top: -10px;" id="trafficChart" width="615" height="400"></canvas>
       </div>
-      <figcaption class="figure-caption text-end">A caption for the above image.</figcaption>
+      <figcaption class="figure-caption text-end mt-5">A caption for the above image.</figcaption>
     </figure>
     <div class="col-2"></div>
     <div style="border: 1px solid red; background-color: white; max-height: 300px;" class="col-3">

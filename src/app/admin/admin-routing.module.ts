@@ -7,6 +7,8 @@ import { ReadallCategoriesComponent } from '../categories/readall-categories/rea
 import { CreateBusinessComponent } from '../business/create-business/create-business.component';
 import { ReadallBusinessComponent } from '../business/readall-business/readall-business.component';
 import { UpdateCategoriesComponent } from '../categories/update-categories/update-categories.component';
+import { CreateAdverComponent } from '../advertisement/create-adver/create-adver.component';
+import { ReadallAdverComponent } from '../advertisement/readall-adver/readall-adver.component';
 
 const routes: Routes = [
   { path:'', component: AdminComponent,
@@ -18,6 +20,8 @@ const routes: Routes = [
     { path:'update-categories/:ca_uid', component: UpdateCategoriesComponent },
     { path:'create-business', component: CreateBusinessComponent },
     { path:'readall-business', component: ReadallBusinessComponent },
+    { path:'create-adver', component: CreateAdverComponent },
+    { path:'readall-adver', component: ReadallAdverComponent },
     {path: 'settings',loadChildren: () => import('./settings/settings.module').then((m) => m.SettingsModule)},
   ]
 }

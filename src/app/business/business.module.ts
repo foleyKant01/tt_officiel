@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    // CreateBusinessComponent,
+    CreateBusinessComponent,
     ReadallBusinessComponent,
     ReadsingleBusinessComponent,
     UpdateBusinessComponent,

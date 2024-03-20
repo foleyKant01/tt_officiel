@@ -71,7 +71,7 @@ export class AdHomeComponent implements OnInit {
     this.drawChart();
   }
 
-  // Get Categories
+  //Fonction pour readall business
 
   loadCategories() {
     this.http.ReadAllCategories()?.subscribe({
