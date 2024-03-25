@@ -8,6 +8,7 @@ import { ReadsingleBusinessComponent } from './readsingle-business/readsingle-bu
 import { UpdateBusinessComponent } from './update-business/update-business.component';
 import { DeleteBusinessComponent } from './delete-business/delete-business.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    BrowserModule,
     ReactiveFormsModule,
     BusinessRoutingModule
   ]

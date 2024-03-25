@@ -43,6 +43,18 @@ export class CreateBusinessComponent implements OnInit{
 
   constructor(private router: Router, private http: ApiService){}
 
+  //Fonction pour readall business
+
+  Readallbusiness() {
+    this.http.ReadAllBusiness()?.subscribe({
+      next: (response:any) =>{
+        this.data = response?.busi
+        this.searchBusiness = this.data.map((business: any) => business?.name);
+        console.log(this.searchBusiness)
+      }
+    });
+  }
+
   // Fonction create Business
 
   createbusiness: FormGroup = new FormGroup(
@@ -83,17 +95,7 @@ export class CreateBusinessComponent implements OnInit{
     }
   }
 
-  //Fonction pour readall business
 
-  Readallbusiness() {
-    this.http.ReadAllBusiness()?.subscribe({
-      next: (response:any) =>{
-        this.data = response?.busi
-        this.searchBusiness = this.data.map((business: any) => business?.name);
-        console.log(this.searchBusiness)
-      }
-    });
-  }
 
 
   // loadCategories() {
