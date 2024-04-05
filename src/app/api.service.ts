@@ -80,6 +80,29 @@ export class ApiService {
   }
 
 
+   // Api Teller
+
+   CreateTeller(body:any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+    return this.api.post("http://127.0.0.1:5000/api/teller/create", body, httpOptions)
+  }
+
+
+  LoginTeller(body:any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+    return this.api.post('http://127.0.0.1:5000/api/teller/login', body, httpOptions);
+    // return this.api.post('mysql+pymysql://root:@localhost/tt_officiel', body, httpOptions)
+  }
+
+
    // Api Categories
 
    ReadAllCategories(): Observable<any>{
