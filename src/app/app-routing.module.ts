@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'advertisement',
     loadChildren: () => import('./advertisement/advertisement.module').then((m) => m.AdvertisementModule)
   },
+  {
+    path: 'teller',
+    loadChildren: () => import('./teller/teller.module').then((m) => m.TellerModule)
+  },
   { path: 'create-business', component: CreateBusinessComponent },
   { path: '**', component: NotfoundComponent }
 ];
