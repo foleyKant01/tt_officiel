@@ -1,0 +1,86 @@
+h1{
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  text-transform: uppercase!important;
+  margin-top: 20%;
+}
+
+@media (max-width: 991px){
+  .container-fluid{
+    padding: 2rem!important;
+  }
+  .container{
+    min-width: 100%!important;
+    margin: 0px!important;
+    padding: 0px!important;
+  }
+}
+@media (max-width: 1450px){
+  .container{
+    min-width: 100%!important;
+    margin: 0px;
+  }
+}
+@media (max-width: 1450px){
+  .container-fluid{
+    padding: 02rem!important;
+  }
+}
+@media (max-width: 300px){
+  .container-fluid{
+    padding: 0.5rem!important;
+  }
+}
+@media (min-width: 1200px){
+  .container{
+  max-width: 80%!important;
+}
+}
+
+form{
+  height: 50px;
+}
+input{
+  height: 50px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+button{
+  height: 50px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+
+}
+.ulsearch{
+  border: 1px solid rgb(167, 167, 167);
+  list-style: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.ulsearch > li{
+  border-bottom: 1px solid rgb(167, 167, 167);
+}
+
+.proposition{
+  margin-left: -1px;
+  width: 80.3%;
+}
+
+.ulsearch > li:hover{
+  background-color: rgb(215, 240, 255);
+  cursor: pointer;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: red;
+}

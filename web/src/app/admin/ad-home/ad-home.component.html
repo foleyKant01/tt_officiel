@@ -1,0 +1,96 @@
+<main class="container-fluid m-0">
+<span style="">Les données de ce tte page ne sont pas constantes ils évoluent en fonction du trafic sur le site </span>
+  <div style="border: 1px solid rgb(226, 226, 226); margin: 30px 0px auto 0px; background-color: white; border-radius: 3px;" class="row">
+    <div style=" padding: 10px;" class="col-12 m-0">Portfolio Performance</div>
+    <div style="display: flex; padding: 20px 20px 0px 20px;" class="col-12 m-0">
+      <div style="" class="col-4">
+        <div style="text-align: center;" class="col-12">Categories</div>
+        <div style="display: flex;  margin-top: 10px; margin-bottom: 20px; justify-content: space-between;">
+          <div class="col-4"></div>
+          <div style="display: flex;" class="col-4">
+            <div style="width: 30px; height: 30px;">
+              <img src="./assets/demos/academic/images/person-thumb.jpg" alt="">
+            </div>
+            <div style="margin-left: 10px;">
+              <h1>{{searchCategories.length}}</h1>
+            </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+        <!-- <span style="text-align: center;"></span> -->
+      </div>
+      <div  style="" class="col-4">
+        <div style="text-align: center;" class="col-12">Business</div>
+        <div style="display: flex; margin-top: 10px; justify-content: space-between;">
+          <div class="col-4"></div>
+          <div style="display: flex;" class="col-4">
+            <div style="width: 30px; height: 30px;">
+              <img src="./assets/demos/academic/images/person-thumb.jpg" alt="">
+            </div>
+            <div style="margin-left: 10px;">
+              <h1>{{searchBusiness.length}}</h1>
+            </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+        <!-- <span style="text-align: center;"></span> -->
+      </div>
+      <div  style="" class="col-4">
+        <div style="text-align: center;" class="col-12">Advertisement</div>
+        <div style="display: flex; margin-top: 10px; justify-content: space-between;">
+          <div class="col-4"></div>
+          <div style="display: flex;" class="col-4">
+            <div style="width: 30px; height: 30px;">
+              <img src="./assets/demos/academic/images/person-thumb.jpg" alt="">
+            </div>
+            <div style="margin-left: 10px;">
+              <h1>{{searchAdvertisement.length}}</h1>
+            </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+        <!-- <span style="text-align: center;"></span> -->
+      </div>
+    </div>
+  </div><br><br>
+  <div style="display: flex;" class="col-12">
+    <div class="col-2"></div>
+    <figure style=" height: 300px; border-radius: 3px; background-color: white;" class="figure col-3 p-1">
+      <div class="col-12" style="height: 260px; margin-bottom: 10px;">
+        <!-- <div style="width: 100%; height: 100%;">
+          <canvas id="trafficChart"></canvas>
+        </div> -->
+        <!-- <div class="col-12 form-group">
+          <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Categorie:</label>
+          <select name="categorie" id="categorie" class="form-control fw-semibold">
+            <option value="">Choose</option>
+            <option *ngFor="let category of searchCategories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+
+        <div class="col-12 form-group">
+          <label for="datePicker">Select Date:</label>
+          <input type="date" id="datePicker" (change)="onDateSelect($event.target.value)" class="form-control">
+        </div>
+
+        <canvas id="myChart"></canvas> -->
+        <div style=" height: 35px;" class="form-group col-6 d-flex">
+          <!-- <label class="col-4" for="from_date">From Date</label> -->
+          <input type="date"  class="form-control" id="from_date" aria-describedby="from_date" placeholder="dd/mm/yyyy">
+        </div>
+        <canvas style="margin-top: -10px;" id="trafficChart" width="615" height="400"></canvas>
+      </div>
+      <figcaption class="figure-caption text-end mt-5">A caption for the above image.</figcaption>
+    </figure>
+    <div class="col-2"></div>
+    <div style="border: 1px solid red; background-color: white; max-height: 300px;" class="col-3">
+      <!-- <ul class="ulsearch">
+        <li *ngFor="let category of " >
+          {{ category }}
+        </li>
+      </ul> -->
+    </div>
+    <div class="col-2"></div>
+  </div>
+
+</main>

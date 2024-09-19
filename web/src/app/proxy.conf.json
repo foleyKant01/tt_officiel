@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "mysql+pymysql://root:@localhost/tt_officiel",
+    "secure": false
+  }
+}
