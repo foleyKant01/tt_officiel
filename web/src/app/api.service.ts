@@ -122,19 +122,20 @@ export class ApiService {
 
 
   ReadSingleCategories(body: any) {
-    return this.api.get("http://127.0.0.1:5000/api/categorie/readsinglecategorie",body);
+    return this.api.post("http://127.0.0.1:5000/api/categorie/readsinglecategorie",body);
   }
 
 
   DeleteCategories(body: any) {
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
-    };
-    return this.api.post("http://127.0.0.1:5000/api/categorie/deletecategorie", body, httpOptions)
+    }
+    return this.api.post("http://127.0.0.1:5000/api/categorie/deletecategorie",body, httpOptions);
   }
+
+
 
 
   UpdateCategories(body: any) {
@@ -145,7 +146,7 @@ export class ApiService {
       })
     };
 
-    return this.api.patch("http://127.0.0.1:5000/api/categorie/updatecategorie", body, httpOptions)
+    return this.api.post("http://127.0.0.1:5000/api/categorie/updatecategorie", body, httpOptions)
   }
 
 

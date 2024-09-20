@@ -12,17 +12,14 @@ class CategoriesApi(Resource):
         if route == "readsinglecategorie":
             return ReadSingleCategories()
         
+        if route == "deletecategorie":
+            return DeleteCategories()
+        
+        if route == "updatecategorie":
+            return UpdateCategories()
+        
+        
         
     def get(self, route):
         if route == "readallcategorie":
             return ReadAllCategories()
-
-    
-    def delete(self, route):
-         if route == "deletecategorie":
-            return DeleteCategories()
-         
-    def patch(self, route):
-        if route == "updatecategorie":
-            return UpdateCategories()
-        

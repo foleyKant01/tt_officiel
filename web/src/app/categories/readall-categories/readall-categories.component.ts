@@ -33,37 +33,36 @@ export class ReadallCategoriesComponent implements OnInit{
     this.http.ReadAllCategories()?.subscribe({
       next: (res:any) =>{
           this.data = res?.categorie
-          // this.searchCategories = this.data.map((category: any) => category?.name);
-          console.log(this.data)
+          // console.log(this.data)
       }
     });
   }
-  // loadDescription() {
-  //   this.http.ReadAllCategories()?.subscribe({
-  //     next: (response:any) =>{
-  //       if(response?.categories)  {
-  //         this.data_note = response?.categories
-  //         this.searchNote = this.data_note.map((note: any) => note?.description);
-  //         // console.log(this.searchNote)
-  //       }
-  //     }
-  //   });
-  // }
-  // loadDescription() {
-  //   this.http.ReadAllCategories()?.subscribe(
-  //     (response: any[]) =>{
-  //         this.response = response
-  //         console.log(this.response.categories)
-  //       }
-  //   );
-  // }
 
 
-  // Update Categories
-
-  editCategory(ca_uid: string) {
+  editCategorie(ca_uid: string, name: string) {
     // Redirigez l'utilisateur vers la page de modification avec l'ID de la catégorie dans l'URL
-    this.router.navigate(['admin' , 'update-categories', ca_uid]);
+    this.router.navigate(['admin' , 'update-categories', ca_uid, name]);
+  }
+
+
+  deleteCategorie(ca_uid: string): void {
+    let body = {
+      ca_uid: ca_uid
+    }
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+      this.http.DeleteCategories(body).subscribe({
+        next: (res: any) => {
+          this.data = res?.status
+          console.log('Uid: ',body);
+          console.log(this.data);
+          // Actualiser la liste des produits après la suppression
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error('Failed to delete product:', error);
+        }
+      });
+    }
   }
 
 

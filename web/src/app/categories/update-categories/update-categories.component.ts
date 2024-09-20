@@ -35,9 +35,6 @@ this.http.ReadSingleCategories(this.categoryId).subscribe((category: any) => {
   });
 });
 }
-//Gar de transport
-//Des compagnies de transport pour des destination interne et externe du pays
-
 
   updateCategory() {
     if (this.updateCategoryForm.valid) {
