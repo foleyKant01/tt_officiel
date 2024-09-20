@@ -12,17 +12,17 @@ export class ApiService {
 
   private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
 
-  constructor(private api: HttpClient, private http: HttpClient) {}
+  constructor(private api: HttpClient, private http: HttpClient) { }
 
 
   // Api user
 
-  SaveLocation(position:{ latitude: number; longitude: number }): Observable<any>{
+  SaveLocation(position: { latitude: number; longitude: number }): Observable<any> {
     return this.api.post("http://127.0.0.1:5000/api/user/localisation", position)
   }
 
 
-  CreateUser(body:any){
+  CreateUser(body: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export class ApiService {
   }
 
 
-  LoginUser(body:any): Observable<any> {
+  LoginUser(body: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -42,27 +42,27 @@ export class ApiService {
   }
 
 
-  ReadAllUser(): Observable<any>{
+  ReadAllUser(): Observable<any> {
     return this.api.get<any>("http://127.0.0.1:5000/api/user/readall")
   }
 
 
-  ReadSingleUser(u_uid:any){
+  ReadSingleUser(u_uid: any) {
 
     const httpOptions = {
       headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       })
     };
 
     return this.api.get("http://127.0.0.1:5000/api/user/readsingle/${u_uid}", httpOptions);
   }
 
-  UpdateUser(body:any){
+  UpdateUser(body: any) {
 
     const httpOptions = {
       headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       })
     };
 
@@ -70,11 +70,11 @@ export class ApiService {
   }
 
 
-  DeleteUser(body:any){
+  DeleteUser(body: any) {
 
     const httpOptions = {
       headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       })
     };
 
@@ -82,9 +82,9 @@ export class ApiService {
   }
 
 
-   // Api Teller
+  // Api Teller
 
-   CreateTeller(body:any){
+  CreateTeller(body: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ export class ApiService {
   }
 
 
-  LoginTeller(body:any): Observable<any> {
+  LoginTeller(body: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -104,91 +104,82 @@ export class ApiService {
   }
 
 
-   // Api Categories
+  // Api Categories
 
-   ReadAllCategories(): Observable<any>{
-    return this.api.get<any[]>("http://127.0.0.1:5000/api/categories/readall")
-  }
-
-
-  ReadSingleCategories(u_uid:any){
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      })
-    };
-
-    return this.api.get("http://127.0.0.1:5000/api/categories/readsingle/${ca_uid}", httpOptions);
-  }
-
-
-  CreateCategories(body:any){
+  CreateCategories(body: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     }
-    return this.api.post("http://127.0.0.1:5000/api/categories/create", body, httpOptions)
+    return this.api.post("http://127.0.0.1:5000/api/categorie/createcategorie", body, httpOptions)
   }
 
 
+  ReadAllCategories(): Observable<any> {
+    return this.api.get<any[]>("http://127.0.0.1:5000/api/categorie/readallcategorie")
+  }
 
-  DeleteCategories(body:any){
+
+  ReadSingleCategories(body: any) {
+    return this.api.get("http://127.0.0.1:5000/api/categorie/readsinglecategorie",body);
+  }
+
+
+  DeleteCategories(body: any) {
 
     const httpOptions = {
       headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       })
     };
-
-    return this.api.post("http://127.0.0.1:5000/api/categories/delete", body, httpOptions)
+    return this.api.post("http://127.0.0.1:5000/api/categorie/deletecategorie", body, httpOptions)
   }
 
 
-  UpdateCategories(body:any){
+  UpdateCategories(body: any) {
 
     const httpOptions = {
       headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       })
     };
 
-    return this.api.patch("http://127.0.0.1:5000/api/categories/update", body, httpOptions)
+    return this.api.patch("http://127.0.0.1:5000/api/categorie/updatecategorie", body, httpOptions)
   }
 
 
-    // Api Business
+  // Api Business
 
-    CreateBusiness(body:any){
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        })
-      }
-      return this.api.post("http://127.0.0.1:5000/api/business/create", body, httpOptions)
+  CreateBusiness(body: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
     }
+    return this.api.post("http://127.0.0.1:5000/api/business/create", body, httpOptions)
+  }
 
 
-    ReadAllBusiness(): Observable<any>{
-      return this.api.get<any[]>("http://127.0.0.1:5000/api/business/readall")
+  ReadAllBusiness(): Observable<any> {
+    return this.api.get<any[]>("http://127.0.0.1:5000/api/business/readall")
+  }
+  // Api Advertisement
+
+  ReadAllAdvertisement(): Observable<any> {
+    return this.api.get<any[]>("http://127.0.0.1:5000/api/advertisement/readall")
+  }
+
+
+
+  CreateAdvertisement(body: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
     }
-    // Api Advertisement
-
-    ReadAllAdvertisement(): Observable<any>{
-      return this.api.get<any[]>("http://127.0.0.1:5000/api/advertisement/readall")
-    }
-
-
-
-    CreateAdvertisement(body:any){
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        })
-      }
-      return this.api.post("http://127.0.0.1:5000/api/advertisement/create", body, httpOptions)
-    }
+    return this.api.post("http://127.0.0.1:5000/api/advertisement/create", body, httpOptions)
+  }
 }
 
 

@@ -10,10 +10,6 @@ import { ApiService } from 'src/app/api.service';
 })
 export class CreateCategoriesComponent implements OnInit {
 
-  loading= false;
-  delayDuration= 2000;
-  success = false;
-
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
@@ -29,27 +25,19 @@ export class CreateCategoriesComponent implements OnInit {
 
   Createcategories(){
     if (this.createcategories.valid) {
-      this.loading = true;
 
-    this.http.CreateCategories(this.createcategories.value).subscribe({
-      next : (reponse:any)=>{
-        console.log(reponse);
-        setTimeout(() => {
-          this.loading = false;
-          this.success = true;
-          window.location.reload();
-        }, this.delayDuration);
-
-      },
-      error: (error) => {
-        console.error(error);
-        setTimeout(() => {
-          this.loading = false;
-        }, this.delayDuration); // Désactiver le spinner en cas d'erreur
-      }
-    })
+      this.http.CreateCategories(this.createcategories.value).subscribe({
+        next : (reponse:any)=>{
+          console.log(reponse);
+          alert('La création a été effectuée avec succès !');
+          setTimeout(() => {
+            window.location.reload();
+          })
+        },
+      })
     }
+    // else{
+    //   alert('Veuillez remplir tous les champs obligatoires avant de soumettre le formulaire.');
+    // }
   }
-
-
 }

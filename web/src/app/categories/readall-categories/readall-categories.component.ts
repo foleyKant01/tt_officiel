@@ -24,19 +24,17 @@ export class ReadallCategoriesComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadCategories();
-    this.loadDescription();
+    // this.loadDescription();
   }
 
   // Get Categories
 
   loadCategories() {
     this.http.ReadAllCategories()?.subscribe({
-      next: (response:any) =>{
-        if(response?.categories)  {
-          this.data = response?.categories
-          this.searchCategories = this.data.map((category: any) => category?.name);
-          // console.log(this.data)
-        }
+      next: (res:any) =>{
+          this.data = res?.categorie
+          // this.searchCategories = this.data.map((category: any) => category?.name);
+          console.log(this.data)
       }
     });
   }
@@ -51,14 +49,14 @@ export class ReadallCategoriesComponent implements OnInit{
   //     }
   //   });
   // }
-  loadDescription() {
-    this.http.ReadAllCategories()?.subscribe(
-      (response: any[]) =>{
-          this.response = response
-          console.log(this.response.categories)
-        }
-    );
-  }
+  // loadDescription() {
+  //   this.http.ReadAllCategories()?.subscribe(
+  //     (response: any[]) =>{
+  //         this.response = response
+  //         console.log(this.response.categories)
+  //       }
+  //   );
+  // }
 
 
   // Update Categories
