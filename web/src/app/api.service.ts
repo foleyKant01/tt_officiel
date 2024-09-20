@@ -158,20 +158,14 @@ export class ApiService {
         'Content-Type': 'application/json',
       })
     }
-    return this.api.post("http://127.0.0.1:5000/api/business/create", body, httpOptions)
+    return this.api.post("http://127.0.0.1:5000/api/business/createbusiness", body, httpOptions)
   }
 
 
   ReadAllBusiness(): Observable<any> {
-    return this.api.get<any[]>("http://127.0.0.1:5000/api/business/readall")
+    return this.api.get<any[]>("http://127.0.0.1:5000/api/business/readallbusiness")
   }
   // Api Advertisement
-
-  ReadAllAdvertisement(): Observable<any> {
-    return this.api.get<any[]>("http://127.0.0.1:5000/api/advertisement/readall")
-  }
-
-
 
   CreateAdvertisement(body: any) {
     const httpOptions = {
@@ -179,8 +173,14 @@ export class ApiService {
         'Content-Type': 'application/json',
       })
     }
-    return this.api.post("http://127.0.0.1:5000/api/advertisement/create", body, httpOptions)
+    return this.api.post("http://127.0.0.1:5000/api/advertisement/createadvertisement", body, httpOptions)
   }
+
+
+  ReadAllAdvertisement(): Observable<any> {
+    return this.api.get<any[]>("http://127.0.0.1:5000/api/advertisement/readalladvertisement")
+  }
+
 }
 
 

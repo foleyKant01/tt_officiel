@@ -8,19 +8,18 @@ class AdvertisementApi(Resource):
     def post(self, route):
         if route == "createadvertisement":
             return CreateAdvertisement()
+        
+        if route == "readsingleadvertisement":
+            return ReadSingleAdvertisement()
+        
+        if route == "updateadvertisement":
+            return UpdateAdvertisement()
+        
+        if route == "deleteadvertisement":
+            return DeleteAdvertisement()
     
     def get(self, route):
         if route == "readalladvertisement":
             return ReadAllAdvertisement()
 
-        if route == "readsingleadvertisement":
-            return ReadSingleAdvertisement()
-    
-    def delete(self, route):
-         if route == "deleteadvertisement":
-            return DeleteAdvertisement()
-         
-    def patch(self, route):
-        if route == "updateadvertisement":
-            return UpdateAdvertisement()
-        
+
