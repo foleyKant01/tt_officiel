@@ -165,6 +165,7 @@ export class ApiService {
   ReadAllBusiness(): Observable<any> {
     return this.api.get<any[]>("http://127.0.0.1:5000/api/business/readallbusiness")
   }
+
   // Api Advertisement
 
   CreateAdvertisement(body: any) {

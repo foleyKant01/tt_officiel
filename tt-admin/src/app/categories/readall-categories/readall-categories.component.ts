@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/api.service';
+import { CategorieService } from '../../services/categorie.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class ReadallCategoriesComponent implements OnInit{
   searchNote: string[] = [];
   response: any;
 
-  constructor(private router: Router, private http: ApiService){}
+  constructor(private router: Router, private http: CategorieService){}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -58,9 +58,7 @@ export class ReadallCategoriesComponent implements OnInit{
           // Actualiser la liste des produits après la suppression
           window.location.reload();
         },
-        error: (error) => {
-          console.error('Failed to delete product:', error);
-        }
+
       });
     }
   }

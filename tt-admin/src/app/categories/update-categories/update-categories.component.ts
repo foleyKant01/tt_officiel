@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from 'src/app/api.service';
+import { CategorieService } from '../../services/categorie.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class UpdateCategoriesComponent implements OnInit {
   loading = false;
   categoryId: any;
 
-  constructor(private router: ActivatedRoute, private http: ApiService, private formBuilder: FormBuilder){
+  constructor(private router: ActivatedRoute, private http: CategorieService, private formBuilder: FormBuilder){
     this.updateCategoryForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required]
@@ -52,10 +52,6 @@ this.http.ReadSingleCategories(this.categoryId).subscribe((category: any) => {
           console.log(response);
           // Rediriger ou afficher un message de succès
         },
-        error: (error) => {
-          console.error(error);
-          // Afficher un message d'erreur
-        }
       });
     }
   }

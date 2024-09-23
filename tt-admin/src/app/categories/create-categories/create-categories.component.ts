@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
-import { ApiService } from 'src/app/api.service';
+import { CategorieService } from '../../services/categorie.service';
 
 @Component({
   selector: 'app-create-categories',
@@ -14,7 +14,7 @@ export class CreateCategoriesComponent implements OnInit {
     // throw new Error('Method not implemented.');
   }
 
-  constructor(private router: Router, private http: ApiService){}
+  constructor(private router: Router, private http: CategorieService){}
 
   createcategories: FormGroup = new FormGroup(
     {

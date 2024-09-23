@@ -22,20 +22,9 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule)
   },
   {
-    path: 'categories',
-    loadChildren: () => import('./categories/categories.module').then((m) => m.CategoriesModule)
-  },
-  {
-    path: 'advertisement',
-    loadChildren: () => import('./advertisement/advertisement.module').then((m) => m.AdvertisementModule)
-  },
-  {
     path: 'teller',
     loadChildren: () => import('./teller/teller.module').then((m) => m.TellerModule)
-  },
-  { path: 'create-business', component: CreateBusinessComponent },
-  { path: '**', component: NotfoundComponent }
-];
+  },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

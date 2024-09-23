@@ -10,7 +10,8 @@
               <div class="col-12 form-group">
                 <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Categorie:</label>
                 <select class="form-select" aria-label="Default select example">
-                  <option *ngFor="let business of searchBusiness" [value]="business">{{ business }}</option>
+                  <!-- <option></option> -->
+                  <option *ngFor="let item of data" [value]="item.name">{{ item.name }}</option>
                 </select>
               </div>
               <div class="col-12 form-group">
@@ -23,17 +24,14 @@
               </div>
               <div class="clear"></div>
               <div class="col-12 form-group">
-                <label class="text-transform-none ls-0 fw-normal mb-1" for="title">Title:</label>
-                <input type="text" name="title" formControlName="title" id="title" class="form-control fw-semibold">
-              </div>
-              <div class="col-12 form-group">
                 <label class="text-transform-none ls-0 fw-normal mb-1" for="name">Name:</label>
                 <input type="text" name="name" formControlName="name" id="name" class="form-control fw-semibold">
               </div>
               <div class="clear"></div>
               <div class="col-12 form-group">
                 <label class="text-transform-none ls-0 fw-normal mb-1" for="description">Description:</label>
-                <input type="text" name="description" formControlName="description" id="description" class="form-control fw-semibold">
+                <input type="text" name="description" formControlName="description" id="description"
+                  class="form-control fw-semibold">
               </div>
               <div class="clear"></div>
 
@@ -50,7 +48,8 @@
               </div>
               <div class="col-12 form-group">
                 <label class="text-transform-none ls-0 fw-normal mb-1" for="address">Address:</label>
-                <input type="text" name="address" formControlName="address" id="address" class="form-control fw-semibold">
+                <input type="text" name="address" formControlName="address" id="address"
+                  class="form-control fw-semibold">
               </div>
               <div class="clear"></div>
               <div class="col-12 form-group">
@@ -60,24 +59,29 @@
               <div class="clear"></div>
               <div class="col-12 form-group">
                 <label class="text-transform-none ls-0 fw-normal mb-1" for="images1">Image 1:</label>
-                <input type="file" name="images1" formControlName="images1" id="images1" class="form-control fw-semibold">
+                <input type="file" name="images1" formControlName="images1" id="images1"
+                  class="form-control fw-semibold">
               </div>
               <div class="clear"></div>
               <div class="col-12 form-group">
                 <label class="text-transform-none ls-0 fw-normal mb-1" for="images2">Image 2:</label>
-                <input type="file" name="images2" formControlName="images2" id="images2" class="form-control fw-semibold">
+                <input type="file" name="images2" formControlName="images2" id="images2"
+                  class="form-control fw-semibold">
               </div>
               <div class="clear"></div><br>
               <div class="col-12 form-group">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox2">
-                  <label class="form-check-label text-transform-none ls-0 mb-0 fw-semibold" for="inlineCheckbox2">Condition générale d'utlisation</label>
+                  <label class="form-check-label text-transform-none ls-0 mb-0 fw-semibold"
+                    for="inlineCheckbox2">Condition générale d'utlisation</label>
                 </div>
               </div>
             </div>
             <div class="clear"></div><br>
             <div class="col-12">
-              <button type="submit" name="submit" class="button button-large bg-alt py-2 rounded-1 fw-medium text-transform-none ls-0 ms-0">Create</button>
+              <button type="submit" name="submit"
+                class="button button-large bg-alt py-2 rounded-1 fw-medium text-transform-none ls-0 ms-0"
+                [disabled]="createbusiness.invalid">Create</button>
             </div>
           </form>
         </div>
