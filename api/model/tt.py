@@ -5,23 +5,34 @@ from config.db import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import expression
 
+class Admin(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ad_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
+    ad_fullname = db.Column(db.String(128), nullable=False)
+    ad_username = db.Column(db.String(128), nullable=False)
+    ad_mobile = db.Column(db.String(128), nullable=False)
+    ad_email = db.Column(db.String(128), nullable=False)
+    ad_password = db.Column(db.String(128), nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    u_fullname = db.Column(db.String(128), nullable=False)
+    u_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
     u_username = db.Column(db.String(128), nullable=False)
     u_mobile = db.Column(db.String(128), nullable=False)
     u_address = db.Column(db.String(128), nullable=False)
     u_email = db.Column(db.String(128), nullable=False)
     u_password = db.Column(db.String(128), nullable=False)
     u_city = db.Column(db.String(128), nullable=False)
-    u_uid = db.Column(db.String(128), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
+
 class Teller(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    t_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
     t_fullname = db.Column(db.String(128), nullable=False)
     t_username = db.Column(db.String(128), nullable=False)
     t_mobile = db.Column(db.String(128), nullable=False)
@@ -29,7 +40,6 @@ class Teller(db.Model):
     t_email = db.Column(db.String(128), nullable=False)
     t_password = db.Column(db.String(128), nullable=False)
     t_city = db.Column(db.String(128), nullable=False)
-    t_uid = db.Column(db.String(128), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 

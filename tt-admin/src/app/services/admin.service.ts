@@ -17,6 +17,16 @@ export class AdminService {
   }
 
 
+  CreateUser(body: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+    return this.api.post("http://127.0.0.1:5000/api/user/create", body, httpOptions)
+  }
+
+
   ReadAllUser(): Observable<any> {
     return this.api.get<any>("http://127.0.0.1:5000/api/user/readall")
   }
@@ -56,6 +66,19 @@ export class AdminService {
     }
     return this.api.post("http://127.0.0.1:5000/api/teller/create", body, httpOptions)
   }
+
+
+
+
+  LoginUser(body: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+    return this.api.post('http://127.0.0.1:5000/api/user/login', body, httpOptions);
+  }
+
 
 }
 

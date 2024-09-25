@@ -141,32 +141,36 @@ def SaveLocation():
 
    
 def CreateUser():
-    reponse = {}
 
+    reponse = {}
     try:
-        u_fullname = (request.json.get('fullname'))
-        u_username = (request.json.get('username'))
-        u_mobile = (request.json.get('mobile'))      
-        u_address = (request.json.get('address'))
-        u_email = (request.json.get('email'))
-        u_password = (request.json.get('password'))
-        u_city = (request.json.get('city'))
-        u_uid = str(uuid.uuid4())
+        u_username = (request.json.get('u_username'))
+        u_mobile = (request.json.get('u_mobile'))      
+        u_address = (request.json.get('u_address'))
+        u_email = (request.json.get('u_email'))
+        u_password = (request.json.get('u_password'))
+        u_city = (request.json.get('u_city'))
 
         hashed_password = bcrypt.hashpw(u_password.encode('utf-8'), bcrypt.gensalt())
         
         new_user = User()
-        new_user.u_fullname = u_fullname
         new_user.u_username = u_username
         new_user.u_mobile = u_mobile
         new_user.u_address = u_address
         new_user.u_email = u_email
         new_user.u_password = hashed_password
         new_user.u_city = u_city
-        new_user.u_uid = u_uid
         
         db.session.add(new_user)
         db.session.commit()
+
+        rs = {}
+        rs['u_username'] = u_username
+        rs['u_mobile'] = u_mobile
+        rs['u_address'] = u_address
+        rs['u_email'] = u_email
+        rs['u_city'] = u_city
+        rs['u_uid'] = new_user.u_uid
 
         reponse['status'] = 'Succes'
 
@@ -179,27 +183,23 @@ def CreateUser():
 
 
 def ReadAllUser():
+
     reponse = {}
-
     try:
-        readAllUser = User.query.all()
-
-        if readAllUser:
+        all_user = User.query.all()
+        if all_user:
             user_informations = []
 
-            for user in readAllUser:
+            for user in all_user:
                 user_infos = {
+                    'u_username': user.u_username,
+                    'u_mobile': user.u_mobile,
+                    'u_address': user.u_address,
+                    'u_email': user.u_email,                    
+                    'u_city': user.u_city, 
                     'u_uid': user.u_uid,
-                    'fullname': user.u_fullname,
-                    'username': user.u_username,
-                    'mobile': user.u_mobile,
-                    'address': user.u_address,
-                    'email': user.u_email,                    
-                    'city': user.u_city, 
                 }
-
                 user_informations.append(user_infos)
-
             reponse['status'] = 'success'
             reponse ['users'] = user_informations
         else:
@@ -215,29 +215,21 @@ def ReadAllUser():
 
 
 def ReadSingleUser():
-    reponse = {}
 
+    reponse = {}
     try:
         uid = request.json.get('u_uid')
-
-        readSingleUser = User.query.filter_by(u_uid = uid).first()
-
-        if readSingleUser:
-            user_infos = {
-                'u_uid': readSingleUser.u_uid,
-                'fullname': readSingleUser.u_fullname,
-                'username': readSingleUser.u_username,
-                'mobile': readSingleUser.u_mobile,
-                'address': readSingleUser.u_address,
-                'email': readSingleUser.u_email,                    
-                'city': readSingleUser.u_city, 
-            }
-
-            reponse['status'] = 'success'
-            reponse['user'] = user_infos
-        else:
-            reponse['status'] = 'erreur'
-            reponse['motif'] = 'aucun'
+        single_user = User.query.filter_by(u_uid = uid).first_or_404()
+        user_infos = {
+            'u_username': single_user.u_username,
+            'u_mobile': single_user.u_mobile,
+            'u_address': single_user.u_address,
+            'u_email': single_user.u_email,                    
+            'u_city': single_user.u_city, 
+            'u_uid': single_user.u_uid,
+        }
+        reponse['status'] = 'success'
+        reponse['user'] = user_infos
 
     except Exception as e:
         reponse['error_description'] = str(e)
@@ -248,28 +240,25 @@ def ReadSingleUser():
 
 
 def UpdateUser  ():
-    reponse = {}
 
+    reponse = {}
     try:
         uid = request.json.get('u_uid')
-        
-        updateuser = User.query.filter_by(u_uid = uid).first()
+        update_user = User.query.filter_by(u_uid = uid).first_or_404()
 
-        if updateuser:
-            updateuser.u_fullname = request.json.get('fullname', updateuser.u_fullname)
-            updateuser.u_username = request.json.get('username', updateuser.u_username)            
-            updateuser.u_mobile = request.json.get('mobile', updateuser.u_mobile)
-            updateuser.u_address = request.json.get('address', updateuser.u_address)
-            updateuser.u_email = request.json.get('email', updateuser.u_email)
-            updateuser.u_password = request.json.get('password', updateuser.u_password)
-            updateuser.u_city = request.json.get('city', updateuser.u_city)
+        update_user.u_username = request.json.get('u_username', update_user.u_username)            
+        update_user.u_mobile = request.json.get('u_mobile', update_user.u_mobile)
+        update_user.u_address = request.json.get('u_address', update_user.u_address)
+        update_user.u_email = request.json.get('u_email', update_user.u_email)
+        update_user.u_password = request.json.get('u_city', update_user.u_password)
+        update_user.u_city = request.json.get('u_uid', update_user.u_city)
 
-            db.session.add(updateuser)
-            db.session.commit()
+        db.session.add(update_user)
+        db.session.commit()
 
-            reponse['status'] = 'Succes'
-        else:
-            reponse['status'] = 'User not found'
+        reponse['status'] = 'Succes'
+        reponse['user'] = update_user
+
 
     except Exception as e:
         reponse['error_description'] = str(e)
@@ -279,20 +268,15 @@ def UpdateUser  ():
 
 
 def DeleteUser():
-    reponse = {}
 
+    reponse = {}
     try:
         uid = request.json.get('u_uid')
+        deleteuser = User.query.filter_by(u_uid=uid).first_or_404()
 
-        deleteuser = User.query.filter_by(u_uid=uid).first()
-
-        if deleteuser:
-            db.session.delete(deleteuser)
-            db.session.commit()
-            reponse['status'] = 'success'
-        else:
-            reponse['status'] = 'error'
-            reponse['motif'] = 'utilisateur non trouvé'
+        db.session.delete(deleteuser)
+        db.session.commit()
+        reponse['status'] = 'success'
 
     except Exception as e:
         reponse['error_description'] = str(e)
@@ -304,7 +288,6 @@ def DeleteUser():
 
 def LoginUser():
     reponse = {}
-    reponses = {}
 
     try:
         username = request.json.get('username')
