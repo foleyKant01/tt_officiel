@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CoocleSearch-Admin": {
+    "rfid_tracker_web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/coocle-search-admin",
+            "outputPath": "dist/rfid_tracker_web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -37,11 +37,17 @@
               "src/styles.scss"
             ],
             "scripts": [
-
+             
             ]
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -68,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "CoocleSearch-Admin:build:production"
+              "buildTarget": "rfid_tracker_web:build:production"
             },
             "development": {
-              "buildTarget": "CoocleSearch-Admin:build:development"
+              "buildTarget": "rfid_tracker_web:build:development"
             }
           },
           "defaultConfiguration": "development"

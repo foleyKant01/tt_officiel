@@ -1,0 +1,127 @@
+<!-- Start Container Fluid -->
+<div class="container">
+    <div class="row">
+        <!-- Colonne de gauche pour la carte du superviseur -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <!-- Image du superviseur -->
+                    <div class="d-flex justify-content-center mb-4">
+                        <!-- <img src="./assets/images/default-user.png" alt="Supervisor Image" 
+                             class="img-fluid bg-light rounded-circle" 
+                             style="width: 150px; height: 150px; object-fit: cover;"> -->
+                             <i class="ti ti-user user-icon"></i>
+
+                    </div>
+                    <h4 class="text-dark fw-medium text-capitalize">{{ supervisor_data.username }}</h4>
+                    <h6 class="text-muted">{{ supervisor_data.fullname }}</h6>
+                    <p class="text-muted">{{ supervisor_data.number }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne de droite pour les informations détaillées -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <!-- Badge de statut et nom du superviseur -->
+                    <div class="mb-4">
+                        <h4 class="badge text-light fs-14 py-1 px-3"
+                            [ngClass]="{
+                                'bg-info': supervisor_data.status === 'active',
+                                'bg-warning': supervisor_data.status === 'inactive',
+                                'bg-success': supervisor_data.status === 'completed',
+                                'bg-danger': supervisor_data.status === 'cancelled'
+                            }">{{ supervisor_data.status | titlecase }}</h4>
+                        <h5 class="text-dark mt-2 text-capitalize">{{ supervisor_data.username }}</h5>
+                    </div>
+
+                    <!-- Carte d'information principale - Email -->
+                    <div class="info-card  bg-light rounded shadow-sm mb-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" >
+                                <i class="ti ti-mail icon-ti"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-dark fw-medium mb-1">Email Address</h6>
+                                <p class="text-muted mb-0">{{ supervisor_data.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carte d'information principale - Role -->
+                    <div class="info-card bg-light rounded shadow-sm mb-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" >
+                                <i class="ti ti-user-check icon-ti"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-dark fw-medium mb-1">Role</h6>
+                                <p class="text-muted mb-0">{{ supervisor_data.role }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card bg-light rounded shadow-sm mb-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" >
+                                <i class="ti ti-id icon-ti"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-dark fw-medium mb-1">ID Card</h6>
+                                <p class="text-muted mb-0">{{ supervisor_data.rfid_card }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ligne pour le tableau des conducteurs -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="text-dark fw-medium mb-4">USER LIST</h4>
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fullname</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Number</th>
+                                <th>supervisor</th>
+                                <th>RFID card</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let driver of driver_data; let i =index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ driver.fullname }}</td>
+                                <td>{{ driver.username }}</td>
+                                <td>{{ driver.email }}</td>
+                                <td>{{ driver.role }}</td>
+                                <td>{{ driver.number }}</td>
+                                <td>{{ driver.supervisorName }}</td>
+                                <td>{{ driver.rfid_card }}</td>
+                                <td>
+                                    <span class="badge" 
+                                          [ngClass]="{
+                                            'bg-info': driver.status === 'active',
+                                            'bg-warning': driver.status === 'inactive',
+                                            'bg-success': driver.status === 'completed',
+                                            'bg-danger': driver.status === 'cancelled'
+                                          }">{{ driver.status | titlecase }}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,14 @@
-<div id="wrapper">
-  <app-sidebar></app-sidebar>
-  <div style="min-height: 811px;">
-    <router-outlet></router-outlet>
-  </div>
-  <footer id="footer" class="bg-contrast-0 border-width-1">
-    <div id="copyrights" class="bg-color">
-      <div class="container">
-        <p class="mb-0 text-center text-dark text-opacity-75">Copyrights &copy; 2024 All Rights Reserved by TrouvezTout</p>
-      </div>
-    </div>
-  </footer>
+ <!--  Body Wrapper -->
+ <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+ data-sidebar-position="fixed" data-header-position="fixed">
+ <!-- Sidebar Start -->
+<app-sidebar></app-sidebar>
+ <!--  Sidebar End -->
+ <!--  Main wrapper -->
+ <div class="body-wrapper">
+   <!--  Header Start -->
+<app-header></app-header>
+   <!--  Header End -->
+ <router-outlet></router-outlet>
+ </div>
 </div>
-<div id="gotoTop" class="uil uil-angle-up"></div>
