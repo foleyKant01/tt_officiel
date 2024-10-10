@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotfoundComponent } from './notfound/notfound.component';
-import { CreateBusinessComponent } from './business/create-business/create-business.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -9,10 +7,10 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule)
   },
-  {
-    path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule)
-  },
+  // {
+  //   path: 'admin',
+  //   loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule)
+  // },
   {
     path: 'super-admin',
     loadChildren: () => import('./super-admin/super-admin.module').then((m) => m.SuperAdminModule)

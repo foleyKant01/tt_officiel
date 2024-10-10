@@ -7,12 +7,10 @@
     <form [formGroup]="createcategories" (ngSubmit)="Createcategories()">
       <h2>Create categories</h2>
       <hr><br>
-      <!-- Champ Name -->
       <div class="div-input">
         <label for="exampleInputEmail1" class="form-label">Name:</label>
         <input type="text" class="form-control" formControlName="name" aria-describedby="emailHelp">
       </div><br>
-      <!-- Champ Description -->
       <div class="div-input">
         <label for="exampleInputEmail1" class="form-label">Description:</label>
         <textarea class="form-control" formControlName="description" cols="25" rows="3"></textarea>
