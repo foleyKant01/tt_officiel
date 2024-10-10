@@ -14,6 +14,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+      { path: 'business', loadChildren: () => import('./business/business.module').then(m => m.BusinessModule) },
       { path: 'attendance', component: AttendenceComponent },
       { path: 'settings', component: SettingsComponent },
 
