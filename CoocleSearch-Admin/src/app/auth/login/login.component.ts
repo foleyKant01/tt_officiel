@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   });
 
-  login() {
+  Loginadmin() {
     this.is_loading = true;
     let body = this.login_form?.value;
 
