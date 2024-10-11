@@ -13,8 +13,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+      { path: 'advertisement', loadChildren: () => import('./advertisement/advertisement.module').then(m => m.AdvertisementModule) },
       { path: 'business', loadChildren: () => import('./business/business.module').then(m => m.BusinessModule) },
+      { path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule) },
       { path: 'attendance', component: AttendenceComponent },
       { path: 'settings', component: SettingsComponent },
 

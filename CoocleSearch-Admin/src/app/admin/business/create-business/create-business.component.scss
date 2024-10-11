@@ -1,0 +1,19 @@
+input, textarea {
+  color: black!important;
+}
+#images1, #images2 {
+  border: none;
+  padding: .220rem .0rem;
+}
+.col-3 {
+  display: flex!important;
+  justify-content: center!important; /* Centre horizontalement */
+  align-items: center!important; /* Centre verticalement (si nécessaire) */
+}
+.container {
+  border: 2px solid #8287ad;
+  border-radius: 10px;
+}
+label {
+  color: #6e739b;
+}

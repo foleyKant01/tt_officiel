@@ -7,11 +7,13 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
+
+  constructor(private api: HttpClient, private http: HttpClient) { }
 
   api_url = environment.apiUrl
 
-  login(body: any) {
-    return this.http.post(this.api_url+"/api/users/loginuser", body);
+  LoginAdmin(body: any) {
+    return this.http.post(this.api_url+"/api/admin/login", body);
   }
 }

@@ -1,14 +1,36 @@
- <!--  Body Wrapper -->
- <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
- data-sidebar-position="fixed" data-header-position="fixed">
- <!-- Sidebar Start -->
-<app-sidebar></app-sidebar>
- <!--  Sidebar End -->
- <!--  Main wrapper -->
- <div class="body-wrapper">
-   <!--  Header Start -->
-<app-header></app-header>
-   <!--  Header End -->
- <router-outlet></router-outlet>
- </div>
+<div id="wrapper">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      <app-header></app-header>
+
+      <!-- End of Topbar -->
+
+      <!-- Begin Page Content -->
+      <router-outlet></router-outlet>
+
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; Your Website 2021</span>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
+
+  </div>
 </div>
