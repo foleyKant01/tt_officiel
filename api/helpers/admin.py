@@ -11,18 +11,14 @@ def CreateAdmin():
     response = {}
 
     try:
-        ad_fullname = (request.json.get('ad_fullname'))
-        ad_username = (request.json.get('ad_username'))      
-        ad_mobile = (request.json.get('ad_mobile'))
-        ad_email = (request.json.get('ad_email'))
-        ad_password = (request.json.get('ad_password'))
+        ad_password = "foley123"
         hashed_password = bcrypt.hashpw(ad_password.encode('utf-8'), bcrypt.gensalt())
         
         new_admin = Admin()
-        new_admin.ad_fullname = ad_fullname
-        new_admin.ad_username = ad_username
-        new_admin.ad_mobile = ad_mobile
-        new_admin.ad_email = ad_email
+        new_admin.ad_fullname = "Kraye Roland Landry"
+        new_admin.ad_username = "foleykant01"
+        new_admin.ad_mobile = "0702653594"
+        new_admin.ad_email = "krayediego@gmail.com"
         new_admin.ad_password = hashed_password
         
         db.session.add(new_admin)

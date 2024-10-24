@@ -62,7 +62,7 @@ class Advertisement(db.Model):
 class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     bu_uid = db.Column(db.String(128), nullable=False)
-    bu_categories = db.Column(db.String(128), nullable=False)
+    bu_categorie = db.Column(db.String(128), nullable=False)
     bu_type = db.Column(db.String(128), nullable=False)
     bu_name = db.Column(db.String(128), nullable=False, unique=True)
     bu_description = db.Column(db.String(128), nullable=False)
@@ -72,8 +72,8 @@ class Business(db.Model):
     bu_mobile = db.Column(db.String(128), nullable=False)
     bu_image1 = db.Column(db.String(128), nullable=False)
     bu_image2 = db.Column(db.String(128), nullable=False)
-    latitude = db.Column(db.Float, nullable=False)
-    longitude = db.Column(db.Float, nullable=False)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 

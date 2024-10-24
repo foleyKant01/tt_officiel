@@ -1,6 +1,8 @@
+import { CategoriesService } from './../../../services/categories/categories.service';
+import { BusinessService } from './../../../services/business/business.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -13,7 +15,7 @@ import { Router, RouterModule } from '@angular/router';
 export class CreateBusinessComponent implements OnInit{
 
   // Variable commun
-  data: any;
+  data: string[] = [];
 
   // Variables Geo
   latitude: number | undefined;
@@ -21,33 +23,39 @@ export class CreateBusinessComponent implements OnInit{
   error: string | undefined;
 
   //Variable Business
-  searchBusiness: string[] = [];
+  allBusiness: string[] = [];
   business: any;
   loading= false;
   delayDuration= 2000;
   success = false;
 
   // category: any;
-  // searchCategories: string[] = [];
+  allCategories: string[] = [];
   // searchIterm: any = '';
   // filteredItems: string[] = [];
   // filteredCategories: string[] = [];
   // showError: boolean = false;
 
-
-
   ngOnInit(): void {
-    // this.loadCategories();
-    // this.Readallbusiness();
+    this.loadCategories();
   }
 
-  constructor(private router: Router, ){}
+  constructor(private router: Router, private fb: FormBuilder, private http: BusinessService, private api: CategoriesService){}
+
+  loadCategories() {
+    this.api.ReadAllCategories()?.subscribe({
+      next: (response:any) =>{
+        this.data = response?.categorie_name
+        this.allCategories = this.data.map((category: any) => category?.name);
+        console.log(this.allCategories)
+      }
+    });
+  }
 
   // Fonction create Business
-
   createbusiness: FormGroup = new FormGroup(
     {
-      title: new FormControl(null, Validators.required),
+      categorie: new FormControl(null, Validators.required),
       type: new FormControl(null, Validators.required),
       name: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
@@ -55,66 +63,47 @@ export class CreateBusinessComponent implements OnInit{
       city: new FormControl(null, Validators.required),
       address: new FormControl(null, Validators.required),
       mobile: new FormControl(null, Validators.required),
-      images1: new FormControl(null, Validators.required),
-      images2: new FormControl(null, Validators.required),
+      image1: new FormControl(null, Validators.required),
+      image2: new FormControl(null, Validators.required),
+      // latitude: new FormControl(null, Validators.required),
+      // longitude: new FormControl(null, Validators.required),
     }
   )
 
-  // Createbusiness(){
-  //   if (this.createbusiness.valid) {
-  //     this.loading = true;
+  Createbusiness(){
 
-  //   this.http.CreateBusiness(this.createbusiness.value).subscribe({
-  //     next : (reponse:any)=>{
-  //       console.log(reponse);
-  //       setTimeout(() => {
-  //         this.loading = false;
-  //         this.success = true;
-  //         window.location.reload();
-  //       }, this.delayDuration);
+    this.loading = true;
+    let body = this.createbusiness?.value;
 
-  //     },
-  //     error: (error) => {
-  //       console.error(error);
-  //       setTimeout(() => {
-  //         this.loading = false;
-  //       }, this.delayDuration); // Désactiver le spinner en cas d'erreur
-  //     }
-  //   })
-  //   }
-  // }
-
+    this.http.CreateBusiness(this.createbusiness.value).subscribe({
+      next : (reponse:any)=>{
+        console.log(reponse);
+        // setTimeout(() => {
+        //   this.loading = false;
+        //   this.success = true;
+        //   window.location.reload();
+        // }, this.delayDuration);
+      },
+      error: (error) => {
+        console.error(error);
+        setTimeout(() => {
+          this.loading = false;
+        }, this.delayDuration); // Désactiver le spinner en cas d'erreur
+      }
+    })
+  }
 
   GetLocalisation(){
   }
 
 
-  //Fonction pour readall business
-
-  // Readallbusiness() {
-  //   this.http.ReadAllBusiness()?.subscribe({
-  //     next: (response:any) =>{
-  //       this.data = response?.busi
-  //       this.searchBusiness = this.data.map((business: any) => business?.name);
-  //       console.log(this.searchBusiness)
-  //     }
-  //   });
-  // }
 
 
 
-  // loadCategories() {
-  //   this.http.ReadAllCategories()?.subscribe({
-  //     next: (response:any) =>{
-  //       this.data = response?.categories
-  //       this.searchCategories = this.data.map((category: any) => category?.name);
-  //       console.log(this.searchCategories)
-  //     }
-  //   });
-  // }
+
 
   // filterItems() {
-  //   this.filteredItems = this.searchCategories.filter((category: string) =>
+  //   this.filteredItems = this.allCategories.filter((category: string) =>
   //     category.toLowerCase().includes(this.searchIterm.toLowerCase())
   //   );
   // }
@@ -126,7 +115,7 @@ export class CreateBusinessComponent implements OnInit{
   // }
 
   // submitForm() {
-  //   if (!this.searchCategories.includes(this.searchIterm)) {
+  //   if (!this.allCategories.includes(this.searchIterm)) {
   //     this.showError = true;
   //     setTimeout(() => {
   //       this.showError = false;

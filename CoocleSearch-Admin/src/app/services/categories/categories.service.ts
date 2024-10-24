@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +14,11 @@ export class CategoriesService {
 
   api_url = environment.apiUrl
 
-  LoginAdmin(body: any) {
-    return this.http.post(this.api_url+"/api/admin/login", body);
-  }}
+  CreateCategories(body: any) {
+    return this.http.post(this.api_url+"/api/categorie/createcategorie", body);
+  }
+
+  ReadAllCategories(): Observable<any>{
+    return this.api.get<any>(this.api_url+"/api/categorie/readallcategorie")
+  }
+}

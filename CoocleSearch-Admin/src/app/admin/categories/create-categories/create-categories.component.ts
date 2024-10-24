@@ -1,8 +1,8 @@
+import { CategoriesService } from './../../../services/categories/categories.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { CategoriesService } from '../../../services/categories/categories.service';
 
 @Component({
   selector: 'app-create-categories',
@@ -13,12 +13,9 @@ import { CategoriesService } from '../../../services/categories/categories.servi
 })
 export class CreateCategoriesComponent  {
 
-  ngOnInit(): void {
-    // throw new Error('Method not implemented.');
-  }
+  constructor(private router: Router, private fb: FormBuilder, private http: CategoriesService){}
 
-  constructor(private router: Router, private http: CategoriesService){}
-
+  // Fonction create Categorie
   createcategories: FormGroup = new FormGroup(
     {
       name: new FormControl(null, Validators.required),
@@ -39,8 +36,8 @@ export class CreateCategoriesComponent  {
         },
       })
     }
-    // else{
-    //   alert('Veuillez remplir tous les champs obligatoires avant de soumettre le formulaire.');
-    // }
+    else{
+      alert('Veuillez remplir tous les champs obligatoires avant de soumettre le formulaire.');
+    }
   }
 }

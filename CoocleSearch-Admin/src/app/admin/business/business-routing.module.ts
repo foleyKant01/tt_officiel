@@ -10,9 +10,6 @@ const routes: Routes = [
     { path:'', redirectTo:'create-business', pathMatch:'full' },
     { path:'create-business', component:CreateBusinessComponent },
     { path:'readall-business', component:ReadallBusinessComponent },
-    // { path:'register', component:RegisterComponent },
-    // { path:'forgotpassword', component:ForgotpasswordComponent },
-    // { path:'readsingle', component:ReadsingleComponent },
 
   ]
 }

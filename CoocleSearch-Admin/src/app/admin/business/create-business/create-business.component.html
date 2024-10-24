@@ -3,17 +3,20 @@
     <div class="content-wrap">
       <div class="container mb-5 p-5 mw-md">
         <h3 class="h1 fw-bolder mb-4">Create Business</h3><br>
-        <form class="row" method="post" enctype="multipart/form-data">
+        <form class="row" method="post" enctype="multipart/form-data" [formGroup]="createbusiness" (submit)="Createbusiness()">
           <div class="col-md-6">
             <div class="col-12 form-group">
               <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Categorie<span class="text-danger">*</span></label>
               <select class="form-select" formControlName="categorie" class="form-control fw-semibold" aria-label="Default select example">
-                <option *ngFor="let business of searchBusiness" [value]="business">{{ business }}</option>
+                <option *ngFor="let category of allCategories" [value]="category">{{ category }}</option>
               </select>
             </div>
             <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="title">Title<span class="text-danger">*</span></label>
-              <input type="text" name="title" formControlName="title" id="title" class="form-control fw-semibold">
+              <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Type<span class="text-danger">*</span></label>
+              <select class="form-select" formControlName="type" class="form-control fw-semibold" aria-label="Default select example">
+                <option value="physique">Physique</option>
+                <option value="en-ligne">En ligne</option>
+              </select>
             </div>
             <div class="clear"></div>
             <div class="col-12 form-group">
@@ -37,14 +40,7 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Type<span class="text-danger">*</span></label>
-              <select class="form-select" class="form-control fw-semibold" aria-label="Default select example">
-                <option value=""></option>
-                <option value="physique">Physique</option>
-                <option value="en-ligne">En ligne</option>
-              </select>
-            </div>
+
             <div class="col-12 form-group">
               <label class="text-transform-none ls-0 fw-normal mb-1" for="city">City<span class="text-danger">*</span></label>
               <input type="text" name="city" formControlName="city" id="city" class="form-control fw-semibold">
@@ -61,11 +57,11 @@
             <div class="clear"></div>
             <div class="col-12 form-group">
               <label class="text-transform-none ls-0 fw-normal mb-1" for="images1">Image 1<span class="text-danger">*</span></label>
-              <input type="file" name="images1" formControlName="images1" id="images1" class="form-control fw-semibold">
+              <input type="file" name="images1" formControlName="image1" id="images1" class="form-control fw-semibold">
             </div>
             <div class="col-12 form-group">
               <label class="text-transform-none ls-0 fw-normal mb-1" for="images2">Image 2</label>
-              <input type="file" name="images2" formControlName="images2" id="images2" class="form-control fw-semibold">
+              <input type="file" name="images2" formControlName="image2" id="images2" class="form-control fw-semibold">
             </div>
             <div class="clear"></div><br>
 
@@ -81,3 +77,4 @@
     </div>
   </section>
 </div>
+<!-- [disabled]="createbusiness.invalid" -->

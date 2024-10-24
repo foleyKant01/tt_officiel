@@ -23,3 +23,7 @@ class BusinessApi(Resource):
     def get(self, route):
         if route == "readallbusiness":
             return ReadAllBusiness()
+        
+    def delete(self, route):
+        if route == "readallbusiness":
+            return ReadAllBusiness()

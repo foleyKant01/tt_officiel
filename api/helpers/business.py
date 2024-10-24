@@ -10,7 +10,7 @@ def CreateBusiness():
     try:
 
         new_business = Business()
-        new_business.bu_categories = request.json.get('categories')
+        new_business.bu_categorie = request.json.get('categorie')
         new_business.bu_type = request.json.get('type')
         new_business.bu_name = request.json.get('name')
         new_business.bu_description = request.json.get('description')
@@ -20,8 +20,8 @@ def CreateBusiness():
         new_business.bu_mobile = request.json.get('mobile')
         new_business.bu_image1 = request.json.get('image1')
         new_business.bu_image2 = request.json.get('image2')
-        new_business.latitude = request.json.get('latitude')
-        new_business.longitude = request.json.get('longitude')
+        # new_business.latitude = request.json.get('latitude')
+        # new_business.longitude = request.json.get('longitude')
         new_business.bu_uid = str(uuid.uuid4())
         
         db.session.add(new_business)
@@ -29,7 +29,7 @@ def CreateBusiness():
 
         rs = {}
         rs['bu_uid'] = new_business.bu_uid
-        rs['bu_categories'] = new_business.bu_categories
+        rs['bu_categorie'] = new_business.bu_categorie
         rs['bu_type'] = new_business.bu_type
         rs['bu_name'] = new_business.bu_name
         rs['bu_description'] = new_business.bu_description
@@ -39,8 +39,8 @@ def CreateBusiness():
         rs['bu_mobile'] = new_business.bu_mobile
         rs['bu_image1'] = new_business.bu_image1
         rs['bu_image2'] = new_business.bu_image2
-        rs['latitude'] = new_business.latitude
-        rs['longitude'] = new_business.longitude
+        # rs['latitude'] = new_business.latitude
+        # rs['longitude'] = new_business.longitude
 
         response['satus'] = 'success'
         response['business_infos'] = rs
@@ -118,21 +118,21 @@ def ReadAllBusiness():
     try:
         all_business = Business.query.all()
         business_infos = []
-        for advertisement in all_business:
+        for business in all_business:
             business_info = {
-                'bu_uid': advertisement.bu_uid,              
-                'bu_categories': advertisement.bu_categories,              
-                'bu_type': advertisement.bu_type,              
-                'bu_name': advertisement.bu_name,              
-                'bu_description': advertisement.bu_description,              
-                'bu_email': advertisement.bu_email,              
-                'bu_city': advertisement.bu_city,              
-                'bu_address': advertisement.bu_address,              
-                'bu_mobile': advertisement.bu_mobile,              
-                'bu_image1': advertisement.bu_image1,              
-                'bu_image2': advertisement.bu_image2,              
-                'latitude': advertisement.latitude,              
-                'longitude': advertisement.longitude,              
+                'bu_uid': business.bu_uid,              
+                'bu_categorie': business.bu_categorie,              
+                'bu_type': business.bu_type,              
+                'bu_name': business.bu_name,              
+                'bu_description': business.bu_description,              
+                'bu_email': business.bu_email,              
+                'bu_city': business.bu_city,              
+                'bu_address': business.bu_address,              
+                'bu_mobile': business.bu_mobile,              
+                'bu_image1': business.bu_image1,              
+                'bu_image2': business.bu_image2,              
+                # 'latitude': business.latitude,              
+                # 'longitude': business.longitude,              
             }
             business_infos.append(business_info)
 
@@ -156,7 +156,7 @@ def ReadSingleBusiness():
         single_business = Business.query.filter_by(bu_uid=business_uid).first_or_404()
         business_info = {
                 'bu_uid': single_business.bu_uid,              
-                'bu_categories': single_business.bu_categories,              
+                'bu_categorie': single_business.bu_categorie,              
                 'bu_type': single_business.bu_type,              
                 'bu_name': single_business.bu_name,              
                 'bu_description': single_business.bu_description,              
@@ -184,13 +184,13 @@ def ReadAllBusinessByCategories():
 
     response = {}
     try:
-        bu_categories = request.json.get('bu_categories')
-        all_business = Business.query.filter_by(bu_categories=bu_categories).all()
+        bu_categorie = request.json.get('bu_categorie')
+        all_business = Business.query.filter_by(bu_categorie=bu_categorie).all()
         business_infos = []
         for business in all_business:
             business_info = {
                 'bu_uid': business.bu_uid,              
-                'bu_categories': business.bu_categories,              
+                'bu_categorie': business.bu_categorie,              
                 'bu_type': business.bu_type,              
                 'bu_name': business.bu_name,              
                 'bu_description': business.bu_description,              

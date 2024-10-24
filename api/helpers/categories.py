@@ -83,9 +83,10 @@ def ReadAllCategories():
 
     response = {}
     try:
-        all_categiries = Categories.query.all()
+        all_categirie = Categories.query.all()
         categories_info = []
-        for categorie in all_categiries:
+        categorie_name = []
+        for categorie in all_categirie:
             categorie_infos = {
                 'ca_uid': categorie.ca_uid,
                 'name': categorie.ca_name,              
@@ -93,8 +94,14 @@ def ReadAllCategories():
             }
             categories_info.append(categorie_infos)
 
+        for categorie in all_categirie:
+            categorie_infos = {
+                'name': categorie.ca_name,              
+            }
+            categorie_name.append(categorie_infos)
         response['status'] = 'success'
-        response ['categorie'] = categories_info
+        response ['categorie_name'] = categorie_name
+        response ['categories_info'] = categories_info
 
     except Exception as e:
         response['status'] = 'error'
