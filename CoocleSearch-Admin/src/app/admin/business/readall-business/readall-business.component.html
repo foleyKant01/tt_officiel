@@ -1,12 +1,12 @@
-<div class="container-fluid" style="position: relative; top: 30px; bottom: 30px; width: 100%;;">
-  <h3 class="">All Business</h3><br>
+<div class="container p-0" style="position: relative; top: 30px; bottom: 30px; width: 100%;;">
+  <h3 style="color: black;" class="">All Business</h3><br>
   <form class="p-0"[formGroup]="searchbusiness" (submit)="Readallbusinessbycategories()">
     <div class="d-flex justify-content-between col-12 p-0 m-0">
       <div class="col-7"></div>
       <div class="col-4">
         <div class="form-group">
           <label for="user">Categories</label>
-          <select class="form-select" formControlName="bu_categorie" class="form-control fw-semibold" >
+          <select style="color: black;" class="form-select" formControlName="bu_categorie" class="form-control fw-semibold" >
             <option></option>
             <option *ngFor="let category of allCategories" [value]="category">{{ category }}</option>
           </select>
@@ -17,7 +17,7 @@
           <button style="height: 50px;" type="submit" class=" btn btn-primary ">Generate</button>
         </div> -->
         <div class="col-12">
-          <button type="submit" name="submit" [disabled]="searchbusiness.invalid" class="btn btn-primary btn-user btn-block">Generate</button>
+          <button type="submit" name="submit" [disabled]="searchbusiness.invalid" class="btn btn-primary">Generate</button>
         </div>
       </div>
     </div>
@@ -25,17 +25,17 @@
   <div class="row">
     <div class="col-12  -responsive">
       <table class="table report_gcc" *ngIf="dataBusiness && dataBusiness.length > 0">
-        <thead>
+        <thead style="color: black;">
           <tr>
-            <th scope="col">#</th>
-            <td>Categorie</td>
-            <td>Type</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>City</td>
-            <td>Mobile</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <th scope="col"><b>#</b></th>
+            <td><b>Categorie</b></td>
+            <td><b>Type</b></td>
+            <td><b>Name</b></td>
+            <td><b>Email</b></td>
+            <td><b>City</b></td>
+            <td><b>Mobile</b></td>
+            <td><b>Edit</b></td>
+            <td><b>Delete</b></td>
           </tr>
         </thead>
         <tbody>
@@ -47,7 +47,7 @@
             <td> {{ business?.bu_email }} </td>
             <td> {{ business?.bu_city }} </td>
             <td> {{ business?.bu_mobile }} </td>
-            <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="viewsingleProducts(product.pr_uid)"><i style="color: #e9af00;" class="fa-solid fa-eye"></i></button></td>
+            <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="Readsingleproducts(business.bu_uid)"><i style="color: #e9af00;" class="fa-solid fa-eye"></i></button></td>
             <td><button type="button" class="btn" style="width: 50%;" (click)="Deleteproduct(business.bu_uid)"><i class="fa-solid fa-trash-can text-danger"></i></button></td>
           </tr>
         </tbody>

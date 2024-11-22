@@ -2,15 +2,15 @@
   <br>
   <div id="wrappe">
     <form [formGroup]="createcategories" (submit)="Createcategories()">
-      <h2>Create categories</h2>
+      <h2 style="color: black;">Create categories</h2>
       <hr><br>
       <div class="div-input">
         <label for="exampleInputEmail1" class="form-label">Name:</label>
-        <input type="text" class="form-control" formControlName="name" aria-describedby="emailHelp">
+        <input style="color: black;" type="text" class="form-control fw-semibold" formControlName="name" aria-describedby="emailHelp">
       </div><br>
       <div class="div-input">
         <label for="exampleInputEmail1" class="form-label">Description:</label>
-        <textarea class="form-control" formControlName="description" cols="25" rows="3"></textarea>
+        <textarea style="color: black;" class="form-control fw-semibold" formControlName="description" cols="25" rows="3"></textarea>
       </div><br>
       <div class="mt-2 p-2" style="display: flex; justify-content: end;">
         <button [disabled]="createcategories.invalid" type="submit" class="btn btn-primary" >Create</button>

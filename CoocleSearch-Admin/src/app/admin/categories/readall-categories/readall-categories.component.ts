@@ -1,17 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-// import { CategorieService } from '../../services/categorie.service';
+import { Router, RouterModule } from '@angular/router';
+import { CategoriesService } from '../../../services/categories/categories.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-readall-categories',
+  standalone: true,
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './readall-categories.component.html',
   styleUrls: ['./readall-categories.component.scss']
 })
-export class ReadallCategoriesComponent{
+export class ReadallCategoriesComponent implements OnInit{
 
   // category: any;
-  // data: any;
+  business: any[] = [];
+  categories: any[] = [];
+  dataCategories: any[] = [];
+  deleteResult: any[] = [];
+  dataBusiness: any[] = [];
+  allBusiness: string[] = [];
+  allCategories: string[] = [];
   // searchCategories: string[] = [];
 
   // //Variable Note
@@ -20,24 +30,24 @@ export class ReadallCategoriesComponent{
   // searchNote: string[] = [];
   // response: any;
 
-  // constructor(private router: Router, private http: CategorieService){}
+  constructor(private router: Router, private http: CategoriesService){}
+  ngOnInit(): void {
+      this.Readallcategories();
+  }
 
-  // ngOnInit(): void {
-  //   this.loadCategories();
-  //   // this.loadDescription();
-  // }
 
-  // // Get Categories
-
-  // loadCategories() {
-  //   this.http.ReadAllCategories()?.subscribe({
-  //     next: (res:any) =>{
-  //         this.data = res?.categorie
-  //         // console.log(this.data)
-  //     }
-  //   });
-  // }
-
+  //Fonction pour readall categories
+  Readallcategories(): void {
+    this.http.ReadAllCategories().subscribe({
+      next: (response: any) => {
+        this.allCategories = response || []; // Stocker les produits dans le tableau
+        if(response?.categories)  {
+          this.dataCategories = response?.categories
+          console.log(this.dataCategories)
+        }
+      },
+    })
+  }
 
   // editCategorie(ca_uid: string, name: string) {
   //   // Redirigez l'utilisateur vers la page de modification avec l'ID de la catégorie dans l'URL

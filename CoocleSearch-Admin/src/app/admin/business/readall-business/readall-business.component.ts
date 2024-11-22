@@ -16,6 +16,7 @@ export class ReadallBusinessComponent implements OnInit{
 
   business: any[] = [];
   dataCategorie: any[] = [];
+  deleteResult: any[] = [];
   dataBusiness: any[] = [];
   allBusiness: string[] = [];
   allCategories: string[] = [];
@@ -37,7 +38,7 @@ export class ReadallBusinessComponent implements OnInit{
         this.allBusiness = response || []; // Stocker les produits dans le tableau
         if(response?.business)  {
           this.dataBusiness = response?.business
-          console.log(this.dataBusiness)
+          // console.log(this.dataBusiness)
         }
       },
     })
@@ -50,7 +51,7 @@ export class ReadallBusinessComponent implements OnInit{
       next: (response:any) =>{
         this.dataCategorie = response?.categorie_name
         this.allCategories = this.dataCategorie.map((category: any) => category?.name);
-        console.log(this.allCategories)
+        // console.log(this.dataCategorie)
       }
     });
   }
@@ -70,30 +71,34 @@ export class ReadallBusinessComponent implements OnInit{
         this.allBusiness = response || [];
         if(response?.business)  {
           this.dataBusiness = response?.business
-          console.log(this.dataBusiness)
+          // console.log(this.dataBusiness)
         }
       },
   })
 }
 
-viewsingleProducts(pr_uid: number): void {
-  this.router.navigate(['/admin/view-single-products', pr_uid]);
-}
-
-
-deleteProduct(pr_uid: number): void {
-  if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
-    this.http.DeleteBusiness(pr_uid).subscribe({
-      next: (response: any) => {
-        console.log('Product deleted successfully:', response);
-        // Actualiser la liste des produits après la suppression
-        // this.viewallProducts();
-      },
-      error: (error) => {
-        console.error('Failed to delete product:', error);
-      }
-    });
+  Readsingleproducts(bu_uid: number): void {
+    this.router.navigate(['/admin/business/edit-business', bu_uid]);
   }
-}
+
+
+  Deleteproduct(bu_uid: any): void {
+    console.log(bu_uid)
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+      this.http.DeleteBusiness(bu_uid).subscribe({
+        next: (response: any) => {
+          console.log('Product deleted successfully:', response);
+          this.deleteResult = response?.status
+          console.log(this.deleteResult)
+
+          // Actualiser la liste des produits après la suppression
+          // this.viewallProducts();
+        },
+        error: (error) => {
+          console.error('Failed to delete product:', error);
+        }
+      });
+    }
+  }
 
 }

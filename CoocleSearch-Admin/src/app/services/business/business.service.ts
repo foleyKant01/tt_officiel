@@ -26,13 +26,17 @@ export class BusinessService {
     return this.http.post(this.api_url+"/api/business/readsinglebusinessbycategories", body);
   }
 
-  DeleteBusiness(body:any){
-    const httpOptions = {
-      headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      })
-    };
-    return this.http.delete(this.api_url+"/api/business/deletebusiness", body)
+  ReadSingleBusiness(body : any){
+    return this.http.post(this.api_url+"/api/business/readsinglebusiness",body);
+  }
+
+  DeleteBusiness(body : any){
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   })
+    // };
+    return this.http.post(this.api_url+"/api/business/deletebusiness", body)
   }
 
 }

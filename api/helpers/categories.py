@@ -101,7 +101,7 @@ def ReadAllCategories():
             categorie_name.append(categorie_infos)
         response['status'] = 'success'
         response ['categorie_name'] = categorie_name
-        response ['categories_info'] = categories_info
+        response ['categories'] = categories_info
 
     except Exception as e:
         response['status'] = 'error'
