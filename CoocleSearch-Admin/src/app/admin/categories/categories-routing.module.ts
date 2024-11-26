@@ -12,11 +12,9 @@ const routes: Routes = [
     { path:'', redirectTo:'create-categories', pathMatch:'full' },
     { path:'create-categories', component:CreateCategoriesComponent },
     { path:'readall-categories', component:ReadallCategoriesComponent },
-    { path:'update-categories', component:UpdateCategoriesComponent },
+    { path:'update-categories/:bu_uid', component:UpdateCategoriesComponent },
     { path:'spinner', component:SpinnerComponent },
-    // { path:'register', component:RegisterComponent },
     // { path:'forgotpassword', component:ForgotpasswordComponent },
-    // { path:'readsingle', component:ReadsingleComponent },
 
   ]
 }

@@ -11,13 +11,14 @@ class AdminApi(Resource):
         
         if route == "login":
             return LoginAdmin()
+        
+        # if route == "readsingle":
+        #     return ReadSinglAdmin()
 
     
-    # def get(self, route):
-    #     if route == "readall":
-    #         return ReadAllAdmin
-    #     if route == "readsingle":
-    #         return ReadSinglAdmin()
+    def get(self, route):
+        if route == "readall":
+            return ReadAllAdmin
 
     
     # def delete(self, route):

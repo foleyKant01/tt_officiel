@@ -12,8 +12,8 @@ const routes: Routes = [
     { path:'', redirectTo:'readall-tellers', pathMatch:'full' },
     { path:'readall-tellers', component:ReadallTellersComponent },
     { path:'create-tellers', component:CreateTellersComponent },
-    { path:'readsingle-tellers', component:ReadsingleTellersComponent },
-    { path:'edit-tellers', component:EditTellersComponent },
+    { path:'readsingle-tellers/:t_uid', component:ReadsingleTellersComponent },
+    { path:'edit-tellers/:t_uid', component:EditTellersComponent },
   ]
 }
 ];

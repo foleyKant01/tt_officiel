@@ -11,15 +11,38 @@ def CreateTeller():
     rseponse = {}
 
     try:
-        t_fullname = (request.json.get('t_fullname'))
-        t_username = (request.json.get('t_username'))
-        t_mobile = (request.json.get('t_mobile'))      
-        t_address = (request.json.get('t_address'))
-        t_email = (request.json.get('t_email'))
-        t_password = (request.json.get('t_password'))
-        t_city = (request.json.get('t_city'))
+        # t_fullname = (request.json.get('t_fullname')).strip().title()
+        # t_username = (request.json.get('t_username'))
+        # t_mobile = (request.json.get('t_mobile'))      
+        # t_address = (request.json.get('t_address')).strip().title()
+        # t_email = (request.json.get('t_email'))
+        # t_password = (request.json.get('t_password'))
+        # t_city = (request.json.get('t_city')).strip().title()
+
+        data = request.json
+        t_fullname = data.get('t_fullname', '').strip().title()
+        t_username = data.get('t_username', '')
+        t_mobile = data.get('t_mobile', '')
+        t_address = data.get('t_address', '').strip().title()
+        t_email = data.get('t_email', '')
+        t_password = data.get('t_password', '')
+        t_city = data.get('t_city', '').strip().title()
 
         hashed_password = bcrypt.hashpw(t_password.encode('utf-8'), bcrypt.gensalt())
+
+
+        if not all([t_fullname, t_username, t_mobile, t_address, t_email, t_password, t_city]):
+            raise ValueError("All fields are required")
+        
+        if not t_mobile.isdigit() or len(t_mobile) != 10:
+            raise ValueError("Mobile number must contain exactly 10 digits and no other characters")
+
+        if '@' not in t_email:
+            raise ValueError("Invalid email address")
+
+        existing_teller = Teller.query.filter((Teller.t_username == t_username) | (Teller.t_email == t_email)).first()
+        if existing_teller:
+            raise ValueError("Username or email already exists")
         
         new_teller = Teller()
         new_teller.t_fullname = t_fullname
@@ -29,6 +52,7 @@ def CreateTeller():
         new_teller.t_email = t_email
         new_teller.t_password = hashed_password
         new_teller.t_city = t_city
+        new_teller.t_status = 'Active'
         
         db.session.add(new_teller)
         db.session.commit()
@@ -40,15 +64,16 @@ def CreateTeller():
         rs['t_address'] = t_address
         rs['t_email'] = t_email
         rs['t_city'] = t_city
+        rs['t_status'] = new_teller.t_status
         rs['t_uid'] = new_teller.t_uid
 
-        rseponse['status'] = 'Succes'
-        rseponse['status'] = rs
+        rseponse['status'] = 'Success'
+        rseponse['teller_infos'] = rs
 
 
     except Exception as e:
-        rseponse['error_description'] = str(e)
         rseponse['status'] = 'error'
+        rseponse['error_description'] = str(e)
 
     return rseponse
 
@@ -70,6 +95,7 @@ def ReadAllTeller():
                     't_address': teller.t_address,
                     't_email': teller.t_email,
                     't_city': teller.t_city,                    
+                    't_status': teller.t_status,                    
                     't_uid': teller.t_uid, 
                 }
                 teller_informations.append(teller_infos)
@@ -103,6 +129,7 @@ def ReadSingleTeller():
                 't_address': single_teller.t_address,
                 't_email': single_teller.t_email,
                 't_city': single_teller.t_city,                    
+                't_status': single_teller.t_status,                    
                 't_uid': single_teller.t_uid, 
             }
             reponse['status'] = 'success'
@@ -133,7 +160,33 @@ def UpdateTeller  ():
             update_teller.t_address = request.json.get('t_address', update_teller.t_address)
             update_teller.t_email = request.json.get('t_email', update_teller.t_email)
             update_teller.t_city = request.json.get('t_city', update_teller.t_city)
-            update_teller.t_uid = request.json.get('t_uid', update_teller.t_uid)
+            update_teller.t_status = update_teller.t_status
+
+            db.session.add(update_teller)
+            db.session.commit()
+
+            reponse['status'] = 'Succes'
+            reponse['teller'] = update_teller
+        else:
+            reponse['status'] = 'Teller not found'
+
+    except Exception as e:
+        reponse['error_description'] = str(e)
+        reponse['status'] = 'error'
+
+    return reponse
+
+
+
+def UpdateStatusTeller  ():
+
+    reponse = {}
+    try:
+        uid = request.json.get('t_uid')
+        update_teller = Teller.query.filter_by(t_uid = uid).first()
+
+        if update_teller:
+            update_teller.t_status = request.json.get('t_status', update_teller.t_status)
 
             db.session.add(update_teller)
             db.session.commit()

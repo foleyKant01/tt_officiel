@@ -111,23 +111,23 @@ def ReadAllCategories():
 
 
 
-def ReadSingleCategories():
+# def ReadSingleCategories():
 
-    response = {}
-    try:
-        ca_uid = request.json.get('ca_uid')
-        single_categories = Categories.query.filter_by(ca_uid=ca_uid).first_or_404()
-        categories_infos = {
-            'ca_uid': single_categories.ca_uid,
-            'name': single_categories.ca_name,  
-            'description': single_categories.ca_description,              
-        }
-        response['status'] = 'success'
-        response['categorie'] = categories_infos
+#     response = {}
+#     try:
+#         ca_uid = request.json.get('ca_uid')
+#         single_categories = Categories.query.filter_by(ca_uid=ca_uid).first_or_404()
+#         categories_infos = {
+#             'ca_uid': single_categories.ca_uid,
+#             'name': single_categories.ca_name,  
+#             'description': single_categories.ca_description,              
+#         }
+#         response['status'] = 'success'
+#         response['categorie'] = categories_infos
 
-    except Exception as e:
-        response['status'] = 'error'
-        response['error_description'] = str(e)
+#     except Exception as e:
+#         response['status'] = 'error'
+#         response['error_description'] = str(e)
 
-    return response
+#     return response
 

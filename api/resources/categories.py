@@ -9,8 +9,8 @@ class CategoriesApi(Resource):
         if route == "createcategorie":
             return CreateCategories()
     
-        if route == "readsinglecategorie":
-            return ReadSingleCategories()
+        # if route == "readsinglecategorie":
+        #     return ReadSingleCategories()
         
         if route == "deletecategorie":
             return DeleteCategories()

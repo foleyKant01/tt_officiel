@@ -15,12 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class ReadallCategoriesComponent implements OnInit{
 
   // category: any;
-  business: any[] = [];
   categories: any[] = [];
   dataCategories: any[] = [];
   deleteResult: any[] = [];
-  dataBusiness: any[] = [];
-  allBusiness: string[] = [];
   allCategories: string[] = [];
   // searchCategories: string[] = [];
 
@@ -49,29 +46,32 @@ export class ReadallCategoriesComponent implements OnInit{
     })
   }
 
+  RedirectToUpdateCategories(ca_uid: number): void {
+    this.router.navigate(['/admin/categories/update-categories', ca_uid]);
+  }
+
   // editCategorie(ca_uid: string, name: string) {
   //   // Redirigez l'utilisateur vers la page de modification avec l'ID de la catégorie dans l'URL
   //   this.router.navigate(['admin' , 'update-categories', ca_uid, name]);
   // }
 
 
-  // deleteCategorie(ca_uid: string): void {
-  //   let body = {
-  //     ca_uid: ca_uid
-  //   }
-  //   if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
-  //     this.http.DeleteCategories(body).subscribe({
-  //       next: (res: any) => {
-  //         this.data = res?.status
-  //         console.log('Uid: ',body);
-  //         console.log(this.data);
-  //         // Actualiser la liste des produits après la suppression
-  //         window.location.reload();
-  //       },
+  deleteCategorie(ca_uid: string): void {
+    let body = {
+      ca_uid: ca_uid
+    }
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+      this.http.DeleteCategories(body).subscribe({
+        next: (res: any) => {
+          this.deleteResult = res?.status
+          console.log('Uid: ',body);
+          console.log(this.deleteResult);
+          window.location.reload();
+        },
 
-  //     });
-  //   }
-  // }
+      });
+    }
+  }
 
 
 }

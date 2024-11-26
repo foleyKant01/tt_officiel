@@ -5,11 +5,10 @@
     </div>
     <div>
       <!-- Button to Open the Modal -->
-      <button type="button" class="btn btn-primary rounded-4" data-bs-toggle="modal"
-          data-bs-target="#usertModal">
-          Add Tellers
+      <button type="button" class="btn btn-primary rounded-4" data-bs-toggle="modal" data-bs-target="#tellerModal">
+        Add Tellers
       </button>
-  </div>
+    </div>
   </div>
   <hr>
   <div class="row mb-4">
@@ -21,6 +20,7 @@
               <thead>
                 <tr>
                   <th><b>#</b></th>
+                  <th><b>Fullname</b></th>
                   <th><b>Username</b></th>
                   <th><b>Mobile</b></th>
                   <th><b>Address</b></th>
@@ -30,15 +30,17 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr *ngFor="let item of dataUsers, let i = index;"[routerLink]="['/admin/user/view-supervisor', item?.user_id]" style="cursor: pointer;">
+                <tr *ngFor="let item of dataTeller, let i = index;"
+                  [routerLink]="['/admin/user/view-supervisor', item?.user_id]" style="cursor: pointer;">
                   <td>{{i + 1}}</td>
-                  <td>{{item?.u_username}}</td>
-                  <td>{{item?.u_mobile}}</td>
-                  <td>{{item?.u_address}}</td>
-                  <td>{{item?.u_email}}</td>
-                  <td>{{item?.u_city}}</td>
-                  <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;"><i style="color: #e9af00;" class="fa-solid fa-eye"></i></button></td>
-                </tr> -->
+                  <td>{{item?.t_fullname}}</td>
+                  <td>{{item?.t_username}}</td>
+                  <td>{{item?.t_mobile}}</td>
+                  <td>{{item?.t_address}}</td>
+                  <td>{{item?.t_email}}</td>
+                  <td>{{item?.t_city}}</td>
+                  <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="Readsingleteller(item.t_uid)"><i style="color: #e9af00;" class="fa-solid fa-eye"></i></button></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -48,86 +50,54 @@
   </div>
 </div>
 
-<!-- Modal for Adding Users -->
-<!-- <div class="modal fade" id="usertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" (hidden.bs.modal)="closeUserModal()">
+<div class="modal fade" id="tellerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  (hidden.bs.modal)="closeUserModal()">
   <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <form [formGroup]="user_form">
-                  <div class="mb-3">
-                      <label for="username" class="form-label">Fullname</label>
-                      <input type="text" id="username" class="form-control" formControlName="fullname">
-                  </div>
-
-                  <div class="mb-3">
-                      <label for="username" class="form-label">Username</label>
-                      <input type="text" id="username" class="form-control" formControlName="username">
-                  </div>
-                  <div class="mb-3">
-                      <label for="password_hash" class="form-label">Password</label>
-                      <input type="password" id="password_hash" class="form-control" formControlName="password_hash">
-                  </div>
-                  <div class="mb-3">
-                      <label for="email" class="form-label">Email</label>
-                      <input type="email" id="email" class="form-control" formControlName="email">
-                  </div>
-                  <div class="mb-3 row">
-                      <div class="col-md-4">
-                          <label for="id_number" class="form-label">Phone Code</label>
-                          <select id="id_number" class="form-select" formControlName="id_number" data-live-search="true" data-show-subtext="true" >
-                              <option value="" disabled>Select Phone Code</option>
-                              <option *ngFor="let code of flagIcons " [value]="code.countryIsoCode">{{ code.countryIsoCode }}</option>
-                          </select>
-                      </div>
-                      <div class="col-md-8">
-                          <label for="number" class="form-label">Mobile</label>
-                          <input type="text" id="number" class="form-control" formControlName="number">
-                      </div>
-                  </div>
-
-                  <div class="mb-3">
-                      <label for="role" class="form-label">Role</label>
-                      <select id="role" class="form-select" formControlName="role">
-                          <option value="" disabled>Select Role</option>
-                          <option value="superadmin">Superadmin</option>
-                          <option value="supervisor">Supervisor</option>
-                          <option value="driver">Driver</option>
-                          <option value="user">User</option>
-                      </select>
-                  </div>
-                  <div class="mb-3" *ngIf="user_form.get('role')?.value === 'driver' || user_form.get('role')?.value === 'user'">
-                      <label for="supervisor" class="form-label">Supervisor</label>
-                      <select id="supervisor" class="form-select" formControlName="supervisor">
-                          <option value="" disabled>Select Supervisor</option>
-                          <option *ngFor="let supervisor of supervisor_data" [value]="supervisor?.user_id">{{supervisor?.username}}</option>
-                      </select>
-                  </div>
-                  <div class="mb-3" *ngIf="user_form.get('role')?.value === 'user' || user_form.get('role')?.value === 'driver' || user_form.get('role')?.value === 'supervisor'">
-                      <label for="id-_card" class="form-label">ID Card</label>
-                      <input type="text" id="rfid_card" class="form-control" formControlName="rfid_card">
-                  </div>
-                  <div class="mb-3">
-                      <label for="status" class="form-label">Status</label>
-                      <select id="status" class="form-select" formControlName="status">
-                          <option value="" disabled>Select Status</option>
-                          <option value="active">Active</option>
-                          <option value="inactive">Inactive</option>
-                      </select>
-                  </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addUser()">Add User</button>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="color: black;" class="modal-title" id="exampleModalLabel"><b>Add Teller</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <div class="modal-body">
+        <form style="color: black;" [formGroup]="register_teller_form">
+          <div class="mb-3">
+            <label for="t_fullname" class="form-label">Fullname</label>
+            <input type="text" id="t_fullname" class="form-control" formControlName="t_fullname">
+          </div>
+          <div class="mb-3">
+            <label for="t_username" class="form-label">Username</label>
+            <input type="text" id="t_username" class="form-control" formControlName="t_username">
+          </div>
+          <div class="mb-3">
+            <label for="t_mobile" class="form-label">Mobile</label>
+            <input type="text" id="t_mobile" class="form-control" formControlName="t_mobile">
+          </div>
+          <div class="mb-3">
+            <label for="t_address" class="form-label">Address</label>
+            <input type="text" id="t_address" class="form-control" formControlName="t_address">
+          </div>
+          <div class="mb-3">
+            <label for="t_email" class="form-label">Email</label>
+            <input type="email" id="t_email" class="form-control" formControlName="t_email">
+          </div>
+          <div class="mb-3">
+            <label for="t_password" class="form-label">Password</label>
+            <input type="password" id="t_password" class="form-control" formControlName="t_password">
+          </div>
+          <div class="mb-3">
+            <label for="t_city" class="form-label">City</label>
+            <input type="text" id="t_city" class="form-control" formControlName="t_city">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button [disabled]="register_teller_form.invalid" type="button" class="btn btn-primary" (click)="Createteller()">Add User</button>
+        <!-- data-bs-dismiss="modal" -->
+      </div>
+    </div>
   </div>
-</div> -->
-
+</div>
 
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
   <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"

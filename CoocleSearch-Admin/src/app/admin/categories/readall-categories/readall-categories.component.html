@@ -17,10 +17,8 @@
             <td> {{i+1}} </td>
             <td> {{ item?.name }} </td>
             <td> {{ item?.description }} </td>
-            <td></td>
-            <td></td>
-            <!-- <td class="p-0"><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="editCategorie(item.ca_uid, item.name)"><i style="color: #e9af00;"  class="fa-solid fa-pencil"></i></button></td> -->
-            <!-- <td class="p-0"><button type="button" class="btn" style="width: 50%;" (click)="deleteCategorie(item.ca_uid)"><i class="fa-solid fa-trash-can text-danger"></i></button></td> -->
+            <td class="p-0"><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="RedirectToUpdateCategories(item.ca_uid)"><i style="color: #e9af00;"  class="fa-solid fa-pencil"></i></button></td>
+            <td class="p-0"><button type="button" class="btn" style="width: 50%;" (click)="deleteCategorie(item.ca_uid)"><i class="fa-solid fa-trash-can text-danger"></i></button></td>
           </tr>
         </tbody>
       </table>

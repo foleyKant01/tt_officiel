@@ -8,14 +8,18 @@ class TellerApi(Resource):
     def post(self, route):
         if route == "create":
             return CreateTeller()
+        
         if route == "login":
             return LoginTeller()
+        
+        if route == "readsingle":
+            return ReadSingleTeller()
+        
     
-    # def get(self, route):
-    #     if route == "readall":
-    #         return ReadAllTeller()
-    #     if route == "readsingle":
-    #         return ReadSingleTeller()
+    def get(self, route):
+        if route == "readall":
+            return ReadAllTeller()
+
             
     
     # def delete(self, route):
