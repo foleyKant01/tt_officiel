@@ -225,19 +225,32 @@ def DeleteTeller():
 
 
 
-def LoginTeller():
 
+def LoginTeller():
     reponse = {}
+
     try:
-        username = request.json.get('t_username')
+        identifiant = request.json.get('identifiant')
         password = request.json.get('t_password')
-        login_teller = Teller.query.filter_by(t_username=username).first()
+        login_teller = Teller.query.filter((Teller.t_email == identifiant) | (Teller.t_username == identifiant)).first()
+
         if login_teller and bcrypt.checkpw(password.encode('utf-8'), login_teller.t_password.encode('utf-8')):
             expires = timedelta(hours=1)
-            access_token = create_access_token(identity=username)
+            access_token = create_access_token(identity=identifiant)
+            rs = {}
+            rs['t_uid'] = login_teller.t_uid
+            rs['t_fullname'] = login_teller.t_fullname
+            rs['t_username'] = login_teller.t_username
+            rs['t_mobile'] = login_teller.t_mobile
+            rs['t_address'] = login_teller.t_address
+            rs['t_email'] = login_teller.t_email
+            rs['t_password'] = login_teller.t_password
+            rs['t_city'] = login_teller.t_city
+            rs['t_status'] = login_teller.t_status
 
             reponse['status'] = 'success'
             reponse['message'] = 'Login successful'
+            reponse['teller_infos'] = rs
             reponse['access_token'] = access_token
 
         else:

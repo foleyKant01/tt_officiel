@@ -1,9 +1,9 @@
-import { DashboardComponent } from './../../../../CoocleSearch-Admin/src/app/admin/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TellerComponent } from './teller.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'business', loadChildren: () => import('./business/business.module').then(m => m.BusinessModule) },
+      { path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule) },
       { path: 'settings', component: SettingsComponent },
 
     ]

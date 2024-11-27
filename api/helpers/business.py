@@ -18,7 +18,7 @@ def CreateBusiness():
         new_business.bu_image1 = request.json.get('image1')
         new_business.bu_image2 = request.json.get('image2')
         new_business.t_uid = request.json.get('t_uid')
-        new_business.bu_status = request.json.get('bu_status')
+        new_business.bu_status = 'Active'
         # new_business.latitude = request.json.get('latitude')
         # new_business.longitude = request.json.get('longitude')
         new_business.bu_uid = str(uuid.uuid4())
@@ -85,7 +85,7 @@ def UpdateBusiness():
 
 
 
-def UpdateBusiness():
+def UpdateStatusBusiness():
     response = {}
 
     try:
@@ -206,6 +206,42 @@ def ReadAllBusinessByCategories():
     try:
         bu_categorie = request.json.get('bu_categorie')
         all_business = Business.query.filter_by(bu_categorie=bu_categorie).all()
+        business_infos = []
+        for business in all_business:
+            business_info = {
+                'bu_uid': business.bu_uid,              
+                'bu_categorie': business.bu_categorie,              
+                'bu_type': business.bu_type,              
+                'bu_name': business.bu_name,              
+                'bu_description': business.bu_description,              
+                'bu_city': business.bu_city,              
+                'bu_address': business.bu_address,              
+                'bu_image1': business.bu_image1,              
+                'bu_image2': business.bu_image2,              
+                't_uid': business.t_uid,              
+                'bu_status': business.bu_status,              
+                # 'latitude': business.latitude,              
+                # 'longitude': business.longitude,               
+            }
+            business_infos.append(business_info)
+
+        response['status'] = 'success'
+        response ['business'] = business_infos
+
+    except Exception as e:
+        response['status'] = 'error'
+        response['error_description'] = str(e)
+
+    return response
+
+
+
+def ReadAllBusinessByTeller():
+
+    response = {}
+    try:
+        t_uid = request.json.get('t_uid')
+        all_business = Business.query.filter_by(t_uid=t_uid).all()
         business_infos = []
         for business in all_business:
             business_info = {

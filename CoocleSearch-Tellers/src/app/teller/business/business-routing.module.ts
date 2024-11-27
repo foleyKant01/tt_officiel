@@ -5,6 +5,7 @@ import { CreateBusinessComponent } from './create-business/create-business.compo
 import { ReadallBusinessComponent } from './readall-business/readall-business.component';
 import { ReadsingleBusinessComponent } from './readsingle-business/readsingle-business.component';
 import { DeleteBusinessComponent } from './delete-business/delete-business.component';
+import { UpdateBusinessComponent } from './update-business/update-business.component';
 
 const routes: Routes = [
   { path:'', component:BusinessComponent,
@@ -12,7 +13,8 @@ const routes: Routes = [
     { path:'', redirectTo:'create-business', pathMatch:'full' },
     { path:'create-business', component:CreateBusinessComponent },
     { path:'readall-business', component:ReadallBusinessComponent },
-    { path:'edit-business/:bu_uid', component:ReadsingleBusinessComponent },
+    { path:'readsingle-business/:bu_uid', component:ReadsingleBusinessComponent },
+    { path:'update-business/:bu_uid', component:UpdateBusinessComponent },
     { path:'delete-business/:bu_uid', component:DeleteBusinessComponent },
   ]
 }

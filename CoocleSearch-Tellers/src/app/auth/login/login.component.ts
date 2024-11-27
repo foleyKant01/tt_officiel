@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth/auth.service';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -16,39 +17,39 @@ export class LoginComponent implements OnInit {
   data: any;
   is_loading: boolean = false;
 
-  constructor(private router: Router, private _activateRouter: ActivatedRoute, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
 
   login_form: FormGroup = new FormGroup({
     identifiant: new FormControl(null, Validators.required),
-    ad_password: new FormControl(null, Validators.required),
+    t_password: new FormControl(null, Validators.required),
 
   });
 
-  Loginadmin() {
-    this.is_loading = true;
+  Loginteller() {
+    // this.is_loading = true;
     let body = this.login_form?.value;
 
-    this.auth.LoginAdmin(body).subscribe({
+    this.auth.LoginTeller(body).subscribe({
       next: (res: any) => {
         console.log('Response:', res);
         if (res?.status === 'success') {
           this.data = res;
-          if (res.admin_infos) {
-            sessionStorage.setItem('admin_infos', JSON.stringify(res.admin_infos));
+          if (res.teller_infos) {
+            sessionStorage.setItem('teller_infos', JSON.stringify(res.teller_infos));
           } else {
-            console.error('admin_infos is missing in the response');
+            console.error('teller_infos is missing in the response');
           }
           sessionStorage.setItem('access_token', res.access_token);
 
           Swal.fire({
             title: 'Success!',
-            text: 'Admin login successfully!',
+            text: 'Teller login successfully!',
             icon: 'success',
             confirmButtonText: 'OK',
             confirmButtonColor: '#ff6c2f'
           }).then(() => {
-            this.router.navigate(['/admin/dashboard']);
+            this.router.navigate(['teller']);
           });
         } else {
           Swal.fire({

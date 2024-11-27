@@ -1,6 +1,6 @@
 <div class="container p-0" style="position: relative; top: 30px; bottom: 30px; width: 100%;;">
   <h3 style="color: black;" class="">All Business</h3><br>
-  <form class="p-0"[formGroup]="searchbusiness" (submit)="Readallbusinessbycategories()">
+  <!-- <form class="p-0"[formGroup]="searchbusiness" (submit)="Readallbusinessbycategories()">
     <div class="d-flex justify-content-between col-12 p-0 m-0">
       <div class="col-7"></div>
       <div class="col-4">
@@ -13,15 +13,15 @@
         </div>
       </div>
       <div style="margin-top: 31.5px;"  class="col-1 text-center">
-        <!-- <div class="form-group col-12">
+        <div class="form-group col-12">
           <button style="height: 50px;" type="submit" class=" btn btn-primary ">Generate</button>
-        </div> -->
+        </div>
         <div class="col-12">
           <button type="submit" name="submit" [disabled]="searchbusiness.invalid" class="btn btn-primary">Generate</button>
         </div>
       </div>
     </div>
-  </form><br>
+  </form><br> -->
   <div class="row">
     <div class="col-12  -responsive">
       <table class="table report_gcc" *ngIf="dataBusiness && dataBusiness.length > 0">
@@ -44,7 +44,7 @@
             <td> {{ business?.bu_type }} </td>
             <td> {{ business?.bu_name }} </td>
             <td> {{ business?.bu_city }} </td>
-            <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="Readsingleproducts(business.bu_uid)"><i style="color: #e9af00;" class="fa-solid fa-eye"></i></button></td>
+            <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="Readsinglebusiness(business.bu_uid)"><i style="color: #e9af00;" class="fa-solid fa-eye"></i></button></td>
           </tr>
         </tbody>
       </table>

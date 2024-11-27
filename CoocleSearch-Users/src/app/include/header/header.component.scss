@@ -1,0 +1,13 @@
+.rotate-n-15 {
+  color: yellow; /* Si vous voulez garder la couleur jaune */
+  transform: rotate(15deg); /* Pivote l'icône de 15 degrés */
+  display: inline-block; /* Assure que la rotation affecte uniquement l'icône */
+}
+nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Pour s'assurer que l'en-tête est au-dessus du contenu */
+  transition: top 0.3s ease; /* Pour ajouter une transition fluide */
+}

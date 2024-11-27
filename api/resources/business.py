@@ -9,21 +9,28 @@ class BusinessApi(Resource):
             return CreateBusiness()
         
         if route == "readsinglebusiness":
-            return ReadSingleBusiness()
+            return ReadSingleBusiness() 
         
         if route == "readsinglebusinessbycategories":
             return ReadAllBusinessByCategories()
+            
+        if route == "readallbusinessbyteller":
+            return ReadAllBusinessByTeller()
 
-        if route == "deletebusiness":
-            return DeleteBusiness()
         
-        if route == "updatebusiness":
-            return UpdateBusiness()
-    
     def get(self, route):
         if route == "readallbusiness":
             return ReadAllBusiness()
         
-    # def delete(self, route):
-    #     if route == "deletebusiness":
-    #         return DeleteBusiness()
+        
+    def delete(self, route):
+        if route == "deletebusiness":
+            return DeleteBusiness()
+
+         
+    def patch(self, route):
+        if route == "updatebusiness":
+            return UpdateBusiness()
+        
+        if route == "updatestatusbusiness":
+            return UpdateStatusBusiness()

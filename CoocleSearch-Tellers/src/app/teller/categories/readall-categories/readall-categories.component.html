@@ -1,0 +1,24 @@
+<div  class="container p-0" style="position: relative; top: 30px; bottom: 30px; width: 100%;;">
+  <h3 style="color: black;" class="">All Categories</h3><br><br>
+  <div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table report_gcc"  *ngIf="dataCategories && dataCategories.length > 0">
+        <thead style="color: black;">
+          <tr>
+            <th class="op-06" scope="col"><b>#</b></th>
+            <td><b>Name</b></td>
+            <td><b>Description</b></td>
+          </tr>
+        </thead>
+        <tbody style="color: black;">
+          <tr *ngFor="let item of dataCategories; let i = index" >
+            <td> {{i+1}} </td>
+            <td> {{ item?.name }} </td>
+            <td> {{ item?.description }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

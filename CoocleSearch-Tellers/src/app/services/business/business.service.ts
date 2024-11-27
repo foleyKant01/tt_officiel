@@ -18,17 +18,18 @@ export class BusinessService {
     return this.http.post(this.api_url+"/api/business/createbusiness", body);
   }
 
-  ReadAllBusiness(): Observable<any>{
-    return this.api.get<any>(this.api_url+"/api/business/readallbusiness")
+  ReadAllBusinessByTeller(body: any): Observable<any>{
+    return this.api.get<any>(this.api_url+"/api/business/readallbusinessbyteller", body)
+  }
+
+  ReadSingleBusiness(body : any){
+    return this.http.post(this.api_url+"/api/business/readsinglebusiness",body);
   }
 
   ReadAllBusinessByCategories(body: any) {
     return this.http.post(this.api_url+"/api/business/readsinglebusinessbycategories", body);
   }
 
-  ReadSingleBusiness(body : any){
-    return this.http.post(this.api_url+"/api/business/readsinglebusiness",body);
-  }
 
   DeleteBusiness(body : any){
     // const httpOptions = {
