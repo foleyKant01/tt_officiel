@@ -12,10 +12,13 @@ class BusinessApi(Resource):
             return ReadSingleBusiness() 
         
         if route == "readsinglebusinessbycategories":
-            return ReadAllBusinessByCategories()
+            return ReadAllBusinessByCategories() 
             
         if route == "readallbusinessbyteller":
             return ReadAllBusinessByTeller()
+        
+        if route == "searchbusinessbycategorie":
+            return SearchBusinessByCategorie()
 
         
     def get(self, route):

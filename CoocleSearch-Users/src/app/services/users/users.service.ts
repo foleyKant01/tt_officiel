@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class UsersService {
     return this.http.get(this.api_url+"/api/users/getallsupervisor", body);
   }
 
-  GetAllDriver(body: any) {
-    return this.http.post(this.api_url+"/api/users/getalldriver", body);
+  SearchBusinessByCategorie(body: any) {
+    return this.http.post(this.api_url+"/api/business/searchbusinessbycategorie", body);
   }
 
   GetSingleDriverOrSupervisor(body: any) {
