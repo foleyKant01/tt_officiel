@@ -1,0 +1,12 @@
+a{
+  color: black;
+  text-decoration: none;
+}
+.forgot{
+  color: rgb(49, 49, 247);
+  text-decoration: underline;
+  cursor: pointer; /* Assurez-vous que le pointeur change sur le survol */
+  position: relative;
+  z-index: 10;  /* Assurez-vous que le lien est au-dessus des autres éléments */
+}
+

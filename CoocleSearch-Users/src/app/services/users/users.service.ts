@@ -15,16 +15,8 @@ export class UsersService {
     return this.http.post(this.api_url+"/api/users/createuser", body);
   }
 
-  GetAllSupervisor(body: any) {
-    return this.http.get(this.api_url+"/api/users/getallsupervisor", body);
-  }
-
   SearchBusinessByCategorie(body: any) {
     return this.http.post(this.api_url+"/api/business/searchbusinessbycategorie", body);
-  }
-
-  GetSingleDriverOrSupervisor(body: any) {
-    return this.http.post(this.api_url+"/api/users/getsingledriverorsupervisor", body);
   }
 
   DeleteUser(body: any) {

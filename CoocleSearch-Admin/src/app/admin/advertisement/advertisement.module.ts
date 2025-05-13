@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AdvertisementRoutingModule } from './advertisement-routing.module';
 
-
-
 @NgModule({
   declarations: [
 

@@ -5,6 +5,7 @@ from model.tt import Business
 
 from flask import request, jsonify, current_app as app
 from sqlalchemy import or_, func
+import unicodedata
 
 
 def CreateBusiness():
@@ -275,44 +276,122 @@ def ReadAllBusinessByTeller():
 
 
 
+# def SearchBusinessByCategorie():
+#     response = {}
+#     try:
+#         textSearch = request.json.get('textSearch')
+#         if not textSearch:
+#             return jsonify({'status': 'error', 'error_description': 'textSearch is required'}), 400
+
+#         word_search = f"%{textSearch}%"
+#         exact_word_search = f"% {textSearch} %"  
+
+#         all_business = Business.query.filter(
+#             or_(
+#                 Business.bu_categorie.ilike(word_search),
+#                 Business.bu_name.ilike(word_search),
+#                 Business.bu_description.ilike(word_search),
+#                 func.lower(Business.bu_description).ilike(exact_word_search)
+#             )
+#         ).all()
+
+#         business_infos = []
+#         for business in all_business:
+#             business_info = {
+#                 'bu_uid': business.bu_uid,              
+#                 'bu_categorie': business.bu_categorie,              
+#                 'bu_type': business.bu_type,              
+#                 'bu_name': business.bu_name,              
+#                 'bu_description': business.bu_description,              
+#                 'bu_city': business.bu_city,              
+#                 'bu_address': business.bu_address,              
+#                 'bu_image1': business.bu_image1,              
+#                 'bu_image2': business.bu_image2,              
+#                 't_uid': business.t_uid,              
+#                 'bu_status': business.bu_status,              
+#             }
+#             business_infos.append(business_info)
+
+#         response['status'] = 'success'
+#         response['business'] = business_infos
+
+#     except Exception as e:
+#         app.logger.error(f"Error in searchBusinessByCategorie: {str(e)}")
+#         response['status'] = 'error'
+#         response['error_description'] = 'An unexpected error occurred.'
+
+#     return jsonify(response)
+
+
+
+def normalize_text(text):
+    text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
+    return text.strip().lower()
+
+
 def SearchBusinessByCategorie():
     response = {}
     try:
-        textSearch = request.json.get('textSearch')
+        data = request.json
+        textSearch = data.get('textSearch', '').strip()
+        page = int(data.get('page', 1))
+        per_page = int(data.get('per_page', 10))
+
         if not textSearch:
             return jsonify({'status': 'error', 'error_description': 'textSearch is required'}), 400
 
-        word_search = f"%{textSearch}%"
-        exact_word_search = f"% {textSearch} %"  
+        # Nettoyage du mot-clé (retourne une liste de mots)
+        normalized_search = normalize_text(textSearch)
 
-        all_business = Business.query.filter(
-            or_(
-                Business.bu_categorie.ilike(word_search),
-                Business.bu_name.ilike(word_search),
-                Business.bu_description.ilike(word_search),
-                func.lower(Business.bu_description).ilike(exact_word_search)
-            )
-        ).all()
+        matched_businesses = set()  # Utilisé pour éviter les doublons
+
+        for word in normalized_search:
+            word_search = f"%{word}%"
+            exact_word_search = f"% {word} %"
+
+            results = Business.query.filter(
+                Business.bu_status == 'active',
+                or_(
+                    func.lower(func.unaccent(Business.bu_categorie)).ilike(word_search),
+                    func.lower(func.unaccent(Business.bu_name)).ilike(word_search),
+                    func.lower(func.unaccent(Business.bu_description)).ilike(word_search),
+                    func.lower(func.unaccent(Business.bu_description)).ilike(exact_word_search)
+                )
+            ).all()
+
+            # Ajouter les résultats sans doublon
+            matched_businesses.update(results)
+
+        # Tri par nom
+        sorted_businesses = sorted(matched_businesses, key=lambda b: b.bu_name.lower())
+
+        # Pagination manuelle
+        total = len(sorted_businesses)
+        start = (page - 1) * per_page
+        end = start + per_page
+        paginated_businesses = sorted_businesses[start:end]
 
         business_infos = []
-        for business in all_business:
-            business_info = {
-                'bu_uid': business.bu_uid,              
-                'bu_categorie': business.bu_categorie,              
-                'bu_type': business.bu_type,              
-                'bu_name': business.bu_name,              
-                'bu_description': business.bu_description,              
-                'bu_city': business.bu_city,              
-                'bu_address': business.bu_address,              
-                'bu_image1': business.bu_image1,              
-                'bu_image2': business.bu_image2,              
-                't_uid': business.t_uid,              
-                'bu_status': business.bu_status,              
-            }
-            business_infos.append(business_info)
+        for business in paginated_businesses:
+            business_infos.append({
+                'bu_uid': business.bu_uid,
+                'bu_categorie': business.bu_categorie,
+                'bu_type': business.bu_type,
+                'bu_name': business.bu_name,
+                'bu_description': business.bu_description,
+                'bu_city': business.bu_city,
+                'bu_address': business.bu_address,
+                'bu_image1': business.bu_image1,
+                'bu_image2': business.bu_image2,
+                't_uid': business.t_uid,
+                'bu_status': business.bu_status,
+            })
 
         response['status'] = 'success'
         response['business'] = business_infos
+        response['total'] = total
+        response['pages'] = (total + per_page - 1) // per_page
+        response['current_page'] = page
 
     except Exception as e:
         app.logger.error(f"Error in searchBusinessByCategorie: {str(e)}")

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -18,37 +19,36 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private _activateRouter: ActivatedRoute, private auth: AuthService) { }
 
-
   login_form: FormGroup = new FormGroup({
-    identifiant: new FormControl(null, Validators.required),
-    ad_password: new FormControl(null, Validators.required),
+    username: new FormControl(null, Validators.required),
+    password: new FormControl(null, Validators.required),
 
   });
 
-  Loginadmin() {
+  Loginuser() {
     this.is_loading = true;
     let body = this.login_form?.value;
 
-    this.auth.LoginAdmin(body).subscribe({
+    this.auth.LoginUser(body).subscribe({
       next: (res: any) => {
         console.log('Response:', res);
         if (res?.status === 'success') {
           this.data = res;
-          if (res.admin_infos) {
-            sessionStorage.setItem('admin_infos', JSON.stringify(res.admin_infos));
+          if (res.user_infos) {
+            sessionStorage.setItem('user_infos', JSON.stringify(res.user_infos));
           } else {
-            console.error('admin_infos is missing in the response');
+            console.error('user_infos is missing in the response');
           }
           sessionStorage.setItem('access_token', res.access_token);
 
           Swal.fire({
             title: 'Success!',
-            text: 'Admin login successfully!',
+            text: 'User login successfully!',
             icon: 'success',
             confirmButtonText: 'OK',
             confirmButtonColor: '#ff6c2f'
           }).then(() => {
-            this.router.navigate(['/admin/dashboard']);
+            this.router.navigate(['/home']);
           });
         } else {
           Swal.fire({

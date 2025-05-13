@@ -146,10 +146,10 @@ def CreateUser():
     try:
         u_username = (request.json.get('u_username'))
         u_mobile = (request.json.get('u_mobile'))      
+        u_city = (request.json.get('u_city'))
         u_address = (request.json.get('u_address'))
         u_email = (request.json.get('u_email'))
         u_password = (request.json.get('u_password'))
-        u_city = (request.json.get('u_city'))
 
         hashed_password = bcrypt.hashpw(u_password.encode('utf-8'), bcrypt.gensalt())
         
@@ -173,6 +173,7 @@ def CreateUser():
         rs['u_uid'] = new_user.u_uid
 
         reponse['status'] = 'Succes'
+        reponse['user_infos'] = rs
 
     except Exception as e:
         reponse['error_description'] = str(e)
@@ -299,8 +300,17 @@ def LoginUser():
             expires = timedelta(hours=1)
             access_token = create_access_token(identity=username)
 
+            rs = {}
+            rs['u_username'] = login_user.u_username
+            rs['u_mobile'] = login_user.u_mobile
+            rs['u_address'] = login_user.u_address
+            rs['u_email'] = login_user.u_email
+            rs['u_city'] = login_user.u_city
+            rs['u_uid'] = login_user.u_uid
+
             reponse['status'] = 'success'
             reponse['message'] = 'Login successful'
+            reponse['user_infos'] = rs
             reponse['access_token'] = access_token
 
         else:
