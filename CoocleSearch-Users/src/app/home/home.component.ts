@@ -1,10 +1,8 @@
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { HeaderComponent } from './../include/header/header.component';
+import { Router, RouterModule } from '@angular/router';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../services/users/users.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -24,19 +22,68 @@ export class HomeComponent implements OnInit{
     textSearch: new FormControl(null, Validators.required),
   });
 
-  Searchbusiness(){
+  businessList: any[] = [];
+  searchDone = false;
+  backToTopBtnVisible = false; // État du bouton
+  isLoggedIn: boolean = false;
+  user_infos: any
+
+  Searchbusiness() {
+    const searchText = this.search_form.get('textSearch')?.value.trim();
+    if (!searchText) return;
+
     this.http.SearchBusinessByCategorie(this.search_form.value).subscribe({
-      next: (reponse:any)=>{
+      next: (reponse: any) => {
         console.log('Response:', reponse);
-        if (reponse?.status === 'success') {
-          this.data = reponse;
-          // this.router.navigate(['/user',' trouveztout']);
+        this.searchDone = true;
+
+        if (reponse?.status === 'success' && Array.isArray(reponse.business)) {
+          this.businessList = reponse.business;
+        } else {
+          this.businessList = [];  // Aucun résultat trouvé
         }
+      },
+      error: (err) => {
+        console.error('Erreur lors de la recherche :', err);
+        this.searchDone = true;
+        this.businessList = [];
       }
-    })
+    });
   }
 
+  visibleCount = 6;
+  get visibleBusinessList() {
+    return this.businessList.slice(0, this.visibleCount);
+  }
+
+  showAll() {
+    this.visibleCount = this.businessList.length;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(): void {
+    const scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+    this.backToTopBtnVisible = scrollPosition > 200; // Affiche le bouton si l'utilisateur a défilé plus de 200px
+  }
+
+  // Fonction de défilement vers le haut
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  profileMenuVisible = false;
+
+  toggleProfileMenu() {
+    this.profileMenuVisible = !this.profileMenuVisible;
+  }
+
+
   ngOnInit(): void {
+    const user = sessionStorage.getItem('user_infos');
+    this.isLoggedIn = !!user;
+    console.log(this.isLoggedIn);
+    this.user_infos = user
+    console.log(this.user_infos);
   }
 
 }
