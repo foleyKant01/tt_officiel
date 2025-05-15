@@ -1,10 +1,12 @@
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token, get_jwt_identity
 from datetime import timedelta
-from flask import request, jsonify
+from flask import request
+from helpers.send_mail import send_mailer_pincode
 from config.db import db
 from model.tt import *
 import bcrypt
-from werkzeug.security import check_password_hash
+import random
+import string
 
 
 def CreateAdmin():
@@ -31,7 +33,6 @@ def CreateAdmin():
         response['status'] = 'error'
 
     return response
-
 
 
 def ReadAllAdmin():
@@ -97,3 +98,73 @@ def LoginAdmin():
         reponse['status'] = 'error'
 
     return reponse
+
+
+def generate_temp_password(length=8):
+    digits = string.digits  # '0123456789'
+    return ''.join(random.choice(digits) for _ in range(length))
+
+
+def ForgotPassword():
+    response = {}
+    try:
+        email = request.json.get('email')
+        if not email:
+            response['status'] = 'error'
+            response['error_description'] = 'Adresse email manquante.'
+            return response
+        admin = Admin.query.filter_by(ad_email=email).first()
+        if not admin:
+            response['status'] = 'error'
+            response['error_description'] = "Aucun administrateur avec cet email."
+            return response
+        temp_password = generate_temp_password()
+        hashed_password = bcrypt.hashpw(temp_password.encode('utf-8'), bcrypt.gensalt())
+
+        admin.ad_password = hashed_password
+        db.session.commit()
+
+        try:
+            send_mailer_pincode(admin.ad_email, temp_password)
+
+            response['status'] = 'success'
+            response['message'] = 'Envoi du code de réinitialisation réussit'
+            response['email'] = email 
+
+        except Exception as e:
+            response['status'] = 'error'
+            response['error_description'] = str(e)
+
+    except Exception as e:
+        response['status'] = 'error'
+        response['error_description'] = str(e)
+
+    return response
+
+
+def SaveNewPassword():
+    response = {}
+    try:
+        email = request.json.get('email')
+        temp_password = request.json.get('temp_password')
+        new_password = request.json.get('new_password')
+        admin = Admin.query.filter_by(ad_email=email).first()
+        if not admin:
+            response['status'] = 'error'
+            response['error_description'] = "Aucun administrateur avec cet email."
+            return response
+        if admin and bcrypt.checkpw(temp_password.encode('utf-8'), admin.ad_password.encode('utf-8')):
+            hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+            admin.ad_password = hashed_password
+            db.session.commit()
+            response['status'] = 'success'
+            response['message'] = 'Mot de passe réinitialisé avec succès.'
+        else:
+            response['status'] = 'error'
+            response['message'] = 'Invalid temp_password'
+
+    except Exception as e:
+        response['error_description'] = str(e)
+        response['status'] = 'error'
+
+    return response
