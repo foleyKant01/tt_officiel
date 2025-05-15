@@ -1,6 +1,5 @@
 from flask_restful import Resource
 from helpers.business import *
-from flask import request
 
 
 class BusinessApi(Resource):

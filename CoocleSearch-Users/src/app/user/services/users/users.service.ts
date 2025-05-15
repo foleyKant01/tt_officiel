@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,6 @@ export class UsersService {
 
   CreateUser(body: any) {
     return this.http.post(this.api_url+"/api/users/createuser", body);
-  }
-
-  SearchBusinessByCategorie(body: any) {
-    return this.http.post(this.api_url+"/api/business/searchbusinessbycategorie", body);
   }
 
   DeleteUser(body: any) {

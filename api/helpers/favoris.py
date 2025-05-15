@@ -1,38 +1,36 @@
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-from datetime import timedelta
-from flask import request, jsonify
+from flask import request
 from config.db import db
 from model.tt import *
 from flask import request
 
-def SaveHistorique():
+def SaveFavoris():
 
     reponse = {}
     try:
-        textSearch = (request.json.get('textSearch'))
-        bu_name = (request.json.get('bu_name'))      
-        bu_city = (request.json.get('bu_city'))
+        bu_name = (request.json.get('bu_name'))
+        bu_city = (request.json.get('bu_city'))      
+        bu_uid = (request.json.get('bu_uid'))
         u_uid = (request.json.get('u_uid'))
         
-        new_historiques = Historiques()
-        new_historiques.textSearch = textSearch
-        new_historiques.bu_name = bu_name
-        new_historiques.bu_city = bu_city
-        new_historiques.u_uid = u_uid
+        new_fav = Favoris()
+        new_fav.bu_name = bu_name
+        new_fav.bu_city = bu_city
+        new_fav.bu_uid = bu_uid
+        new_fav.u_uid = u_uid
         
-        db.session.add(new_historiques)
+        db.session.add(new_fav)
         db.session.commit()
 
         rs = {}
-        rs['h_uid'] = new_historiques.h_uid
-        rs['textSearch'] = new_historiques.textSearch
-        rs['bu_name'] = new_historiques.bu_name
-        rs['bu_city'] = new_historiques.bu_city
-        rs['u_uid'] = new_historiques.u_uid
-        rs['visited_at'] = new_historiques.visited_at
+        rs['fa_uid'] = new_fav.fa_uid
+        rs['bu_name'] = new_fav.bu_name
+        rs['bu_city'] = new_fav.bu_city
+        rs['bu_uid'] = new_fav.bu_uid
+        rs['u_uid'] = new_fav.u_uid
+        rs['creation_date'] = str(new_fav.creation_date)
 
         reponse['status'] = 'Succes'
-        reponse['histo_infos'] = rs
+        reponse['fav_infos'] = rs
 
     except Exception as e:
         reponse['error_description'] = str(e)
@@ -41,26 +39,26 @@ def SaveHistorique():
     return reponse
 
 
-def ReadAllHistoriqueByUser():
+def ReadAllFavorisByUser():
 
     reponse = {}
     try:
         u_uid = request.json.get('u_uid')
-        all_histo = Historiques.query.filter_by(u_uid = u_uid).first_or_404()
-        if all_histo:
-            histo_informations = []
-            for user in all_histo:
-                histo_infos = {
-                    'h_uid': user.h_uid,
-                    'textSearch': user.textSearch,
+        all_favs = Favoris.query.filter_by(u_uid = u_uid).first_or_404()
+        if all_favs:
+            favs_informations = []
+            for user in all_favs:
+                favs_infos = {
+                    'fa_uid': user.fa_uid,
                     'bu_name': user.bu_name,
-                    'bu_city': user.bu_city,                    
+                    'bu_city': user.bu_city,
+                    'bu_uid': user.bu_uid,                    
                     'u_uid': user.u_uid, 
-                    'visited_at': user.visited_at,
+                    'creation_date': str(user.creation_date),
                 }
-                histo_informations.append(histo_infos)
+                favs_informations.append(favs_infos)
             reponse['status'] = 'success'
-            reponse ['histo_informations'] = histo_informations
+            reponse ['favs_informations'] = favs_informations
         else:
             reponse['status'] = 'erreur'
             reponse['motif'] = 'aucun'
@@ -72,13 +70,13 @@ def ReadAllHistoriqueByUser():
     return reponse
 
 
-def DeleteHistoriques():
+def DeleteFavoris():
 
     reponse = {}
     try:
-        h_uid = request.json.get('h_uid')
-        delete_histo = Historiques.query.filter_by(u_uid=h_uid).first_or_404()
-        db.session.delete(delete_histo)
+        fa_uid = request.json.get('fa_uid')
+        delete_fav = Favoris.query.filter_by(fa_uid=fa_uid).first_or_404()
+        db.session.delete(delete_fav)
         db.session.commit()
         reponse['status'] = 'success'
 

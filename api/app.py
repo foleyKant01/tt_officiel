@@ -10,8 +10,9 @@ from resources.users import UsersApi
 from resources.teller import TellerApi
 from resources.advertisement import AdvertisementApi 
 from resources.business import BusinessApi
-from resources.categories import CategoriesApi
+from resources.categories import CategoriesApi 
 from resources.historiques import HistoriquesApi
+from resources.favoris import FavorisApi
 from flask_migrate import Migrate
 from flask_cors import CORS
 
@@ -45,10 +46,11 @@ CORS(app)
 api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_admin', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(UsersApi, '/api/user/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(TellerApi, '/api/teller/<string:route>', endpoint='all_teller', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-api.add_resource(AdvertisementApi, '/api/advertisement/<string:route>', endpoint='all_advertisement', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(AdvertisementApi, '/api/advertisement/<string:route>', endpoint='all_advertisement', methods=['GET', 'POST', 'DELETE', 'PATCH']) 
 api.add_resource(BusinessApi, '/api/business/<string:route>', endpoint='all_business', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(CategoriesApi, '/api/categorie/<string:route>', endpoint='all_categiries', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(HistoriquesApi, '/api/historiques/<string:route>', endpoint='all_historiques', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(FavorisApi, '/api/favoris/<string:route>', endpoint='all_favoris', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
 if __name__ == '__main__':
     app.run(debug=True,  host="0.0.0.0")  

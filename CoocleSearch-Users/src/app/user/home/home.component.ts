@@ -1,8 +1,8 @@
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UsersService } from '../services/users/users.service';
+import { BusinessService } from '../services/users/business.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +11,12 @@ import { UsersService } from '../services/users/users.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
+
 export class HomeComponent implements OnInit{
 
   data: any;
 
-  constructor(private router: Router, private http: UsersService) { }
+  constructor(private router: Router, private http: BusinessService, private route: ActivatedRoute) { }
 
 
   search_form: FormGroup = new FormGroup({
@@ -51,6 +52,14 @@ export class HomeComponent implements OnInit{
     });
   }
 
+  navigateToHome() {
+    window.location.href = '/user/home';
+  }
+
+  readSingleBusiness(bu_uid: string): void {
+    this.router.navigate(['/user/business/readsingle-business', bu_uid]);
+  }
+
   visibleCount = 6;
   get visibleBusinessList() {
     return this.businessList.slice(0, this.visibleCount);
@@ -63,10 +72,9 @@ export class HomeComponent implements OnInit{
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
     const scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
-    this.backToTopBtnVisible = scrollPosition > 200; // Affiche le bouton si l'utilisateur a défilé plus de 200px
+    this.backToTopBtnVisible = scrollPosition > 200;
   }
 
-  // Fonction de défilement vers le haut
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -77,13 +85,20 @@ export class HomeComponent implements OnInit{
     this.profileMenuVisible = !this.profileMenuVisible;
   }
 
-
   ngOnInit(): void {
     const user = sessionStorage.getItem('user_infos');
     this.isLoggedIn = !!user;
     console.log(this.isLoggedIn);
     this.user_infos = user
     console.log(this.user_infos);
+
+    this.route.queryParams.subscribe(params => {
+      const data = params['data'];
+      if (data) {
+        this.businessList = JSON.parse(data);
+        console.log(this.businessList);
+      }
+    });
   }
 
 }

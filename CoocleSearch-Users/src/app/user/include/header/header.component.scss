@@ -1,0 +1,98 @@
+.header{
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.rotate-n-15 {
+  color: yellow;
+  transform: rotate(15deg);
+  display: inline-block;
+}
+nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Pour s'assurer que l'en-tête est au-dessus du contenu */
+  transition: top 0.3s ease; /* Pour ajouter une transition fluide */
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+.forgot{
+  color: rgb(49, 49, 247);
+  text-decoration: underline;
+  cursor: pointer; /* Assurez-vous que le pointeur change sur le survol */
+  position: relative;
+  z-index: 10;  /* Assurez-vous que le lien est au-dessus des autres éléments */
+}
+
+#backToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: block; /* Le bouton est visible lorsqu'il est activé */
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#backToTopBtn:hover {
+  background-color: #0056b3;
+}
+
+.profile-menu {
+  position: absolute;
+  z-index: 1050;
+  min-width: 170px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Supprime l'effet actif par défaut */
+.profile-menu .dropdown-item:active,
+.profile-menu .dropdown-item.active {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* Style de survol élégant */
+.profile-menu .dropdown-item {
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 0.375rem;
+}
+
+.profile-menu .dropdown-item:hover {
+  background-color: #4d7a8d;
+  color: #000;
+}
+
+/* Taille normale (mobile et desktop large) */
+.logo-title {
+  font-size: 1.6rem;
+}
+.logo-icon {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 768px) and (max-width: 1264px) {
+  .logo-title {
+    font-size: 1.3rem;
+  }
+
+  .logo-icon {
+    font-size: 1.2rem;
+  }
+}
+.logo{
+  cursor: pointer;
+}

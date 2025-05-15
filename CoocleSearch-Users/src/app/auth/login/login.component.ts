@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../user/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
             confirmButtonText: 'OK',
             confirmButtonColor: '#ff6c2f'
           }).then(() => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/user/home']);
           });
         } else {
           Swal.fire({

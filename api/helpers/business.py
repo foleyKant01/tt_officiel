@@ -277,58 +277,6 @@ def ReadAllBusinessByTeller():
     return response
 
 
-
-# def SearchBusinessByCategorie():
-#     response = {}
-#     try:
-#         data = request.json
-#         textSearch = data.get('textSearch', '').strip()
-#         page = int(data.get('page', 1))
-#         per_page = int(data.get('per_page', 10))        
-#         if not textSearch:
-#             return jsonify({'status': 'error', 'error_description': 'textSearch is required'}), 400
-
-#         word_search = f"%{textSearch}%"
-#         exact_word_search = f"% {textSearch} %"  
-
-#         all_business = Business.query.filter(
-#             Business.bu_status == 'active',
-#             or_(
-#                 Business.bu_categorie.ilike(word_search),
-#                 Business.bu_name.ilike(word_search),
-#                 Business.bu_description.ilike(word_search),
-#                 func.lower(Business.bu_description).ilike(exact_word_search)
-#             )
-#         ).all()
-
-#         business_infos = []
-#         for business in all_business:
-#             business_info = {
-#                 'bu_uid': business.bu_uid,              
-#                 'bu_categorie': business.bu_categorie,              
-#                 'bu_type': business.bu_type,              
-#                 'bu_name': business.bu_name,              
-#                 'bu_description': business.bu_description,              
-#                 'bu_city': business.bu_city,              
-#                 'bu_address': business.bu_address,              
-#                 'bu_image1': business.bu_image1,              
-#                 'bu_image2': business.bu_image2,              
-#                 't_uid': business.t_uid,              
-#                 'bu_status': business.bu_status,              
-#             }
-#             business_infos.append(business_info)
-
-#         response['status'] = 'success'
-#         response['business'] = business_infos
-
-#     except Exception as e:
-#         app.logger.error(f"Error in searchBusinessByCategorie: {str(e)}")
-#         response['status'] = 'error'
-#         response['error_description'] = 'An unexpected error occurred.'
-
-#     return jsonify(response)
-
-
 def remove_accents(input_str):
     nfkd_form = unicodedata.normalize('NFKD', input_str)
     return ''.join([c for c in nfkd_form if not unicodedata.combining(c)])

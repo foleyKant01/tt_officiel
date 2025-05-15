@@ -1,9 +1,8 @@
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-from datetime import timedelta
-from flask import request, jsonify
+from flask import request
 from config.db import db
 from model.tt import *
 from flask import request
+
 
 def SaveHistorique():
 
@@ -12,12 +11,14 @@ def SaveHistorique():
         textSearch = (request.json.get('textSearch'))
         bu_name = (request.json.get('bu_name'))      
         bu_city = (request.json.get('bu_city'))
+        bu_uid = (request.json.get('bu_uid'))
         u_uid = (request.json.get('u_uid'))
         
         new_historiques = Historiques()
         new_historiques.textSearch = textSearch
         new_historiques.bu_name = bu_name
         new_historiques.bu_city = bu_city
+        new_historiques.bu_uid = bu_uid
         new_historiques.u_uid = u_uid
         
         db.session.add(new_historiques)
@@ -28,6 +29,7 @@ def SaveHistorique():
         rs['textSearch'] = new_historiques.textSearch
         rs['bu_name'] = new_historiques.bu_name
         rs['bu_city'] = new_historiques.bu_city
+        rs['bu_uid'] = new_historiques.bu_uid
         rs['u_uid'] = new_historiques.u_uid
         rs['visited_at'] = new_historiques.visited_at
 
@@ -55,6 +57,7 @@ def ReadAllHistoriqueByUser():
                     'textSearch': user.textSearch,
                     'bu_name': user.bu_name,
                     'bu_city': user.bu_city,                    
+                    'bu_uid': user.bu_uid, 
                     'u_uid': user.u_uid, 
                     'visited_at': user.visited_at,
                 }
@@ -77,7 +80,7 @@ def DeleteHistoriques():
     reponse = {}
     try:
         h_uid = request.json.get('h_uid')
-        delete_histo = Historiques.query.filter_by(u_uid=h_uid).first_or_404()
+        delete_histo = Historiques.query.filter_by(h_uid=h_uid).first_or_404()
         db.session.delete(delete_histo)
         db.session.commit()
         reponse['status'] = 'success'

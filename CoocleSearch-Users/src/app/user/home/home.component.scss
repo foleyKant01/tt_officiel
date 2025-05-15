@@ -56,3 +56,49 @@ a{
   background-color: #4d7a8d;
   color: #000;
 }
+
+.viewbusiness{
+  background: linear-gradient(135deg, #096fdb, #043870);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Réduction de hauteur pour les petits écrans */
+@media (max-width: 576px) {
+  .responsive-header {
+    padding-top: 0 !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 3rem !important;
+  }
+
+  .responsive-header .container {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    margin-top: -3rem;
+  }
+
+  .responsive-header .btnprofil {
+    margin-top: -0.5rem !important;
+    margin-right: 0rem !important
+  }
+
+  .responsive-header .profile-menu {
+    margin-top: -1rem !important;
+    margin-right: -1rem !important
+  }
+
+  .responsive-header h1,
+  .responsive-header h2 {
+    font-size: 2rem !important;
+  }
+
+  .responsive-header form {
+    margin-top: 1rem;
+  }
+}
+
+.logo{
+  cursor: pointer;
+}
