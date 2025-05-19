@@ -13,7 +13,19 @@ export class AuthService {
 
   api_url = environment.apiUrl
 
+  CreateUser(body: any) {
+    return this.http.post(this.api_url+"/api/user/create", body);
+  }
+
   LoginUser(body: any) {
     return this.http.post(this.api_url+"/api/user/login", body);
+  }
+
+  ForgotPassword(body: any) {
+    return this.http.post(this.api_url+"/api/user/forgot_password", body);
+  }
+
+  SaveNewPassword(body: any) {
+    return this.http.post(this.api_url+"/api/user/save_new_password", body);
   }
 }

@@ -56,7 +56,6 @@ export class HeaderComponent implements OnInit{
       }
     });
   }
-
   ngOnInit(): void {
     const user = sessionStorage.getItem('user_infos');
     this.isLoggedIn = !!user;

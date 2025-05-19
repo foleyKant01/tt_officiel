@@ -1,1 +1,44 @@
-<p>favoris works!</p>
+<app-header></app-header>
+
+<section>
+
+  <h1 class="m-5 text-start">Mes Favoris</h1>
+
+  <div class="favorites-container">
+    <!-- Exemple de carte favorite -->
+    <div class="favorite-card">
+      <div class="card-header">
+        <h3><i class="fas fa-store me-2"></i> Boutique Omega</h3>
+        <i class="fas fa-heart icon-fav"></i>
+      </div>
+      <div class="card-description">
+        Spécialiste en vêtements de luxe pour hommes. Situé à Abidjan, Cocody Angré.
+      </div>
+      <div class="card-footer">
+        <button class="btn" onmouseover="this.style.background='linear-gradient(135deg, #ffc107, #6d5203)'"
+        onmouseout="this.style.background='linear-gradient(135deg, #6d5203, #ffc107)'">Voir</button>
+        <button class="btn" onmouseover="this.style.background='linear-gradient(135deg, #ffc107, #6d5203)'"
+        onmouseout="this.style.background='linear-gradient(135deg, #6d5203, #ffc107)'">Retirer</button>
+      </div>
+    </div>
+
+    <div class="favorite-card">
+      <div class="card-header">
+        <h3><i class="fas fa-utensils me-2"></i> Chicken Palace</h3>
+        <i class="fas fa-heart icon-fav"></i>
+      </div>
+      <div class="card-description">
+        Restaurant spécialisé en poulet braisé. Livraison rapide à domicile.
+      </div>
+      <div class="card-footer">
+        <button class="btn" onmouseover="this.style.background='linear-gradient(135deg, #ffc107, #6d5203)'"
+        onmouseout="this.style.background='linear-gradient(135deg, #6d5203, #ffc107)'">Voir</button>
+        <button class="btn" onmouseover="this.style.background='linear-gradient(135deg, #ffc107, #6d5203)'"
+        onmouseout="this.style.background='linear-gradient(135deg, #6d5203, #ffc107)'">Retirer</button>
+      </div>
+    </div>
+
+    <!-- Ajouter dynamiquement d'autres cartes similaires via Angular ou autre -->
+  </div>
+
+</section>

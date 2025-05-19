@@ -16,4 +16,12 @@ export class AuthService {
   LoginAdmin(body: any) {
     return this.http.post(this.api_url+"/api/admin/login", body);
   }
+
+  ForgotPassword(body: any) {
+    return this.http.post(this.api_url+"/api/admin/forgot_password", body);
+  }
+
+  SaveNewPassword(body: any) {
+    return this.http.post(this.api_url+"/api/admin/save_new_password", body);
+  }
 }

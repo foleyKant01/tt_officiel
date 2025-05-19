@@ -1,1 +1,92 @@
-<p>register works!</p>
+<div class="body">
+  <div class="login-container">
+    <div class="login-header">
+      <h3><b>COOCLE SEARCH</b></h3>
+    </div>
+    <div class="login-box">
+      <div class="avatar">
+        <i class="fas fa-laugh-wink img rotate-left"></i>
+      </div>
+      <form [formGroup]="register_form" (ngSubmit)="createUser()">
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-user"></i></span>
+            <input class="input flex-grow-1" type="text" formControlName="u_username" id="u_username"
+              placeholder="Nom d'utilisateur" required>
+          </div>
+        </div>
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-phone"></i></span>
+            <input class="input flex-grow-1" type="text" formControlName="u_mobile" placeholder="Numéro de téléphone"
+              required>
+          </div>
+        </div>
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-city"></i></span>
+            <input class="input flex-grow-1" type="text" formControlName="u_city" placeholder="Ville" required>
+          </div>
+        </div>
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-map-marker-alt"></i></span>
+            <input class="input flex-grow-1" type="text" formControlName="u_address" placeholder="Adresse" required>
+          </div>
+        </div>
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-envelope"></i></span>
+            <input class="input flex-grow-1" type="email" formControlName="u_email" placeholder="Email" required>
+          </div>
+        </div>
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-lock"></i></span>
+            <input class="input flex-grow-1" type="password" formControlName="u_password" placeholder="Mot de passe"
+              required>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="register_form.invalid" class="login-btn"
+          onmouseover="this.style.background='linear-gradient(135deg, #ffc107, #6d5203)'"
+          onmouseout="this.style.background='linear-gradient(135deg, #203a43, #2c5364)'">
+          S'inscrire
+        </button>
+        <div *ngIf="loading" class="spinner-overlay">
+          <div class="spinner"></div>
+        </div>
+      </form>
+      <br>
+      <a [routerLink]="['/auth/login']" class="small">← Retour à la connexion</a>
+    </div>
+  </div>
+
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="successToastBody">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+
+    <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="errorToastBody">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+</div>

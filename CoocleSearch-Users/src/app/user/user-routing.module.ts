@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user.component';
-import { HistoriquesComponent } from './historiques/historiques.component';
 import { FavorisComponent } from './favoris/favoris.component';
+import { ActivitesComponent } from './activites/activites.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {path: 'home', component: HomeComponent},
-      {path: 'historiques', component: HistoriquesComponent},
+      {path: 'activites', component: ActivitesComponent},
       {path: 'favoris', component: FavorisComponent},
       {path: 'business', loadChildren: () => import('./business/business.module').then(m => m.BusinessModule)},
 

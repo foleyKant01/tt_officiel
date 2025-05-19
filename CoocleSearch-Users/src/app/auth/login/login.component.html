@@ -5,23 +5,59 @@
     </div>
     <div class="login-box">
       <div class="avatar">
-          <i class="fas fa-laugh-wink img rotate-left"></i>
+        <i class="fas fa-laugh-wink img rotate-left"></i>
       </div>
-      <form [formGroup]="login_form" (ngSubmit)="Loginuser()">
-        <div class="input-group">
-          <span class="icon"><i class="fas fa-user"></i></span>
-          <input type="text" formControlName="username" placeholder="Username" required>
+      <form [formGroup]="login_form" (ngSubmit)="loginUser()">
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-user"></i></span>
+            <input class="input flex-grow-1" type="text" formControlName="username" placeholder="Nom d'utilisateur" required>
+          </div>
         </div>
-        <div class="input-group">
-          <span class="icon"><i class="fas fa-lock"></i></span>
-          <input type="password" formControlName="password" placeholder="**********" required>
+
+        <div class="row mb-3 text-start">
+          <div class="form-group d-flex align-items-center">
+            <span class="icon me-2"><i class="fas fa-phone"></i></span>
+            <input class="input flex-grow-1" type="password" formControlName="password" placeholder="**********" required>
+          </div>
         </div>
-        <div class="options">
-          <label><input type="checkbox"> Remember me</label>
-          <a href="#">Forgot Password?</a>
+        <button type="submit" [disabled]="login_form.invalid" class="login-btn"
+          onmouseover="this.style.background='linear-gradient(135deg, #ffc107, #6d5203)'"
+          onmouseout="this.style.background='linear-gradient(135deg, #203a43, #2c5364)'">
+          Se connecter
+        </button>
+        <div *ngIf="loading" class="spinner-overlay">
+          <div class="spinner"></div>
         </div>
-        <button type="submit" class="login-btn">LOGIN</button>
       </form>
+      <br>
+      <div class="options d-flex justify-content-between align-items-center">
+        <a [routerLink]="['/auth/forgot-password']" class="small">Mot de passe oublié ?</a>
+        <a [routerLink]="['/auth/register']" class="small">S'inscrire</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="successToastBody">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+
+    <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="errorToastBody">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
     </div>
   </div>
 </div>

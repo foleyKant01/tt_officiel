@@ -1,7 +1,7 @@
 from flask import jsonify, request
 import uuid
 from config.db import db
-from model.tt import Business
+from model.tt import Business, Favoris
 
 from flask import request, jsonify, current_app as app
 from sqlalchemy import or_, func
@@ -291,11 +291,12 @@ def SearchBusinessByCategorie():
     response = {}
     try:
         data = request.json
+        user_id = data.get('user_id')
         text = data.get('textSearch', '').strip()
         print(f"Original text: {text}")
         
         textSearch = remove_accents(text)
-        print(f"Text after accent removal: {textSearch}")
+        print(f"Text after accent removal: {textSearch}") 
         
         page = int(data.get('page', 1))
         per_page = int(data.get('per_page', 10))
@@ -333,6 +334,11 @@ def SearchBusinessByCategorie():
 
             business_infos = []
             for business in paginated_businesses:
+                all_favs = Favoris.query.filter_by(bu_uid=business.bu_uid, u_uid=user_id).first()
+                if all_favs:
+                    is_favs = 1
+                else:
+                    is_favs = 0
                 business_infos.append({
                     'bu_uid': business.bu_uid,
                     'bu_categorie': business.bu_categorie,
@@ -344,6 +350,7 @@ def SearchBusinessByCategorie():
                     'bu_image1': business.bu_image1,
                     'bu_image2': business.bu_image2,
                     't_uid': business.t_uid,
+                    'is_favs': is_favs,
                     'bu_status': business.bu_status,
                 })
             response['status'] = 'success'

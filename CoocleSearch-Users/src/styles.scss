@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-style {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-style:hover {
+  background: linear-gradient(to right, #ffc107, #6d5203);
+}
+
+
+.btn-style-auto {
+  @extend .btn-style; /* Si tu utilises SCSS */
+  width: auto;
+  padding: 10px 20px;
+}

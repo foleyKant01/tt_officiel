@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   data: any;
   is_loading: boolean = false;
 
-  constructor(private router: Router, private _activateRouter: ActivatedRoute, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
 
   login_form: FormGroup = new FormGroup({

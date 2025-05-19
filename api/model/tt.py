@@ -100,7 +100,7 @@ class Favoris(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     fa_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
     bu_name = db.Column(db.String(128), nullable=False)
-    bu_city = db.Column(db.String(128), nullable=False)
+    bu_city = db.Column(db.String(128), nullable=False) 
     bu_uid = db.Column(db.String(128), nullable=False)
     u_uid = db.Column(db.String(128), db.ForeignKey('user.u_uid'))
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)

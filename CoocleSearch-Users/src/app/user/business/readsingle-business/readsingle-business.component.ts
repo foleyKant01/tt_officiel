@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BusinessService } from '../../services/users/business.service';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-readsingle-business',
@@ -17,9 +19,10 @@ export class ReadsingleBusinessComponent implements OnInit{
 
   business: any; // Stocke les détails du produit
   backToTopBtnVisible = false; // État du bouton
+  userEmail: string | undefined;
   businessUid: string | undefined;
 
-  constructor(private route: Router, private http: BusinessService, private router: ActivatedRoute) {}
+  constructor(private route: Router, private http: BusinessService, private router: ActivatedRoute, private location: Location) {}
 
   ngOnInit(): void {
     this.router.params.subscribe(params => {
@@ -27,6 +30,11 @@ export class ReadsingleBusinessComponent implements OnInit{
     console.log(this.businessUid);
     })
     this.readSingleBusiness()
+
+  }
+
+  backStep(){
+    history.back()
   }
 
   readSingleBusiness(): void {

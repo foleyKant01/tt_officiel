@@ -1,16 +1,15 @@
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token
 from datetime import timedelta
 from flask import request, jsonify
-import uuid
+from helpers.send_mail import send_mailer_pincode
 from config.db import db
 from model.tt import *
 from helpers.business import ReadAllBusinessByCategories
-import bcrypt, jwt
-from werkzeug.security import check_password_hash
-from flask import Flask, request, jsonify
-from geopy.geocoders import Nominatim
-from flask_cors import CORS
-
+import bcrypt
+from flask import request, jsonify
+import bcrypt
+import random
+import string
 from geopy.distance import distance, geodesic
 from typing import List, Tuple
 
@@ -172,7 +171,7 @@ def CreateUser():
         rs['u_city'] = u_city
         rs['u_uid'] = new_user.u_uid
 
-        reponse['status'] = 'Succes'
+        reponse['status'] = 'success'
         reponse['user_infos'] = rs
 
     except Exception as e:
@@ -318,7 +317,83 @@ def LoginUser():
             reponse['message'] = 'Invalid username or password'
 
     except Exception as e:
-        reponse['error_description'] = str(e)
         reponse['status'] = 'error'
+        reponse['message'] = str(e)
 
     return reponse
+
+
+
+def generate_temp_password(length=8):
+    digits = string.digits  # '0123456789'
+    return ''.join(random.choice(digits) for _ in range(length))
+
+
+def ForgotPassword():
+    response = {}
+    try:
+        u_email = request.json.get('u_email')
+        if not u_email:
+            response['status'] = 'error'
+            response['message'] = 'Adresse email manquante.'
+            return response
+        single_user = User.query.filter_by(u_email=u_email).first()
+        if not single_user:
+            response['status'] = 'error'
+            response['message'] = "Aucun utilisateur trouver avec cet email."
+            return response
+        temp_password = generate_temp_password()
+        hashed_password = bcrypt.hashpw(temp_password.encode('utf-8'), bcrypt.gensalt())
+
+        single_user.u_password = hashed_password
+        db.session.commit()
+
+        try:
+            send_mailer_pincode(single_user.u_email, temp_password)
+
+            response['status'] = 'success'
+            response['message'] = 'Envoi du code de réinitialisation réussit'
+            response['u_email'] = u_email 
+
+        except Exception as e:
+            response['status'] = 'error'
+            response['message'] = str(e)
+
+    except Exception as e:
+        response['status'] = 'error'
+        response['message'] = str(e)
+
+    return response
+
+
+def SaveNewPassword():
+    response = {}
+    try:
+        u_email = request.json.get('u_email')
+        temp_password = request.json.get('temp_password')
+        new_password = request.json.get('new_password')
+        confirm_password = request.json.get('confirm_password')
+        if new_password != confirm_password:
+            response['status'] = 'error'
+            response['message'] = "Les mots de passe ne correspondent pas."
+            return response
+        single_user = User.query.filter_by(u_email=u_email).first()
+        if not single_user:
+            response['status'] = 'error'
+            response['message'] = "Aucun utilisateur avec cet email."
+            return response
+        if single_user and bcrypt.checkpw(temp_password.encode('utf-8'), single_user.u_password.encode('utf-8')):
+            hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+            single_user.u_password = hashed_password
+            db.session.commit()
+            response['status'] = 'success'
+            response['message'] = 'Mot de passe réinitialisé avec succès.'
+        else:
+            response['status'] = 'error'
+            response['message'] = 'Code temporaire invalide'
+
+    except Exception as e:
+        response['status'] = 'error'
+        response['message'] = str(e)
+
+    return response

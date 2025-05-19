@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../user/services/auth/auth.service';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,7 +17,7 @@ import { AuthService } from '../../user/services/auth/auth.service';
 export class LoginComponent implements OnInit {
 
   data: any;
-  is_loading: boolean = false;
+  loading = false;
 
   constructor(private router: Router, private _activateRouter: ActivatedRoute, private auth: AuthService) { }
 
@@ -25,8 +27,8 @@ export class LoginComponent implements OnInit {
 
   });
 
-  Loginuser() {
-    this.is_loading = true;
+  loginUser() {
+    this.loading = true;
     let body = this.login_form?.value;
 
     this.auth.LoginUser(body).subscribe({
@@ -34,53 +36,57 @@ export class LoginComponent implements OnInit {
         console.log('Response:', res);
         if (res?.status === 'success') {
           this.data = res;
+          this.loading = true;
+          setTimeout(() => {
+            this.loading = false;
+            this.showSuccessToast('Successful download');
+
+            setTimeout(() => {
+              this.router.navigate(['/user/home']);
+            }, 1000);
+          }, 2000);
           if (res.user_infos) {
             sessionStorage.setItem('user_infos', JSON.stringify(res.user_infos));
+            sessionStorage.setItem('access_token', res.access_token);
           } else {
             console.error('user_infos is missing in the response');
           }
-          sessionStorage.setItem('access_token', res.access_token);
-
-          Swal.fire({
-            title: 'Success!',
-            text: 'User login successfully!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#ff6c2f'
-          }).then(() => {
-            this.router.navigate(['/user/home']);
-          });
-        } else {
-          Swal.fire({
-            title: 'Error!',
-            text: res?.message || 'Login failed',
-            icon: 'error',
-            confirmButtonText: 'Try Again',
-            confirmButtonColor: '#ff6c2f'
-          });
-          this.is_loading = false;
         }
       },
       error: (err) => {
-        console.log('Error:', err);
-        Swal.fire({
-          title: 'Error!',
-          text: err.error_description || 'An error occurred',
-          icon: 'error',
-          confirmButtonText: 'Try Again',
-          confirmButtonColor: '#ff6c2f'
-        });
-        this.is_loading = false;
+        console.error('Error:', err);
+        this.showErrorToast('An error has occurred while launching the store. Please try again. ')
       },
       complete: () => {
         console.log('Request complete');
-        this.is_loading = false;
       }
     });
   }
 
 
+  showSuccessToast(message: string) {
+    const toastBody = document.getElementById('successToastBody');
+    if (toastBody) {
+      toastBody.textContent = message;
+    } else {
+      console.warn('Success toast body element not found.');
+    }
+    const toastElement = document.getElementById('successToast');
+    const toast = new bootstrap.Toast(toastElement, { delay: 2000 });
+    toast.show();
+  }
 
+  showErrorToast(message: string) {
+    const toastBody = document.getElementById('errorToastBody');
+    if (toastBody) {
+      toastBody.textContent = message;
+    } else {
+      console.warn('Error toast body element not found.');
+    }
+    const toastElement = document.getElementById('errorToast');
+    const toast = new bootstrap.Toast(toastElement, { delay: 2000 });
+    toast.show();
+  }
 
   ngOnInit(): void {
   }
