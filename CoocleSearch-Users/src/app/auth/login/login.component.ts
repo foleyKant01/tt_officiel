@@ -39,12 +39,12 @@ export class LoginComponent implements OnInit {
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.showSuccessToast('Successful download');
-
-            setTimeout(() => {
-              this.router.navigate(['/user/home']);
-            }, 1000);
           }, 2000);
+          // setTimeout(() => {
+          //   this.showSuccessToast('Successful download');
+          // }, 4000);
+          this.loading = false;
+          this.router.navigate(['/user/home']);
           if (res.user_infos) {
             sessionStorage.setItem('user_infos', JSON.stringify(res.user_infos));
             sessionStorage.setItem('access_token', res.access_token);
