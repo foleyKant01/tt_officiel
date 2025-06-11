@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit{
     textSearch: new FormControl(null, Validators.required),
   });
 
-  businessList: any[] = [];
+  All_business: any[] = [];
   searchDone = false;
   backToTopBtnVisible = false; // État du bouton
   isLoggedIn: boolean = false;
@@ -50,21 +50,23 @@ export class HomeComponent implements OnInit{
         if (reponse?.status === 'success' && Array.isArray(reponse.business)) {
           setTimeout(() => {
             this.loading = false;
-            this.businessList = reponse.business;
+            this.All_business = reponse.business;
             this.searchDone = true;
           }, 2000);
           if (reponse.business) {
-            sessionStorage.setItem('business', JSON.stringify(reponse.business));
+            sessionStorage.setItem('All_business', JSON.stringify(reponse.business));
+            sessionStorage.setItem('businessList', JSON.stringify(reponse.business));
+            sessionStorage.setItem('textSearch', JSON.stringify(reponse.textSearch));
           }
         }
         else {
-          this.businessList = [];
+          this.All_business = [];
         }
       },
       error: (err) => {
         console.error('Erreur lors de la recherche :', err);
         this.searchDone = true;
-        this.businessList = [];
+        this.All_business = [];
       }
     });
   }
@@ -79,11 +81,11 @@ export class HomeComponent implements OnInit{
 
   visibleCount = 6;
   get visibleBusinessList() {
-    return this.businessList.slice(0, this.visibleCount);
+    return this.All_business.slice(0, this.visibleCount);
   }
 
   showAll() {
-    this.visibleCount = this.businessList.length;
+    this.visibleCount = this.All_business.length;
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -103,7 +105,9 @@ export class HomeComponent implements OnInit{
   }
 
   unloadCallback = () => {
-    sessionStorage.removeItem('business');
+    sessionStorage.removeItem('All_business');
+    sessionStorage.removeItem('single_business');
+    sessionStorage.removeItem('textSearch');
   };
 
 
@@ -112,25 +116,25 @@ export class HomeComponent implements OnInit{
   }
 
   toggleFavorite(business: any): void {
-    this.favoriteList = this.businessList.filter(b => b.is_favs === 1);
+    this.favoriteList = this.All_business.filter(b => b.is_favs === 1);
 
     // Trouver l'index dans le tableau global
-    const index = this.businessList.findIndex(b => b.bu_uid === business.bu_uid);
+    const index = this.All_business.findIndex(b => b.bu_uid === business.bu_uid);
     if (index > -1) {
       // Basculer l'état
-      this.businessList[index].is_favs = this.businessList[index].is_favs === 1 ? 0 : 1;
+      this.All_business[index].is_favs = this.All_business[index].is_favs === 1 ? 0 : 1;
 
       // Mettre à jour favoriteList
-      this.favoriteList = this.businessList.filter(b => b.is_favs === 1);
+      this.favoriteList = this.All_business.filter(b => b.is_favs === 1);
 
       // Mettre à jour sessionStorage
-      sessionStorage.setItem('businessList', JSON.stringify(this.businessList));
+      sessionStorage.setItem('All_business', JSON.stringify(this.All_business));
 
       // (Optionnel) appel serveur pour enregistrer le changement
-      if (this.businessList[index].is_favs === 1) {
-        this.saveFavoris(this.businessList[index]);
+      if (this.All_business[index].is_favs === 1) {
+        this.saveFavoris(this.All_business[index]);
       } else {
-        this.deleteFavoris(this.businessList[index]);
+        this.deleteFavoris(this.All_business[index]);
       }
     }
   }
@@ -182,14 +186,14 @@ export class HomeComponent implements OnInit{
     this.route.queryParams.subscribe(params => {
       const data = params['data'];
       if (data) {
-        this.businessList = JSON.parse(data);
-        console.log(this.businessList);
+        this.All_business = JSON.parse(data);
+        console.log(this.All_business);
       }
     });
-    const dataBusiness = JSON.parse(sessionStorage.getItem('business') || 'null');
+    const dataBusiness = JSON.parse(sessionStorage.getItem('All_business') || 'null');
     if (dataBusiness) {
       console.log('Business infos trouvé en session:', dataBusiness);
-      this.businessList = dataBusiness;
+      this.All_business = dataBusiness;
     } else {
       console.warn('Aucun Business trouvé dans sessionStorage');
     }

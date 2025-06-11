@@ -59,6 +59,10 @@ def ReadAllFavorisByUser():
         favs_informations = []
         for favs in all_favs:
             business = Business.query.filter_by(bu_uid = favs.bu_uid).first()
+            if business:
+                is_favs = 1
+            else:
+                is_favs = 0
             favs_infos = {
                 'fa_uid': favs.fa_uid,
                 'bu_name': favs.bu_name,
@@ -66,6 +70,7 @@ def ReadAllFavorisByUser():
                 'bu_city': favs.bu_city,
                 'bu_uid': favs.bu_uid,                    
                 'u_uid': favs.u_uid, 
+                'is_favs': is_favs,
                 'creation_date': str(favs.creation_date),
             }
             favs_informations.append(favs_infos)

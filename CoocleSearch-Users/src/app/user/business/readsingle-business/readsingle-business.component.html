@@ -30,7 +30,9 @@
               <i class="bi bi-tag"></i> {{ business?.bu_category }}
             </span>
           </div>
-
+          <div *ngIf="loading" class="spinner-overlay">
+            <div class="spinner"></div>
+          </div>
           <div class="mt-4">
             <a (click)="backStep()" class="btn btn-warning rounded-pill me-3 back-btp-style">
               <i class="bi bi-arrow-left"></i> Retour
@@ -57,6 +59,7 @@
       </div>
     </div>
   </div>
+
 </section>
 
 <!-- Bouton retour en haut -->

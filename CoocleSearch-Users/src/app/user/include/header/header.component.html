@@ -15,15 +15,12 @@
           <button *ngIf="user_infos" class="btn text-white p-0 position-relative" type="button" (click)="toggleProfileMenu()">
             <i class="bi bi-person-circle fs-4"></i>
           </button>
-          <div *ngIf="profileMenuVisible" class="dropdown-menu show" style="right: 0; top: 3.5rem; position: absolute;">
+          <div *ngIf="profileMenuVisible" class="dropdown-menu show" style="right: 0.5rem; top: 3.5rem; position: absolute;">
             <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/profil']">
               <i class="bi bi-person-fill"></i> Profil
             </a>
-            <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/historique']">
-              <i class="bi bi-clock-history"></i> Historiques
-            </a>
-            <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/user/favoris']">
-              <i class="bi bi-star-fill"></i> Favoris
+            <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/user/activites']">
+              <i class="bi bi-star-fill"></i> Activités
             </a>
           </div>
         </div>
@@ -66,19 +63,16 @@
         <a *ngIf="!isLoggedIn" class="me-3 text-white" [routerLink]="['/auth/login/']"
           style="text-decoration: underline;">Connexion</a>
         <div *ngIf="user_infos" class="position-relative">
-          <button class="btn text-white p-0 position-relative" style="margin-left: 0.5rem;" type="button"
+          <button class="btn text-white p-0 position-relative" style="margin-left: 1.5rem;" type="button"
             (click)="toggleProfileMenu()">
             <i class="bi bi-person-circle fs-4"></i>
           </button>
-          <div *ngIf="profileMenuVisible" class="dropdown-menu show" style="right: 0; top: 3.5rem; position: absolute;">
+          <div *ngIf="profileMenuVisible" class="profile-menu dropdown-menu show" style="right: 1.5rem; top: 3.5rem;">
             <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/profil']">
               <i class="bi bi-person-fill"></i> Profil
             </a>
-            <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/historique']">
-              <i class="bi bi-clock-history"></i> Historiques
-            </a>
-            <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/favoris']">
-              <i class="bi bi-star-fill"></i> Favoris
+            <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/user/activites']">
+              <i class="bi bi-star-fill"></i> Activités
             </a>
           </div>
         </div>

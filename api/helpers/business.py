@@ -355,6 +355,7 @@ def SearchBusinessByCategorie():
                 })
             response['status'] = 'success'
             response['business'] = business_infos
+            response['textSearch'] = textSearch
             response['total'] = total
             response['pages'] = (total + per_page - 1) // per_page
             response['current_page'] = page

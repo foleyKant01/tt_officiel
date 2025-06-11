@@ -33,7 +33,7 @@ export class ActivitesComponent implements OnInit{
     }
     this.http.ReadAllFavorisByUser(body).subscribe({
       next: (reponse: any) => {
-        console.log('Response:', reponse);
+        console.log('response favs_List:', reponse);
         if (reponse?.status === 'success' && Array.isArray(reponse.favs_informations)) {
           setTimeout(() => {
             this.loading = false;
@@ -58,12 +58,12 @@ export class ActivitesComponent implements OnInit{
     }
     this.http.ReadAllHistoriqueByUser(body).subscribe({
       next: (reponse: any) => {
-        console.log('Response:', reponse);
+        console.log('response histo_List:', reponse);
         if (reponse?.status === 'success' && Array.isArray(reponse.histo_informations)) {
           setTimeout(() => {
             this.loading = false;
             this.histo_List = reponse.histo_informations;
-          }, 1000);
+          }, 2000);
         }
         else {
           this.histo_List = [];
@@ -111,6 +111,8 @@ export class ActivitesComponent implements OnInit{
         this.deleteFavoris(this.businessList[index]);
       }
     }
+    window.location.reload();
+
   }
 
   saveFavoris(business: any ) {
@@ -147,6 +149,24 @@ export class ActivitesComponent implements OnInit{
     });
   }
 
+  deleteHistorique(business: any ) {
+    const payload = {
+      ...business,
+      user_id: this.user_id
+    };
+    console.log('payload:', payload);
+    this.http.DeleteHistoriques(payload).subscribe({
+      next: (reponse: any) => {
+        console.log('Response:', reponse);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la recherche :', err);
+        this.favoriteList = [];
+      }
+    });
+    window.location.reload();
+  }
+
   ngOnInit(): void {
 
     const user = sessionStorage.getItem('user_infos');
@@ -157,11 +177,11 @@ export class ActivitesComponent implements OnInit{
       this.user_id = this.user_infos.u_uid
       console.log('user_id:', this.user_id);
 
-    this.  readAllFavorisByUser();
+    this.readAllFavorisByUser();
     this.readAllHistoriqueByUser()
   }
 
-  const dataBusiness = JSON.parse(sessionStorage.getItem('business') || 'null');
+  const dataBusiness = JSON.parse(sessionStorage.getItem('businessList') || 'null');
   if (dataBusiness) {
     console.log('Business infos trouvé en session:', dataBusiness);
     this.businessList = dataBusiness;

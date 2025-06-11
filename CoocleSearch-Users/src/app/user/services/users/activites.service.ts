@@ -26,4 +26,8 @@ export class ActivitesService {
   ReadAllHistoriqueByUser(body: any) {
     return this.http.post(this.api_url+"/api/historiques/read_all_historique_by_user", body);
   }
+
+  DeleteHistoriques(body: any) {
+    return this.http.post(this.api_url+"/api/historiques/delete_historiques", body);
+  }
 }

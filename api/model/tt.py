@@ -90,8 +90,6 @@ class Historiques(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     h_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
     textSearch = db.Column(db.String(128), nullable=False)
-    bu_name = db.Column(db.String(128), nullable=False)
-    bu_city = db.Column(db.String(128), nullable=False)
     bu_uid = db.Column(db.String(128), nullable=False)
     u_uid = db.Column(db.String(128), db.ForeignKey('user.u_uid'))
     visited_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)

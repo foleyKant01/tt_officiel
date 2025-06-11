@@ -48,7 +48,7 @@
           </form>
           <div class="position-relative" style="min-height: 80px;">
             <div class="position-absolute top-50 start-50 translate-middle text-white text-center"
-              *ngIf="searchDone && businessList.length === 0">
+              *ngIf="searchDone && All_business.length === 0">
               <h4 class="m-0">Aucun résultat trouvé.</h4>
             </div>
           </div>
@@ -58,8 +58,8 @@
   </div>
 </header>
 <section class="m-5">
-  <div class="row mt-4" *ngIf="businessList.length > 0">
-    <div class="col-md-4" *ngFor="let business of businessList.slice(0, visibleCount)">
+  <div class="row mt-4" *ngIf="All_business.length > 0">
+    <div class="col-md-4" *ngFor="let business of All_business.slice(0, visibleCount)">
       <div class="card mb-3 position-relative">
 
         <!-- Bouton Favoris -->
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <div class="text-center" *ngIf="businessList.length > visibleCount">
+  <div class="text-center" *ngIf="All_business.length > visibleCount">
     <button class="btn btn-outline-primary" (click)="showAll()">Voir plus</button>
   </div>
 </section>
