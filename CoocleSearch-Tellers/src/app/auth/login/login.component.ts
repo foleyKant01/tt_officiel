@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   });
 
-  Loginteller() {
+  loginTeller() {
     // this.is_loading = true;
     let body = this.login_form?.value;
 

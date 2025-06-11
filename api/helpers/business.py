@@ -47,7 +47,7 @@ def CreateBusiness():
         # rs['latitude'] = new_business.latitude
         # rs['longitude'] = new_business.longitude
 
-        response['satus'] = 'success'
+        response['status'] = 'success'
         response['business_infos'] = rs
 
     except Exception as e:

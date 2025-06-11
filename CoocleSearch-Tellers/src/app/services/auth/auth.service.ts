@@ -16,4 +16,12 @@ export class AuthService {
   LoginTeller(body: any) {
     return this.http.post(this.api_url+"/api/teller/login", body);
   }
+
+  ForgotPassword(body: any) {
+    return this.http.post(this.api_url+"/api/teller/forgot_password", body);
+  }
+
+  SaveNewPassword(body: any) {
+    return this.http.post(this.api_url+"/api/teller/save_new_password", body);
+  }
 }
