@@ -361,6 +361,7 @@ def SearchBusinessByCategorie():
             response['current_page'] = page
         else:
             response['status'] = 'Not found'
+            response['textSearch'] = textSearch
 
     except Exception as e:
         app.logger.error(f"Error in searchBusinessByCategorie: {str(e)}")

@@ -106,3 +106,14 @@ class Favoris(db.Model):
     bu_uid = db.Column(db.String(128), nullable=False)
     u_uid = db.Column(db.String(128), db.ForeignKey('user.u_uid'))
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+class Stats(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
+    textSearch = db.Column(db.String(128), nullable=False)
+    all_business_found = db.Column(db.String(128))
+    city = db.Column(db.String(128), nullable=False)
+    commune = db.Column(db.String(128), nullable=False) 
+    longitude = db.Column(db.String(128), nullable=False) 
+    latitude = db.Column(db.String(128), nullable=False) 
+    creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)

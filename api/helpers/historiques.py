@@ -46,17 +46,19 @@ def ReadAllHistoriqueByUser():
         if all_histo:
             print('histo found')
             histo_informations = []
-            for user in all_histo:
-                single_business = Business.query.filter_by(bu_uid = user.bu_uid).first()
-                histo_infos = {
-                    'h_uid': user.h_uid,
-                    'textSearch': user.textSearch,
-                    'bu_uid': single_business.bu_uid, 
-                    'bu_name': single_business.bu_name, 
-                    'bu_description': single_business.bu_description, 
-                    'u_uid': user.u_uid, 
-                    'visited_at': str(user.visited_at),
-                }
+            for histo in all_histo:
+                single_business = Business.query.filter_by(bu_uid = histo.bu_uid).first()
+                histo_infos = None
+                if single_business:
+                    histo_infos = {
+                        'h_uid': histo.h_uid,
+                        'textSearch': histo.textSearch,
+                        'bu_uid': single_business.bu_uid, 
+                        'bu_name': single_business.bu_name, 
+                        'bu_description': single_business.bu_description, 
+                        'u_uid': histo.u_uid, 
+                        'visited_at': str(histo.visited_at),
+                    }
                 histo_informations.append(histo_infos)
             reponse['status'] = 'success'
             reponse ['histo_informations'] = histo_informations

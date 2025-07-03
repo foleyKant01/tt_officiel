@@ -54,15 +54,16 @@ def ReportsTeller():
                 and h.visited_at.month == datetime.now().month
                 and h.visited_at.year == datetime.now().year
             ]
-
-            for h in vues_this_month:
-                all_vue_this_month.append({
-                    'bu_name': h.bu_name,
-                    'bu_city': h.bu_city,
-                    'bu_uid': h.bu_uid,
-                    'visited_at': str(h.visited_at)
-                })
-                vue_counter[bu_uid] += 1
+            if vues_this_month:
+                for h in vues_this_month:
+                    all_vue_this_month.append({
+                        'h_uid': h.h_uid,
+                        'textSearch': h.textSearch,
+                        'bu_uid': h.bu_uid,
+                        'u_uid': h.u_uid,
+                        'visited_at': str(h.visited_at)
+                    })
+                    vue_counter[bu_uid] += 1
 
         top_entities = sorted(vue_counter.items(), key=lambda x: x[1], reverse=True)[:5]
         most_visited_entities = []
