@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../user/services/auth/auth.service';
+import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
 declare var bootstrap: any;
 
@@ -18,47 +18,49 @@ export class RegisterComponent implements OnInit{
   loading = false;
   is_loading: boolean = false;
 
-  constructor(private router: Router, private _activateRouter: ActivatedRoute, private auth: AuthService) { }
-
-  register_form: FormGroup = new FormGroup({
-    u_username: new FormControl(null, Validators.required),
-    u_mobile: new FormControl(null, Validators.required),
-    u_city: new FormControl(null, Validators.required),
-    u_address: new FormControl(null, Validators.required),
-    u_email: new FormControl(null, Validators.required),
-    u_password: new FormControl(null, Validators.required),
+  registerTellerForm: FormGroup = new FormGroup({
+    t_fullname: new FormControl(null, Validators.required),
+    t_username: new FormControl(null, Validators.required),
+    t_email: new FormControl(null, Validators.required),
+    t_mobile: new FormControl(null, Validators.required),
+    t_address: new FormControl(null, Validators.required),
+    t_city: new FormControl(null, Validators.required),
+    t_password: new FormControl(null, Validators.required),
   });
 
-  createUser() {
+  constructor(private router: Router, private auth: AuthService) { }
+
+  createTeller() {
     this.loading = true;
-    let body = this.register_form?.value;
-    this.auth.CreateUser(body).subscribe({
+    const body = this.registerTellerForm.value;
+
+    this.auth.CreateTeller(body).subscribe({
       next: (res: any) => {
         console.log('Response:', res);
+
         if (res?.status === 'success') {
           this.data = res;
-          if (res.user_infos) {
-            sessionStorage.setItem('user_infos', JSON.stringify(res.user_infos));
-          } else {
-            console.error('user_infos is missing in the response');
-          }
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-            this.showSuccessToast('Successful download');
+
+          if (res.teller_infos) {
+            sessionStorage.setItem('teller_infos', JSON.stringify(res.teller_infos));
+            this.showSuccessToast('Création réussie');
 
             setTimeout(() => {
               this.router.navigate(['/auth/login']);
             }, 1000);
-          }, 2000);
+          } else {
+            this.showErrorToast("Erreur : données incomplètes");
+          }
+        } else {
+          this.showErrorToast("Échec de l'inscription. Veuillez réessayer.");
         }
       },
       error: (err) => {
-        console.error('Error:', err);
-        this.showErrorToast('An error has occurred while launching the store. Please try again. ')
+        console.error('Erreur :', err);
+        this.showErrorToast("Une erreur est survenue. Veuillez réessayer.");
       },
       complete: () => {
-        console.log('Request complete');
+        this.loading = false; // Assure que le loading est désactivé à la fin
       }
     });
   }
