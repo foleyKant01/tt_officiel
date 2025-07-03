@@ -48,7 +48,9 @@ h1 {
 
 .stats i {
   font-size: 28px;
-  color: var(--primary);
+  background: linear-gradient(to right, #6d5203, #dda706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 table {
@@ -77,11 +79,13 @@ th {
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
+  border: 0px;
+  background: linear-gradient(to right, #a37b04, #dda706);
   transition: background 0.3s;
 }
 
 .btn:hover {
-  background-color: #2e59d9;
+  background: linear-gradient(to right, #203a43, #396679);
 }
 
 .map, .chart {

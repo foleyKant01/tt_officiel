@@ -15,6 +15,10 @@ export class TellersService {
     return this.http.post(this.api_url+"/api/teller/create", body);
   }
 
+  UpdateTeller(body: any) {
+    return this.http.post(this.api_url+"/api/teller/update_teller", body);
+  }
+
   ReportsTeller(body: any) {
     return this.http.post(this.api_url+"/api/reports/reports_teller", body);
   }

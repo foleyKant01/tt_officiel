@@ -1,24 +1,80 @@
+/* Général */
 a {
   cursor: pointer;
 }
 
-/* Navbar */
-.navbar {
+/* Navbar stylée */
+.navbar-custom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 25px;
-  width: 100%;
-  background: #fff;
+  padding: 10px 25px;
+  color: black;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 15px;
+/* Nom de l’utilisateur */
+.user-name {
+  color: black;
+  font-weight: 600;
 }
 
+/* Icônes de navbar */
+.navbar .fa-fw {
+  font-size: 18px;
+  color: black !important;
+}
+
+/* Image profil */
 .img-profile {
   object-fit: cover;
+  border: 2px solid #fff;
+}
+
+/* Badge de notifications/messages */
+.badge-counter {
+  position: absolute;
+  transform: scale(0.9);
+  transform-origin: top right;
+  background-color: #ffc107;
+  color: black;
+  font-weight: bold;
+  font-size: 11px;
+  border-radius: 50px;
+  padding: 4px 7px;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 14px;
+  background: white;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-item:hover {
+  background-color: #fceabb;
+  color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar .user-name {
+    display: none;
+  }
+
+  .navbar .img-profile {
+    width: 32px;
+    height: 32px;
+  }
+
+  .navbar-nav {
+    gap: 10px;
+  }
 }

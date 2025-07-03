@@ -20,7 +20,7 @@ export class ForgotPasswordComponent implements OnInit{
   constructor(private router: Router, private auth: AuthService) { }
 
   forgot_form: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl(null, [Validators.required, Validators.email])
   });
 
   forgotPassword() {

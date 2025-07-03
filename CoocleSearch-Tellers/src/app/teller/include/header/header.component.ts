@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 declare var $: any;
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
+
+
 export class HeaderComponent {
   adminInfos: any;
   accessToken: any

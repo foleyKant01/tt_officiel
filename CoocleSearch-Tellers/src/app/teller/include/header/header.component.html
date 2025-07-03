@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar shadow">
+<nav class="navbar navbar-expand navbar-custom topbar shadow">
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle me-3">
-    <i class="fa fa-bars"></i>
+    <i class="fa fa-bars text-white"></i>
   </button>
 
   <ul class="navbar-nav ms-auto d-flex align-items-center">
@@ -8,11 +8,11 @@
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown"
         aria-expanded="false">
-        <i class="fas fa-bell fa-fw"></i>
-        <span class="badge badge-danger badge-counter">3+</span>
+        <i class="fas fa-bell fa-fw text-white"></i>
+        <span class="badge badge-counter">3+</span>
       </a>
       <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="alertsDropdown">
-        <h6 class="dropdown-header">Alerts Center</h6>
+        <h6 class="dropdown-header">Centre d’alertes</h6>
         <a class="dropdown-item d-flex align-items-center" href="#">
           <div class="me-3">
             <div class="icon-circle bg-primary">
@@ -20,8 +20,8 @@
             </div>
           </div>
           <div>
-            <div class="small text-gray-500">December 12, 2019</div>
-            <span class="font-weight-bold">A new monthly report is ready to download!</span>
+            <div class="small text-gray-500">12 Juillet 2025</div>
+            <span class="font-weight-bold">Un nouveau rapport est disponible !</span>
           </div>
         </a>
       </div>
@@ -31,19 +31,19 @@
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-bs-toggle="dropdown"
         aria-expanded="false">
-        <i class="fas fa-envelope fa-fw"></i>
-        <span class="badge badge-danger badge-counter">7</span>
+        <i class="fas fa-envelope fa-fw text-white"></i>
+        <span class="badge badge-counter">7</span>
       </a>
       <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="messagesDropdown">
-        <h6 class="dropdown-header">Message Center</h6>
+        <h6 class="dropdown-header">Centre de messages</h6>
         <a class="dropdown-item d-flex align-items-center" href="#">
           <div class="dropdown-list-image me-3">
             <img class="rounded-circle" src="assets/img/undraw_profile_3.svg" alt="..." width="40" height="40">
             <div class="status-indicator bg-warning"></div>
           </div>
           <div class="text-truncate">
-            Last month's report looks great!
-            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+            Le rapport du mois dernier est excellent !
+            <div class="small text-gray-500">Morgan Alvarez · il y a 2j</div>
           </div>
         </a>
       </div>
@@ -54,15 +54,15 @@
 
     <!-- User Info -->
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="me-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+      <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="me-2 d-none d-lg-inline user-name">Douglas McGee</span>
         <img class="img-profile rounded-circle" src="assets/img/undraw_profile.svg" width="35" height="35">
       </a>
       <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" routerLink="/teller/profile"><i class="fas fa-user me-2"></i> Profil</a></li>
+        <!-- <li><a class="dropdown-item" routerLink="/teller/settings"><i class="fas fa-cog me-2"></i> Paramètres</a></li> -->
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</a></li>
       </ul>
     </li>
   </ul>

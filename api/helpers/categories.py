@@ -48,7 +48,7 @@ def CreateCategories():
 
     except Exception as e:
         response['status'] = 'error'
-        response['error_description'] = str(e)
+        response['message'] = str(e)
 
     return response
 

@@ -16,10 +16,13 @@ class TellerApi(Resource):
             return ReadSingleTeller() 
         
         if route == "forgot_password":
-            return ForgotPassword()
+            return ForgotPassword() 
         
         if route == "save_new_password":
-            return SaveNewPassword()        
+            return SaveNewPassword() 
+
+        if route == "update_teller":
+            return UpdateTeller()        
     
     def get(self, route):
         if route == "readall":

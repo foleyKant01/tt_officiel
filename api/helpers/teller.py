@@ -151,13 +151,23 @@ def UpdateTeller  ():
             update_teller.t_address = request.json.get('t_address', update_teller.t_address)
             update_teller.t_email = request.json.get('t_email', update_teller.t_email)
             update_teller.t_city = request.json.get('t_city', update_teller.t_city)
-            update_teller.t_status = update_teller.t_status
 
             db.session.add(update_teller)
             db.session.commit()
 
-            reponse['status'] = 'Succes'
-            reponse['teller'] = update_teller
+            teller_infos = {
+                't_fullname': update_teller.t_fullname,
+                't_username': update_teller.t_username,
+                't_mobile': update_teller.t_mobile,
+                't_address': update_teller.t_address,
+                't_email': update_teller.t_email,
+                't_city': update_teller.t_city,                    
+                't_status': update_teller.t_status,                    
+                't_uid': update_teller.t_uid, 
+            }
+
+            reponse['status'] = 'success'
+            reponse['teller_infos'] = teller_infos
         else:
             reponse['status'] = 'Teller not found'
 
@@ -166,7 +176,6 @@ def UpdateTeller  ():
         reponse['status'] = 'error'
 
     return reponse
-
 
 
 def UpdateStatusTeller  ():
@@ -273,12 +282,12 @@ def ForgotPassword():
         email = request.json.get('email')
         if not email:
             response['status'] = 'error'
-            response['error_description'] = 'Adresse email manquante.'
+            response['message'] = 'Adresse email manquante.'
             return response
         admin = Admin.query.filter_by(ad_email=email).first()
         if not admin:
             response['status'] = 'error'
-            response['error_description'] = "Aucun administrateur avec cet email."
+            response['message'] = "Aucun administrateur avec cet email."
             return response
         temp_password = generate_temp_password()
         hashed_password = bcrypt.hashpw(temp_password.encode('utf-8'), bcrypt.gensalt())
@@ -295,11 +304,11 @@ def ForgotPassword():
 
         except Exception as e:
             response['status'] = 'error'
-            response['error_description'] = str(e)
+            response['message'] = str(e)
 
     except Exception as e:
         response['status'] = 'error'
-        response['error_description'] = str(e)
+        response['message'] = str(e)
 
     return response
 

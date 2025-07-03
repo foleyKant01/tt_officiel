@@ -79,31 +79,30 @@ export class CreateBusinessComponent implements OnInit{
     }
   )
 
-  Createbusiness(){
-
+  Createbusiness() {
     this.loading = true;
     let body = this.createbusiness?.value;
 
     this.http.CreateBusiness(body).subscribe({
-      next : (reponse:any)=>{
+      next: (reponse: any) => {
         console.log(reponse);
         if (reponse?.status === 'success') {
           this.data = reponse;
           Swal.fire({
-            title: 'Success!',
-            text: 'Business was successfully created!',
+            title: 'Succès !',
+            text: 'L\'entité a été créée avec succès !',
             icon: 'success',
             confirmButtonText: 'OK',
-            confirmButtonColor: '#ff6c2f'
+            confirmButtonColor: '#dda706'
           }).then(() => {
-            this.router.navigate(['teller']);
+            window.location.reload();  // Recharger la page après 3 secondes
           });
         } else {
           Swal.fire({
-            title: 'Error!',
-            text: reponse?.error_description || 'Login failed',
+            title: 'Erreur !',
+            text: reponse?.error_description || 'Échec de création.',
             icon: 'error',
-            confirmButtonText: 'Try Again',
+            confirmButtonText: 'Réessayer',
             confirmButtonColor: '#ff6c2f'
           });
         }
@@ -112,12 +111,11 @@ export class CreateBusinessComponent implements OnInit{
         console.error(error);
         setTimeout(() => {
           this.loading = false;
-        }, this.delayDuration); // Désactiver le spinner en cas d'erreur
+        }, this.delayDuration);
       }
-    })
-    window.location.reload();
-
+    });
   }
+
 
   navigateToRead() {
     this.router.navigate(['/teller/business/readall-business']);
@@ -125,29 +123,5 @@ export class CreateBusinessComponent implements OnInit{
 
   GetLocalisation(){
   }
-
-
-  // filterItems() {
-  //   this.filteredItems = this.allCategories.filter((category: string) =>
-  //     category.toLowerCase().includes(this.searchIterm.toLowerCase())
-  //   );
-  // }
-
-  // selectItems(category: string) {
-  //   this.searchIterm = category;
-  //   this.filteredItems = [];
-  //   this.showError = false;
-  // }
-
-  // submitForm() {
-  //   if (!this.allCategories.includes(this.searchIterm)) {
-  //     this.showError = true;
-  //     setTimeout(() => {
-  //       this.showError = false;
-  //     }, 5000);
-  //   } else {
-  //     this.showError = false;
-  //   }
-  // }
 
 }

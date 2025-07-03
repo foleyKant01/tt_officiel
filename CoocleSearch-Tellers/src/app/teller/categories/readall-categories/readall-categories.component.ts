@@ -32,6 +32,11 @@ export class ReadallCategoriesComponent implements OnInit{
       this.Readallcategories();
   }
 
+  goToAddCategorie() {
+    this.router.navigate(['/teller/categories/create-categories']);
+  }
+
+
 
   //Fonction pour readall categories
   Readallcategories(): void {

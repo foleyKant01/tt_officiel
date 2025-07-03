@@ -66,10 +66,11 @@ hr {
     border: none;
     border-radius: 50px;
     cursor: pointer;
+    background: linear-gradient(to right, #a37b04, #dda706);
     transition: background 0.35s ease;
 
     &:hover:not(:disabled) {
-      background: linear-gradient(135deg, #ffc107, #6d5203);
+      background: linear-gradient(to right, #203a43, #396679);
       color: #000;
     }
 
