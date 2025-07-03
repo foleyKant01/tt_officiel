@@ -119,6 +119,10 @@ export class CreateBusinessComponent implements OnInit{
 
   }
 
+  navigateToRead() {
+    this.router.navigate(['/teller/business/readall-business']);
+  }
+
   GetLocalisation(){
   }
 

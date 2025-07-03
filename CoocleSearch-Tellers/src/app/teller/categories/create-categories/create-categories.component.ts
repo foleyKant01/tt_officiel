@@ -1,8 +1,8 @@
-import { CategoriesService } from './../../../services/categories/categories.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { CategoriesService } from '../../../services/categories/categories.service';
 
 @Component({
   selector: 'app-create-categories',

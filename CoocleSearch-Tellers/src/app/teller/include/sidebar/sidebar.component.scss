@@ -1,16 +1,27 @@
 .sidebar .nav-item .nav-link {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 0.6rem;
-  width: 14rem;
+  padding: 0.75rem 1.2rem;
+  font-size: 15px;
+  font-weight: 500;
 }
 
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s;
+}
+
+.sidebar .collapse-inner a:hover {
+  color: #b89019;
+  font-weight: 600;
+}
 
 .bg-gradient-primary {
-  background-color: #ffc107!important;
-  // background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
   background-image: linear-gradient(180deg, #ddb642 10%, #b89019 100%);
   background-size: cover;
-  color: black!important;
+}
+
+.sidebar-heading {
+  font-size: 13px;
+  text-transform: uppercase;
+  margin: 1rem 1rem 0.5rem;
+  color: rgba(255, 255, 255, 0.5);
 }

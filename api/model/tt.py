@@ -55,6 +55,8 @@ class Advertisement(db.Model):
     number_broadcasts = db.Column(db.String(128), nullable=False)
     ad_start_date = db.Column(db.String(128), nullable=False)
     ad_end_date = db.Column(db.String(128))
+    ad_status = db.Column(db.Boolean, default=False)
+    t_uid = db.Column(db.String(128), db.ForeignKey('teller.t_uid'))
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
@@ -82,6 +84,8 @@ class Categories(db.Model):
     ca_name = db.Column(db.String(128), nullable=False)
     ca_description = db.Column(db.String(250), nullable=False)
     ca_uid = db.Column(db.String(128), nullable=False)
+    create_by = db.Column(db.String(128))
+    status = db.Column(db.Boolean, default=False)
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { CategoriesService } from '../../../services/categories/categories.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoriesService } from '../../../services/categories/categories.service';
 
 
 @Component({

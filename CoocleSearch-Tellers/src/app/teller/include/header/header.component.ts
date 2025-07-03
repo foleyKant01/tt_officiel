@@ -45,23 +45,15 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.toggleSidebar(); 
-    this.adminInfos = JSON.parse(sessionStorage.getItem('admin_infos') || '{}');
+    this.toggleSidebar();
+    this.adminInfos = JSON.parse(sessionStorage.getItem('teller_infos') || '{}');
     this.accessToken = sessionStorage.getItem('access_token');
   }
 
 
   logout() {
-    console.log('Before logout:', {
-      adminInfos: sessionStorage.getItem('admin_infos'),
-      accessToken: sessionStorage.getItem('access_token')
-    });
-    sessionStorage.removeItem('admin_infos');
+    sessionStorage.removeItem('teller_infos');
     sessionStorage.removeItem('access_token');
-    console.log('After logout:', {
-      adminInfos: sessionStorage.getItem('admin_infos'),
-      accessToken: sessionStorage.getItem('access_token')
-    });
     this.router.navigate(['/auth/login']);
   }
 }

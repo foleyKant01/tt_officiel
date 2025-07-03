@@ -11,8 +11,9 @@ from resources.teller import TellerApi
 from resources.advertisement import AdvertisementApi 
 from resources.business import BusinessApi
 from resources.categories import CategoriesApi 
-from resources.historiques import HistoriquesApi
+from resources.historiques import HistoriquesApi 
 from resources.favoris import FavorisApi
+from resources.reports import ReportsApi
 from flask_migrate import Migrate
 from flask_cors import CORS
 
@@ -51,6 +52,7 @@ api.add_resource(BusinessApi, '/api/business/<string:route>', endpoint='all_busi
 api.add_resource(CategoriesApi, '/api/categorie/<string:route>', endpoint='all_categiries', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(HistoriquesApi, '/api/historiques/<string:route>', endpoint='all_historiques', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(FavorisApi, '/api/favoris/<string:route>', endpoint='all_favoris', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(ReportsApi, '/api/reports/<string:route>', endpoint='all_reports', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
 if __name__ == '__main__':
     app.run(debug=True,  host="0.0.0.0")  

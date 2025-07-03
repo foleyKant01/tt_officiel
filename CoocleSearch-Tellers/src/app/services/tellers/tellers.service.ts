@@ -15,7 +15,7 @@ export class TellersService {
     return this.http.post(this.api_url+"/api/teller/create", body);
   }
 
-  ReadAllTeller(): Observable<any>{
-    return this.http.get<any>(this.api_url+"/api/teller/readall")
+  ReportsTeller(body: any) {
+    return this.http.post(this.api_url+"/api/reports/reports_teller", body);
   }
 }
