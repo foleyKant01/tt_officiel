@@ -7,20 +7,13 @@ from helpers.send_mail import send_mailer_pincode
 from config.db import db
 from model.tt import *
 import bcrypt
-from werkzeug.security import check_password_hash
+
+
 
 def CreateTeller():
     rseponse = {}
 
     try:
-        # t_fullname = (request.json.get('t_fullname')).strip().title()
-        # t_username = (request.json.get('t_username'))
-        # t_mobile = (request.json.get('t_mobile'))      
-        # t_address = (request.json.get('t_address')).strip().title()
-        # t_email = (request.json.get('t_email'))
-        # t_password = (request.json.get('t_password'))
-        # t_city = (request.json.get('t_city')).strip().title()
-
         data = request.json
         t_fullname = data.get('t_fullname', '').strip().title()
         t_username = data.get('t_username', '')
@@ -66,9 +59,8 @@ def CreateTeller():
         rs['t_status'] = new_teller.t_status
         rs['t_uid'] = new_teller.t_uid
 
-        rseponse['status'] = 'Success'
+        rseponse['status'] = 'success'
         rseponse['teller_infos'] = rs
-
 
     except Exception as e:
         rseponse['status'] = 'error'

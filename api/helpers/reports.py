@@ -1,9 +1,9 @@
 from model.tt import *
 from flask import request, jsonify
 from datetime import datetime
-
 from collections import defaultdict
 from datetime import datetime
+
 
 def ReportsTeller():
     response = {}
@@ -48,7 +48,6 @@ def ReportsTeller():
                     'bu_uid': bu_uid,
                 })
 
-            # Vues du mois
             vues_this_month = [
                 h for h in all_historiques
                 if h.bu_uid == bu_uid
@@ -65,7 +64,6 @@ def ReportsTeller():
                 })
                 vue_counter[bu_uid] += 1
 
-        # Top 5 entités les plus visitées
         top_entities = sorted(vue_counter.items(), key=lambda x: x[1], reverse=True)[:5]
         most_visited_entities = []
 

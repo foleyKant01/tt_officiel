@@ -1,0 +1,71 @@
+.profile-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 25px;
+
+  .avatar {
+    font-size: 70px;
+    color: #ffc107;
+    margin-bottom: 10px;
+  }
+
+  .username {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .role {
+    font-size: 14px;
+    color: #888;
+  }
+}
+
+.form-group {
+  margin-bottom: 15px;
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    transition: border 0.3s ease;
+
+    &:focus {
+      border-color: #ffc107;
+      outline: none;
+    }
+
+    &[readonly] {
+      background: #f9f9f9;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+
+  .btn {
+    flex: 1;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
