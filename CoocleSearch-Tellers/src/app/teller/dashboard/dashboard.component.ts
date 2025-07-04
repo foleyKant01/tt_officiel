@@ -28,7 +28,11 @@ export class DashboardComponent implements OnInit{
       this.t_uid = this.teller_infos.t_uid
     }
     this.reportsTeller();
+    this.getCurrentLocationAndAddress();
+
   }
+
+
   reportsTeller(): void {
     let body = {
       t_uid: this.t_uid
@@ -41,6 +45,60 @@ export class DashboardComponent implements OnInit{
 
       },
     })
+  }
+
+
+  getCurrentLocationAndAddress() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          console.log('Latitude:', lat, 'Longitude:', lon);
+          // Appeler la fonction pour obtenir ville + commune
+          this.getCityAndCommuneFromCoords(lat, lon).then(location => {
+            sessionStorage.setItem('localisation', JSON.stringify(location));
+            sessionStorage.setItem('coordonne', JSON.stringify(position.coords));
+            console.log('localisation:', location);
+            console.log('coordonne:', position.coords);
+            console.log('Ville:', location.city);
+            console.log('Commune:', location.commune);
+          });
+        },
+        error => {
+          console.error('Erreur de géolocalisation :', error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    } else {
+      console.error('La géolocalisation n’est pas prise en charge par ce navigateur.');
+    }
+  }
+
+
+  getCityAndCommuneFromCoords(lat: number, lon: number): Promise<{ city?: string, commune?: string }> {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
+    return fetch(url, {
+      headers: {
+        'User-Agent': 'CoocleSearch/1.0 (your@email.com)'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const address = data.address;
+      return {
+        infos_maps: address,
+        commune: address
+      };
+    })
+    .catch(error => {
+      console.error('Erreur géocodage inverse :', error);
+      return {};
+    });
   }
 
 }

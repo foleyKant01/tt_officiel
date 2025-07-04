@@ -18,4 +18,8 @@ export class BusinessService {
   ReadSingleBusiness(body: any) {
     return this.http.post(this.api_url+"/api/business/readsinglebusiness", body);
   }
+
+  CreateStats(body: any) {
+    return this.http.post(this.api_url+"/api/stats/create_stats", body);
+  }
 }

@@ -5,7 +5,6 @@ import json
 from flask import request, jsonify
 
 
-
 def CreateStats():
     try:
         data = request.get_json()
@@ -14,9 +13,7 @@ def CreateStats():
             if field not in data:
                 return {'status': 'error', 'message': f'Le champ "{field}" est requis.'}
 
-        # Si c'est une liste, on la convertit en JSON string
         all_business_json = json.dumps(data['all_business_found']) if isinstance(data['all_business_found'], list) else str(data['all_business_found'])
-
         new_stat = Stats(
             textSearch=data['textSearch'],
             all_business_found=all_business_json,
@@ -34,7 +31,6 @@ def CreateStats():
     except Exception as e:
         print("Erreur lors de la création des stats :", e)
         return {'status': 'error', 'message': 'Une erreur est survenue lors de l’enregistrement des stats.'}
-
 
 
 

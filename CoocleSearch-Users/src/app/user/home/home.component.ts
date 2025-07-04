@@ -30,9 +30,10 @@ export class HomeComponent implements OnInit{
   dataBusiness: string | undefined;
   user_infos: any
   user_id: any
+  localisation: any
+  coordonne: any
   loading = false;
   favoriteList: any[] = [];
-
 
 
   Searchbusiness() {
@@ -61,6 +62,9 @@ export class HomeComponent implements OnInit{
         }
         else {
           this.All_business = [];
+          sessionStorage.setItem('All_business', JSON.stringify(this.All_business));
+          sessionStorage.setItem('textSearch', JSON.stringify(reponse.textSearch));
+          this.loading = false;
         }
       },
       error: (err) => {
@@ -69,6 +73,39 @@ export class HomeComponent implements OnInit{
         this.All_business = [];
       }
     });
+    this.createStats()
+  }
+
+
+  createStats(): void {
+    const searchText = this.search_form.get('textSearch')?.value.trim();
+    if (!searchText) return;
+    let body = {
+      textSearch: searchText,
+      all_business_found: this.All_business,
+      city: this.localisation.city,
+      commune: this.localisation.commune,
+      longitude: this.coordonne.longitude,
+      latitude: this.coordonne.latitude
+    }
+    this.http.CreateStats(body).subscribe({
+      next: (response: any) => {
+        if (response?.status === 'success') {
+          console.log('message: ',response.message);
+          }
+        },
+      error: (error) => {
+        console.error('Failed to load products:', error);
+      }
+    });
+  }
+
+
+  logout() {
+    sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('businessList');
+    sessionStorage.removeItem('user_infos');
+    this.router.navigate(['/auth/login']);
   }
 
   navigateToHome() {
@@ -118,19 +155,13 @@ export class HomeComponent implements OnInit{
   toggleFavorite(business: any): void {
     this.favoriteList = this.All_business.filter(b => b.is_favs === 1);
 
-    // Trouver l'index dans le tableau global
     const index = this.All_business.findIndex(b => b.bu_uid === business.bu_uid);
     if (index > -1) {
-      // Basculer l'état
       this.All_business[index].is_favs = this.All_business[index].is_favs === 1 ? 0 : 1;
-
-      // Mettre à jour favoriteList
       this.favoriteList = this.All_business.filter(b => b.is_favs === 1);
 
-      // Mettre à jour sessionStorage
       sessionStorage.setItem('All_business', JSON.stringify(this.All_business));
 
-      // (Optionnel) appel serveur pour enregistrer le changement
       if (this.All_business[index].is_favs === 1) {
         this.saveFavoris(this.All_business[index]);
       } else {
@@ -191,16 +222,96 @@ export class HomeComponent implements OnInit{
       }
     });
     const dataBusiness = JSON.parse(sessionStorage.getItem('All_business') || 'null');
+    // const datatextSearch = JSON.parse(sessionStorage.getItem('textSearch') || 'null');
+    const datalocalisation = JSON.parse(sessionStorage.getItem('localisation') || 'null');
+    const datacoordonne = JSON.parse(sessionStorage.getItem('coordonne') || 'null');
     if (dataBusiness) {
       console.log('Business infos trouvé en session:', dataBusiness);
       this.All_business = dataBusiness;
     } else {
       console.warn('Aucun Business trouvé dans sessionStorage');
     }
-    // Supprime la clé 'business' à chaque actualisation de la page
+
+    // if (datatextSearch) {
+    //   console.log('textSearch infos trouvé en session:', datatextSearch);
+    //   this.All_business = datatextSearch;
+    // } else {
+    //   console.warn('Aucun Business trouvé dans sessionStorage');
+    // }
+
+    if (datalocalisation) {
+      console.log('localisation infos trouvé en session:', datalocalisation);
+      this.localisation = datalocalisation;
+    } else {
+      console.warn('Aucun localisation trouvé dans sessionStorage');
+    }
+
+    if (datacoordonne) {
+      console.log('coordonne infos trouvé en session:', datacoordonne);
+      this.coordonne = datacoordonne;
+    } else {
+      console.warn('Aucun coordonne trouvé dans sessionStorage');
+    }
+
       window.addEventListener('beforeunload', this.unloadCallback);
 
   }
 
+  this.getCurrentLocationAndAddress();
+
 }
+
+  getCurrentLocationAndAddress() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          console.log('Latitude:', lat, 'Longitude:', lon);
+          // Appeler la fonction pour obtenir ville + commune
+          this.getCityAndCommuneFromCoords(lat, lon).then(location => {
+            sessionStorage.setItem('localisation', JSON.stringify(location));
+            sessionStorage.setItem('coordonne', JSON.stringify(position.coords));
+            console.log('coordonne:', position.coords);
+            console.log('Ville:', location.city);
+            console.log('Commune:', location.commune);
+          });
+        },
+        error => {
+          console.error('Erreur de géolocalisation :', error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    } else {
+      console.error('La géolocalisation n’est pas prise en charge par ce navigateur.');
+    }
+  }
+
+
+  getCityAndCommuneFromCoords(lat: number, lon: number): Promise<{ city?: string, commune?: string }> {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
+
+    return fetch(url, {
+      headers: {
+        'User-Agent': 'CoocleSearch/1.0 (your@email.com)'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const address = data.address;
+      return {
+        city: address.city || address.town || address.village || address.state,
+        commune: address.suburb || address.neighbourhood || address.city_district
+      };
+    })
+    .catch(error => {
+      console.error('Erreur géocodage inverse :', error);
+      return {};
+    });
+  }
+
 }

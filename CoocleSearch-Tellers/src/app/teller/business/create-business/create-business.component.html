@@ -51,14 +51,24 @@
       <div class="card p-3 border-0 shadow-sm">
         <h5 class="text-primary">Localisation & Visuels</h5>
 
-        <div class="form-group mt-2">
+        <!-- Ville -->
+        <div class="form-group mt-2" *ngIf="typeValue === 'physique'">
           <label for="city">Ville <span class="text-danger">*</span></label>
-          <input type="text" formControlName="city" id="city" class="form-control">
+          <input type="text" [value]="city" formControlName="city" id="city" class="form-control">
         </div>
 
-        <div class="form-group mt-2">
+        <!-- Checkbox "Utiliser votre position actuelle" -->
+        <div class="form-check" *ngIf="typeValue === 'physique'">
+          <input class="form-check-input" type="checkbox" id="useLocation" (change)="useCurrentLocation($event)">
+          <label class="form-check-label" for="useLocation">
+            Utiliser votre position actuelle
+          </label>
+        </div>
+
+        <!-- Adresse -->
+        <div class="form-group mt-2" *ngIf="typeValue === 'physique'">
           <label for="address">Adresse <span class="text-danger">*</span></label>
-          <input type="text" formControlName="address" id="address" class="form-control">
+          <input type="text" [value]="address" formControlName="address" id="address" class="form-control">
         </div>
 
         <div class="form-group mt-2">
