@@ -173,36 +173,36 @@ def ReadAllBusiness():
 
 
 
-def ReadSingleBusiness():
 
+def ReadSingleBusiness():
     response = {}
     try:
         business_uid = request.json.get('bu_uid')
         single_business = Business.query.filter_by(bu_uid=business_uid).first_or_404()
-        business_info = {
-                'bu_uid': single_business.bu_uid,              
-                'bu_categorie': single_business.bu_categorie,              
-                'bu_type': single_business.bu_type,              
-                'bu_name': single_business.bu_name,              
-                'bu_description': single_business.bu_description,              
-                'bu_city': single_business.bu_city,              
-                'bu_address': single_business.bu_address,              
-                'bu_image1': single_business.bu_image1,              
-                'bu_image2': single_business.bu_image2,              
-                't_uid': single_business.t_uid,                   
-                'bu_status': single_business.bu_status,                   
-                # 'latitude': single_business.latitude,              
-                # 'longitude': single_business.longitude,                   
-        }
 
-        response['status'] = 'success'
-        response['business'] = business_info
+        if single_business:
+            business_info = {
+                'bu_uid': single_business.bu_uid,
+                'bu_categorie': single_business.bu_categorie,
+                'bu_type': single_business.bu_type,
+                'bu_name': single_business.bu_name,
+                'bu_description': single_business.bu_description,
+                'bu_city': single_business.bu_city,
+                'bu_address': single_business.bu_address,
+                'bu_image1': str(single_business.bu_image1),
+                'bu_image2': str(single_business.bu_image2),
+                't_uid': single_business.t_uid,
+                'bu_status': single_business.bu_status,
+            }
+            response['status'] = 'success'
+            response['business'] = business_info
 
     except Exception as e:
         response['status'] = 'error'
         response['error_description'] = str(e)
 
     return response
+
 
 
 
