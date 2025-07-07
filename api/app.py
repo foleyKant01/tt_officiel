@@ -36,6 +36,10 @@ db.init_app(app)
 migrate = Migrate(app, db)
 api = Api(app)
 
+@app.after_request
+def after_request(response):
+    response.headers["Content-Type"] = "application/json"
+    return response
 
 
 @app.route('/a')    

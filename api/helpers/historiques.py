@@ -38,34 +38,31 @@ def SaveHistorique():
 
 
 def ReadAllHistoriqueByUser():
-
     reponse = {}
     try:
         user_id = request.json.get('user_id')
-        all_histo = Historiques.query.filter_by(u_uid = user_id).all()
+        all_histo = Historiques.query.filter_by(u_uid=user_id).all()
         if all_histo:
             print('histo found')
             histo_informations = []
             for histo in all_histo:
-                single_business = Business.query.filter_by(bu_uid = histo.bu_uid).first()
-                histo_infos = None
+                single_business = Business.query.filter_by(bu_uid=histo.bu_uid).first()
                 if single_business:
                     histo_infos = {
                         'h_uid': histo.h_uid,
                         'textSearch': histo.textSearch,
-                        'bu_uid': single_business.bu_uid, 
-                        'bu_name': single_business.bu_name, 
-                        'bu_description': single_business.bu_description, 
-                        'u_uid': histo.u_uid, 
+                        'bu_uid': single_business.bu_uid,
+                        'bu_name': single_business.bu_name,
+                        'bu_description': single_business.bu_description,
+                        'u_uid': histo.u_uid,
                         'visited_at': str(histo.visited_at),
                     }
-                histo_informations.append(histo_infos)
+                    histo_informations.append(histo_infos)  # Ajout seulement si complet
             reponse['status'] = 'success'
-            reponse ['histo_informations'] = histo_informations
+            reponse['histo_informations'] = histo_informations
         else:
             reponse['status'] = 'erreur'
             reponse['motif'] = 'aucun'
-
     except Exception as e:
         reponse['error_description'] = str(e)
         reponse['status'] = 'error'

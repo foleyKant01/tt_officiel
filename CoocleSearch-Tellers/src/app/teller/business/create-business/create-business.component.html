@@ -1,8 +1,6 @@
 <div class="container my-5 p-5 shadow bg-white rounded">
   <h2 class="text-center mb-4 fw-bold text-dark">Créer une Entité</h2>
   <form class="row g-4" [formGroup]="createbusiness" (ngSubmit)="Createbusiness()" enctype="multipart/form-data">
-
-    <!-- Informations Générales -->
     <div class="col-md-6">
       <div class="card p-3 border-0 shadow-sm">
         <h5 class="text-primary">Informations Générales</h5>
@@ -13,7 +11,6 @@
             <option *ngFor="let category of allCategories" [value]="category">{{ category }}</option>
           </select>
         </div>
-
         <div class="form-group mt-2">
           <label for="type">Type <span class="text-danger">*</span></label>
           <select class="form-select" formControlName="type">
@@ -21,22 +18,18 @@
             <option value="en-ligne">En ligne</option>
           </select>
         </div>
-
         <div class="form-group mt-2">
           <label for="name">Nom de l'entité <span class="text-danger">*</span></label>
           <input type="text" formControlName="name" id="name" class="form-control">
         </div>
-
         <div class="form-group mt-2">
           <label for="description">Description <span class="text-danger">*</span></label>
           <textarea formControlName="description" id="description" class="form-control" rows="3"></textarea>
         </div>
-
         <div class="form-group mt-2">
           <label for="email">Email <span class="text-danger">*</span></label>
           <input type="email" formControlName="email" id="email" class="form-control">
         </div>
-
         <div class="form-check mt-3">
           <input class="form-check-input" type="checkbox" id="terms">
           <label class="form-check-label" for="terms">
@@ -45,54 +38,38 @@
         </div>
       </div>
     </div>
-
-    <!-- Localisation et Visuels -->
     <div class="col-md-6">
       <div class="card p-3 border-0 shadow-sm">
         <h5 class="text-primary">Localisation & Visuels</h5>
-
-        <!-- Ville -->
+        <div class="form-check p-0 alert alert-warning text-dark mt-3" role="alert" *ngIf="typeValue === 'physique'">
+          <small>Pour une géolocalisation précise, veuillez être présent sur le site de l’entité au moment de sa
+            création.</small>
+        </div>
         <div class="form-group mt-2" *ngIf="typeValue === 'physique'">
           <label for="city">Ville <span class="text-danger">*</span></label>
-          <input type="text" [value]="city" formControlName="city" id="city" class="form-control">
+          <input type="text" formControlName="city" id="city" class="form-control">
         </div>
-
-        <!-- Checkbox "Utiliser votre position actuelle" -->
-        <div class="form-check" *ngIf="typeValue === 'physique'">
-          <input class="form-check-input" type="checkbox" id="useLocation" (change)="useCurrentLocation($event)">
-          <label class="form-check-label" for="useLocation">
-            Utiliser votre position actuelle
-          </label>
-        </div>
-
-        <!-- Adresse -->
         <div class="form-group mt-2" *ngIf="typeValue === 'physique'">
           <label for="address">Adresse <span class="text-danger">*</span></label>
-          <input type="text" [value]="address" formControlName="address" id="address" class="form-control">
+          <input type="text" formControlName="address" id="address" class="form-control">
         </div>
-
         <div class="form-group mt-2">
           <label for="mobile">Téléphone <span class="text-danger">*</span></label>
           <input type="text" formControlName="mobile" id="mobile" class="form-control">
         </div>
-
         <div class="form-group mt-2">
           <label for="images1">Image 1 <span class="text-danger">*</span></label>
           <input type="file" formControlName="image1" id="images1" class="form-control">
         </div>
-
         <div class="form-group mt-2">
           <label for="images2">Image 2</label>
           <input type="file" formControlName="image2" id="images2" class="form-control">
         </div>
       </div>
     </div>
-
-    <!-- Boutons -->
     <div class="col-12 text-center mt-4">
       <button type="submit" class="btn btn-warning px-5 py-2 rounded-pill shadow"
         [disabled]="createbusiness.invalid">Créer l'entité</button>
     </div>
-
   </form>
 </div>

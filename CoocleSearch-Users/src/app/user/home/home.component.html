@@ -52,7 +52,7 @@
           </form>
           <div class="position-relative" style="min-height: 80px;">
             <div class="position-absolute top-50 start-50 translate-middle text-white text-center"
-              *ngIf="searchDone && All_business.length === 0">
+            *ngIf="(textSearch || searchDone) && All_business.length === 0">
               <h4 class="m-0">Aucun résultat trouvé.</h4>
             </div>
           </div>
@@ -102,7 +102,7 @@
   </div>
 
   <div class="text-center" *ngIf="All_business.length > visibleCount">
-    <button class="btn btn-outline-primary" (click)="showAll()">Voir plus</button>
+    <button class="btn btn-outline-primary showAll" (click)="showAll()">Voir plus</button>
   </div>
 </section>
 

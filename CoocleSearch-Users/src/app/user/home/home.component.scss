@@ -67,6 +67,17 @@ a{
   border: 0;
 }
 
+.showAll {
+  border: solid, 1px, #0f2027;
+  color: #203a43;
+}
+
+.showAll:hover {
+  background: linear-gradient(to right, #a37b04, #dda706);
+  color: white;
+  border: solid, 1px, #a37b04;
+}
+
 .spinner-overlay {
   position: fixed;
   top: 0;

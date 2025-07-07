@@ -10,126 +10,18 @@ from flask import request, jsonify
 import bcrypt
 import random
 import string
-from geopy.distance import distance, geodesic
-from typing import List, Tuple
-
-def calculate_coordinates_within_radius(latitude: float, longitude: float, radius_meters: float, num_points: int) -> List[Tuple[float, float]]:
-    """
-    Calcule les coordonnées dans un rayon donné autour d'un point central.
-
-    :param latitude: Latitude du point central
-    :param longitude: Longitude du point central
-    :param radius_meters: Rayon en mètres
-    :param num_points: Nombre de points à générer autour du point central
-    :return: Liste de tuples contenant les coordonnées (latitude, longitude)
-    """
-    # Liste pour stocker les coordonnées générées
-    coordinates = []
-
-    # Calcul de l'angle entre chaque point
-    angle_step = 360 / num_points
-
-    for i in range(num_points):
-        # Calcul de l'angle
-        angle = i * angle_step
-
-        # Calcul de la nouvelle position
-        destination = distance(meters=radius_meters).destination((latitude, longitude), angle)
-        coordinates.append((destination.latitude, destination.longitude))
-
-    return coordinates
-
-
-def find_coordinates_within_interval(
-    center_latitude: float,
-    center_longitude: float,
-    max_radius_meters: float,
-    coordinates: List[Tuple[float, float]],
-    min_radius_meters: float = 0,
-) -> List[Tuple[float, float]]:
-    """
-    Trouve les coordonnées qui se situent dans un intervalle de distance autour d'un point central.
-
-    :param center_latitude: Latitude du point central
-    :param center_longitude: Longitude du point central
-    :param coordinates: Liste de tuples contenant les coordonnées (latitude, longitude) à vérifier
-    :param min_radius_meters: Distance minimale en mètres (incluse)
-    :param max_radius_meters: Distance maximale en mètres (incluse)
-    :return: Liste de tuples contenant les coordonnées (latitude, longitude) qui se trouvent dans l'intervalle spécifié
-    """
-    within_interval = []
-
-    # Point central
-    center_point = (center_latitude, center_longitude)
-
-    for coord in coordinates:
-        # Coordonnée à vérifier
-        point = (coord[0], coord[1])
-        
-        # Calcul de la distance
-        distance = geodesic(center_point, point).meters
-
-        # Vérifier si la distance est dans l'intervalle spécifié
-        if min_radius_meters <= distance <= max_radius_meters:
-            within_interval.append(coord)
-
-    return within_interval
-
-
-
-def test():
-
-    response = {}
-
-    bu_categories = request.json.get('bu_categories')
-    ReadAllBusinessByCategories(bu_categories)
-    
-    # Exemple d'utilisation
-    # center_latitude = 5.3587526
-    # center_longitude = -3.9253285
-    # coordinates = [
-    #     (5.3596535, -3.9253285),  # A environ 100 mètres
-    #     (5.3578517, -3.9253285),  # A environ 150 mètres (hors de l'intervalle)
-    #     (5.3587526, -3.9244276),  # A environ 50 mètres
-    #     (5.3587526, -3.9262294),  # A environ 50 mètres
-    #     (5.3600000, -3.9250000)   # A environ 200 mètres (hors de l'intervalle)
-    # ]
-
-    # result = find_coordinates_within_interval(center_latitude, center_longitude, coordinates)
-
-    # for coord in result:
-    #     print(f"Latitude: {coord[0]}, Longitude: {coord[1]}")
-
-
-
-
-    # Exemple d'utilisation
-    # latitude = 5.3587526
-    # longitude = -3.9253285
-    # radius_meters = 100
-    # num_points = 5  # Nombre de points à générer autour du cercle
-
-    # coordinates = calculate_coordinates_within_radius(latitude, longitude, radius_meters, num_points)
-
-    # for coord in coordinates:
-    #     print(f"Latitude: {coord[0]}, Longitude: {coord[1]}")
-
-    return True
-
 
 
 def SaveLocation():
-    # Vérifie si le contenu est en JSON
     if request.is_json:
         data = request.get_json()
         latitude = data.get('latitude')
         longitude = data.get('longitude')
-        categories = data.get('bu_categories')
+        categories = data.get('bu_categories')  
         coordinates = Business.query.filter_by(bu_categories = categories).first()
-        max_radius_meters = data.get('max_radius_meters')
+        max_radius_meters = data.get('max_radius_meters')   
 
         if latitude and longitude:
-            # result = find_coordinates_within_interval(latitude, longitude, coordinates, max_radius_meters)
             print(f"Latitude: {latitude}, Longitude: {longitude}")
             return jsonify({"status": "Location received", "latitude": latitude, "longitude": longitude})
         else:
@@ -144,7 +36,7 @@ def CreateUser():
     reponse = {}
     try:
         u_username = (request.json.get('u_username'))
-        u_mobile = (request.json.get('u_mobile'))      
+        u_mobile = (request.json.get('u_mobile'))    
         u_city = (request.json.get('u_city'))
         u_address = (request.json.get('u_address'))
         u_email = (request.json.get('u_email'))

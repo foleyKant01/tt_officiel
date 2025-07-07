@@ -42,34 +42,43 @@ export class CreateBusinessComponent implements OnInit{
     const datacoordonne = JSON.parse(sessionStorage.getItem('coordonne') || 'null');
 
     if (datacoordonne) {
-      console.log('coordonne infos trouvé en session:', datacoordonne);
       this.coordonne = datacoordonne;
-    } else {
-      console.warn('Aucun coordonne trouvé dans sessionStorage');
     }
-    this.teller_infos = user
-    console.log(this.teller_infos);
+
+    this.teller_infos = user;
     if (user) {
       this.teller_infos = JSON.parse(user);
-      this.t_uid = this.teller_infos.t_uid
+      this.t_uid = this.teller_infos.t_uid;
       this.createbusiness.patchValue({
-        t_uid : this.t_uid,
-        latitude : this.coordonne.latitude,
-        longitude : this.coordonne.longitude
-      })
-      console.log('t_uid:', this.t_uid);
+        t_uid: this.t_uid,
+        latitude: this.coordonne.latitude,
+        longitude: this.coordonne.longitude
+      });
     }
 
     const datalocalisation = JSON.parse(sessionStorage.getItem('localisation') || 'null');
     if (datalocalisation) {
-      console.log('localisation infos trouvé en session:', datalocalisation);
       this.localisation = datalocalisation;
       this.city = this.localisation.infos_maps.state + ', ' + this.localisation.infos_maps.city;
       this.address = this.localisation.infos_maps.neighbourhood + ', ' + this.localisation.infos_maps.road;
-    } else {
-      console.warn('Aucun localisation trouvé dans sessionStorage');
     }
+
+    // 👉 Auto-remplir ville et adresse si type = physique
+    this.createbusiness.get('type')?.valueChanges.subscribe((value: string) => {
+      if (value === 'physique') {
+        this.createbusiness.patchValue({
+          city: this.city,
+          address: this.address
+        });
+      } else {
+        this.createbusiness.patchValue({
+          city: '',
+          address: ''
+        });
+      }
+    });
   }
+
 
   constructor(private router: Router, private fb: FormBuilder, private http: BusinessService, private api: CategoriesService){}
 

@@ -21,6 +21,7 @@ export class ActivitesComponent implements OnInit{
   histo_List: any[] = [];
   user_infos: any
   user_id: any
+  bu_name: any
   businessList: any[] = [];
   favoriteList: any[] = [];
   loading = false;
@@ -58,8 +59,11 @@ export class ActivitesComponent implements OnInit{
     }
     this.http.ReadAllHistoriqueByUser(body).subscribe({
       next: (reponse: any) => {
-        console.log('response histo_List:', reponse);
-        if (reponse?.status === 'success' && Array.isArray(reponse.histo_informations)) {
+        if (reponse?.status === 'success') {
+          this.histo_List = reponse.histo_informations;
+          this.bu_name = reponse.histo_informations.bu_name;
+          console.log('histo_List:', this.histo_List);
+          console.log('bu_name:', this.bu_name);
           setTimeout(() => {
             this.loading = false;
             this.histo_List = reponse.histo_informations;

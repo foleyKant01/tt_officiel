@@ -26,7 +26,6 @@
         </div>
       </div>
 
-      <!-- Barre de recherche (mobile) -->
       <div class="col-12 mb-3 d-md-none">
         <form class="form-subscribe" id="contactForm" [formGroup]="search_form" (ngSubmit)="Searchbusiness()">
           <div class="input-group shadow-sm" style="height: 45px;">
@@ -36,6 +35,9 @@
               [disabled]="search_form.get('textSearch')?.invalid || search_form.get('textSearch')?.value.trim() === ''">
               Search
             </button>
+          </div>
+          <div *ngIf="loading" class="spinner-overlay">
+            <div class="spinner"></div>
           </div>
         </form>
       </div>

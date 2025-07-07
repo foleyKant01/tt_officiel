@@ -4,6 +4,7 @@
   font-family: 'Segoe UI', sans-serif;
   padding: 20px;
   background: #f7f9fc;
+  color: black;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -133,3 +134,48 @@
 .btn-fav.active {
   color: #ffc107;
 }
+
+.activity-tabs .tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.activity-tabs .tab-btn.active {
+  border-color: #ffc107;
+  color: #000;
+}
+
+
+.btn.viewbusiness {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.show {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.btn.viewbusiness:hover {
+  background: linear-gradient(135deg, #ffc107, #6d5203);
+}
+
+.show:hover {
+  background: linear-gradient(135deg, #ffc107, #6d5203);
+}
+
+.btn-danger-hover {
+  background: linear-gradient(135deg, #a71d2a, #dc3545);
+}
+.btn-danger-hover:hover {
+  background: linear-gradient(135deg, #dc3545, #a71d2a);
+}
+
+

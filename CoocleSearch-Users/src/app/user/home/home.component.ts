@@ -8,16 +8,17 @@ import { ActivitesService } from '../services/users/activites.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
   data: any;
+  textSearch: any;
 
-  constructor(private router: Router, private http: BusinessService, private route: ActivatedRoute, private api: ActivitesService ) { }
+  constructor(private router: Router, private http: BusinessService, private route: ActivatedRoute, private api: ActivitesService) { }
 
   search_form: FormGroup = new FormGroup({
     textSearch: new FormControl(null, Validators.required),
@@ -42,7 +43,9 @@ export class HomeComponent implements OnInit{
     if (!searchText) return;
     const payload = {
       textSearch: searchText,
-      user_id: this.user_id
+      user_id: this.user_id,
+      latitude: this.coordonne.latitude,
+      longitude: this.coordonne.longitude
     };
     this.http.SearchBusinessByCategorie(payload).subscribe({
       next: (reponse: any) => {
@@ -65,12 +68,19 @@ export class HomeComponent implements OnInit{
           sessionStorage.setItem('All_business', JSON.stringify(this.All_business));
           sessionStorage.setItem('textSearch', JSON.stringify(reponse.textSearch));
           this.loading = false;
+          this.searchDone = true;
+
         }
       },
       error: (err) => {
         console.error('Erreur lors de la recherche :', err);
         this.searchDone = true;
         this.All_business = [];
+        if (err.error instanceof ProgressEvent) {
+          console.log('Erreur liée à un mauvais format JSON ou content-type.');
+        } else {
+          console.log('Réponse du serveur :', err.error);
+        }
       }
     });
     this.createStats()
@@ -91,9 +101,9 @@ export class HomeComponent implements OnInit{
     this.http.CreateStats(body).subscribe({
       next: (response: any) => {
         if (response?.status === 'success') {
-          console.log('message: ',response.message);
-          }
-        },
+          console.log('message: ', response.message);
+        }
+      },
       error: (error) => {
         console.error('Failed to load products:', error);
       }
@@ -170,7 +180,7 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  saveFavoris(business: any ) {
+  saveFavoris(business: any) {
     const payload = {
       ...business,
       user_id: this.user_id
@@ -187,7 +197,7 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  deleteFavoris(business: any ) {
+  deleteFavoris(business: any) {
     const payload = {
       ...business,
       user_id: this.user_id
@@ -205,6 +215,9 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    // this.searchDone = true;
+
     const user = sessionStorage.getItem('user_infos');
     this.isLoggedIn = !!user;
     this.user_infos = user
@@ -214,52 +227,54 @@ export class HomeComponent implements OnInit{
       this.user_id = this.user_infos.u_uid
       console.log('user_id:', this.user_id);
 
-    this.route.queryParams.subscribe(params => {
-      const data = params['data'];
-      if (data) {
-        this.All_business = JSON.parse(data);
-        console.log(this.All_business);
+      this.route.queryParams.subscribe(params => {
+        const data = params['data'];
+        console.log('data:', this.data);
+        if (data) {
+
+          this.All_business = JSON.parse(data);
+          console.log(this.All_business);
+        }
+      });
+      const dataBusiness = JSON.parse(sessionStorage.getItem('All_business') || 'null');
+      const datatextSearch = JSON.parse(sessionStorage.getItem('textSearch') || 'null');
+      const datalocalisation = JSON.parse(sessionStorage.getItem('localisation') || 'null');
+      const datacoordonne = JSON.parse(sessionStorage.getItem('coordonne') || 'null');
+      if (dataBusiness) {
+        console.log('Business infos trouvé en session:', dataBusiness);
+        this.All_business = dataBusiness;
+      } else {
+        console.warn('Aucun Business trouvé dans sessionStorage');
       }
-    });
-    const dataBusiness = JSON.parse(sessionStorage.getItem('All_business') || 'null');
-    // const datatextSearch = JSON.parse(sessionStorage.getItem('textSearch') || 'null');
-    const datalocalisation = JSON.parse(sessionStorage.getItem('localisation') || 'null');
-    const datacoordonne = JSON.parse(sessionStorage.getItem('coordonne') || 'null');
-    if (dataBusiness) {
-      console.log('Business infos trouvé en session:', dataBusiness);
-      this.All_business = dataBusiness;
-    } else {
-      console.warn('Aucun Business trouvé dans sessionStorage');
-    }
 
-    // if (datatextSearch) {
-    //   console.log('textSearch infos trouvé en session:', datatextSearch);
-    //   this.All_business = datatextSearch;
-    // } else {
-    //   console.warn('Aucun Business trouvé dans sessionStorage');
-    // }
+      if (datatextSearch) {
+        console.log('textSearch infos trouvé en session:', datatextSearch);
+        this.textSearch = datatextSearch;
+      } else {
+        console.warn('Aucun Business trouvé dans sessionStorage');
+      }
 
-    if (datalocalisation) {
-      console.log('localisation infos trouvé en session:', datalocalisation);
-      this.localisation = datalocalisation;
-    } else {
-      console.warn('Aucun localisation trouvé dans sessionStorage');
-    }
+      if (datalocalisation) {
+        console.log('localisation infos trouvé en session:', datalocalisation);
+        this.localisation = datalocalisation;
+      } else {
+        console.warn('Aucun localisation trouvé dans sessionStorage');
+      }
 
-    if (datacoordonne) {
-      console.log('coordonne infos trouvé en session:', datacoordonne);
-      this.coordonne = datacoordonne;
-    } else {
-      console.warn('Aucun coordonne trouvé dans sessionStorage');
-    }
+      if (datacoordonne) {
+        console.log('coordonne infos trouvé en session:', datacoordonne);
+        this.coordonne = datacoordonne;
+      } else {
+        console.warn('Aucun coordonne trouvé dans sessionStorage');
+      }
 
       window.addEventListener('beforeunload', this.unloadCallback);
 
+    }
+
+    this.getCurrentLocationAndAddress();
+
   }
-
-  this.getCurrentLocationAndAddress();
-
-}
 
   getCurrentLocationAndAddress() {
     if (navigator.geolocation) {
@@ -272,9 +287,9 @@ export class HomeComponent implements OnInit{
           this.getCityAndCommuneFromCoords(lat, lon).then(location => {
             sessionStorage.setItem('localisation', JSON.stringify(location));
             sessionStorage.setItem('coordonne', JSON.stringify(position.coords));
-            console.log('coordonne:', position.coords);
-            console.log('Ville:', location.city);
-            console.log('Commune:', location.commune);
+            // console.log('coordonne:', position.coords);
+            // console.log('Ville:', location.city);
+            // console.log('Commune:', location.commune);
           });
         },
         error => {
@@ -300,18 +315,18 @@ export class HomeComponent implements OnInit{
         'User-Agent': 'CoocleSearch/1.0 (your@email.com)'
       }
     })
-    .then(response => response.json())
-    .then(data => {
-      const address = data.address;
-      return {
-        city: address.city || address.town || address.village || address.state,
-        commune: address.suburb || address.neighbourhood || address.city_district
-      };
-    })
-    .catch(error => {
-      console.error('Erreur géocodage inverse :', error);
-      return {};
-    });
+      .then(response => response.json())
+      .then(data => {
+        const address = data.address;
+        return {
+          city: address.city || address.town || address.village || address.state,
+          commune: address.suburb || address.neighbourhood || address.city_district
+        };
+      })
+      .catch(error => {
+        console.error('Erreur géocodage inverse :', error);
+        return {};
+      });
   }
 
 }

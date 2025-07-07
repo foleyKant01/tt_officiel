@@ -287,11 +287,33 @@ def normalize_text(text):
     return text.split()
 
 
+import math
+
+def haversine_distance(lat1, lon1, lat2, lon2):
+    # Rayon de la Terre en kilomètres
+    R = 6371.0
+
+    lat1_rad = math.radians(lat1)
+    lon1_rad = math.radians(lon1)
+    lat2_rad = math.radians(lat2)
+    lon2_rad = math.radians(lon2)
+
+    dlat = lat2_rad - lat1_rad
+    dlon = lon2_rad - lon1_rad
+
+    a = math.sin(dlat / 2)**2 + math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(dlon / 2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+    return R * c  # distance en km
+
+
 def SearchBusinessByCategorie():
     response = {}
     try:
         data = request.json
         user_id = data.get('user_id')
+        user_latitude = float(data.get('latitude'))
+        user_longitude = float(data.get('longitude'))
         text = data.get('textSearch', '').strip()
         print(f"Original text: {text}")
         
@@ -307,7 +329,7 @@ def SearchBusinessByCategorie():
         normalized_search = [w for w in normalize_text(textSearch) if len(w) > 2]
         print(f"Normalized search terms (len > 2): {normalized_search}")
 
-        matched_businesses = []  # Utilisation d'une liste pour conserver l'ordre
+        matched_businesses = []
         for word in normalized_search:
             word_search = f"%{word}%"
             print(f"Recherche de : {word_search}")
@@ -326,19 +348,26 @@ def SearchBusinessByCategorie():
         matched_businesses = list({business.bu_uid: business for business in matched_businesses}.values())
 
         if matched_businesses:
-            sorted_businesses = sorted(matched_businesses, key=lambda b: b.bu_name.lower())
-            total = len(sorted_businesses)
+            # Ajouter la distance à chaque business
+            business_with_distance = []
+            for business in matched_businesses:
+                if business.latitude is not None and business.longitude is not None:
+                    distance = haversine_distance(user_latitude, user_longitude, business.latitude, business.longitude)
+                else:
+                    distance = 999999.0  # Valeur arbitrairement grande
+                business_with_distance.append((business, distance))
+
+            # Trier par distance croissante
+            business_with_distance.sort(key=lambda x: x[1])
+            total = len(business_with_distance)
             start = (page - 1) * per_page
             end = start + per_page
-            paginated_businesses = sorted_businesses[start:end]
+            paginated_businesses = business_with_distance[start:end]
 
             business_infos = []
-            for business in paginated_businesses:
+            for business, distance in paginated_businesses:
                 all_favs = Favoris.query.filter_by(bu_uid=business.bu_uid, u_uid=user_id).first()
-                if all_favs:
-                    is_favs = 1
-                else:
-                    is_favs = 0
+                is_favs = 1 if all_favs else 0
                 business_infos.append({
                     'bu_uid': business.bu_uid,
                     'bu_categorie': business.bu_categorie,
@@ -352,6 +381,9 @@ def SearchBusinessByCategorie():
                     't_uid': business.t_uid,
                     'is_favs': is_favs,
                     'bu_status': business.bu_status,
+                    'latitude': business.latitude,
+                    'longitude': business.longitude,
+                    'distance_km': round(distance, 2)
                 })
             response['status'] = 'success'
             response['business'] = business_infos
@@ -368,4 +400,4 @@ def SearchBusinessByCategorie():
         response['status'] = 'error'
         response['error_description'] = 'An unexpected error occurred.'
 
-    return jsonify(response)
+    return response, 200

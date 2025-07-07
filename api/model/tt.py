@@ -3,6 +3,8 @@ import uuid
 from config.db import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import expression
+from sqlalchemy.dialects.mysql import MEDIUMTEXT
+
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -111,7 +113,7 @@ class Stats(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
     textSearch = db.Column(db.String(128), nullable=False)
-    all_business_found = db.Column(db.String(128))
+    all_business_found = db.Column(MEDIUMTEXT)
     city = db.Column(db.String(128), nullable=False)
     commune = db.Column(db.String(128), nullable=False) 
     longitude = db.Column(db.String(128), nullable=False) 
