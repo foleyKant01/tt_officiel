@@ -21,12 +21,13 @@ def CreateBusiness():
         new_business.bu_description = request.json.get('description')
         new_business.bu_city = request.json.get('city')
         new_business.bu_address = request.json.get('address')
+        new_business.phone = request.json.get('phone')
         new_business.bu_image1 = request.json.get('image1')
         new_business.bu_image2 = request.json.get('image2')
         new_business.t_uid = request.json.get('t_uid')
         new_business.bu_status = 'Active'
-        # new_business.latitude = request.json.get('latitude')
-        # new_business.longitude = request.json.get('longitude')
+        new_business.latitude = request.json.get('latitude')
+        new_business.longitude = request.json.get('longitude')
         new_business.bu_uid = str(uuid.uuid4())
         
         db.session.add(new_business)
@@ -40,6 +41,7 @@ def CreateBusiness():
         rs['bu_description'] = new_business.bu_description
         rs['bu_city'] = new_business.bu_city
         rs['bu_address'] = new_business.bu_address
+        rs['phone'] = new_business.phone
         rs['bu_image1'] = new_business.bu_image1
         rs['bu_image2'] = new_business.bu_image2
         rs['t_uid'] = new_business.t_uid
@@ -69,11 +71,12 @@ def UpdateBusiness():
             update_business.bu_name = request.json.get('name', update_business.bu_name)
             update_business.bu_description = request.json.get('description', update_business.bu_description)            
             update_business.bu_city = request.json.get('city', update_business.bu_city)
+            update_business.phone = request.json.get('phone', update_business.phone)
             update_business.bu_address = request.json.get('address', update_business.bu_address)
             update_business.bu_image1 = request.json.get('image1', update_business.bu_image1)
             update_business.bu_image1 = request.json.get('image2', update_business.bu_image1)
-            # update_business.latitude = request.json.get('latitude', update_business.latitude)
-            # update_business.longitude = request.json.get('longitude', update_business.longitude)
+            update_business.latitude = request.json.get('latitude', update_business.latitude)
+            update_business.longitude = request.json.get('longitude', update_business.longitude)
             update_business.t_uid = update_business.t_uid
             update_business.bu_status = update_business.bu_status
 
@@ -153,6 +156,7 @@ def ReadAllBusiness():
                 'bu_description': business.bu_description,              
                 'bu_city': business.bu_city,              
                 'bu_address': business.bu_address,              
+                'phone': business.phone,              
                 'bu_image1': business.bu_image1,              
                 'bu_image2': business.bu_image2,              
                 't_uid': business.t_uid,              
@@ -173,13 +177,12 @@ def ReadAllBusiness():
 
 
 
-
 def ReadSingleBusiness():
     response = {}
     try:
         business_uid = request.json.get('bu_uid')
+        print(business_uid)
         single_business = Business.query.filter_by(bu_uid=business_uid).first_or_404()
-
         if single_business:
             business_info = {
                 'bu_uid': single_business.bu_uid,
@@ -189,6 +192,7 @@ def ReadSingleBusiness():
                 'bu_description': single_business.bu_description,
                 'bu_city': single_business.bu_city,
                 'bu_address': single_business.bu_address,
+                'phone': single_business.phone,
                 'bu_image1': str(single_business.bu_image1),
                 'bu_image2': str(single_business.bu_image2),
                 't_uid': single_business.t_uid,
@@ -196,13 +200,13 @@ def ReadSingleBusiness():
             }
             response['status'] = 'success'
             response['business'] = business_info
+            print(business_info)
 
     except Exception as e:
         response['status'] = 'error'
         response['error_description'] = str(e)
 
-    return response
-
+    return jsonify(response)
 
 
 
@@ -221,6 +225,7 @@ def ReadAllBusinessByCategories():
                 'bu_name': business.bu_name,              
                 'bu_description': business.bu_description,              
                 'bu_city': business.bu_city,              
+                'phone': business.phone,              
                 'bu_address': business.bu_address,              
                 'bu_image1': business.bu_image1,              
                 'bu_image2': business.bu_image2,              
@@ -257,6 +262,7 @@ def ReadAllBusinessByTeller():
                 'bu_name': business.bu_name,              
                 'bu_description': business.bu_description,              
                 'bu_city': business.bu_city,              
+                'phone': business.phone,              
                 'bu_address': business.bu_address,              
                 'bu_image1': business.bu_image1,              
                 'bu_image2': business.bu_image2,              
@@ -375,6 +381,7 @@ def SearchBusinessByCategorie():
                     'bu_name': business.bu_name,
                     'bu_description': business.bu_description,
                     'bu_city': business.bu_city,
+                    'phone': business.phone,
                     'bu_address': business.bu_address,
                     'bu_image1': business.bu_image1,
                     'bu_image2': business.bu_image2,

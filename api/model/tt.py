@@ -72,6 +72,7 @@ class Business(db.Model):
     bu_description = db.Column(db.String(128), nullable=False)
     bu_city = db.Column(db.String(128), nullable=False)
     bu_address = db.Column(db.String(128), nullable=False)
+    phone = db.Column(db.String(128), nullable=False)
     bu_image1 = db.Column(db.String(128), nullable=False)
     bu_image2 = db.Column(db.String(128), nullable=False)
     latitude = db.Column(db.Float)
