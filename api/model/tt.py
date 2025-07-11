@@ -73,8 +73,7 @@ class Business(db.Model):
     bu_city = db.Column(db.String(128), nullable=False)
     bu_address = db.Column(db.String(128), nullable=False)
     phone = db.Column(db.String(128), nullable=False)
-    bu_image1 = db.Column(db.String(128), nullable=False)
-    bu_image2 = db.Column(db.String(128), nullable=False)
+    bu_picture = db.Column(db.String(255), nullable=True)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     t_uid = db.Column(db.String(128), db.ForeignKey('teller.t_uid'))
@@ -84,11 +83,11 @@ class Business(db.Model):
 
 class Categories(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ca_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
     ca_name = db.Column(db.String(128), nullable=False)
-    ca_description = db.Column(db.String(250), nullable=False)
-    ca_uid = db.Column(db.String(128), nullable=False)
+    ca_description = db.Column(db.TEXT(), nullable=False)
     create_by = db.Column(db.String(128))
-    status = db.Column(db.Boolean, default=False)
+    status = db.Column(db.Integer, default=0)
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 

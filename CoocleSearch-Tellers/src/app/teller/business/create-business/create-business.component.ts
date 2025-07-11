@@ -28,6 +28,7 @@ export class CreateBusinessComponent implements OnInit{
   success = false;
   teller_infos: any
   t_uid: any
+  file: any
   localisation: any
   coordonne: any
   city: any
@@ -86,18 +87,18 @@ export class CreateBusinessComponent implements OnInit{
     return this.createbusiness.get('type')?.value;
   }
 
-  useCurrentLocation(event: any) {
-    const isChecked = event.target.checked;
-    if (isChecked) {
-      this.city = this.localisation.infos_maps.state + ', ' + this.localisation.infos_maps.city;
-      this.address = this.localisation.infos_maps.neighbourhood + ', ' + this.localisation.infos_maps.road;
-      this.createbusiness.get('city')?.setValue(this.city);
-      this.createbusiness.get('address')?.setValue(this.address);
-    } else {
-      this.createbusiness.get('city')?.setValue('');
-      this.createbusiness.get('address')?.setValue('');
-    }
-  }
+  // useCurrentLocation(event: any) {
+  //   const isChecked = event.target.checked;
+  //   if (isChecked) {
+  //     this.city = this.localisation.infos_maps.state + ', ' + this.localisation.infos_maps.city;
+  //     this.address = this.localisation.infos_maps.neighbourhood + ', ' + this.localisation.infos_maps.road;
+  //     this.createbusiness.get('city')?.setValue(this.city);
+  //     this.createbusiness.get('address')?.setValue(this.address);
+  //   } else {
+  //     this.createbusiness.get('city')?.setValue('');
+  //     this.createbusiness.get('address')?.setValue('');
+  //   }
+  // }
 
   loadCategories() {
     this.api.ReadAllCategories()?.subscribe({
@@ -116,54 +117,80 @@ export class CreateBusinessComponent implements OnInit{
       name: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       email: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
-      mobile: new FormControl(null, Validators.required),
-      image1: new FormControl(null, Validators.required),
-      image2: new FormControl(null, Validators.required),
+      city: new FormControl(null),
+      address: new FormControl(null),
+      phone: new FormControl(null, Validators.required),
+      bu_picture: new FormControl(null, Validators.required),
       t_uid: new FormControl(null, Validators.required),
       latitude: new FormControl(null, Validators.required),
       longitude: new FormControl(null, Validators.required),
     }
   )
 
-  Createbusiness() {
-    this.loading = true;
-    let body = this.createbusiness?.value;
+  onFileChange(event: any) {
+    console.log(event);
+    let file = event.target.files[0];
+    this.file = file;
+    console.log(this.file);
 
-    this.http.CreateBusiness(body).subscribe({
-      next: (reponse: any) => {
-        console.log(reponse);
-        if (reponse?.status === 'success') {
-          this.data = reponse;
-          Swal.fire({
-            title: 'Succès !',
-            text: 'L\'entité a été créée avec succès !',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#dda706'
-          }).then(() => {
-            window.location.reload();  // Recharger la page après 3 secondes
-          });
-        } else {
-          Swal.fire({
-            title: 'Erreur !',
-            text: reponse?.error_description || 'Échec de création.',
-            icon: 'error',
-            confirmButtonText: 'Réessayer',
-            confirmButtonColor: '#ff6c2f'
-          });
-        }
-      },
-      error: (error) => {
-        console.error(error);
-        setTimeout(() => {
-          this.loading = false;
-        }, this.delayDuration);
-      }
-    });
+    return file;
   }
 
+
+  Createbusiness() {
+    // this.loading = true;
+    // let body = this.createbusiness?.value;
+
+    if (this.createbusiness.valid) {
+      this.loading = true;
+
+      const formData: FormData = new FormData();
+      formData.append('categorie', this.createbusiness.get('categorie')?.value);
+      formData.append('type', this.createbusiness.get('type')?.value);
+      formData.append('name', this.createbusiness.get('name')?.value);
+      formData.append('description', this.createbusiness.get('description')?.value);
+      formData.append('email', this.createbusiness.get('email')?.value);
+      formData.append('city', this.createbusiness.get('city')?.value);
+      formData.append('address', this.createbusiness.get('address')?.value);
+      formData.append('phone', this.createbusiness.get('phone')?.value);
+      formData.append('bu_picture', this.file as File);
+      formData.append('t_uid', this.createbusiness.get('t_uid')?.value);
+      formData.append('latitude', this.createbusiness.get('latitude')?.value);
+      formData.append('longitude', this.createbusiness.get('longitude')?.value);
+
+      this.http.CreateBusiness(formData).subscribe({
+        next: (reponse: any) => {
+          console.log(reponse);
+          if (reponse?.status === 'success') {
+            this.data = reponse;
+            Swal.fire({
+              title: 'Succès !',
+              text: 'L\'entité a été créée avec succès !',
+              icon: 'success',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#dda706'
+            }).then(() => {
+              window.location.reload();  // Recharger la page après 3 secondes
+            });
+          } else {
+            Swal.fire({
+              title: 'Erreur !',
+              text: reponse?.error_description || 'Échec de création.',
+              icon: 'error',
+              confirmButtonText: 'Réessayer',
+              confirmButtonColor: '#ff6c2f'
+            });
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          setTimeout(() => {
+            this.loading = false;
+          }, this.delayDuration);
+        }
+      });
+    }
+  }
 
   navigateToRead() {
     this.router.navigate(['/teller/business/readall-business']);

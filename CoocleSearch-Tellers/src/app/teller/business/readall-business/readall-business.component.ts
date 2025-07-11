@@ -14,39 +14,34 @@ declare var $:any
 })
 export class ReadallBusinessComponent implements OnInit{
 
-  business: any[] = [];
-  dataCategorie: any[] = [];
-  deleteResult: any[] = [];
-  dataBusiness: any[] = [];
-  allBusiness: string[] = [];
-  allCategories: string[] = [];
-  tellerUid: string | undefined;
-
-
+  allBusiness: any;
+  teller_infos: any
+  t_uid: any
+  dataBusiness: any
 
   constructor(private route: ActivatedRoute, private router: Router, private http: BusinessService, private api: CategoriesService){}
 
   ngOnInit(): void {
-    this.Readallbusinessbyteller();
-    // this.loadCategories();
-    this.route.params.subscribe(params => {
-      this.tellerUid = params['t_uid']; // (+) converts string 'id' to a number
-    });
-    console.log('hlkhjlh: ',this.tellerUid);
 
-    // $('.table').DataTable();
+    const teller = sessionStorage.getItem('teller_infos');
+    this.teller_infos = teller
+    if (teller) {
+      this.teller_infos = JSON.parse(teller); // Convertir en objet
+      this.t_uid = this.teller_infos.t_uid
+    }
+    console.log('t_uid: ',this.t_uid);
+    this.Readallbusinessbyteller();
+
+
   }
 
-
-  //Fonction pour readall business
   Readallbusinessbyteller(): void {
     let body = {
-      t_uid: this.tellerUid
+      t_uid: this.t_uid
     }
-
     this.http.ReadAllBusinessByTeller(body).subscribe({
       next: (response: any) => {
-        this.allBusiness = response || []; // Stocker les produits dans le tableau
+        this.allBusiness = response; // Stocker les produits dans le tableau
         if(response?.business)  {
           this.dataBusiness = response?.business
           console.log(this.dataBusiness)
@@ -54,24 +49,6 @@ export class ReadallBusinessComponent implements OnInit{
       },
     })
   }
-
-
-  //Fonction pour readall categories
-  // loadCategories() {
-  //   this.api.ReadAllCategories()?.subscribe({
-  //     next: (response:any) =>{
-  //       this.dataCategorie = response?.categorie_name
-  //       this.allCategories = this.dataCategorie.map((category: any) => category?.name);
-  //       // console.log(this.dataCategorie)
-  //     }
-  //   });
-  // }
-
-  // searchbusiness: FormGroup = new FormGroup(
-  //   {
-  //     bu_categorie: new FormControl(null, Validators.required),
-  //   }
-  // )
 
 
   Readsinglebusiness(bu_uid: number): void {

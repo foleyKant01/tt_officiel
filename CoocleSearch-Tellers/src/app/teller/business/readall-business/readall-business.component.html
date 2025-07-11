@@ -1,8 +1,12 @@
 <div class="container mt-5">
-  <div class="card shadow border-0 p-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="text-dark fw-bold">Mes Entités</h4>
-      <span class="badge bg-warning text-dark px-3 py-2">Total : {{ dataBusiness?.length || 0 }}</span>
+  <div class="card shadow-sm border-0 rounded-4 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4 class="fw-bold text-dark m-0">
+        <i class="bi bi-building me-2 text-primary"></i> Mes Entités
+      </h4>
+      <span class="badge bg-warning text-dark fs-6 px-3 py-2 rounded-pill shadow-sm">
+        Total : {{ dataBusiness?.length || 0 }}
+      </span>
     </div>
 
     <div class="table-responsive">
@@ -10,32 +14,38 @@
         <thead class="table-light text-dark">
           <tr>
             <th>#</th>
-            <th>Utilisateur</th>
+            <th>Image</th>
+            <th>Nom</th>
             <th>Catégorie</th>
             <th>Type</th>
-            <th>Nom</th>
             <th>Ville</th>
-            <th>Action</th>
+            <th class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let business of dataBusiness; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ business?.t_uid }}</td>
+            <td class="fw-semibold">{{ i + 1 }}</td>
+            <td>
+              <img style="height: 35px; width: 35px;" [src]="business.bu_picture || 'assets/img/default.jpg'"
+                class="img-fluid rounded-circle object-fit-cover" alt="">
+            </td>
+            <td class="fw-semibold text-dark">{{ business?.bu_name }}</td>
             <td>{{ business?.bu_categorie }}</td>
             <td>{{ business?.bu_type }}</td>
-            <td class="fw-semibold">{{ business?.bu_name }}</td>
             <td>{{ business?.bu_city }}</td>
-            <td>
-              <button class="btn btn-light border rounded-circle" (click)="Readsinglebusiness(business.bu_uid)">
-                <i class="fas fa-eye text-warning"></i>
+            <td class="text-center">
+              <button class="btn show btn-sm btn-outline-primary rounded-circle shadow-sm"
+                (click)="Readsinglebusiness(business.bu_uid)" title="Voir les détails">
+                <i class="bi bi-eye-fill"></i>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <div *ngIf="dataBusiness.length === 0" class="text-center py-4 text-muted">
-        Aucune entité disponible.
+
+      <div *ngIf="dataBusiness.length === 0" class="text-center py-5 text-muted">
+        <i class="bi bi-info-circle fs-2 mb-2"></i>
+        <p class="m-0">Aucune entité disponible pour le moment.</p>
       </div>
     </div>
   </div>

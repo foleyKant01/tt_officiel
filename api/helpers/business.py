@@ -1,13 +1,40 @@
+import os
 from flask import jsonify, request
 import uuid
 from config.db import db
+from config.constant import *
 from model.tt import Business, Favoris
+from werkzeug.utils import secure_filename
+
 
 from flask import request, jsonify, current_app as app
-from sqlalchemy import or_, func
+from sqlalchemy import or_
 import re
 import unicodedata
+import math
 
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def upload_file():
+    if request.method == 'PATCH' or request.method == 'POST':
+        print('is post')
+        if 'bu_picture' not in request.files:
+            return None  # Champ de fichier manquant
+        file = request.files['bu_picture']
+        print(file.filename)
+        if file.filename == '':
+            return None  # Nom de fichier vide
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)  # Nettoyer le nom de fichier
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            return filename
 
 
 def CreateBusiness():
@@ -15,42 +42,41 @@ def CreateBusiness():
     response = {}   
     try:
         new_business = Business()
-        new_business.bu_categorie = request.json.get('categorie')
-        new_business.bu_type = request.json.get('type')
-        new_business.bu_name = request.json.get('name')
-        new_business.bu_description = request.json.get('description')
-        new_business.bu_city = request.json.get('city')
-        new_business.bu_address = request.json.get('address')
-        new_business.phone = request.json.get('phone')
-        new_business.bu_image1 = request.json.get('image1')
-        new_business.bu_image2 = request.json.get('image2')
-        new_business.t_uid = request.json.get('t_uid')
+        new_business.bu_categorie = request.form.get('categorie')
+        new_business.bu_type = request.form.get('type')
+        new_business.bu_name = request.form.get('name')
+        new_business.bu_description = request.form.get('description')
+        new_business.bu_city = request.form.get('city')
+        new_business.bu_address = request.form.get('address')
+        new_business.phone = request.form.get('phone')
+        bu_picture = upload_file()
+        new_business.bu_picture = bu_picture
+        new_business.t_uid = request.form.get('t_uid')
         new_business.bu_status = 'Active'
-        new_business.latitude = request.json.get('latitude')
-        new_business.longitude = request.json.get('longitude')
+        new_business.latitude = request.form.get('latitude')
+        new_business.longitude = request.form.get('longitude')
         new_business.bu_uid = str(uuid.uuid4())
         
         db.session.add(new_business)
         db.session.commit()
 
-        rs = {}
-        rs['bu_uid'] = new_business.bu_uid
-        rs['bu_categorie'] = new_business.bu_categorie
-        rs['bu_type'] = new_business.bu_type
-        rs['bu_name'] = new_business.bu_name
-        rs['bu_description'] = new_business.bu_description
-        rs['bu_city'] = new_business.bu_city
-        rs['bu_address'] = new_business.bu_address
-        rs['phone'] = new_business.phone
-        rs['bu_image1'] = new_business.bu_image1
-        rs['bu_image2'] = new_business.bu_image2
-        rs['t_uid'] = new_business.t_uid
-        rs['bu_status'] = new_business.bu_status
-        # rs['latitude'] = new_business.latitude
-        # rs['longitude'] = new_business.longitude
+        # rs = {}
+        # rs['bu_uid'] = new_business.bu_uid
+        # rs['bu_categorie'] = new_business.bu_categorie
+        # rs['bu_type'] = new_business.bu_type
+        # rs['bu_name'] = new_business.bu_name
+        # rs['bu_description'] = new_business.bu_description
+        # rs['bu_city'] = new_business.bu_city
+        # rs['bu_address'] = new_business.bu_address
+        # rs['phone'] = new_business.phone
+        # rs['bu_picture'] = new_business.bu_picture
+        # rs['t_uid'] = new_business.t_uid
+        # rs['bu_status'] = new_business.bu_status
+        # # rs['latitude'] = new_business.latitude
+        # # rs['longitude'] = new_business.longitude
 
         response['status'] = 'success'
-        response['business_infos'] = rs
+        # response['business_infos'] = rs
 
     except Exception as e:
         response['error_description'] = str(e)
@@ -64,21 +90,18 @@ def UpdateBusiness():
     response = {}
 
     try:
-        bu_uid = request.json.get('bu_uid')
+        bu_uid = request.form.get('bu_uid')
         update_business = Business.query.filter_by(bu_uid = bu_uid).first_or_404()
         if update_business:
-            update_business.bu_type = request.json.get('type', update_business.bu_type)
-            update_business.bu_name = request.json.get('name', update_business.bu_name)
-            update_business.bu_description = request.json.get('description', update_business.bu_description)            
-            update_business.bu_city = request.json.get('city', update_business.bu_city)
-            update_business.phone = request.json.get('phone', update_business.phone)
-            update_business.bu_address = request.json.get('address', update_business.bu_address)
-            update_business.bu_image1 = request.json.get('image1', update_business.bu_image1)
-            update_business.bu_image1 = request.json.get('image2', update_business.bu_image1)
-            update_business.latitude = request.json.get('latitude', update_business.latitude)
-            update_business.longitude = request.json.get('longitude', update_business.longitude)
-            update_business.t_uid = update_business.t_uid
-            update_business.bu_status = update_business.bu_status
+            update_business.bu_type = request.form.get('type', update_business.bu_type)
+            update_business.bu_name = request.form.get('name', update_business.bu_name)
+            update_business.bu_description = request.form.get('description', update_business.bu_description)            
+            update_business.bu_city = request.form.get('city', update_business.bu_city)
+            update_business.phone = request.form.get('phone', update_business.phone)
+            update_business.bu_address = request.form.get('address', update_business.bu_address)
+            update_business.bu_picture = request.form.get('bu_picture', upload_file())
+            update_business.latitude = request.form.get('latitude', update_business.latitude)
+            update_business.longitude = request.form.get('longitude', update_business.longitude)
 
         db.session.add(update_business)
         db.session.commit() 
@@ -157,12 +180,9 @@ def ReadAllBusiness():
                 'bu_city': business.bu_city,              
                 'bu_address': business.bu_address,              
                 'phone': business.phone,              
-                'bu_image1': business.bu_image1,              
-                'bu_image2': business.bu_image2,              
+                'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                 't_uid': business.t_uid,              
                 'bu_status': business.bu_status,              
-                # 'latitude': business.latitude,              
-                # 'longitude': business.longitude,              
             }
             business_infos.append(business_info)
 
@@ -193,8 +213,7 @@ def ReadSingleBusiness():
                 'bu_city': single_business.bu_city,
                 'bu_address': single_business.bu_address,
                 'phone': single_business.phone,
-                'bu_image1': str(single_business.bu_image1),
-                'bu_image2': str(single_business.bu_image2),
+                'bu_picture': str(IMGHOSTNAME)+str(single_business.bu_picture),              
                 't_uid': single_business.t_uid,
                 'bu_status': single_business.bu_status,
             }
@@ -227,12 +246,9 @@ def ReadAllBusinessByCategories():
                 'bu_city': business.bu_city,              
                 'phone': business.phone,              
                 'bu_address': business.bu_address,              
-                'bu_image1': business.bu_image1,              
-                'bu_image2': business.bu_image2,              
+                'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                 't_uid': business.t_uid,              
                 'bu_status': business.bu_status,              
-                # 'latitude': business.latitude,              
-                # 'longitude': business.longitude,               
             }
             business_infos.append(business_info)
 
@@ -264,12 +280,9 @@ def ReadAllBusinessByTeller():
                 'bu_city': business.bu_city,              
                 'phone': business.phone,              
                 'bu_address': business.bu_address,              
-                'bu_image1': business.bu_image1,              
-                'bu_image2': business.bu_image2,              
+                'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                 't_uid': business.t_uid,              
                 'bu_status': business.bu_status,              
-                # 'latitude': business.latitude,              
-                # 'longitude': business.longitude,               
             }
             business_infos.append(business_info)
 
@@ -293,7 +306,6 @@ def normalize_text(text):
     return text.split()
 
 
-import math
 
 def haversine_distance(lat1, lon1, lat2, lon2):
     # Rayon de la Terre en kilomètres
@@ -383,8 +395,7 @@ def SearchBusinessByCategorie():
                     'bu_city': business.bu_city,
                     'phone': business.phone,
                     'bu_address': business.bu_address,
-                    'bu_image1': business.bu_image1,
-                    'bu_image2': business.bu_image2,
+                    'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                     't_uid': business.t_uid,
                     'is_favs': is_favs,
                     'bu_status': business.bu_status,

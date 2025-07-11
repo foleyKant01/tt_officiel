@@ -18,8 +18,8 @@ export class BusinessService {
     return this.http.post(this.api_url+"/api/business/createbusiness", body);
   }
 
-  ReadAllBusinessByTeller(body: any): Observable<any>{
-    return this.api.get<any>(this.api_url+"/api/business/readallbusinessbyteller", body)
+  ReadAllBusinessByTeller(body: any) {
+    return this.http.post(this.api_url+"/api/business/readallbusinessbyteller", body);
   }
 
   ReadSingleBusiness(body : any){
@@ -29,7 +29,6 @@ export class BusinessService {
   ReadAllBusinessByCategories(body: any) {
     return this.http.post(this.api_url+"/api/business/readsinglebusinessbycategories", body);
   }
-
 
   DeleteBusiness(body : any){
     // const httpOptions = {

@@ -7,13 +7,16 @@ from flask import request
 class CategoriesApi(Resource):
     def post(self, route):
         if route == "createcategorie":
-            return CreateCategories()
+            return CreateCategories() 
     
         # if route == "readsinglecategorie":
         #     return ReadSingleCategories()
         
         if route == "deletecategorie":
             return DeleteCategories()
+        
+        if route == "insert_all_categories":
+            return InsertAllCategories()
         
         if route == "updatecategorie":
             return UpdateCategories()

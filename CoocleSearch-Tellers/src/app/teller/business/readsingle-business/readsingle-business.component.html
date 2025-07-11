@@ -1,1 +1,41 @@
-<p>readsingle-business works!</p>
+<div class="container my-5 p-4 shadow bg-white rounded">
+  <div class="row align-items-center mb-4">
+    <div class="col-md-8">
+      <h2 class="fw-bold text-dark mb-2">{{ all_business.bu_name }}</h2>
+      <span class="badge bg-primary">{{ all_business.bu_categorie }}</span>
+      <span class="badge bg-secondary ms-2 text-capitalize">{{ all_business.bu_type }}</span>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn btn-outline-secondary rounded-pill goBack" (click)="goBack()">
+        <i class="bi bi-arrow-left-circle me-1 "></i> Retour
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <img [src]="all_business.bu_picture || 'assets/img/default.jpg'" class="img-fluid h-100 rounded shadow-sm"
+          alt="Image principale">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <strong>Description :</strong><br>
+          {{ all_business.bu_description }}
+        </li>
+        <li class="list-group-item">
+          <strong>Téléphone :</strong> {{ all_business.phone }}
+        </li>
+        <li class="list-group-item">
+          <strong>{{ adresse }}</strong> {{ all_business.bu_address }}
+        </li>
+        <li class="list-group-item">
+          <strong>{{ ville }}</strong> {{ all_business.bu_city }}<br>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

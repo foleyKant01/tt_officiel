@@ -1,0 +1,21 @@
+.list-group-item {
+  background-color: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+img.img-fluid {
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.goBack {
+  background: linear-gradient(to right, #a37b04, #dda706);
+  color: white;
+  border: 0px;
+}
+
+.goBack:hover {
+  background: linear-gradient(to right, #203a43, #396679);
+}

@@ -1,22 +1,23 @@
-table {
-  color: #333;
-  font-size: 15px;
+table th {
+  white-space: nowrap;
 }
 
-th {
-  text-transform: uppercase;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-td {
-  vertical-align: middle;
-}
-
-.btn i {
+.badge {
   font-size: 1rem;
 }
 
-.table-hover tbody tr:hover {
-  background-color: #fff8e1;
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+.show {
+  background: linear-gradient(to right, #a37b04, #dda706);
+  border: 0px;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+.show:hover {
+  background: linear-gradient(to right, #203a43, #396679);
 }
