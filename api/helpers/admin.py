@@ -168,3 +168,37 @@ def SaveNewPassword():
         response['status'] = 'error'
 
     return response
+
+
+
+def UpdateAdmin():
+
+    reponse = {}
+    try:
+        uid = request.json.get('ad_uid')
+        update_admin = Admin.query.filter_by(ad_uid = uid).first()
+
+        if update_admin:
+            update_admin.ad_fullname = request.json.get('ad_fullname', update_admin.ad_fullname)
+            update_admin.ad_username = request.json.get('ad_username', update_admin.ad_username)            
+            update_admin.ad_mobile = request.json.get('ad_mobile', update_admin.ad_mobile)
+            update_admin.ad_email = request.json.get('ad_email', update_admin.ad_email)
+            db.session.add(update_admin)
+            db.session.commit()
+
+            admin_infos = {
+                'ad_fullname': update_admin.ad_fullname,
+                'ad_username': update_admin.ad_username,
+                'ad_mobile': update_admin.ad_mobile,
+                'ad_email': update_admin.ad_email,
+            }
+            reponse['status'] = 'success'
+            reponse['admin_infos'] = admin_infos
+        else:
+            reponse['status'] = 'Admin not found'
+
+    except Exception as e:
+        reponse['error_description'] = str(e)
+        reponse['status'] = 'error'
+
+    return reponse

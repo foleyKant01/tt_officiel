@@ -13,10 +13,15 @@ class AdminApi(Resource):
             return LoginAdmin()
         
         if route == "forgot_password":
-            return ForgotPassword()
+            return ForgotPassword() 
         
         if route == "save_new_password":
             return SaveNewPassword()
+        
+        if route == "update_admin":
+            return UpdateAdmin()
+
+
         
     
     def get(self, route):

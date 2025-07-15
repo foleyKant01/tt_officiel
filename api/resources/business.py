@@ -18,6 +18,9 @@ class BusinessApi(Resource):
         
         if route == "searchbusinessbycategorie":
             return SearchBusinessByCategorie()
+        
+        if route == "updatebusiness":
+            return UpdateBusiness()
 
         
     def get(self, route):
@@ -31,8 +34,7 @@ class BusinessApi(Resource):
 
          
     def patch(self, route):
-        if route == "updatebusiness":
-            return UpdateBusiness()
+
         
         if route == "updatestatusbusiness":
             return UpdateStatusBusiness()

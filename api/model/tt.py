@@ -65,7 +65,7 @@ class Advertisement(db.Model):
 
 class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    bu_uid = db.Column(db.String(128), nullable=False)
+    bu_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
     bu_categorie = db.Column(db.String(128), nullable=False)
     bu_type = db.Column(db.String(128), nullable=False)
     bu_name = db.Column(db.String(128), nullable=False, unique=True)

@@ -55,7 +55,6 @@ def CreateBusiness():
         new_business.bu_status = 'Active'
         new_business.latitude = request.form.get('latitude')
         new_business.longitude = request.form.get('longitude')
-        new_business.bu_uid = str(uuid.uuid4())
         
         db.session.add(new_business)
         db.session.commit()
@@ -91,23 +90,52 @@ def UpdateBusiness():
 
     try:
         bu_uid = request.form.get('bu_uid')
-        update_business = Business.query.filter_by(bu_uid = bu_uid).first_or_404()
-        if update_business:
-            update_business.bu_type = request.form.get('type', update_business.bu_type)
-            update_business.bu_name = request.form.get('name', update_business.bu_name)
-            update_business.bu_description = request.form.get('description', update_business.bu_description)            
-            update_business.bu_city = request.form.get('city', update_business.bu_city)
-            update_business.phone = request.form.get('phone', update_business.phone)
-            update_business.bu_address = request.form.get('address', update_business.bu_address)
-            update_business.bu_picture = request.form.get('bu_picture', upload_file())
-            update_business.latitude = request.form.get('latitude', update_business.latitude)
-            update_business.longitude = request.form.get('longitude', update_business.longitude)
+        update_business = Business.query.filter_by(bu_uid=bu_uid).first()
 
-        db.session.add(update_business)
-        db.session.commit() 
-        
-        response['status'] = 'success'
-        response['business'] = update_business
+        if update_business:
+            update_business.bu_type = request.form.get('bu_type', update_business.bu_type)
+            update_business.bu_name = request.form.get('bu_name', update_business.bu_name)
+            update_business.bu_description = request.form.get('bu_description', update_business.bu_description)
+            update_business.bu_city = request.form.get('bu_city', update_business.bu_city)
+            update_business.phone = request.form.get('phone', update_business.phone)
+            update_business.bu_address = request.form.get('bu_address', update_business.bu_address)
+
+            # Gestion sécurisée de latitude / longitude
+            def safe_float(value, default=None):
+                try:
+                    return float(value)
+                except (TypeError, ValueError):
+                    return default
+
+            update_business.latitude = safe_float(request.form.get('latitude'), update_business.latitude)
+            update_business.longitude = safe_float(request.form.get('longitude'), update_business.longitude)
+
+            # Upload image si présente
+            uploaded_image = upload_file()
+            if uploaded_image:
+                update_business.bu_picture = uploaded_image
+
+            db.session.commit()
+
+            business_info = {
+                'bu_uid': update_business.bu_uid,
+                'bu_type': update_business.bu_type,
+                'bu_name': update_business.bu_name,
+                'bu_description': update_business.bu_description,
+                'bu_city': update_business.bu_city,
+                'bu_address': update_business.bu_address,
+                'phone': update_business.phone,
+                'bu_picture': str(IMGHOSTNAME) + str(update_business.bu_picture),
+                'bu_status': update_business.bu_status,
+                't_uid': update_business.t_uid,
+                'bu_categorie': update_business.bu_categorie
+            }
+
+            response['status'] = 'success'
+            response['business'] = business_info
+        else:
+            response['status'] = 'error'
+            response['error_description'] = "Aucune entité trouvée"
 
     except Exception as e:
         response['status'] = 'error'
@@ -116,13 +144,12 @@ def UpdateBusiness():
     return response
 
 
-
 def UpdateStatusBusiness():
     response = {}
 
     try:
         bu_uid = request.json.get('bu_uid')
-        update_business = Business.query.filter_by(bu_uid = bu_uid).first_or_404()
+        update_business = Business.query.filter_by(bu_uid = bu_uid).first()
         if update_business:
             update_business.bu_status = request.json.get('bu_status', update_business.bu_status)
         
@@ -145,7 +172,7 @@ def DeleteBusiness():
     response = {}
     try:
         uid = request.json.get('bu_uid')
-        deletebusiness = Business.query.filter_by(bu_uid=uid).first_or_404()
+        deletebusiness = Business.query.filter_by(bu_uid=uid).first()
         if deletebusiness:
             db.session.delete(deletebusiness)
             db.session.commit()
@@ -202,7 +229,7 @@ def ReadSingleBusiness():
     try:
         business_uid = request.json.get('bu_uid')
         print(business_uid)
-        single_business = Business.query.filter_by(bu_uid=business_uid).first_or_404()
+        single_business = Business.query.filter_by(bu_uid=business_uid).first()
         if single_business:
             business_info = {
                 'bu_uid': single_business.bu_uid,
