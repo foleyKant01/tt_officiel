@@ -10,12 +10,16 @@ export class BusinessService {
 
   private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
 
-  constructor(private api: HttpClient, private http: HttpClient) { }
+  constructor( private http: HttpClient) { }
 
   api_url = environment.apiUrl
 
   CreateBusiness(body: any) {
     return this.http.post(this.api_url+"/api/business/createbusiness", body);
+  }
+
+  UpdateBusiness(body: any) {
+    return this.http.post(this.api_url+"/api/business/updatebusiness", body);
   }
 
   ReadAllBusinessByTeller(body: any) {

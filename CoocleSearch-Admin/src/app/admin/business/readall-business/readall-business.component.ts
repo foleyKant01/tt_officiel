@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { BusinessService } from '../../../services/business/business.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-declare var $:any
+declare var $: any
 @Component({
   selector: 'app-readall-business',
   standalone: true,
@@ -12,43 +12,43 @@ declare var $:any
   templateUrl: './readall-business.component.html',
   styleUrls: ['./readall-business.component.scss']
 })
-export class ReadallBusinessComponent implements OnInit{
+export class ReadallBusinessComponent implements OnInit {
 
   business: any[] = [];
   dataCategorie: any[] = [];
   deleteResult: any[] = [];
-  dataBusiness: any[] = [];
+  dataBusiness: any
   allBusiness: string[] = [];
   allCategories: string[] = [];
 
 
-  constructor(private router: Router, private http: BusinessService, private api: CategoriesService){}
+  constructor(private router: Router, private http: BusinessService, private api: CategoriesService) { }
 
   ngOnInit(): void {
     this.Readallbusiness();
     this.loadCategories();
-    // $('.table').DataTable();
   }
 
 
-  //Fonction pour readall business
   Readallbusiness(): void {
     this.http.ReadAllBusiness().subscribe({
       next: (response: any) => {
         this.allBusiness = response || []; // Stocker les produits dans le tableau
-        if(response?.business)  {
+        if (response?.business) {
           this.dataBusiness = response?.business
-          // console.log(this.dataBusiness)
         }
       },
     })
   }
 
+  Readsinglebusiness(bu_uid: number): void {
+    this.router.navigate(['/teller/business/readsingle-business', bu_uid]);
+  }
 
-  //Fonction pour readall categories
+
   loadCategories() {
     this.api.ReadAllCategories()?.subscribe({
-      next: (response:any) =>{
+      next: (response: any) => {
         this.dataCategorie = response?.categorie_name
         this.allCategories = this.dataCategorie.map((category: any) => category?.name);
         // console.log(this.dataCategorie)
@@ -63,19 +63,18 @@ export class ReadallBusinessComponent implements OnInit{
     }
   )
 
-  //Fonction pour readall business by categories
-  Readallbusinessbycategories(){
+  Readallbusinessbycategories() {
     let body = this.searchbusiness?.value;
     this.http.ReadAllBusinessByCategories(this.searchbusiness.value).subscribe({
       next: (response: any) => {
         this.allBusiness = response || [];
-        if(response?.business)  {
+        if (response?.business) {
           this.dataBusiness = response?.business
           // console.log(this.dataBusiness)
         }
       },
-  })
-}
+    })
+  }
 
   Readsingleproducts(bu_uid: number): void {
     this.router.navigate(['/admin/business/edit-business', bu_uid]);
@@ -90,9 +89,6 @@ export class ReadallBusinessComponent implements OnInit{
           console.log('Product deleted successfully:', response);
           this.deleteResult = response?.status
           console.log(this.deleteResult)
-
-          // Actualiser la liste des produits après la suppression
-          // this.viewallProducts();
         },
         error: (error) => {
           console.error('Failed to delete product:', error);

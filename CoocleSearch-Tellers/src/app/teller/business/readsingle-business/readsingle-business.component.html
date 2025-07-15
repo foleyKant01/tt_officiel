@@ -6,8 +6,11 @@
       <span class="badge bg-secondary ms-2 text-capitalize">{{ all_business.bu_type }}</span>
     </div>
     <div class="col-md-4 text-end">
-      <button class="btn btn-outline-secondary rounded-pill goBack" (click)="goBack()">
-        <i class="bi bi-arrow-left-circle me-1 "></i> Retour
+      <button class="btn btn-outline-secondary rounded-pill me-2" (click)="goBack()">
+        <i class="bi bi-arrow-left-circle me-1"></i> Retour
+      </button>
+      <button class="btn btn-warning rounded-pill shadow-sm" (click)="goToUpdate()">
+        <i class="bi bi-pencil-square me-1"></i> Mettre à jour
       </button>
     </div>
   </div>
@@ -33,7 +36,7 @@
           <strong>{{ adresse }}</strong> {{ all_business.bu_address }}
         </li>
         <li class="list-group-item">
-          <strong>{{ ville }}</strong> {{ all_business.bu_city }}<br>
+          <strong>{{ ville }}</strong> {{ all_business.bu_city }}
         </li>
       </ul>
     </div>

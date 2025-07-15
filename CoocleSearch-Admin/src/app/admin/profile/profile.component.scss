@@ -1,0 +1,135 @@
+.profile-wrapper {
+  background: linear-gradient(135deg, #f6f8fa, #dcdfe3);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.profile-banner {
+  background: linear-gradient(to right, #042074, #063bda);
+  padding: 30px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.avatar-circle {
+  font-size: 80px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.user-info h2 {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
+.badge {
+  background: #0745ff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.profile-details {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}
+
+.form-row input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #f9f9f9;
+  transition: all 0.3s;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.form-row input:focus {
+  border-color: #dda706;
+  background: #fff;
+}
+
+.form-row input[readonly] {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.cancel-btn {
+  background: #ff0019 !important;
+  color: white;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  background: linear-gradient(to right, #042074, #063bda);
+  color: white;
+}
+
+.btn:hover {
+  background: linear-gradient(to right, #203a43, #2c5364);
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    margin: 20px;
+    padding: 15px;
+  }
+  .avatar-circle {
+    font-size: 60px;
+  }
+}

@@ -1,19 +1,28 @@
-input, textarea {
-  color: black!important;
+input, textarea, select {
+  color: #000 !important;
 }
-#images1, #images2 {
-  border: none;
-  padding: .220rem .0rem;
-}
-.col-3 {
-  display: flex!important;
-  justify-content: center!important; /* Centre horizontalement */
-  align-items: center!important; /* Centre verticalement (si nécessaire) */
-}
-.container {
-  border: 2px solid #8287ad;
-  border-radius: 10px;
-}
+
 label {
-  color: #6e739b;
+  color: #444;
+  font-weight: 500;
+}
+
+.card h5 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.btn-warning {
+  background: linear-gradient(to right, #a37b04, #dda706);
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(to right, #203a43, #396679);
+}
+
+.btn-outline-dark:hover {
+  background-color: #333;
+  color: white;
 }

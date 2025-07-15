@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
           this.data = res;
 
           if (res.teller_infos) {
-            this.showSuccessToast('Mise à réussie');
+            this.showSuccessToast('Mise à jour réussie');
           } else {
             this.showErrorToast("Erreur : données incomplètes");
           }

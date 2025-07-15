@@ -17,6 +17,10 @@ export class AuthService {
     return this.http.post(this.api_url+"/api/admin/login", body);
   }
 
+  UpdateAdmin(body: any) {
+    return this.http.post(this.api_url+"/api/admin/update_admin", body);
+  }
+
   ForgotPassword(body: any) {
     return this.http.post(this.api_url+"/api/admin/forgot_password", body);
   }

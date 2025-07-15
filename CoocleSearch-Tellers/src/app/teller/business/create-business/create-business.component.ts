@@ -13,7 +13,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './create-business.component.html',
   styleUrls: ['./create-business.component.scss']
 })
-export class CreateBusinessComponent implements OnInit{
+export class CreateBusinessComponent implements OnInit {
 
   data: string[] = [];
 
@@ -23,8 +23,8 @@ export class CreateBusinessComponent implements OnInit{
 
   allBusiness: string[] = [];
   business: any;
-  loading= false;
-  delayDuration= 2000;
+  loading = false;
+  delayDuration = 2000;
   success = false;
   teller_infos: any
   t_uid: any
@@ -81,7 +81,7 @@ export class CreateBusinessComponent implements OnInit{
   }
 
 
-  constructor(private router: Router, private fb: FormBuilder, private http: BusinessService, private api: CategoriesService){}
+  constructor(private router: Router, private fb: FormBuilder, private http: BusinessService, private api: CategoriesService) { }
 
   get typeValue(): string {
     return this.createbusiness.get('type')?.value;
@@ -102,7 +102,7 @@ export class CreateBusinessComponent implements OnInit{
 
   loadCategories() {
     this.api.ReadAllCategories()?.subscribe({
-      next: (response:any) =>{
+      next: (response: any) => {
         this.data = response?.categorie_name
         this.allCategories = this.data.map((category: any) => category?.name);
         console.log(this.allCategories)
@@ -196,7 +196,7 @@ export class CreateBusinessComponent implements OnInit{
     this.router.navigate(['/teller/business/readall-business']);
   }
 
-  GetLocalisation(){
+  GetLocalisation() {
   }
 
 }

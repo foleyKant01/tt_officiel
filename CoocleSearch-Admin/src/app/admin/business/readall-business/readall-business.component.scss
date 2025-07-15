@@ -1,3 +1,23 @@
-tr{
-  color: black!important;
+table th {
+  white-space: nowrap;
+}
+
+.badge {
+  font-size: 1rem;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+.show {
+  background: linear-gradient(to right, #a37b04, #dda706);
+  border: 0px;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+.show:hover {
+  background: linear-gradient(to right, #203a43, #396679);
 }

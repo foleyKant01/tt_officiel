@@ -20,12 +20,23 @@ export class ReadsingleBusinessComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.bu_uid = params['bu_uid'];
       console.log('bu_uid reçu:', this.bu_uid);
+      const navigationEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+
+      if (navigationEntries.length && navigationEntries[0].type === 'reload') {
+        sessionStorage.removeItem('single_business');
+        console.log("Page rechargée → single_business supprimé");
+      }
       this.readSingleBusiness();
     });
   }
 
   goBack() {
+    sessionStorage.removeItem('single_business');
     this.router.navigate(['/teller/business/readall-business']);
+  }
+
+  goToUpdate() {
+    this.router.navigate(['/teller/business/update-business', this.all_business.bu_uid]);
   }
 
   readSingleBusiness() {
@@ -37,6 +48,7 @@ export class ReadsingleBusinessComponent implements OnInit{
         console.log('Réponse backend:', reponse);
         if (reponse?.status === 'success') {
           this.all_business = reponse.business;
+          sessionStorage.setItem('single_business', JSON.stringify(reponse.business));
           console.log('Business reçu:', this.all_business);
           if (this.all_business.bu_type === 'physique'){
           this.all_business = reponse.business;
@@ -52,4 +64,6 @@ export class ReadsingleBusinessComponent implements OnInit{
       }
     });
   }
+
+
 }

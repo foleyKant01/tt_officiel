@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 declare var $: any;
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -45,23 +45,15 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.toggleSidebar(); 
+    this.toggleSidebar();
     this.adminInfos = JSON.parse(sessionStorage.getItem('admin_infos') || '{}');
     this.accessToken = sessionStorage.getItem('access_token');
   }
 
 
   logout() {
-    console.log('Before logout:', {
-      adminInfos: sessionStorage.getItem('admin_infos'),
-      accessToken: sessionStorage.getItem('access_token')
-    });
     sessionStorage.removeItem('admin_infos');
     sessionStorage.removeItem('access_token');
-    console.log('After logout:', {
-      adminInfos: sessionStorage.getItem('admin_infos'),
-      accessToken: sessionStorage.getItem('access_token')
-    });
     this.router.navigate(['/auth/login']);
   }
 }

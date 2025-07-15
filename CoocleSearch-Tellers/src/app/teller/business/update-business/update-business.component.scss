@@ -1,0 +1,61 @@
+input, textarea, select {
+  color: #000 !important;
+}
+
+label {
+  color: #444;
+  font-weight: 500;
+}
+
+.card h5 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.btn-warning {
+  background: linear-gradient(to right, #a37b04, #dda706);
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(to right, #203a43, #396679);
+}
+
+.btn-outline-dark:hover {
+  background-color: #333;
+  color: white;
+}
+
+
+.cancel-btn {
+  background: #ff0019 !important;
+  color: white;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  background: linear-gradient(to right, #a37b04, #dda706);
+  color: white;
+}
+
+.btn:hover {
+  background: linear-gradient(to right, #203a43, #2c5364);
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}

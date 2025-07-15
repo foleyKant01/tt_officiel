@@ -1,1 +1,62 @@
-<p>profile works!</p>
+<div class="profile-wrapper">
+  <div class="profile-card">
+    <div class="profile-banner">
+      <div class="avatar-circle">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <div class="user-info">
+        <h2>{{ profileForm.value.t_fullname || profileForm.value.u_username }}</h2>
+        <span class="badge">Admin</span>
+      </div>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="updateAdmin()" class="profile-details">
+      <div class="form-row">
+        <label>Nom complet</label>
+        <input type="text" formControlName="ad_fullname" [readonly]="!isEditing">
+      </div>
+
+      <div class="form-row">
+        <label>Nom d'utilisateur</label>
+        <input type="text" formControlName="ad_username" [readonly]="!isEditing">
+      </div>
+
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" formControlName="ad_email" [readonly]="!isEditing">
+      </div>
+
+      <div class="form-row">
+        <label>Numéro de téléphone</label>
+        <input type="text" formControlName="ad_mobile" [readonly]="!isEditing">
+      </div>
+
+      <div class="button-group">
+        <button *ngIf="!isEditing" type="button" class="btn edit-btn" (click)="isEditing = true">Modifier</button>
+        <button *ngIf="isEditing" type="submit" class="btn save-btn" [disabled]="profileForm.invalid">Enregistrer</button>
+        <button *ngIf="isEditing" type="button" class="btn cancel-btn" (click)="cancelEdit()">Annuler</button>
+      </div>
+    </form>
+  </div>
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="successToastBody">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+
+    <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="errorToastBody">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+</div>

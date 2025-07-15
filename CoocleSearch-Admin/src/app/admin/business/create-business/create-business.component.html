@@ -1,80 +1,72 @@
-<div>
-  <section id="content">
-    <div class="content-wrap">
-      <div class="container mb-5 p-5 mw-md">
-        <h3 style="color: black;" class="h1 fw-bolder mb-4">Create Business</h3><br>
-        <form class="row" method="post" enctype="multipart/form-data" [formGroup]="createbusiness" (submit)="Createbusiness()">
-          <div class="col-md-6">
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Categorie<span class="text-danger">*</span></label>
-              <select style="color: black;" class="form-select" formControlName="categorie" class="form-control fw-semibold" aria-label="Default select example">
-                <option *ngFor="let category of allCategories" [value]="category">{{ category }}</option>
-              </select>
-            </div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="categorie">Type<span class="text-danger">*</span></label>
-              <select style="color: black;" class="form-select" formControlName="type" class="form-control fw-semibold" aria-label="Default select example">
-                <option value="physique">Physique</option>
-                <option value="en-ligne">En ligne</option>
-              </select>
-            </div>
-            <div class="clear"></div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="name">Name<span class="text-danger">*</span></label>
-              <input type="text" name="name" formControlName="name" id="name" class="form-control fw-semibold">
-            </div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="description">Description<span class="text-danger">*</span></label>
-              <textarea type="text" name="description" formControlName="description" id="description" class="form-control fw-semibold"></textarea>
-            </div>
-            <div class="clear"></div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="email">Email<span class="text-danger">*</span></label>
-              <input type="email" name="email" formControlName="email" id="email" class="form-control fw-semibold">
-            </div>
-            <div class="col-12 form-group">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2">
-                <label class="form-check-label text-transform-none ls-0 mb-0 fw-semibold" for="inlineCheckbox2">Condition générale d'utlisation</label>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
+<div class="container my-5 p-5 shadow bg-white rounded">
+  <h2 class="text-center mb-4 fw-bold text-dark">Créer une Entité</h2>
+  <form class="row g-4" [formGroup]="createbusiness" (ngSubmit)="Createbusiness()" enctype="multipart/form-data">
+    <div class="col-md-6">
+      <div class="card p-3 border-0 shadow-sm">
+        <h5 class="text-primary">Informations Générales</h5>
 
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="city">City<span class="text-danger">*</span></label>
-              <input type="text" name="city" formControlName="city" id="city" class="form-control fw-semibold">
-            </div>
-            <div class="clear"></div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="address">Address<span class="text-danger">*</span></label>
-              <input type="text" name="address" formControlName="address" id="address" class="form-control fw-semibold">
-            </div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="mobile">Mobile<span class="text-danger">*</span></label>
-              <input type="text" name="mobile" formControlName="mobile" id="mobile" class="form-control fw-semibold">
-            </div>
-            <div class="clear"></div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="images1">Image 1<span class="text-danger">*</span></label>
-              <input type="file" name="images1" formControlName="image1" id="images1" class="form-control fw-semibold">
-            </div>
-            <div class="col-12 form-group">
-              <label class="text-transform-none ls-0 fw-normal mb-1" for="images2">Image 2</label>
-              <input type="file" name="images2" formControlName="image2" id="images2" class="form-control fw-semibold">
-            </div>
-            <div class="clear"></div><br>
-
-          </div>
-          <div class="clear"></div><br>
-          <div class="col-4"></div>
-          <div class="col-4">
-            <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">Create</button>
-          </div>
-          <div class="col-4"></div>
-        </form>
+        <div class="form-group mt-2">
+          <label for="categorie">Catégorie <span class="text-danger">*</span></label>
+          <select class="form-select" formControlName="categorie">
+            <option *ngFor="let category of allCategories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label for="type">Type <span class="text-danger">*</span></label>
+          <select class="form-select" formControlName="type">
+            <option value="physique">Physique</option>
+            <option value="en-ligne">En ligne</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label for="name">Nom de l'entité <span class="text-danger">*</span></label>
+          <input type="text" formControlName="name" id="name" class="form-control">
+        </div>
+        <div class="form-group mt-2">
+          <label for="description">Description <span class="text-danger">*</span></label>
+          <textarea formControlName="description" id="description" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-group mt-2">
+          <label for="email">Email <span class="text-danger">*</span></label>
+          <input type="email" formControlName="email" id="email" class="form-control">
+        </div>
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="checkbox" id="terms">
+          <label class="form-check-label" for="terms">
+            J'accepte les conditions générales d'utilisation
+          </label>
+        </div>
       </div>
     </div>
-  </section>
+    <div class="col-md-6">
+      <div class="card p-3 border-0 shadow-sm">
+        <h5 class="text-primary">Localisation & Visuels</h5>
+        <div class="form-check p-0 alert alert-warning text-dark mt-3" role="alert" *ngIf="typeValue === 'physique'">
+          <small>Pour une géolocalisation précise, veuillez être présent sur le site de l’entité au moment de sa
+            création.</small>
+        </div>
+        <div class="form-group mt-2" *ngIf="typeValue === 'physique'">
+          <label for="city">Ville <span class="text-danger">*</span></label>
+          <input type="text" formControlName="city" id="city" class="form-control">
+        </div>
+        <div class="form-group mt-2" *ngIf="typeValue === 'physique'">
+          <label for="address">Adresse <span class="text-danger">*</span></label>
+          <input type="text" formControlName="address" id="address" class="form-control">
+        </div>
+        <div class="form-group mt-2">
+          <label for="phone">Téléphone <span class="text-danger">*</span></label>
+          <input type="text" formControlName="phone" id="phone" class="form-control">
+        </div>
+        <div class="form-group mt-2">
+          <label for="bu_picture">Picture <span class="text-danger">*</span></label>
+          <input type="file" formControlName="bu_picture" (change)="onFileChange($event)" id="bu_picture"
+            class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center mt-4">
+      <button type="submit" class="btn btn-warning px-5 py-2 rounded-pill shadow"
+        [disabled]="createbusiness.invalid">Créer l'entité</button>
+    </div>
+  </form>
 </div>
-<!-- [disabled]="createbusiness.invalid" -->
