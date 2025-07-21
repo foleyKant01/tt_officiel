@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
 
-  private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
+  // private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
 
   constructor(private api: HttpClient, private http: HttpClient) { }
 
