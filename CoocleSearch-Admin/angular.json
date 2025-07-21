@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rfid_tracker_web": {
+    "admin_coocle": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/rfid_tracker_web",
+            "outputPath": "dist/admin_coocle",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rfid_tracker_web:build:production"
+              "buildTarget": "admin_coocle:build:production"
             },
             "development": {
-              "buildTarget": "rfid_tracker_web:build:development"
+              "buildTarget": "admin_coocle:build:development"
             }
           },
           "defaultConfiguration": "development"
