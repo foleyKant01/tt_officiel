@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
-    // apiUrl: ' https://api.araf-group.com'
+    production: true,
+    apiUrl: 'http://16.171.7.125'  // ou le nom de domaine de ton API
   };
 
