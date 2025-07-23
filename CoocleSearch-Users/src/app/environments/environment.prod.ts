@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
-    apiUrl: ' https://api.araf-group.com'
+    production: true,
+    apiUrl: 'https://dashboard.coocle.ci/'
   };
-  
+
