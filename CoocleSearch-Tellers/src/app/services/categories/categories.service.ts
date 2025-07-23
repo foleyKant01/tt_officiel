@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
 
-  private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
+  // private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
 
   constructor(private api: HttpClient, private http: HttpClient) { }
 
