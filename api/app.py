@@ -28,13 +28,14 @@ jwt = JWTManager(app)
 app.secret_key = os.urandom(24)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = LIEN_BASE_DE_DONNEES
-app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
 migrate = Migrate(app, db)
 api = Api(app)
+
+CORS(app)
 
 @app.after_request
 def after_request(response):
@@ -47,7 +48,6 @@ def home():
     print('Trouvez Tous Officiel')
     return render_template('index.html')
 
-CORS(app)
 
 api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_admin', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(UsersApi, '/api/user/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
