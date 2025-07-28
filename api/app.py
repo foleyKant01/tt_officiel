@@ -59,6 +59,10 @@ api.add_resource(HistoriquesApi, '/api/historiques/<string:route>', endpoint='al
 api.add_resource(FavorisApi, '/api/favoris/<string:route>', endpoint='all_favoris', methods=['GET', 'POST', 'DELETE', 'PATCH']) 
 api.add_resource(ReportsApi, '/api/reports/<string:route>', endpoint='all_reports', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(StatsApi, '/api/stats/<string:route>', endpoint='all_stats', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+@app.route("/api/test", methods=["GET"])
+def test():
+    return {"message": "API OK"}
+
 
 if __name__ == '__main__':
     app.run(debug=True,  host="0.0.0.0")  
