@@ -28,40 +28,40 @@ export class LoginComponent implements OnInit {
   });
 
   loginUser() {
-    this.loading = true;
-    let body = this.login_form?.value;
+    if (!this.login_form?.valid) {
+      this.showErrorToast('Veuillez remplir correctement tous les champs.');
+      return;
+    }
+
+    const body = this.login_form.value;
 
     this.auth.LoginUser(body).subscribe({
       next: (res: any) => {
         console.log('Response:', res);
+
         if (res?.status === 'success') {
-          this.data = res;
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-          }, 2000);
-          // setTimeout(() => {
-          //   this.showSuccessToast('Successful download');
-          // }, 4000);
-          this.loading = false;
-          this.router.navigate(['/user/home']);
-          if (res.user_infos) {
+          if (res.user_infos && res.access_token) {
             sessionStorage.setItem('user_infos', JSON.stringify(res.user_infos));
             sessionStorage.setItem('access_token', res.access_token);
+            this.router.navigate(['/user/home']);
           } else {
-            console.error('user_infos is missing in the response');
+            console.error('user_infos or access_token is missing in the response');
+            this.showErrorToast('Erreur lors de la récupération des informations utilisateur.');
           }
+        } else {
+          this.showErrorToast(res?.message || 'Échec de la connexion.');
         }
       },
       error: (err) => {
         console.error('Error:', err);
-        this.showErrorToast('An error has occurred while launching the store. Please try again. ')
+        this.showErrorToast('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
       },
       complete: () => {
         console.log('Request complete');
       }
     });
   }
+
 
 
   showSuccessToast(message: string) {

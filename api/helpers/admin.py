@@ -18,7 +18,7 @@ def CreateAdmin():
         
         new_admin = Admin()
         new_admin.ad_fullname = "Kraye Roland Landry"
-        new_admin.ad_username = "foleykant01"
+        new_admin.ad_username = "foleykant"
         new_admin.ad_mobile = "0702653594"
         new_admin.ad_email = "krayediego@gmail.com"
         new_admin.ad_password = hashed_password
