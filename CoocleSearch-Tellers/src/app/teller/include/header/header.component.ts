@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 declare var $: any;
 
@@ -52,6 +52,12 @@ export class HeaderComponent {
     this.accessToken = sessionStorage.getItem('access_token');
   }
 
+  @Output() sidebarToggle = new EventEmitter<void>();
+
+  onToggleSidebar() {
+    console.log('Toggle sidebar clicked');  // Ajoute ce log pour test
+    this.sidebarToggle.emit();
+  }
 
   logout() {
     sessionStorage.removeItem('teller_infos');

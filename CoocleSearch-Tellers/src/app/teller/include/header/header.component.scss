@@ -79,3 +79,78 @@ a {
     gap: 10px;
   }
 }
+
+
+/* Tablette : max-width 992px (ex : iPad) */
+@media (max-width: 992px) {
+  .navbar-custom {
+    padding: 8px 20px;
+  }
+  .navbar .fa-fw {
+    font-size: 16px;
+  }
+  .navbar .img-profile {
+    width: 30px;
+    height: 30px;
+  }
+  .badge-counter {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+  .navbar-nav {
+    gap: 8px;
+  }
+}
+
+/* Smartphone : max-width 576px */
+@media (max-width: 576px) {
+  .navbar-custom {
+    padding: 6px 15px;
+  }
+
+  #sidebarToggleTop {
+    background-image: linear-gradient(180deg, #dda706 10%, #6d5203 100%);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Réduire aussi la taille de l'icône */
+  #sidebarToggleTop i.fa {
+    font-size: 18px; /* Ajuste à 14px ou 16px si tu veux encore plus petit */
+  }
+
+  /* Cacher le nom utilisateur sur smartphone */
+  .navbar .user-name {
+    display: none !important;
+  }
+  .navbar .img-profile {
+    width: 28px;
+    height: 28px;
+  }
+  /* Réduire la taille des icônes */
+  .navbar .fa-fw {
+    font-size: 14px;
+  }
+  .badge-counter {
+    padding: 2px 5px;
+    font-size: 9px;
+  }
+  .navbar-nav {
+    gap: 6px;
+  }
+  /* Ajuster le bouton sidebar (hamburger) */
+  #sidebarToggleTop {
+    padding: 6px 8px;
+  }
+  .navbar .img-profile {
+    object-fit: cover;
+    border: 2px solid #fff;
+  }
+}

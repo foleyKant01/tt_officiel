@@ -28,3 +28,61 @@
 .btn:hover {
   background: linear-gradient(to right, #203a43, #396679);
 }
+
+.btn-outline-primary {
+  color: white;
+  background: linear-gradient(to right, #a37b04, #dda706);
+}
+
+.btn-outline-primary:hover {
+  background: linear-gradient(to right, #203a43, #396679);
+  color: white;
+}
+
+.btn-outline-primary.btn-sm {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outline-primary.btn-sm i {
+  font-size: 16px; /* taille icône */
+}
+
+
+/* Responsive : ajustements sous 768px */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.8rem;
+  }
+
+  .d-flex.justify-content-between {
+    display: flex;
+    justify-content: center; /* centre horizontalement */
+    align-items: center;     /* centre verticalement */
+    flex-wrap: wrap;         /* passe en plusieurs lignes si besoin */
+    gap: 1rem;               /* espace entre les éléments */
+  }
+
+  .d-flex.justify-content-between button {
+    align-items: center;
+    text-align: center;    /* centre verticalement */
+  }
+
+  /* Ajuste la taille de la police */
+  .table th,
+  .table td {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.5rem;
+  }
+
+  /* Réduit l’espace dans la ligne du header */
+  .table thead th {
+    padding: 0.5rem 0.5rem;
+  }
+
+}

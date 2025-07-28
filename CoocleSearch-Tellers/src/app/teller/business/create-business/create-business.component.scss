@@ -26,3 +26,60 @@ label {
   background-color: #333;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem !important;
+  }
+
+  .card {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+  }
+
+  .form-control,
+  .form-select,
+  textarea {
+    font-size: 0.95rem;
+    padding: 0.55rem 0.75rem;
+  }
+
+  .btn-warning {
+    font-size: 0.95rem;
+    padding: 0.5rem 2rem;
+  }
+
+  .btn-warning.rounded-pill {
+    border-radius: 25px !important;
+  }
+
+  .form-check {
+    font-size: 0.9rem;
+  }
+
+  .alert small {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    margin: 1rem auto;
+  }
+
+  .btn-warning {
+    width: 100%;
+  }
+
+  .text-center.mt-4 {
+    margin-top: 2rem !important;
+  }
+}

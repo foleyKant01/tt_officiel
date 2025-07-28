@@ -55,6 +55,10 @@ export class ReadallCategoriesComponent implements OnInit{
     this.router.navigate(['/admin/categories/update-categories', ca_uid]);
   }
 
+  readSingleCategories(ca_uid: number): void {
+    this.router.navigate(['/teller/categories/readsingle-categories', ca_uid]);
+  }
+
   // editCategorie(ca_uid: string, name: string) {
   //   // Redirigez l'utilisateur vers la page de modification avec l'ID de la catégorie dans l'URL
   //   this.router.navigate(['admin' , 'update-categories', ca_uid, name]);

@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  padding: 20px;
+  color: #3333
+}
+
+.category-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30vh;
+}
+
+.category-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.category-title {
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #222;
+}
+
+.category-info p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.category-info span {
+  color: #555;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.status.active {
+  background-color: #d1f5e0;
+  color: #207f44;
+}
+
+.status.inactive {
+  background-color: #ffe0e0;
+  color: #c02c2c;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.back-btn {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.back-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .category-card {
+    padding: 20px;
+  }
+
+  .category-title {
+    font-size: 20px;
+  }
+
+  .category-info p {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 10px;
+  }
+}

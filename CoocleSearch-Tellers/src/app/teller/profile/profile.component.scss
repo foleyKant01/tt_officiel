@@ -135,3 +135,90 @@
     font-size: 60px;
   }
 }
+
+@media (max-width: 768px) {
+  .profile-wrapper {
+    padding: 20px 10px;
+    align-items: flex-start;
+  }
+
+  .profile-card {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0; /* enlevé pour éviter conflit avec .profile-details */
+  }
+
+  .profile-banner {
+    padding: 20px 15px;
+  }
+
+  .avatar-circle {
+    font-size: 60px;
+    margin-bottom: 5px;
+  }
+
+  .user-info h2 {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .profile-details {
+    padding: 20px 15px;
+    gap: 12px;
+  }
+
+  .form-row label {
+    font-size: 14px;
+  }
+
+  .form-row input {
+    font-size: 14px;
+    padding: 9px 12px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-wrapper {
+    padding: 15px 8px;
+  }
+
+  .user-info h2 {
+    font-size: 18px;
+  }
+
+  .avatar-circle {
+    font-size: 50px;
+  }
+
+  .form-row input {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 9px;
+  }
+}

@@ -119,3 +119,79 @@ th {
   color: #666;
   font-style: italic;
 }
+
+/* Tablettes (largeur <= 992px) */
+@media (max-width: 992px) {
+  body {
+    padding: 20px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .stats {
+    font-size: 18px;
+  }
+
+  table th, table td {
+    padding: 10px 8px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Smartphones (largeur <= 576px) */
+@media (max-width: 576px) {
+  body {
+    padding: 15px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr; /* une seule colonne sur mobile */
+    gap: 15px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .stats {
+    font-size: 16px;
+  }
+
+  table th, table td {
+    padding: 8px 6px;
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Optionnel: rendre le tableau scrollable horizontalement */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

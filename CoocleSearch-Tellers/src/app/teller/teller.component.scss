@@ -34,3 +34,68 @@ app-header {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+/* Taille desktop standard, sidebar visible */
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+app-sidebar {
+  flex-shrink: 0;
+}
+
+#content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tablette et plus petit - réduire la sidebar */
+@media (max-width: 992px) {
+  app-sidebar {
+    width: 200px;
+  }
+}
+
+/* Mobile - cacher sidebar et utiliser menu hamburger */
+@media (max-width: 576px) {
+  #wrapper {
+    flex-direction: column;
+  }
+
+  app-sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* caché */
+    width: 100px;
+    height: 100%;
+    transition: left 0.3s ease;
+    background: white;
+    z-index: 9999;
+  }
+
+  app-header {
+    position: fixed;
+    top: 0;
+    left: 0;        /* plus de décalage */
+    right: 0;
+    width: 100%;    /* prend toute la largeur */
+    z-index: 1020;
+  }
+
+  /* Quand sidebar active (tu peux gérer cette classe via Angular) */
+  app-sidebar.active {
+    left: 0;
+  }
+
+  #content-wrapper {
+    flex: 1;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  #content {
+    padding-top: 56px; /* espace pour le header fixe si besoin */
+  }
+}

@@ -11,5 +11,21 @@ import { RouterModule } from '@angular/router';
   styleUrl: './teller.component.scss'
 })
 export class TellerComponent {
+  private _sidebarOpen = false;
+
+  closeSidebar() {
+    if (this.sidebarOpen === true) {
+      this.sidebarOpen = false;
+    }
+  }
+
+  get sidebarOpen() {
+    return this._sidebarOpen;
+  }
+
+  set sidebarOpen(value: boolean) {
+    this._sidebarOpen = value;
+    console.log('sidebarOpen:', value);
+  }
 
 }
