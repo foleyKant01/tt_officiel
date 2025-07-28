@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://dashboard.coocle.ci/'
+    apiUrl: 'https://dashboard.coocle.ci/api'
   };
 
