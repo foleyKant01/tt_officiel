@@ -35,7 +35,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 api = Api(app)
 
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Pour autoriser toutes les origines
 
 @app.after_request
 def after_request(response):
