@@ -1,0 +1,1 @@
+.btn-style,.btn-style-auto{background:linear-gradient(to right,#0f2027,#203a43,#2c5364);color:#fff;padding:12px;border:none;width:100%;border-radius:25px;font-weight:700;cursor:pointer;transition:background .3s ease;box-shadow:0 5px 15px #0003}.btn-style:hover,.btn-style-auto:hover{background:linear-gradient(to right,#ffc107,#6d5203)}.btn-style-auto{width:auto;padding:10px 20px}
