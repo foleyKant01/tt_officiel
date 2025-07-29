@@ -116,7 +116,6 @@ export class CreateBusinessComponent implements OnInit {
       type: new FormControl(null, Validators.required),
       name: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      email: new FormControl(null, Validators.required),
       city: new FormControl(null),
       address: new FormControl(null),
       phone: new FormControl(null, Validators.required),
@@ -149,7 +148,6 @@ export class CreateBusinessComponent implements OnInit {
       formData.append('type', this.createbusiness.get('type')?.value);
       formData.append('name', this.createbusiness.get('name')?.value);
       formData.append('description', this.createbusiness.get('description')?.value);
-      formData.append('email', this.createbusiness.get('email')?.value);
       formData.append('city', this.createbusiness.get('city')?.value);
       formData.append('address', this.createbusiness.get('address')?.value);
       formData.append('phone', this.createbusiness.get('phone')?.value);
