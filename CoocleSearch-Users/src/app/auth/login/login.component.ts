@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
 
   data: any;
   loading = false;
+  isLoading: boolean = false;
+
 
   constructor(private router: Router, private _activateRouter: ActivatedRoute, private auth: AuthService) { }
 
@@ -26,41 +28,61 @@ export class LoginComponent implements OnInit {
     password: new FormControl(null, Validators.required),
 
   });
-
   loginUser() {
     if (!this.login_form?.valid) {
       this.showErrorToast('Veuillez remplir correctement tous les champs.');
       return;
     }
 
-    const body = this.login_form.value;
+    this.isLoading = true;
+    const credentials = this.login_form.value;
 
-    this.auth.LoginUser(body).subscribe({
+    this.auth.LoginUser(credentials).subscribe({
       next: (res: any) => {
-        console.log('Response:', res);
+        console.log('Réponse du serveur :', res);
 
         if (res?.status === 'success') {
-          if (res.user_infos && res.access_token) {
-            sessionStorage.setItem('user_infos', JSON.stringify(res.user_infos));
-            sessionStorage.setItem('access_token', res.access_token);
+          const { user_infos, access_token } = res;
+
+          if (user_infos && access_token) {
+            sessionStorage.setItem('user_infos', JSON.stringify(user_infos));
+            sessionStorage.setItem('access_token', access_token);
+
+            this.isLoading = false; // 👉 Désactiver le patienteur AVANT la redirection
             this.router.navigate(['/user/home']);
+            this.showSuccessToast('Connexion réussie !');
           } else {
-            console.error('user_infos or access_token is missing in the response');
-            this.showErrorToast('Erreur lors de la récupération des informations utilisateur.');
+            this.isLoading = false;
+            console.error('Données manquantes dans la réponse :', res);
+            this.showErrorToast("Informations d'utilisateur manquantes. Veuillez réessayer.");
           }
+
         } else {
-          this.showErrorToast(res?.message || 'Échec de la connexion.');
+          this.isLoading = false;
+          const message = res?.message || 'Échec de la connexion.';
+          console.warn('Connexion échouée :', message);
+          this.showErrorToast(message);
         }
       },
+
       error: (err) => {
-        console.error('Error:', err);
-        this.showErrorToast('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
+        this.isLoading = false;
+        console.error('Erreur lors de la requête :', err);
+        const errorMessage =
+          err?.error?.message ||
+          err?.message ||
+          'Une erreur est survenue lors de la connexion. Veuillez réessayer.';
+        this.showErrorToast(errorMessage);
       },
+
       complete: () => {
-        console.log('Request complete');
+        console.log('Requête de connexion terminée');
+        // Ne rien faire ici : isLoading est déjà géré dans next / error
       }
     });
   }
+
+
 
 
 

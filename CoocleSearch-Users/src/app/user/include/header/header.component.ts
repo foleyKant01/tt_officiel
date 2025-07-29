@@ -37,6 +37,13 @@ export class HeaderComponent implements OnInit{
     this.profileMenuVisible = !this.profileMenuVisible;
   }
 
+  logout() {
+    sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('businessList');
+    sessionStorage.removeItem('user_infos');
+    this.router.navigate(['/auth/login']);
+  }
+
   Searchbusiness() {
     this.loading = true;
     const searchText = this.search_form.get('textSearch')?.value.trim();

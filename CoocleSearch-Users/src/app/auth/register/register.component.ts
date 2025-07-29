@@ -30,38 +30,48 @@ export class RegisterComponent implements OnInit{
   });
 
   createUser() {
-    this.loading = true;
-    let body = this.register_form?.value;
+    this.loading = true; // 👉 Active le patienteur au début
+    const body = this.register_form?.value;
+
     this.auth.CreateUser(body).subscribe({
       next: (res: any) => {
         console.log('Response:', res);
+
         if (res?.status === 'success') {
           this.data = res;
+
           if (res.user_infos) {
             sessionStorage.setItem('user_infos', JSON.stringify(res.user_infos));
           } else {
             console.error('user_infos is missing in the response');
           }
-          this.loading = true;
+
+          this.showSuccessToast('Inscription réussie. Redirection en cours...');
+
+          // Garde le patienteur pendant un petit délai pour l'effet visuel
           setTimeout(() => {
             this.loading = false;
-            this.showSuccessToast('Successful download');
-
-            setTimeout(() => {
-              this.router.navigate(['/auth/login']);
-            }, 1000);
+            this.router.navigate(['/auth/login']);
           }, 2000);
+        } else {
+          this.loading = false;
+          this.showErrorToast(res?.message || "L'inscription a échoué. Veuillez réessayer.");
         }
       },
+
       error: (err) => {
-        console.error('Error:', err);
-        this.showErrorToast('An error has occurred while launching the store. Please try again. ')
+        console.error('Erreur :', err);
+        this.loading = false; // 👉 Désactive le patienteur même en cas d’erreur
+        this.showErrorToast("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
       },
+
       complete: () => {
-        console.log('Request complete');
+        console.log('Requête terminée');
+        // Rien ici, car le patienteur est déjà désactivé dans `next` ou `error`
       }
     });
   }
+
 
 
   showSuccessToast(message: string) {

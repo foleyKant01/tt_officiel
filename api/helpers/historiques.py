@@ -73,8 +73,8 @@ def ReadAllHistoriqueByUser():
 def DeleteHistoriques():
     reponse = {}
     try:
-        user_id = request.json.get('user_id')
-        delete_histo = Historiques.query.filter_by(u_uid=user_id).first()
+        h_uid = request.json.get('h_uid')
+        delete_histo = Historiques.query.filter_by(h_uid=h_uid).first()
         db.session.delete(delete_histo)
         db.session.commit()
         reponse['status'] = 'success'

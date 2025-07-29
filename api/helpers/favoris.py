@@ -67,6 +67,7 @@ def ReadAllFavorisByUser():
                 'fa_uid': favs.fa_uid,
                 'bu_name': favs.bu_name,
                 'bu_description': business.bu_description,
+                'bu_categorie': business.bu_categorie,
                 'bu_city': favs.bu_city,
                 'bu_uid': favs.bu_uid,                    
                 'u_uid': favs.u_uid, 

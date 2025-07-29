@@ -59,8 +59,10 @@
           onmouseout="this.style.background='linear-gradient(135deg, #203a43, #2c5364)'">
           S'inscrire
         </button>
-        <div *ngIf="loading" class="spinner-overlay">
-          <div class="spinner"></div>
+        <div *ngIf="loading" class="loading-overlay">
+          <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Chargement...</span>
+          </div>
         </div>
       </form>
       <br>

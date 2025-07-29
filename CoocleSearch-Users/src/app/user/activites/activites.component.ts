@@ -153,10 +153,9 @@ export class ActivitesComponent implements OnInit{
     });
   }
 
-  deleteHistorique(business: any ) {
+  deleteHistorique(h_uid: any ) {
     const payload = {
-      ...business,
-      user_id: this.user_id
+      h_uid: h_uid
     };
     console.log('payload:', payload);
     this.http.DeleteHistoriques(payload).subscribe({
@@ -165,7 +164,7 @@ export class ActivitesComponent implements OnInit{
       },
       error: (err) => {
         console.error('Erreur lors de la recherche :', err);
-        this.favoriteList = [];
+        this.histo_List = [];
       }
     });
     window.location.reload();

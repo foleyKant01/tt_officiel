@@ -25,18 +25,21 @@ export class ForgotPasswordComponent implements OnInit{
 
   forgotPassword() {
     if (this.forgot_form.valid) {
-      let body = this.forgot_form?.value;
+      this.is_loading = true; // 👉 Active le patienteur dès le début
+
+      const body = this.forgot_form.value;
 
       this.auth.ForgotPassword(body).subscribe({
         next: (res: any) => {
           console.log('Response:', res);
+
           if (res?.status === 'success') {
             if (res.u_email) {
               sessionStorage.setItem('u_email', JSON.stringify(res.u_email));
             } else {
-              console.error('User_infos is missing in the response');
+              console.error('u_email is missing in the response');
             }
-            // sessionStorage.setItem('access_token', res.access_token);
+            this.is_loading = false; // 👉 Désactive le patienteur avant la navigation
             Swal.fire({
               title: 'Succès!',
               text: 'Code de réinitialisation envoyé avec succès!',
@@ -46,37 +49,41 @@ export class ForgotPasswordComponent implements OnInit{
             }).then(() => {
               this.router.navigate(['/auth/new-password']);
             });
+
           } else {
+            this.is_loading = false; // 👉 Désactive le patienteur ici aussi
             Swal.fire({
-              title: 'Error!',
-              text: res?.message || "L'envoye du code de réinitialisation à echouer",
+              title: 'Erreur!',
+              text: res?.message || "L'envoi du code de réinitialisation a échoué.",
               icon: 'error',
               confirmButtonText: 'Essayer à nouveau',
               confirmButtonColor: '#ff6c2f'
-            }).then(() => {
-              location.reload(); // Recharge la page après clic sur "Try Again"
-            });
-            this.is_loading = false;
+            })
           }
         },
+
         error: (err) => {
           console.log('Error:', err);
+          this.is_loading = false;
           Swal.fire({
-            title: 'Error!',
-            text: err.error_description || 'An error occurred',
+            title: 'Erreur!',
+            text: err?.error_description || 'Une erreur est survenue. Veuillez réessayer.',
             icon: 'error',
-            confirmButtonText: 'Try Again',
+            confirmButtonText: 'Réessayer',
             confirmButtonColor: '#ff6c2f'
           });
-          this.is_loading = false;
+
         },
+
         complete: () => {
-          console.log('Request complete');
-          this.is_loading = false;
+          console.log('Requête terminée');
+          // ⚠️ Rien ici, car Swal ou la navigation s'en charge.
         }
       });
+
     }
   }
+
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');

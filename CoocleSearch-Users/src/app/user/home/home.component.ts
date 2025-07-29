@@ -39,43 +39,52 @@ export class HomeComponent implements OnInit {
 
   Searchbusiness() {
     this.loading = true;
+    this.searchDone = false;
+
     const searchText = this.search_form.get('textSearch')?.value.trim();
-    if (!searchText) return;
+    if (!searchText) {
+      this.loading = false;
+      return;
+    }
+
     const payload = {
       textSearch: searchText,
       user_id: this.user_id,
       latitude: this.coordonne.latitude,
       longitude: this.coordonne.longitude
     };
+
     this.http.SearchBusinessByCategorie(payload).subscribe({
       next: (reponse: any) => {
         console.log('Response:', reponse);
 
         if (reponse?.status === 'success' && Array.isArray(reponse.business)) {
+          // Attendre 2s pour effet de chargement simulé
           setTimeout(() => {
-            this.loading = false;
             this.All_business = reponse.business;
             this.searchDone = true;
+            this.loading = false;
           }, 2000);
-          if (reponse.business) {
-            sessionStorage.setItem('All_business', JSON.stringify(reponse.business));
-            sessionStorage.setItem('businessList', JSON.stringify(reponse.business));
-            sessionStorage.setItem('textSearch', JSON.stringify(reponse.textSearch));
-          }
-        }
-        else {
-          this.All_business = [];
-          sessionStorage.setItem('All_business', JSON.stringify(this.All_business));
-          sessionStorage.setItem('textSearch', JSON.stringify(reponse.textSearch));
-          this.loading = false;
-          this.searchDone = true;
 
+          sessionStorage.setItem('All_business', JSON.stringify(reponse.business));
+          sessionStorage.setItem('businessList', JSON.stringify(reponse.business));
+          sessionStorage.setItem('textSearch', JSON.stringify(reponse.textSearch));
+        } else {
+          // Cas d'aucun résultat ou réponse incorrecte
+          this.All_business = [];
+          sessionStorage.setItem('All_business', JSON.stringify([]));
+          sessionStorage.setItem('textSearch', JSON.stringify(reponse?.textSearch || ''));
+          this.searchDone = true;
+          this.loading = false;
         }
       },
+
       error: (err) => {
         console.error('Erreur lors de la recherche :', err);
-        this.searchDone = true;
         this.All_business = [];
+        this.searchDone = true;
+        this.loading = false;
+
         if (err.error instanceof ProgressEvent) {
           console.log('Erreur liée à un mauvais format JSON ou content-type.');
         } else {
@@ -83,8 +92,11 @@ export class HomeComponent implements OnInit {
         }
       }
     });
-    this.createStats()
+
+    // Création de stats indépendamment du résultat
+    this.createStats();
   }
+
 
 
   createStats(): void {
@@ -119,7 +131,11 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToHome() {
-    window.location.href = '/user/home';
+    if (window.location.pathname === '/user/home') {
+      window.location.reload();
+    } else {
+      window.location.href = '/user/home';
+    }
   }
 
   readSingleBusiness(bu_uid: string): void {

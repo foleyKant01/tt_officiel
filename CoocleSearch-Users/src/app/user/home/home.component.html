@@ -45,8 +45,10 @@
                 </button>
               </div>
             </div>
-            <div *ngIf="loading" class="spinner-overlay">
-              <div class="spinner"></div>
+            <div *ngIf="loading" class="loading-overlay">
+              <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
             </div>
           </form>
           <div class="position-relative" style="min-height: 80px;">
