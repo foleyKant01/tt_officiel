@@ -168,6 +168,7 @@ export class ActivitesComponent implements OnInit{
         this.isLoading = false;
         if (response?.status === 'success') {
           console.log('success:');
+          window.location.reload();
 
         }
       },
