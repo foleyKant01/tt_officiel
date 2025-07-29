@@ -6,6 +6,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BusinessService } from '../services/users/business.service';
 import { ActivitesService } from '../services/users/activites.service';
 
+declare var bootstrap: any;
+
+
 @Component({
   selector: 'app-activites',
   standalone: true,
@@ -25,6 +28,8 @@ export class ActivitesComponent implements OnInit{
   businessList: any[] = [];
   favoriteList: any[] = [];
   loading = false;
+  isLoading: boolean = false;
+
   currentTab: string = 'favoris';
 
   readAllFavorisByUser() {
@@ -153,21 +158,23 @@ export class ActivitesComponent implements OnInit{
     });
   }
 
-  deleteHistorique(h_uid: any ) {
-    const payload = {
-      h_uid: h_uid
-    };
-    console.log('payload:', payload);
+
+  deleteHistorique(h_uid: any) {
+    this.isLoading = true;
+    const payload = { h_uid };
+
     this.http.DeleteHistoriques(payload).subscribe({
-      next: (reponse: any) => {
-        console.log('Response:', reponse);
+      next: (response: any) => {
+        this.isLoading = false;
+        if (response?.status === 'success') {
+          console.log('success:');
+
+        }
       },
       error: (err) => {
-        console.error('Erreur lors de la recherche :', err);
-        this.histo_List = [];
+        this.isLoading = false;
       }
     });
-    window.location.reload();
   }
 
   ngOnInit(): void {

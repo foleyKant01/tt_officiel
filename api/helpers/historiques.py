@@ -75,6 +75,12 @@ def DeleteHistoriques():
     try:
         h_uid = request.json.get('h_uid')
         delete_histo = Historiques.query.filter_by(h_uid=h_uid).first()
+        
+        if delete_histo is None:
+            reponse['status'] = 'error'
+            reponse['error_description'] = f"Aucun historique trouvé avec h_uid = {h_uid}"
+            return reponse
+        
         db.session.delete(delete_histo)
         db.session.commit()
         reponse['status'] = 'success'
