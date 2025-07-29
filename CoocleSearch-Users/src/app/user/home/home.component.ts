@@ -132,6 +132,9 @@ export class HomeComponent implements OnInit {
 
   navigateToHome() {
     if (window.location.pathname === '/user/home') {
+      sessionStorage.removeItem('All_business');
+      sessionStorage.removeItem('single_business');
+      sessionStorage.removeItem('textSearch');
       window.location.reload();
     } else {
       window.location.href = '/user/home';
