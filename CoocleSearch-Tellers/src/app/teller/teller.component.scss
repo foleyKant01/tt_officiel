@@ -72,7 +72,7 @@ app-sidebar {
     height: 100%;
     transition: left 0.3s ease;
     background: white;
-    z-index: 9999;
+    z-index: 1040;
   }
 
   app-header {
@@ -81,7 +81,7 @@ app-sidebar {
     left: 0;        /* plus de décalage */
     right: 0;
     width: 100%;    /* prend toute la largeur */
-    z-index: 1020;
+    z-index: 1050;
   }
 
   /* Quand sidebar active (tu peux gérer cette classe via Angular) */

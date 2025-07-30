@@ -14,10 +14,11 @@ export class TellerComponent {
   private _sidebarOpen = false;
 
   closeSidebar() {
-    if (this.sidebarOpen === true) {
+    if (window.innerWidth <= 576) {
       this.sidebarOpen = false;
     }
   }
+
 
   get sidebarOpen() {
     return this._sidebarOpen;

@@ -26,8 +26,25 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+
 @media (max-width: 576px) {
   .nav-item {
     margin-left: -10px;
   }
+
+  :host {
+    left: -250px;
+    transition: left 0.3s ease;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    z-index: 1040;
+    background: white;
+    width: 250px;
+  }
+
+  :host(.active) {
+    left: 0;
+  }
+
 }
