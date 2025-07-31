@@ -3,16 +3,15 @@
 <section class="container mt-5 mb-5">
   <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
     <div class="row g-0">
-      <!-- Image principale -->
       <div class="col-md-5">
-        <img [src]="business?.bu_picture || 'assets/img/default.jpg'"
+        <img [src]="'assets/img/default.jpg'"
              class="img-fluid h-100 w-100 object-fit-cover"
-             alt="Image de {{ business?.bu_name }}">
+             alt="PUB">
       </div>
 
-      <!-- Informations du business -->
       <div class="col-md-7">
         <div class="card-body p-4">
+
           <h2 class="card-title fw-bold mb-3 text-black">{{ business?.bu_name }}</h2>
 
           <p class="text-muted">
@@ -23,8 +22,9 @@
             <i class="bi bi-house-fill text-secondary me-2"></i>{{ business?.bu_address }}
           </p>
 
+          <p class="card-text m-0"><i class="bi bi-telephone-fill text-secondary"></i> {{ business.phone }}</p>
           <p class="mt-4">{{ business?.bu_categorie }}</p>
-          <p class="mt-4">{{ business?.bu_description }}</p>
+          <p>{{ business?.bu_description }}</p>
 
           <div *ngIf="business?.bu_category" class="mt-3">
             <span class="badge bg-info text-dark px-3 py-2 rounded-pill">

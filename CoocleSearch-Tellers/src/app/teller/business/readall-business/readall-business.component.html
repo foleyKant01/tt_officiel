@@ -14,25 +14,27 @@
         <thead class="table-light text-dark">
           <tr>
             <th>#</th>
-            <th>Image</th>
+            <!-- <th>Image</th> -->
             <th>Nom</th>
             <th>Catégorie</th>
             <th>Type</th>
             <th>Ville</th>
+            <th>Site Web</th>
             <th class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let business of dataBusiness; let i = index">
             <td class="fw-semibold">{{ i + 1 }}</td>
-            <td>
+            <!-- <td>
               <img style="height: 35px; width: 35px;" [src]="business.bu_picture || 'assets/img/default.jpg'"
                 class="img-fluid rounded-circle object-fit-cover" alt="">
-            </td>
+            </td> -->
             <td class="fw-semibold text-dark">{{ business?.bu_name }}</td>
             <td>{{ business?.bu_categorie }}</td>
             <td>{{ business?.bu_type }}</td>
             <td>{{ business?.bu_city }}</td>
+            <td>{{ business?.bu_website }}</td>
             <td class="text-center">
               <button class="btn show btn-sm btn-outline-primary rounded-circle shadow-sm"
                 (click)="Readsinglebusiness(business.bu_uid)" title="Voir les détails">

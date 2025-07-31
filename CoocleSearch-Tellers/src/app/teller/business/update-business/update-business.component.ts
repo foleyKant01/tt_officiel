@@ -29,6 +29,8 @@ export class UpdateBusinessComponent implements OnInit{
   coordonne: any
   city: any
   file: any
+  type: any
+  single_business: any
   selectedFile: File | null = null;
   bu_picture: string = '';
   address: any
@@ -40,8 +42,12 @@ export class UpdateBusinessComponent implements OnInit{
 
   ngOnInit(): void {
     const storedData = JSON.parse(sessionStorage.getItem('single_business') || '{}');
-    this.bu_picture = storedData.bu_picture || 'assets/img/default.jpg';  // affichage image actuelle
-    console.log('bu_picture: ', this.bu_picture);
+    this.single_business = storedData
+    this.type = this.single_business.bu_type
+    console.log('single_business:', this.single_business);
+
+    // this.bu_picture = storedData.bu_picture || 'assets/img/default.jpg';  // affichage image actuelle
+    // console.log('bu_picture: ', this.bu_picture);
 
     this.updatebusiness = new FormGroup({
       bu_uid: new FormControl(storedData.bu_uid || ''),
@@ -51,7 +57,7 @@ export class UpdateBusinessComponent implements OnInit{
       bu_city: new FormControl(storedData.bu_city || ''),
       phone: new FormControl(storedData.phone || ''),
       bu_address: new FormControl(storedData.bu_address || ''),
-      bu_picture: new FormControl(storedData.bu_picture || ''),
+      bu_website: new FormControl(storedData.bu_website || ''),
       latitude: new FormControl(storedData.latitude || ''),
       longitude: new FormControl(storedData.longitude || '')
     });
@@ -61,8 +67,10 @@ export class UpdateBusinessComponent implements OnInit{
 
     if (datalocalisation) {
       this.localisation = datalocalisation;
-      this.city = this.localisation.infos_maps.state + ', ' + this.localisation.infos_maps.city;
-      this.address = this.localisation.infos_maps.neighbourhood + ', ' + this.localisation.infos_maps.road;
+      const infos = this.localisation.infos_maps;
+
+      this.city = [infos.state, infos.city].filter(Boolean).join(', ');
+      this.address = [infos.suburb, infos.neighbourhood, infos.road].filter(Boolean).join(', ');
     }
 
     if (datacoordonne) {
@@ -75,7 +83,7 @@ export class UpdateBusinessComponent implements OnInit{
       latitude: this.latitude,
       longitude: this.longitude,
       });
-    this.updatebusiness.get('type')?.valueChanges.subscribe((value: string) => {
+    this.updatebusiness.get('bu_type')?.valueChanges.subscribe((value: string) => {
       if (value === 'physique') {
         this.updatebusiness.patchValue({
           bu_city: this.city,
@@ -91,7 +99,7 @@ export class UpdateBusinessComponent implements OnInit{
   }
 
   get typeValue(): string {
-    return this.updatebusiness.get('type')?.value;
+    return this.updatebusiness.get('bu_type')?.value;
   }
 
 
@@ -119,9 +127,9 @@ export class UpdateBusinessComponent implements OnInit{
       formData.append('bu_city', this.updatebusiness.get('bu_city')?.value);
       formData.append('phone', this.updatebusiness.get('phone')?.value);
       formData.append('bu_address', this.updatebusiness.get('bu_address')?.value);
-      if (this.selectedFile) {
-        formData.append('bu_picture', this.selectedFile);
-      }
+      // if (this.selectedFile) {
+      //   formData.append('bu_picture', this.selectedFile);
+      // }
       formData.append('latitude', this.updatebusiness.get('latitude')?.value);
       formData.append('longitude', this.updatebusiness.get('longitude')?.value);
 

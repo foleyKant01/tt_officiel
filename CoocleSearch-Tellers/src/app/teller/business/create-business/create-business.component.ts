@@ -60,9 +60,12 @@ export class CreateBusinessComponent implements OnInit {
     const datalocalisation = JSON.parse(sessionStorage.getItem('localisation') || 'null');
     if (datalocalisation) {
       this.localisation = datalocalisation;
-      this.city = this.localisation.infos_maps.state + ', ' + this.localisation.infos_maps.city;
-      this.address = this.localisation.infos_maps.neighbourhood + ', ' + this.localisation.infos_maps.road;
+      const infos = this.localisation.infos_maps;
+
+      this.city = [infos.state, infos.city].filter(Boolean).join(', ');
+      this.address = [infos.suburb, infos.neighbourhood, infos.road].filter(Boolean).join(', ');
     }
+
 
     // 👉 Auto-remplir ville et adresse si type = physique
     this.createbusiness.get('type')?.valueChanges.subscribe((value: string) => {
@@ -118,8 +121,8 @@ export class CreateBusinessComponent implements OnInit {
       description: new FormControl(null, Validators.required),
       city: new FormControl(null),
       address: new FormControl(null),
+      website: new FormControl(null),
       phone: new FormControl(null, Validators.required),
-      bu_picture: new FormControl(null, Validators.required),
       t_uid: new FormControl(null, Validators.required),
       latitude: new FormControl(null, Validators.required),
       longitude: new FormControl(null, Validators.required),
@@ -150,8 +153,8 @@ export class CreateBusinessComponent implements OnInit {
       formData.append('description', this.createbusiness.get('description')?.value);
       formData.append('city', this.createbusiness.get('city')?.value);
       formData.append('address', this.createbusiness.get('address')?.value);
+      formData.append('website', this.createbusiness.get('website')?.value);
       formData.append('phone', this.createbusiness.get('phone')?.value);
-      formData.append('bu_picture', this.file as File);
       formData.append('t_uid', this.createbusiness.get('t_uid')?.value);
       formData.append('latitude', this.createbusiness.get('latitude')?.value);
       formData.append('longitude', this.createbusiness.get('longitude')?.value);

@@ -12,7 +12,8 @@ export class ReadsingleBusinessComponent implements OnInit{
   bu_uid: any;
   ville: any;
   adresse: any;
-  all_business: any = null;
+  bu_website: any;
+  all_business: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: BusinessService){}
 
@@ -54,6 +55,7 @@ export class ReadsingleBusinessComponent implements OnInit{
           this.all_business = reponse.business;
             this.ville = 'Ville :'
             this.adresse = 'Adresse :'
+            this.bu_website = 'Site web :'
           }
         } else {
           console.warn('Réponse sans succès');

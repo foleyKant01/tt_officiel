@@ -74,16 +74,23 @@
         </button>
 
         <div class="row g-0">
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <img [src]="business.bu_picture || 'assets/img/default.jpg'"
               class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ business.bu_name }}">
-          </div>
-          <div class="col-md-8">
+          </div> -->
+          <div class="col-md-12">
             <div class="card-body">
               <h5 class="card-title fw-bold text-black">{{ business.bu_name }}</h5>
               <p class="card-text text-muted">{{ business.bu_description }}</p>
-              <p class="card-text m-0"><i class="bi bi-geo-alt-fill text-secondary"></i> {{ business.bu_city }}</p>
-              <p class="card-text m-0"><i class="bi bi-house-fill text-secondary"></i> {{ business.bu_address }}</p>
+              <p class="card-text m-0"><i class="bi bi-telephone-fill text-secondary"></i> {{ business.phone }}</p>
+              <p class="card-text m-0" *ngIf="business.bu_type !== 'physique'">
+                <i class="bi bi-globe2 text-secondary"></i>
+                <a [href]="business.bu_website" target="_blank">{{ business.bu_website }}</a>
+              </p>
+
+              <p class="card-text m-0" *ngIf="business.bu_type === 'physique'">
+                <i class="bi bi-geo-alt-fill text-secondary"></i> {{ business.bu_city }}
+              </p>              <!-- <p class="card-text m-0"><i class="bi bi-house-fill text-secondary"></i> {{ business.bu_address }}</p> -->
               <div class="mt-3 text-end">
                 <button type="button" (click)="readSingleBusiness(business.bu_uid)"
                   class="btn btn-sm d-inline-flex align-items-center gap-2 rounded-pill shadow viewbusiness"

@@ -45,12 +45,11 @@ def CreateBusiness():
         new_business.bu_categorie = request.form.get('categorie')
         new_business.bu_type = request.form.get('type')
         new_business.bu_name = request.form.get('name')
-        new_business.bu_description = request.form.get('description')
+        new_business.bu_description = request.form.get('description')bu_website
         new_business.bu_city = request.form.get('city')
+        new_business.bu_website = request.form.get('website')
         new_business.bu_address = request.form.get('address')
         new_business.phone = request.form.get('phone')
-        bu_picture = upload_file()
-        new_business.bu_picture = bu_picture
         new_business.t_uid = request.form.get('t_uid')
         new_business.bu_status = 'Active'
         new_business.latitude = request.form.get('latitude')
@@ -97,6 +96,7 @@ def UpdateBusiness():
             update_business.bu_name = request.form.get('bu_name', update_business.bu_name)
             update_business.bu_description = request.form.get('bu_description', update_business.bu_description)
             update_business.bu_city = request.form.get('bu_city', update_business.bu_city)
+            update_business.bu_website = request.form.get('bu_website', update_business.bu_website)
             update_business.phone = request.form.get('phone', update_business.phone)
             update_business.bu_address = request.form.get('bu_address', update_business.bu_address)
 
@@ -110,10 +110,10 @@ def UpdateBusiness():
             update_business.latitude = safe_float(request.form.get('latitude'), update_business.latitude)
             update_business.longitude = safe_float(request.form.get('longitude'), update_business.longitude)
 
-            # Upload image si présente
-            uploaded_image = upload_file()
-            if uploaded_image:
-                update_business.bu_picture = uploaded_image
+            # # Upload image si présente
+            # uploaded_image = upload_file()
+            # if uploaded_image:
+            #     update_business.bu_picture = uploaded_image
 
             db.session.commit()
 
@@ -121,11 +121,12 @@ def UpdateBusiness():
                 'bu_uid': update_business.bu_uid,
                 'bu_type': update_business.bu_type,
                 'bu_name': update_business.bu_name,
-                'bu_description': update_business.bu_description,
+                'bu_description': update_business.bu_description, 
                 'bu_city': update_business.bu_city,
+                'bu_website': update_business.bu_website,
                 'bu_address': update_business.bu_address,
                 'phone': update_business.phone,
-                'bu_picture': str(IMGHOSTNAME) + str(update_business.bu_picture),
+                # 'bu_picture': str(IMGHOSTNAME) + str(update_business.bu_picture),
                 'bu_status': update_business.bu_status,
                 't_uid': update_business.t_uid,
                 'bu_categorie': update_business.bu_categorie
@@ -205,9 +206,10 @@ def ReadAllBusiness():
                 'bu_name': business.bu_name,              
                 'bu_description': business.bu_description,              
                 'bu_city': business.bu_city,              
+                'bu_website': business.bu_website,              
                 'bu_address': business.bu_address,              
                 'phone': business.phone,              
-                'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
+                # 'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                 't_uid': business.t_uid,              
                 'bu_status': business.bu_status,              
             }
@@ -238,9 +240,10 @@ def ReadSingleBusiness():
                 'bu_name': single_business.bu_name,
                 'bu_description': single_business.bu_description,
                 'bu_city': single_business.bu_city,
+                'bu_website': single_business.bu_website,
                 'bu_address': single_business.bu_address,
                 'phone': single_business.phone,
-                'bu_picture': str(IMGHOSTNAME)+str(single_business.bu_picture),              
+                # 'bu_picture': str(IMGHOSTNAME)+str(single_business.bu_picture),              
                 't_uid': single_business.t_uid,
                 'bu_status': single_business.bu_status,
             }
@@ -271,9 +274,10 @@ def ReadAllBusinessByCategories():
                 'bu_name': business.bu_name,              
                 'bu_description': business.bu_description,              
                 'bu_city': business.bu_city,              
+                'bu_website': business.bu_website,              
                 'phone': business.phone,              
                 'bu_address': business.bu_address,              
-                'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
+                # 'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                 't_uid': business.t_uid,              
                 'bu_status': business.bu_status,              
             }
@@ -305,9 +309,10 @@ def ReadAllBusinessByTeller():
                 'bu_name': business.bu_name,              
                 'bu_description': business.bu_description,              
                 'bu_city': business.bu_city,              
+                'bu_website': business.bu_website,              
                 'phone': business.phone,              
                 'bu_address': business.bu_address,              
-                'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
+                # 'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                 't_uid': business.t_uid,              
                 'bu_status': business.bu_status,              
             }
@@ -420,9 +425,10 @@ def SearchBusinessByCategorie():
                     'bu_name': business.bu_name,
                     'bu_description': business.bu_description,
                     'bu_city': business.bu_city,
+                    'bu_website': business.bu_website,
                     'phone': business.phone,
                     'bu_address': business.bu_address,
-                    'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
+                    # 'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
                     't_uid': business.t_uid,
                     'is_favs': is_favs,
                     'bu_status': business.bu_status,

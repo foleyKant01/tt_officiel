@@ -16,14 +16,14 @@
   </div>
 
   <div class="row g-4">
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
       <div class="mb-3">
         <img [src]="all_business.bu_picture || 'assets/img/default.jpg'" class="img-fluid h-100 rounded shadow-sm"
           alt="Image principale">
       </div>
-    </div>
+    </div> -->
 
-    <div class="col-md-6">
+    <div class="col-md-12">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <strong>Description :</strong><br>
@@ -32,12 +32,24 @@
         <li class="list-group-item">
           <strong>Téléphone :</strong> {{ all_business.phone }}
         </li>
+        <!-- Physique -->
         <li class="list-group-item">
-          <strong>{{ adresse }}</strong> {{ all_business.bu_address }}
-        </li>
-        <li class="list-group-item">
+          <i class="bi bi-building text-secondary me-1"></i>
           <strong>{{ ville }}</strong> {{ all_business.bu_city }}
         </li>
+        <li class="list-group-item">
+          <i class="bi bi-geo-alt-fill text-secondary me-1"></i>
+          <strong>{{ adresse }}</strong> {{ all_business.bu_address }}
+        </li>
+        <!-- En ligne -->
+        <li class="list-group-item">
+          <i class="bi bi-globe2 text-secondary me-1"></i>
+          <strong>{{ bu_website }}</strong>
+          <a [href]="all_business.bu_website" target="_blank" rel="noopener noreferrer">
+            {{ all_business.bu_website }}
+          </a>
+        </li>
+
       </ul>
     </div>
   </div>
