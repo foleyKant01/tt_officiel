@@ -10,7 +10,7 @@ import { BusinessRoutingModule } from './business-routing.module';
   ],
   imports: [
     CommonModule,
-    BusinessRoutingModule
+    BusinessRoutingModule,
   ]
 })
 export class BusinessModule { }

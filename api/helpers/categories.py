@@ -370,6 +370,102 @@ def InsertAllCategories():
         {
             "ca_name": "Agence de communication culturelle",
             "ca_description": "Agence spécialisée dans la promotion et la valorisation d’événements, projets ou institutions culturelles via des stratégies de communication ciblées."
+        },
+        {
+            "ca_name": "Restaurants gastronomiques",
+            "ca_description": "Établissements haut de gamme offrant une cuisine raffinée, souvent préparée par des chefs renommés, avec un service soigné et une carte des vins élaborée."
+        },
+        {
+            "ca_name": "Restaurants traditionnels",
+            "ca_description": "Restaurants proposant des plats classiques issus de la cuisine locale ou régionale, avec un service à table et une ambiance familiale ou conviviale."
+        },
+        {
+            "ca_name": "Fast-food",
+            "ca_description": "Restaurants spécialisés dans la restauration rapide, avec des plats comme les burgers, frites, sandwiches ou pizzas, généralement à emporter ou servis rapidement sur place."
+        },
+        {
+            "ca_name": "Food trucks",
+            "ca_description": "Camions-restaurants mobiles servant des plats cuisinés sur place, souvent originaux ou spécialisés (tacos, crêpes, burgers, cuisine du monde, etc.)."
+        },
+        {
+            "ca_name": "Restaurants végétariens / véganes",
+            "ca_description": "Établissements proposant une cuisine sans viande (végétarien) ou sans aucun produit d'origine animale (végane), avec des alternatives saines et durables."
+        },
+        {
+            "ca_name": "Restaurants spécialisés (cuisine du monde)",
+            "ca_description": "Restaurants mettant à l'honneur une cuisine étrangère spécifique comme la cuisine chinoise, libanaise, italienne, indienne, japonaise, africaine, etc."
+        },
+        {
+            "ca_name": "Rôtisseries / Grillades",
+            "ca_description": "Restaurants ou stands proposant principalement des viandes rôties ou grillées (poulet braisé, brochettes, côtelettes, etc.) accompagnées de garnitures locales."
+        },
+        {
+            "ca_name": "Pâtisseries / Boulangeries-salons de thé",
+            "ca_description": "Établissements vendant des viennoiseries, pâtisseries, gâteaux, parfois avec un espace pour consommer sur place du café ou du thé."
+        },
+        {
+            "ca_name": "Restaurants de fruits de mer",
+            "ca_description": "Restaurants spécialisés dans les produits de la mer : poissons, crustacés, coquillages, souvent proposés grillés, frits ou en sauces."
+        },
+        {
+            "ca_name": "Buffets / Libre-service",
+            "ca_description": "Restaurants où les clients peuvent se servir eux-mêmes parmi un choix varié de plats disposés sur un buffet, souvent à volonté."
+        },
+        {
+            "ca_name": "Traiteurs",
+            "ca_description": "Professionnels de la restauration proposant des plats préparés à emporter ou des services de repas pour des événements (mariages, séminaires, réceptions)."
+        },
+        {
+            "ca_name": "Sandwicheries / Snacks",
+            "ca_description": "Établissements proposant des repas rapides à emporter : sandwiches, paninis, salades, wraps, jus frais, etc."
+        },
+        {
+            "ca_name": "Bars à jus / Smoothie bars",
+            "ca_description": "Lieux spécialisés dans la préparation de jus de fruits frais, smoothies, boissons detox, parfois accompagnés de snacks sains."
+        },
+        {
+            "ca_name": "Cafétérias d’entreprise ou scolaires",
+            "ca_description": "Services de restauration collective proposés au sein d’entreprises, d’écoles ou d’institutions, souvent avec des menus équilibrés et à prix réduit."
+        },
+        {
+            "ca_name": "Bars",
+            "ca_description": "Établissements servant des boissons alcoolisées ou non, souvent avec de la musique d’ambiance, des retransmissions sportives ou des animations thématiques."
+        },
+        {
+            "ca_name": "Maquis",
+            "ca_description": "Établissements populaires en Afrique de l’Ouest, combinant restauration, bar et ambiance musicale, souvent en plein air ou semi-ouverte, avec des plats locaux et un cadre convivial."
+        },
+        {
+            "ca_name": "Boîtes de nuit / Clubs",
+            "ca_description": "Lieux festifs ouverts en soirée et en nuit, proposant de la musique à fort volume, des DJ, une piste de danse, des soirées à thème et un bar."
+        },
+        {
+            "ca_name": "Lounge bars / Rooftops",
+            "ca_description": "Espaces haut de gamme offrant une ambiance détendue avec musique chill, cocktails, vue panoramique, souvent situés en terrasse ou sur les toits d’immeubles."
+        },
+        {
+            "ca_name": "Salles de fêtes",
+            "ca_description": "Espaces dédiés à l’organisation de cérémonies ou événements privés comme les mariages, anniversaires, baptêmes, avec possibilité de location, décoration et traiteur."
+        },
+        {
+            "ca_name": "Restaurants ambiance live",
+            "ca_description": "Restaurants qui offrent des repas accompagnés de spectacles live, musiciens, artistes locaux, ou karaoké pour créer une ambiance festive."
+        },
+        {
+            "ca_name": "Espaces événementiels",
+            "ca_description": "Lieux modulables destinés à accueillir des événements professionnels ou privés (séminaires, expositions, galas, soirées privées), souvent avec équipements audiovisuels."
+        },
+        {
+            "ca_name": "Pub / Sports bar",
+            "ca_description": "Bars avec une forte identité sportive, diffusant les matchs en direct sur écran géant, avec une carte de boissons et de snacks adaptée aux soirées sportives."
+        },
+        {
+            "ca_name": "Karaoké bars",
+            "ca_description": "Bars équipés de scènes ou cabines privées pour chanter sur des musiques populaires, en solo ou entre amis, dans une ambiance ludique."
+        },
+        {
+            "ca_name": "Clubs privés",
+            "ca_description": "Établissements sélectifs avec accès réservé aux membres ou à des invités, offrant une ambiance feutrée, des services haut de gamme et des événements exclusifs."
         }
     ]
 
