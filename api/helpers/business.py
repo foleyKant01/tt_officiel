@@ -45,7 +45,7 @@ def CreateBusiness():
         new_business.bu_categorie = request.form.get('categorie')
         new_business.bu_type = request.form.get('type')
         new_business.bu_name = request.form.get('name')
-        new_business.bu_description = request.form.get('description')bu_website
+        new_business.bu_description = request.form.get('description')
         new_business.bu_city = request.form.get('city')
         new_business.bu_website = request.form.get('website')
         new_business.bu_address = request.form.get('address')
