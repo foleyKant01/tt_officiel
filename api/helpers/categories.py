@@ -466,7 +466,40 @@ def InsertAllCategories():
         {
             "ca_name": "Clubs privés",
             "ca_description": "Établissements sélectifs avec accès réservé aux membres ou à des invités, offrant une ambiance feutrée, des services haut de gamme et des événements exclusifs."
+        },
+        {
+            "ca_name": "Parcs et jardins",
+            "ca_description": "Espaces verts aménagés pour la détente, la promenade, les activités de plein air et les loisirs en famille ou entre amis."
+        },
+        {
+            "ca_name": "Bibliothèques",
+            "ca_description": "Établissements publics permettant la consultation et l’emprunt de livres, journaux, revues et autres ressources culturelles."
+        },
+        {
+            "ca_name": "Musées et galeries",
+            "ca_description": "Lieux de préservation et d’exposition d’œuvres d’art, d’objets historiques ou scientifiques ouverts au grand public."
+        },
+        {
+            "ca_name": "Stades et complexes sportifs",
+            "ca_description": "Infrastructures dédiées aux activités sportives, compétitions, entraînements et événements physiques publics ou privés."
+        },
+        {
+            "ca_name": "Plages publiques",
+            "ca_description": "Zones aménagées en bord de mer ou de lagune accessibles librement pour la baignade, le repos ou les activités nautiques."
+        },
+        {
+            "ca_name": "Marchés et foires",
+            "ca_description": "Espaces publics où se tiennent régulièrement des ventes de produits alimentaires, artisanaux ou vestimentaires."
+        },
+        {
+            "ca_name": "Places publiques",
+            "ca_description": "Espaces ouverts souvent situés au centre-ville, servant de lieu de rassemblement, de passage ou d’événements communautaires."
+        },
+        {
+            "ca_name": "Lieux de culte",
+            "ca_description": "Édifices religieux ouverts au public pour la prière, les cérémonies et les rassemblements spirituels."
         }
+
     ]
 
     for cat in categories_data:
