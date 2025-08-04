@@ -128,8 +128,8 @@ export class CreateBusinessComponent implements OnInit {
       website: new FormControl(null),
       phone: new FormControl(null, Validators.required),
       t_uid: new FormControl(null, Validators.required),
-      latitude: new FormControl(null, Validators.required),
-      longitude: new FormControl(null, Validators.required),
+      latitude: new FormControl(null),
+      longitude: new FormControl(null),
     }
   )
 
