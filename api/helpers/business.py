@@ -52,8 +52,17 @@ def CreateBusiness():
         new_business.phone = request.form.get('phone')
         new_business.t_uid = request.form.get('t_uid')
         new_business.bu_status = 'Active'
-        new_business.latitude = request.form.get('latitude')
-        new_business.longitude = request.form.get('longitude')
+        latitude = request.form.get('latitude')
+        longitude = request.form.get('longitude')
+        if latitude:
+            new_business.latitude = latitude
+        else:
+            new_business.latitude = None
+
+        if longitude:
+            new_business.longitude = longitude
+        else:
+            new_business.longitude = None
         
         db.session.add(new_business)
         db.session.commit()

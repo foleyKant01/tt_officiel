@@ -80,8 +80,8 @@ export class CreateBusinessComponent implements OnInit {
         this.createbusiness.patchValue({
           city: '',
           address: '',
-          latitude : null,
-          longitude : null
+          latitude: '',
+          longitude: ''
         });
       }
     });
