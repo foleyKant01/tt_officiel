@@ -432,7 +432,7 @@ def SearchBusinessByCategorie():
                     'bu_categorie': business.bu_categorie,
                     'bu_type': business.bu_type,
                     'bu_name': business.bu_name,
-                    'bu_description': business.bu_description,
+                    'description': item.description[:100] + "..." if len(item.description) > 50 else item.description
                     'bu_city': business.bu_city,
                     'bu_website': business.bu_website,
                     'phone': business.phone,
