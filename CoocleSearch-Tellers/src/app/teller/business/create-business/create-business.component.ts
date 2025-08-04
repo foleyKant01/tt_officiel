@@ -52,8 +52,8 @@ export class CreateBusinessComponent implements OnInit {
       this.t_uid = this.teller_infos.t_uid;
       this.createbusiness.patchValue({
         t_uid: this.t_uid,
-        latitude: this.coordonne.latitude,
-        longitude: this.coordonne.longitude
+        // latitude: this.coordonne.latitude,
+        // longitude: this.coordonne.longitude
       });
     }
 
@@ -72,12 +72,16 @@ export class CreateBusinessComponent implements OnInit {
       if (value === 'physique') {
         this.createbusiness.patchValue({
           city: this.city,
-          address: this.address
+          address: this.address,
+          latitude: this.coordonne.latitude,
+          longitude: this.coordonne.longitude
         });
       } else {
         this.createbusiness.patchValue({
           city: '',
-          address: ''
+          address: '',
+          latitude: '',
+          longitude: ''
         });
       }
     });
