@@ -3,10 +3,8 @@
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
-  // align-items: center;
   min-height: 100vh;
   padding: 20px;
-  // background: linear-gradient(135deg, #0f2027, #2c5364);
   background: linear-gradient(135deg,#6d5203, #dda706, );
 
   background-attachment: fixed;
@@ -96,7 +94,7 @@ input, textarea, select {
   outline: none;
   background: transparent;
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .input:focus {
@@ -125,7 +123,7 @@ input, textarea, select {
 
 a.small {
   text-decoration: none;
-  font-size: 13px;
+  font-size: 16px;
   display: block;
   margin-top: 15px;
 }
@@ -184,12 +182,12 @@ a.small {
   }
 
   .input {
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .login-btn {
     padding: 10px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .login-header {
@@ -223,11 +221,11 @@ a.small {
   }
 
   .input {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .login-btn {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
 

@@ -28,7 +28,7 @@ input, textarea, select {
 }
 
 .btn-user {
-  font-size: 1rem;
+  font-size: 16px;
   border: 0px;
   padding: 0.75rem 1rem;
   border-radius: 10rem;
@@ -38,4 +38,20 @@ input, textarea, select {
 
 .btn-user:hover {
   background: linear-gradient(to right, #203a43, #396679);
+}
+
+.small{
+  font-size: 16px;
+}
+
+form.user .form-control-user {
+  font-size: 16px;
+  border-radius: 10rem;
+  padding: 1.5rem 1rem;
+}
+
+form.user .btn-user {
+  font-size: 16px;
+  border-radius: 10rem;
+  padding: .75rem 1rem;
 }
