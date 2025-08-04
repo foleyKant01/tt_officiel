@@ -248,7 +248,7 @@ def ReadSingleBusiness():
                 'bu_type': single_business.bu_type,
                 'bu_name': single_business.bu_name,
                 'bu_description': single_business.bu_description,
-                'localisation': "https://www.google.com/maps?q={business.latitude},{business.longitude}",
+                'localisation': f"https://www.google.com/maps?q={business.latitude},{business.longitude}"
                 'bu_city': single_business.bu_city,
                 'bu_website': single_business.bu_website,
                 'bu_address': single_business.bu_address,
