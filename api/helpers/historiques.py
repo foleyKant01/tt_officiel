@@ -53,7 +53,7 @@ def ReadAllHistoriqueByUser():
                         'textSearch': histo.textSearch,
                         'bu_uid': single_business.bu_uid,
                         'bu_name': single_business.bu_name,
-                        'bu_description': single_business.bu_description,
+                        'bu_description': single_business.bu_description[:150]+"..." if len(single_business.bu_description) > 150 else single_business.bu_description,
                         'u_uid': histo.u_uid,
                         'visited_at': str(histo.visited_at),
                     }

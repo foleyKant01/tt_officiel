@@ -16,6 +16,8 @@ import { HistoriquesService } from '../../services/users/historiques.service';
   imports: [ReactiveFormsModule, CommonModule, RouterModule, HeaderComponent],
 
 })
+
+
 export class ReadsingleBusinessComponent implements OnInit{
 
   business: any; // Stocke les détails du produit
@@ -27,6 +29,7 @@ export class ReadsingleBusinessComponent implements OnInit{
   textSearch: any
   user_infos: any
   user_id: any
+  formattedDescription: string = '';
 
 
 
@@ -78,6 +81,8 @@ export class ReadsingleBusinessComponent implements OnInit{
           setTimeout(() => {
             this.loading = false;
             this.business = response?.business; // Stocker les produits dans le tableau
+            const raw = this.business?.bu_description || '';
+            this.formattedDescription = raw.replace(/\./g, '.<br>');
           }, 2000);
           if (response.business) {
             sessionStorage.setItem('single_business', JSON.stringify(response.business));

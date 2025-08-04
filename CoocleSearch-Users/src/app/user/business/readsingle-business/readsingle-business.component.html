@@ -4,27 +4,25 @@
   <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
     <div class="row g-0">
       <div class="col-md-5">
-        <img [src]="'assets/img/default.jpg'"
-             class="img-fluid h-100 w-100 object-fit-cover"
-             alt="PUB">
+        <img [src]="'assets/img/default.jpg'" class="img-fluid h-100 w-100 object-fit-cover" alt="PUB">
       </div>
 
       <div class="col-md-7">
         <div class="card-body p-4">
 
-          <h2 class="card-title fw-bold mb-3 text-black">{{ business?.bu_name }}</h2>
+          <h2 class="card-title fw-bolder fs-2 mb-3 text-black">{{ business?.bu_name }}</h2>
 
-          <p class="text-muted">
+          <p class="text-muted" *ngIf="business?.bu_type == 'physique'">
             <i class="bi bi-geo-alt-fill text-secondary me-2"></i>{{ business?.bu_city }}
           </p>
 
-          <p class="text-muted">
+          <p class="text-muted" *ngIf="business?.bu_type == 'physique'">
             <i class="bi bi-house-fill text-secondary me-2"></i>{{ business?.bu_address }}
           </p>
 
           <p class="card-text m-0"><i class="bi bi-telephone-fill text-secondary"></i> {{ business.phone }}</p>
-          <p class="mt-4">{{ business?.bu_categorie }}</p>
-          <p>{{ business?.bu_description }}</p>
+          <p class="mt-4"><b>{{ business?.bu_categorie }}</b></p>
+          <p [innerHTML]="formattedDescription"></p>
 
           <div *ngIf="business?.bu_category" class="mt-3">
             <span class="badge bg-info text-dark px-3 py-2 rounded-pill">
@@ -34,17 +32,21 @@
           <div *ngIf="loading" class="spinner-overlay">
             <div class="spinner"></div>
           </div>
-          <div class="mt-4">
+          <div class="mt-4 d-flex justify-content-between">
             <a (click)="backStep()" class="btn btn-warning rounded-pill me-3 back-btp-style">
               <i class="bi bi-arrow-left"></i> Retour
             </a>
 
-            <a *ngIf="business?.bu_website"
-               class="btn btn-outline-primary rounded-pill"
-               [href]="business?.bu_website"
-               target="_blank">
+            <a *ngIf="business?.bu_type == 'physique'" class="btn btn-outline-primary rounded-pill"
+              [href]="business?.localisation" target="_blank">
+              <i class="bi bi-geo-alt-fill"></i> Localisation
+            </a>
+
+            <a *ngIf="business?.bu_type == 'en-ligne'" class="btn btn-outline-primary rounded-pill"
+              [href]="business?.bu_website" target="_blank">
               <i class="bi bi-globe"></i> Site Web
             </a>
+
           </div>
         </div>
       </div>
@@ -56,7 +58,8 @@
     <h4 class="mb-4 fw-semibold text-center">Galerie</h4>
     <div class="row g-3">
       <div class="col-md-4" *ngFor="let img of business.bu_gallery">
-        <img [src]="img" alt="Galerie" class="img-fluid rounded shadow-sm object-fit-cover" style="height: 250px; width: 100%;">
+        <img [src]="img" alt="Galerie" class="img-fluid rounded shadow-sm object-fit-cover"
+          style="height: 250px; width: 100%;">
       </div>
     </div>
   </div>
@@ -65,6 +68,6 @@
 
 <!-- Bouton retour en haut -->
 <button *ngIf="backToTopBtnVisible" (click)="scrollToTop()" id="backToTopBtn"
-        style="background: none; border: none; color: black; font-size: 1.2rem; cursor: pointer;">
+  style="background: none; border: none; color: black; font-size: 1.2rem; cursor: pointer;">
   Go back up ↑
 </button>
