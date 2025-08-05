@@ -125,10 +125,7 @@ export class HomeComponent implements OnInit {
 
 
   logout() {
-    sessionStorage.removeItem('access_token');
-    sessionStorage.removeItem('businessList');
-    sessionStorage.removeItem('user_infos');
-    sessionStorage.removeItem('is_run');
+    sessionStorage.clear(); // Supprime TOUT le contenu de la session
     this.router.navigate(['/auth/login']);
   }
 
