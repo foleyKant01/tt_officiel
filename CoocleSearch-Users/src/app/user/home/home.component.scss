@@ -21,13 +21,16 @@ a{
   animation: slow-rotate 4s infinite ease-in-out;
 }
 
-/* Image pub : s'adapte à 100% largeur et hauteur du parent, garde le ratio */
-.pub-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.div_img {
+  max-height: 500px;
+  position: relative;
 }
+
+img{
+  max-height: 500px;
+  min-width: 100%;
+}
+
 
 /* Pour éviter marge/padding sur les colonnes qui perturbent la hauteur */
 .showcase .row.g-0 > [class*="col-"] {
@@ -36,9 +39,37 @@ a{
 
 /* Exemple pour ajuster la hauteur minimale des sections image */
 .showcase .showcase-img {
-  max-height: 500px;
+  max-height: 500px!important;
   background-size: cover !important;
   background-position: center center !important;
+}
+
+.div_img {
+  max-height: 500px;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.hover-zoom {
+  transition: transform 0.5s ease-in-out;
+}
+
+.hover-zoom:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.showcase h3 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 767.98px) {
+  .div_img {
+    max-height: 300px;
+  }
 }
 
 
