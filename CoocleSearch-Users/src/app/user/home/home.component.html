@@ -7,6 +7,7 @@
     </a>
     <button *ngIf="user_infos" class="btn btnprofil text-white p-0 position-relative" style="margin-right: 1.5rem;"
       type="button" (click)="toggleProfileMenu()">
+
       <i class="bi bi-person-circle fs-4"></i>
     </button>
     <div *ngIf="profileMenuVisible" class="profile-menu dropdown-menu show" style="right: 1.5rem; top: 3.5rem;">
@@ -23,12 +24,35 @@
     </div>
   </div>
   <div class="container position-relative">
+    <div *ngIf="coordonne?.latitude && !is_run" class="overlay">
+      <div
+        class="custom-alert alert alert-light d-flex flex-column justify-content-center align-items-center text-center">
+        <span class="mb-3">
+          Bienvenue sur <strong>Coocle Search</strong>, votre moteur de recherche préféré !
+          Trouvez tout, et à proximité en un clin d'œil.
+          Une expérience rapide, simple et locale.
+        </span>
+        <button class="btn run" (click)="navigateToHome()">OK</button>
+      </div>
+    </div>
+    <div *ngIf="!coordonne?.latitude" class="overlay">
+      <div
+        class="custom-alert alert alert-warning d-flex flex-column justify-content-center align-items-center text-center">
+        <p>La géolocalisation est désactivée. Pour une meilleure expérience veuillez autoriser la position dans les
+          paramètres de votre navigateur.</p>
+        <div class="col-12 d-flex justify-content-between">
+          <a href="https://support.google.com/chrome/answer/142065" target="_blank" class="btn btn-warning">Autoriser la
+            position</a>
+          <button class="btn btn-dark" (click)="navigateToHome()">Autorisation effèctuer</button>
+        </div>
+      </div>
+    </div>
     <div class="row justify-content-center">
       <div class="col-xl-6">
         <div class="text-center text-white">
           <div class="d-flex justify-content-center logo" style="cursor: pointer;" (click)="navigateToHome()">
-            <h1 class="mb-2 me-3 text-center">Coocle Search</h1>
-            <i class="fas fa-laugh-wink fa-2x" style="color: #ffc107; transform: rotate(-30deg);"></i>
+            <h1 class="mb-2 me-2 text-center">Coocle Search</h1>
+            <i class="fas fa-laugh-wink fa-2x rotate-left" style="color: #ffc107; transform: rotate(-30deg);"></i>
           </div>
 
           <form class="form-subscribe" id="contactForm" [formGroup]="search_form" (ngSubmit)="Searchbusiness()">
@@ -38,11 +62,12 @@
                   type="text" placeholder="Tapez ici pour rechercher..." style="height: 45px;" />
               </div>
               <div class="col-md-auto">
-                <button class="btn btn-warning rounded-pill px-3 shadow-sm" type="submit"
-                  style="height: 45px; line-height: 1;"
+                <button class="btn btn-warning rounded-pill px-3 shadow-sm rotate-on-hover" type="submit"
+                  style="height: 45px;"
                   [disabled]="search_form.get('textSearch')?.invalid || search_form.get('textSearch')?.value.trim() === ''">
-                  Search
+                  <i class="fas fa-search"></i>
                 </button>
+
               </div>
             </div>
             <div *ngIf="loading" class="loading-overlay">
@@ -64,7 +89,8 @@
 </header>
 <section class="m-2">
   <div class="row mt-4" *ngIf="All_business.length > 0">
-    <div class="col-md-4 col-12" [ngClass]="{ 'tablet-fullwidth': All_business.length === 1 }" *ngFor="let business of All_business.slice(0, visibleCount)">
+    <div class="col-md-4 col-12" [ngClass]="{ 'tablet-fullwidth': All_business.length === 1 }"
+      *ngFor="let business of All_business.slice(0, visibleCount)">
       <div class="card mb-3 position-relative">
 
         <!-- Bouton Favoris -->
@@ -90,7 +116,8 @@
 
               <p class="card-text m-0" *ngIf="business.bu_type === 'physique'">
                 <i class="bi bi-geo-alt-fill text-secondary"></i> {{ business.bu_city }}
-              </p>              <!-- <p class="card-text m-0"><i class="bi bi-house-fill text-secondary"></i> {{ business.bu_address }}</p> -->
+              </p>
+              <!-- <p class="card-text m-0"><i class="bi bi-house-fill text-secondary"></i> {{ business.bu_address }}</p> -->
               <div class="mt-3 text-end">
                 <button type="button" (click)="readSingleBusiness(business.bu_uid)"
                   class="btn btn-sm d-inline-flex align-items-center gap-2 rounded-pill shadow viewbusiness"

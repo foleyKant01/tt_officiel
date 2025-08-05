@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   data: any;
   textSearch: any;
+  is_run: any;
 
   constructor(private router: Router, private http: BusinessService, private route: ActivatedRoute, private api: ActivitesService) { }
 
@@ -127,15 +128,16 @@ export class HomeComponent implements OnInit {
     sessionStorage.removeItem('access_token');
     sessionStorage.removeItem('businessList');
     sessionStorage.removeItem('user_infos');
+    sessionStorage.removeItem('is_run');
     this.router.navigate(['/auth/login']);
   }
 
   navigateToHome() {
     if (window.location.pathname === '/user/home') {
-      sessionStorage.removeItem('All_business');
-      sessionStorage.removeItem('single_business');
-      sessionStorage.removeItem('textSearch');
       window.location.reload();
+      this.getCurrentLocationAndAddress()
+      const is_run = '1'
+      sessionStorage.setItem('is_run', JSON.stringify(is_run));
     } else {
       window.location.href = '/user/home';
     }
@@ -234,10 +236,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // this.searchDone = true;
+    this.getCurrentLocationAndAddress();
 
     const user = sessionStorage.getItem('user_infos');
+    const is_run = sessionStorage.getItem('is_run');
+    this.is_run = is_run
     this.isLoggedIn = !!user;
     this.user_infos = user
     console.log(this.user_infos);
@@ -288,10 +291,7 @@ export class HomeComponent implements OnInit {
       }
 
       window.addEventListener('beforeunload', this.unloadCallback);
-
     }
-
-    this.getCurrentLocationAndAddress();
 
   }
 

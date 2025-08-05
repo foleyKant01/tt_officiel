@@ -11,6 +11,17 @@ a{
   z-index: 10;  /* Assurez-vous que le lien est au-dessus des autres éléments */
 }
 
+@keyframes slow-rotate {
+  0% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+.rotate-left {
+  animation: slow-rotate 4s infinite ease-in-out;
+}
+
+
 #backToTopBtn {
   position: fixed;
   bottom: 20px;
@@ -26,8 +37,25 @@ a{
   z-index: 1000;
 }
 
+.rotate-on-hover{
+  padding-left: 0px;
+}
+
+
+.rotate-on-hover:hover {
+  transform: rotate(15deg);
+  transition: transform 0.3s ease;
+}
+
+
 #backToTopBtn:hover {
   background-color: #0056b3;
+}
+
+.run{
+  background: linear-gradient(to right, #a37b04, #dda706);
+  border: 0px;
+  padding: 8px 15px;
 }
 
 .profile-menu {
@@ -66,6 +94,42 @@ a{
   transition: all 0.3s ease;
   border: 0;
 }
+
+// .overlay {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgba(0, 0, 0, 0.5); /* gris semi-transparent */
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 1000;
+// }
+
+// .custom-alert {
+//   background-color: #fff3cd;
+//   border: 1px solid #ffeeba;
+//   padding: 30px;
+//   border-radius: 10px;
+//   max-width: 500px;
+//   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+// }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* gris semi-transparent */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .showAll {
   border: solid, 1px, #0f2027;
