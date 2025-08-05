@@ -56,9 +56,9 @@
           <div class="input-group shadow-sm" style="height: 45px;">
             <input class="form-control border-0 rounded-start-pill" style="height: 100%;" formControlName="textSearch"
               id="textSearch" type="text" placeholder="Tapez ici pour rechercher..." />
-            <button class="btn btn-warning border-0 rounded-end-pill px-4" type="submit" style="height: 100%;"
+            <button class="btn btn-warning border-0 rounded-end-pill px-4 " type="submit" style="height: 100%;"
               [disabled]="search_form.get('textSearch')?.invalid || search_form.get('textSearch')?.value.trim() === ''">
-              Search
+              <i class="fas fa-search rotate-on-hover"></i>
             </button>
           </div>
         </form>

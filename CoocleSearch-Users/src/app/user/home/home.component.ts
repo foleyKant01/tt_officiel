@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   user_id: any
   localisation: any
   coordonne: any
+  isLoadingLocation: boolean = true;
   loading = false;
   favoriteList: any[] = [];
 
@@ -307,17 +308,20 @@ export class HomeComponent implements OnInit {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
           console.log('Latitude:', lat, 'Longitude:', lon);
-          // Appeler la fonction pour obtenir ville + commune
+
+          this.coordonne = position.coords; // ← ici on définit les coordonnées
+
           this.getCityAndCommuneFromCoords(lat, lon).then(location => {
             sessionStorage.setItem('localisation', JSON.stringify(location));
             sessionStorage.setItem('coordonne', JSON.stringify(position.coords));
-            // console.log('coordonne:', position.coords);
-            // console.log('Ville:', location.city);
-            // console.log('Commune:', location.commune);
+            this.localisation = location;
+            this.isLoadingLocation = false; // ← déplacer ici !
           });
         },
         error => {
           console.error('Erreur de géolocalisation :', error.message);
+          this.coordonne = null;
+          this.isLoadingLocation = false;
         },
         {
           enableHighAccuracy: true,
@@ -327,8 +331,10 @@ export class HomeComponent implements OnInit {
       );
     } else {
       console.error('La géolocalisation n’est pas prise en charge par ce navigateur.');
+      this.isLoadingLocation = false;
     }
   }
+
 
 
   getCityAndCommuneFromCoords(lat: number, lon: number): Promise<{ city?: string, commune?: string }> {

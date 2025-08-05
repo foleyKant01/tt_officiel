@@ -16,6 +16,10 @@ nav{
   z-index: 1000; /* Pour s'assurer que l'en-tête est au-dessus du contenu */
   transition: top 0.3s ease; /* Pour ajouter une transition fluide */
 }
+.rotate-on-hover:hover {
+  transform: rotate(15deg);
+  transition: transform 0.3s ease;
+}
 
 a{
   color: black;

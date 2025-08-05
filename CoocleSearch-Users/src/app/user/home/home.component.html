@@ -35,16 +35,23 @@
         <button class="btn run" (click)="runApp()">OK</button>
       </div>
     </div>
-    <div *ngIf="!coordonne?.latitude" class="overlay">
+    <div *ngIf="!isLoadingLocation && !coordonne?.latitude" class="overlay">
       <div
         class="custom-alert alert alert-warning d-flex flex-column justify-content-center align-items-center text-center">
-        <p>La géolocalisation est désactivée. Pour une meilleure expérience veuillez autoriser la position lors de la demande ou dans les
+        <p>La géolocalisation est désactivée. Pour une meilleure expérience veuillez autoriser la position lors de la
+          demande ou dans les
           paramètres de votre navigateur.</p>
         <div class="col-12 d-flex justify-content-between">
           <a href="https://support.google.com/chrome/answer/142065" target="_blank" class="btn btn-warning">Autoriser la
             position</a>
           <button class="btn btn-dark" (click)="navigateToHome()">Autorisation effèctuer</button>
         </div>
+        <div *ngIf="isLoadingLocation" class="overlay">
+          <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Chargement localisation...</span>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="row justify-content-center">
@@ -140,28 +147,42 @@
 </section>
 
 <section class="showcase">
-  <h3 class="text-center mb-4">Autres actualités</h3>
+  <h3 class="text-center mt-5 mb-4">Actualités Publicitaires</h3>
   <div class="container-fluid p-0">
+
     <div class="row g-0">
-      <div class="col-lg-6 order-lg-2 text-white showcase-img"
-        style="background-image: url('assets/img/bg-showcase-1.jpg')"></div>
+      <div class="col-lg-6 order-lg-2" style="max-height: 500px; position: relative;">
+        <a href="https://www.amazon.fr/" target="_blank" class="d-block h-100">
+          <img
+            src="https://m.media-amazon.com/images/I/71UwSHSZRnS._AC_SL1500_.jpg"
+            alt="Publicité Amazon"
+            class="pub-img rounded shadow mb-4"
+          />
+        </a>
+      </div>
+
       <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-        <h2>Fully Responsive Design</h2>
-        <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on
-          any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+        <a href="https://www.aliexpress.com/" target="_blank" class="d-inline-block">
+          <img
+            src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"
+            alt="PayPal Logo"
+            class="img-fluid rounded shadow mb-4"
+          />
+        </a>
       </div>
     </div>
+
     <div class="row g-0">
-      <div class="col-lg-6 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-2.jpg')"></div>
+      <div class="col-lg-6 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-2.jpg'); min-height: 300px; background-size: cover; background-position: center;"></div>
       <div class="col-lg-6 my-auto showcase-text">
         <h2>Updated For Bootstrap 5</h2>
         <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile
           responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
       </div>
     </div>
+
     <div class="row g-0">
-      <div class="col-lg-6 order-lg-2 text-white showcase-img"
-        style="background-image: url('assets/img/bg-showcase-3.jpg')"></div>
+      <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-3.jpg'); min-height: 300px; background-size: cover; background-position: center;"></div>
       <div class="col-lg-6 order-lg-1 my-auto showcase-text">
         <h2>Easy to Use & Customize</h2>
         <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper
@@ -169,8 +190,10 @@
           ready to go!</p>
       </div>
     </div>
+
   </div>
 </section>
+
 <section class="features-icons bg-white text-center py-5">
   <div class="container">
     <h2 class="mb-5 fw-bold">Pourquoi utiliser Coocle ?</h2>
