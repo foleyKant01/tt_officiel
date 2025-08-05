@@ -32,13 +32,13 @@
           Trouvez tout, et à proximité en un clin d'œil.
           Une expérience rapide, simple et locale.
         </span>
-        <button class="btn run" (click)="navigateToHome()">OK</button>
+        <button class="btn run" (click)="runApp()">OK</button>
       </div>
     </div>
     <div *ngIf="!coordonne?.latitude" class="overlay">
       <div
         class="custom-alert alert alert-warning d-flex flex-column justify-content-center align-items-center text-center">
-        <p>La géolocalisation est désactivée. Pour une meilleure expérience veuillez autoriser la position dans les
+        <p>La géolocalisation est désactivée. Pour une meilleure expérience veuillez autoriser la position lors de la demande ou dans les
           paramètres de votre navigateur.</p>
         <div class="col-12 d-flex justify-content-between">
           <a href="https://support.google.com/chrome/answer/142065" target="_blank" class="btn btn-warning">Autoriser la

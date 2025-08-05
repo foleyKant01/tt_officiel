@@ -132,12 +132,20 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/auth/login']);
   }
 
+  runApp() {
+    if (window.location.pathname === '/user/home') {
+      window.location.reload();
+      const is_run = '1'
+      sessionStorage.setItem('is_run', JSON.stringify(is_run));
+    } else {
+      window.location.href = '/user/home';
+    }
+  }
+
   navigateToHome() {
     if (window.location.pathname === '/user/home') {
       window.location.reload();
       this.getCurrentLocationAndAddress()
-      const is_run = '1'
-      sessionStorage.setItem('is_run', JSON.stringify(is_run));
     } else {
       window.location.href = '/user/home';
     }
