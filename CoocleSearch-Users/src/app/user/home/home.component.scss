@@ -3,12 +3,122 @@ a{
   text-decoration: none;
   cursor: pointer;
 }
+
+.masthead{
+  height: 350px!important;
+  margin-bottom: 20px;
+}
+
+.search_respo {
+  display: none;
+}
+
+.submit_search {
+  display: block;
+}
+
 .forgot{
   color: rgb(49, 49, 247);
   text-decoration: underline;
   cursor: pointer; /* Assurez-vous que le pointeur change sur le survol */
   position: relative;
   z-index: 10;  /* Assurez-vous que le lien est au-dessus des autres éléments */
+}
+
+.search-wrapper input {
+  padding-right: 2.5rem !important;
+}
+
+@media (max-width: 576px) {
+  .masthead{
+    height: 250px!important;
+  }
+
+  .profile-menu {
+    right: 1rem!important; /* aligne le menu à droite de son conteneur parent */
+    top: 2.5rem!important;
+  }
+
+  .submit_search {
+    display: none;
+  }
+
+  .search_respo {
+    display: block;
+  }
+
+  .search-icon-inside {
+    display: block;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    color: #6c757d; /* gris élégant */
+    font-size: 1.1rem;
+    pointer-events: none; /* pour ne pas bloquer le clic dans le champ */
+    z-index: 10;
+  }
+
+  .search-icon {
+    display: block;
+  }
+
+  .div_header {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    margin-top: -8rem!important;
+}
+}
+
+@media (min-width: 577px) {
+  .masthead{
+    height: 250px;
+  }
+
+  .div_header {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    margin-top: -8rem!important;
+  }
+
+  .submit_search {
+    display: none;
+  }
+
+  .search_respo {
+    display: block;
+  }
+
+  .search-icon-inside {
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    color: #6c757d; /* gris élégant */
+    font-size: 1.1rem;
+    pointer-events: none; /* pour ne pas bloquer le clic dans le champ */
+    z-index: 10;
+  }
+}
+
+@media (min-width: 1025px) {
+  .submit_search {
+    display: block
+  }
+
+  .div_header {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    margin-top: -5rem!important;
+}
+
+  .grdiv_search{
+    display: flex;
+  }
+
+  .search_respo {
+    display: none;
+  }
 }
 
 @keyframes slow-rotate {
@@ -21,31 +131,20 @@ a{
   animation: slow-rotate 4s infinite ease-in-out;
 }
 
-.div_img {
-  max-height: 500px;
-  position: relative;
-}
-
 img{
-  max-height: 500px;
+  max-height: 850px;
+  min-height: 850px;
   min-width: 100%;
 }
 
-
-/* Pour éviter marge/padding sur les colonnes qui perturbent la hauteur */
 .showcase .row.g-0 > [class*="col-"] {
   padding: 0;
 }
 
-/* Exemple pour ajuster la hauteur minimale des sections image */
 .showcase .showcase-img {
-  max-height: 500px!important;
+  max-height: 850px!important;
   background-size: cover !important;
   background-position: center center !important;
-}
-
-.div_img {
-  max-height: 500px;
 }
 
 .object-fit-cover {
@@ -65,13 +164,6 @@ img{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   letter-spacing: 1px;
 }
-
-@media (max-width: 767.98px) {
-  .div_img {
-    max-height: 300px;
-  }
-}
-
 
 #backToTopBtn {
   position: fixed;
@@ -113,20 +205,24 @@ img{
   position: absolute;
   z-index: 1050;
   min-width: 170px;
-  background: white;
+  max-width: 170px;
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Supprime l'effet actif par défaut */
+.profile-menu {
+  right: 0; /* aligne le menu à droite de son conteneur parent */
+  left: auto; /* annule toute position à gauche */
+}
+
 .profile-menu .dropdown-item:active,
 .profile-menu .dropdown-item.active {
   background-color: transparent !important;
   color: inherit !important;
 }
 
-/* Style de survol élégant */
 .profile-menu .dropdown-item {
   transition: background-color 0.2s ease, color 0.2s ease;
   border-radius: 0.375rem;
@@ -146,28 +242,6 @@ img{
   border: 0;
 }
 
-// .overlay {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-color: rgba(0, 0, 0, 0.5); /* gris semi-transparent */
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 1000;
-// }
-
-// .custom-alert {
-//   background-color: #fff3cd;
-//   border: 1px solid #ffeeba;
-//   padding: 30px;
-//   border-radius: 10px;
-//   max-width: 500px;
-//   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-// }
-
 .overlay {
   position: fixed;
   top: 0;
@@ -180,7 +254,6 @@ img{
   justify-content: center;
   align-items: center;
 }
-
 
 .showAll {
   border: solid, 1px, #0f2027;
@@ -235,10 +308,25 @@ img{
   color: #ffc107;
 }
 
-
-
-/* Réduction de hauteur pour les petits écrans */
 @media (max-width: 576px) {
+
+  .profile-menu {
+    right: 1rem!important; /* aligne le menu à droite de son conteneur parent */
+    top: 2.5rem!important;
+  }
+
+  img {
+    max-height: 300px;
+    min-height: 300px;
+    min-width: 100%;
+  }
+
+  .showcase .showcase-img {
+    max-height: 300px!important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
   .responsive-header {
     padding-top: 0 !important;
     padding-bottom: 1rem !important;
@@ -280,9 +368,33 @@ img{
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+  .masthead{
+    height: 250px!important;
+  }
+
   .tablet-fullwidth {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  .submit_search {
+    display: none;
+  }
+
+  .search_respo {
+    display: block;
+  }
+
+  img {
+    max-height: 500px;
+    min-height: 500px;
+    min-width: 100%;
+  }
+
+  .showcase .showcase-img {
+    max-height: 500px!important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
 }
 

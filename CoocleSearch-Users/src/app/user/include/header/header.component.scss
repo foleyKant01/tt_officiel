@@ -56,11 +56,19 @@ a{
   position: absolute;
   z-index: 1050;
   min-width: 170px;
-  background: white;
+  max-width: 170px;
+  background: rgba(255, 255, 255, 0.8);
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+.profile-menu {
+  right: 0rem!important; /* aligne le menu à droite de son conteneur parent */
+  left: auto; /* annule toute position à gauche */
+  top: 2.4rem!important;
+}
+
 
 /* Supprime l'effet actif par défaut */
 .profile-menu .dropdown-item:active,
@@ -78,6 +86,14 @@ a{
 .profile-menu .dropdown-item:hover {
   background-color: #4d7a8d;
   color: #000;
+}
+
+@media (max-width: 576px) {
+  .profile-menu {
+    right: 0.05rem!important; /* aligne le menu à droite de son conteneur parent */
+    top: 1.8rem!important;
+  }
+
 }
 
 /* Taille normale (mobile et desktop large) */

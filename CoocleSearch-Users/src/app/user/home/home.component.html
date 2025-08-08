@@ -5,25 +5,26 @@
       style="text-decoration: underline;">
       Connexion
     </a>
-    <button *ngIf="user_infos" class="btn btnprofil text-white p-0 position-relative" style="margin-right: 1.5rem;"
-      type="button" (click)="toggleProfileMenu()">
+    <div class="position-relative d-inline-block">
+      <button *ngIf="user_infos" class="btn btnprofil text-white p-0" type="button" (click)="toggleProfileMenu()">
+        <i class="bi bi-person-circle fs-4"></i>
+      </button>
 
-      <i class="bi bi-person-circle fs-4"></i>
-    </button>
-    <div *ngIf="profileMenuVisible" class="profile-menu dropdown-menu show" style="right: 1.5rem; top: 3.5rem;">
-      <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/profil']">
-        <i class="bi bi-person-fill"></i> Profil
-      </a>
-      <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/user/activites']">
-        <i class="bi bi-star-fill"></i> Activités
-      </a>
-      <a class="dropdown-item d-flex align-items-center gap-2" (click)="logout()">
-        <i class="bi bi-box-arrow-right"></i> Déconnexion
-      </a>
-
+      <div *ngIf="profileMenuVisible" class="profile-menu dropdown-menu show end-0 mt-2">
+        <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/profil']">
+          <i class="bi bi-person-fill"></i> Profil
+        </a>
+        <a class="dropdown-item d-flex align-items-center gap-2" [routerLink]="['/user/activites']">
+          <i class="bi bi-star-fill"></i> Activités
+        </a>
+        <a class="dropdown-item d-flex align-items-center gap-2" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i> Déconnexion
+        </a>
+      </div>
     </div>
+
   </div>
-  <div class="container position-relative">
+  <div class="container div_header position-relative">
     <div *ngIf="coordonne?.latitude && !is_run" class="overlay">
       <div
         class="custom-alert alert alert-light d-flex flex-column justify-content-center align-items-center text-center">
@@ -51,7 +52,6 @@
             <span class="visually-hidden">Chargement localisation...</span>
           </div>
         </div>
-
       </div>
     </div>
     <div class="row justify-content-center">
@@ -61,21 +61,25 @@
             <h1 class="mb-2 me-2 text-center">Coocle Search</h1>
             <i class="fas fa-laugh-wink fa-2x rotate-left" style="color: #ffc107; transform: rotate(-30deg);"></i>
           </div>
-
           <form class="form-subscribe" id="contactForm" [formGroup]="search_form" (ngSubmit)="Searchbusiness()">
             <div class="row justify-content-center">
-              <div class="col-md-7 mb-2">
-                <input class="form-control rounded-pill shadow-sm" formControlName="textSearch" id="textSearch"
-                  type="text" placeholder="Tapez ici pour rechercher..." style="height: 45px;" />
+              <div class="col-md-7 mb-2 grdiv_search">
+                <input class="form-control rounded-pill shadow-sm submit_search" formControlName="textSearch"
+                  id="textSearch" type="text" placeholder="Tapez ici pour rechercher..." style="height: 45px;" />
+                <div class="col-md-auto submit_search">
+                  <button class="btn btn-warning rounded-pill px-3 shadow-sm rotate-on-hover" type="submit"
+                    style="height: 45px;"
+                    [disabled]="search_form.get('textSearch')?.invalid || search_form.get('textSearch')?.value.trim() === ''">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                <div class="position-relative search_respo">
+                  <input class="form-control rounded-pill shadow-sm pe-5" formControlName="textSearch" id="textSearch"
+                    type="text" placeholder="Tapez ici pour rechercher..." style="height: 45px;" />
+                  <i class="fas fa-search position-absolute search-icon-inside"></i>
+                </div>
               </div>
-              <div class="col-md-auto">
-                <button class="btn btn-warning rounded-pill px-3 shadow-sm rotate-on-hover" type="submit"
-                  style="height: 45px;"
-                  [disabled]="search_form.get('textSearch')?.invalid || search_form.get('textSearch')?.value.trim() === ''">
-                  <i class="fas fa-search"></i>
-                </button>
 
-              </div>
             </div>
             <div *ngIf="loading" class="loading-overlay">
               <div class="spinner-border text-light" role="status">
@@ -99,18 +103,11 @@
     <div class="col-md-4 col-12" [ngClass]="{ 'tablet-fullwidth': All_business.length === 1 }"
       *ngFor="let business of All_business.slice(0, visibleCount)">
       <div class="card mb-3 position-relative">
-
-        <!-- Bouton Favoris -->
         <button class="btn btn-fav" (click)="toggleFavorite(business)" [ngClass]="{ 'active': isFavorite(business) }"
           title="Ajouter aux favoris">
           <i class="fas" [ngClass]="isFavorite(business) ? 'fa-heart' : 'fa-heart-broken'"></i>
         </button>
-
         <div class="row g-0">
-          <!-- <div class="col-md-4">
-            <img [src]="business.bu_picture || 'assets/img/default.jpg'"
-              class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ business.bu_name }}">
-          </div> -->
           <div class="col-md-12">
             <div class="card-body">
               <h5 class="card-title fw-bold text-black">{{ business.bu_name }}</h5>
@@ -124,7 +121,6 @@
               <p class="card-text m-0" *ngIf="business.bu_type === 'physique'">
                 <i class="bi bi-geo-alt-fill text-secondary"></i> {{ business.bu_city }}
               </p>
-              <!-- <p class="card-text m-0"><i class="bi bi-house-fill text-secondary"></i> {{ business.bu_address }}</p> -->
               <div class="mt-3 text-end">
                 <button type="button" (click)="readSingleBusiness(business.bu_uid)"
                   class="btn btn-sm d-inline-flex align-items-center gap-2 rounded-pill shadow viewbusiness"
@@ -140,51 +136,51 @@
       </div>
     </div>
   </div>
-
   <div class="text-center" *ngIf="All_business.length > visibleCount">
     <button class="btn btn-outline-primary showAll" (click)="showAll()">Voir plus</button>
   </div>
 </section>
-
-<section class="showcase py-5 bg-light">
-  <h3 class="text-center fw-bold mb-5 display-6 text-dark">Actualités Publicitaires</h3>
+<section class="showcase bg-light">
+  <h2 class="text-center mb-4 fw-bold">Actualités Publicitaires</h2>
   <div class="container-fluid p-0">
-
-    <div class="row g-0">
-      <div class="col-lg-6 div_img overflow-hidden position-relative">
-        <a href="https://www.amazon.fr/" target="_blank" class="d-block h-100">
-          <img src="https://m.media-amazon.com/images/I/71UwSHSZRnS._AC_SL1500_.jpg" alt="Publicité Amazon"
-            class="img-fluid w-100 h-100 object-fit-cover rounded shadow-sm hover-zoom" />
-        </a>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100"
+            src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1500&q=80"
+            alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100"
+            src="https://images.unsplash.com/photo-1542856391-010fb87dcfed?auto=format&fit=crop&w=1500&q=80"
+            alt="Third slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100"
+            src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1500&q=80"
+            alt="Third slide">
+        </div>
       </div>
-      <div class="col-lg-6 div_img overflow-hidden position-relative">
-        <a href="https://www.apple.com/" target="_blank" class="d-block h-100">
-          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1500&q=80"
-            alt="Publicité Apple" class="img-fluid w-100 h-100 object-fit-cover rounded shadow-sm hover-zoom" />
-        </a>
-      </div>
-    </div>
-
-    <div class="row g-0">
-      <div class="col-lg-6 div_img overflow-hidden position-relative">
-        <a href="https://www.mcdonalds.com/" target="_blank" class="d-block h-100">
-          <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1500&q=80"
-            alt="Publicité McDonald's" class="img-fluid w-100 h-100 object-fit-cover rounded shadow-sm hover-zoom" />
-        </a>
-      </div>
-      <div class="col-lg-6 div_img overflow-hidden position-relative">
-        <a href="https://www.starbucks.com/" target="_blank" class="d-block h-100">
-          <img src="https://images.unsplash.com/photo-1542856391-010fb87dcfed?auto=format&fit=crop&w=1500&q=80"
-            alt="Publicité Starbucks" class="img-fluid w-100 h-100 object-fit-cover rounded shadow-sm hover-zoom" />
-        </a>
-      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
   </div>
 </section>
 
 <section class="features-icons bg-white text-center py-5">
   <div class="container">
-    <h2 class="mb-5 fw-bold">Pourquoi utiliser Coocle ?</h2>
+    <h2 class="mb-3 fw-bold">Pourquoi utiliser Coocle ?</h2>
     <div class="row">
       <div class="col-lg-4">
         <div class="mb-4">
