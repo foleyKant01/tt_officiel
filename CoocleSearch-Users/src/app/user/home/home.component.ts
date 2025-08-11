@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BusinessService } from '../services/users/business.service';
 import { ActivitesService } from '../services/users/activites.service';
+import { TutorialService } from '../services/users/tutorial.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
   textSearch: any;
   is_run: any;
 
-  constructor(private router: Router, private http: BusinessService, private route: ActivatedRoute, private api: ActivitesService) { }
+  constructor(private router: Router, private http: BusinessService, private route: ActivatedRoute, private api: ActivitesService, private tutorialService: TutorialService) { }
 
   search_form: FormGroup = new FormGroup({
     textSearch: new FormControl(null, Validators.required),
@@ -301,6 +302,12 @@ export class HomeComponent implements OnInit {
 
       window.addEventListener('beforeunload', this.unloadCallback);
     }
+
+    // setTimeout(() => {
+    //   if (!this.tutorialService.hasSeenTutorial()) {
+    //     this.tutorialService.startTutorial();
+    //   }
+    // }, 700); // petit délai pour laisser le DOM s'afficher
 
   }
 

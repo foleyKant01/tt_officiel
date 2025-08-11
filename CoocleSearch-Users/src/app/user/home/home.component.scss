@@ -17,6 +17,11 @@ a{
   display: block;
 }
 
+.introjs-tooltip {
+  z-index: 999999 !important;
+}
+
+
 .forgot{
   color: rgb(49, 49, 247);
   text-decoration: underline;
@@ -24,6 +29,15 @@ a{
   position: relative;
   z-index: 10;  /* Assurez-vous que le lien est au-dessus des autres éléments */
 }
+
+.alert {
+  font-size: 13px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
+
 
 .search-wrapper input {
   padding-right: 2.5rem !important;
