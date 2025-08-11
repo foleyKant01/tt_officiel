@@ -17,8 +17,14 @@ a{
   display: block;
 }
 
-.introjs-tooltip {
-  z-index: 999999 !important;
+.appli {
+  position: fixed;
+  bottom: 20px;  /* 20px du bas de l'écran */
+  left: 20px;    /* 20px du bord gauche */
+  z-index: 1000; /* pour être au-dessus du contenu */
+  border-radius: 8px;
+  padding: 10px 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 

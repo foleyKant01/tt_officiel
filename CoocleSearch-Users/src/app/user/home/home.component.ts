@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit {
   backToTopBtnVisible = false; // État du bouton
   isLoggedIn: boolean = false;
   dataBusiness: string | undefined;
+  deferredPrompt: any = null;
+
   user_infos: any
   user_id: any
   localisation: any
@@ -309,6 +311,27 @@ export class HomeComponent implements OnInit {
     //   }
     // }, 700); // petit délai pour laisser le DOM s'afficher
 
+    window.addEventListener('beforeinstallprompt', (event) => {
+      // Empêche la popup automatique
+      event.preventDefault();
+      // Stocke l’event pour le déclencher plus tard
+      this.deferredPrompt = event;
+    });
+
+  }
+
+  addToHomeScreen() {
+    if (!this.deferredPrompt) return;
+
+    this.deferredPrompt.prompt();  // Affiche la boîte d’installation
+    this.deferredPrompt.userChoice.then((choiceResult: any) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      this.deferredPrompt = null;
+    });
   }
 
   getCurrentLocationAndAddress() {

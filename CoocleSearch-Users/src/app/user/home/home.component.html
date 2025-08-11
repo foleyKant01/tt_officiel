@@ -220,6 +220,10 @@
     </div>
   </div>
 </section>
+<button *ngIf="deferredPrompt" (click)="addToHomeScreen()" class="btn btn-primary appli">
+  Ajouter à l'écran d'accueil
+</button>
+
 <button *ngIf="backToTopBtnVisible" (click)="scrollToTop()" id="backToTopBtn"
   style="background: none; border: none; color: black; font-size: 1.2rem; cursor: pointer;">
   Go back up ↑
