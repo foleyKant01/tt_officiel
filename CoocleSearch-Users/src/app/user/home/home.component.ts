@@ -312,6 +312,8 @@ export class HomeComponent implements OnInit {
     // }, 700); // petit délai pour laisser le DOM s'afficher
 
     window.addEventListener('beforeinstallprompt', (event) => {
+      console.log('App is installable');
+
       // Empêche la popup automatique
       event.preventDefault();
       // Stocke l’event pour le déclencher plus tard
