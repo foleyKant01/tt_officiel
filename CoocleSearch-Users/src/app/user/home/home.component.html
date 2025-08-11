@@ -6,8 +6,7 @@
         <small><i class="bi bi-exclamation-triangle-fill me-1"></i>
           Connectez-vous pour une meilleure expérience.</small>
       </div>
-      <a class="forgot text-white" [routerLink]="['/auth/login/']"
-        style="text-decoration: underline;">
+      <a class="forgot text-white" [routerLink]="['/auth/login/']" style="text-decoration: underline;">
         Connexion
       </a>
     </div>
@@ -47,7 +46,8 @@
           demande ou dans les
           paramètres de votre navigateur.</p>
         <div class="col-12 d-flex justify-content-between p-0">
-          <a href="https://support.google.com/chrome/answer/142065" target="_blank" class="btn btn-warning p-2">Autoriser la
+          <a href="https://support.google.com/chrome/answer/142065" target="_blank"
+            class="btn btn-warning p-2">Autoriser la
             position</a>
           <button class="btn btn-dark p-2" (click)="navigateToHome()">Autorisation effèctuer</button>
         </div>
@@ -68,18 +68,20 @@
           <form class="form-subscribe" id="contactForm" [formGroup]="search_form" (ngSubmit)="Searchbusiness()">
             <div class="row justify-content-center">
               <div class="col-md-7 mb-2 grdiv_search">
-                <input id="searchBar" class="form-control rounded-pill shadow-sm submit_search" formControlName="textSearch"
-                  id="textSearch" type="text" placeholder="Restaurants italiens à proximité..." style="height: 45px;" />
+                <input id="searchBar" class="form-control rounded-pill shadow-sm submit_search"
+                  formControlName="textSearch" id="textSearch" type="text"
+                  placeholder="Restaurants italiens à proximité..." style="height: 45px;" />
                 <div class="col-md-auto submit_search">
-                  <button id="filterBtn" class="btn btn-warning rounded-pill px-3 shadow-sm rotate-on-hover" type="submit"
-                    style="height: 45px;"
+                  <button id="filterBtn" class="btn btn-warning rounded-pill px-3 shadow-sm rotate-on-hover"
+                    type="submit" style="height: 45px;"
                     [disabled]="search_form.get('textSearch')?.invalid || search_form.get('textSearch')?.value.trim() === ''">
                     <i class="fas fa-search"></i>
                   </button>
                 </div>
                 <div class="position-relative search_respo">
-                  <input id="searchBar" class="form-control rounded-pill shadow-sm pe-5" formControlName="textSearch" id="textSearch"
-                    type="text" placeholder="Restaurants italiens à proximité..." style="height: 45px;" />
+                  <input id="searchBar" class="form-control rounded-pill shadow-sm pe-5" formControlName="textSearch"
+                    id="textSearch" type="text" placeholder="Restaurants italiens à proximité..."
+                    style="height: 45px;" />
                   <button id="filterBtn" type="submit" class="btn position-absolute search-btn-inside"
                     [disabled]="search_form.get('textSearch')?.invalid || search_form.get('textSearch')?.value.trim() === ''">
                     <i class="fas fa-search"></i>
@@ -194,31 +196,40 @@
 
 <section class="features-icons bg-white text-center py-5">
   <div class="container">
-    <h2 class="mb-3 fw-bold">Pourquoi utiliser Coocle ?</h2>
-    <div class="row">
+    <h2 class="mb-3 fw-bold text-center">Pourquoi utiliser Coocle ?</h2>
+    <div class="row text-center">
+
       <div class="col-lg-4">
-        <div class="mb-4">
-          <i class="bi bi-phone display-4 text-warning"></i>
-          <h4 class="mt-3">100% Responsive</h4>
-          <p>Accessible sur tous les appareils, partout et à tout moment.</p>
+        <div class="mb-4 p-4 shadow rounded bg-light">
+          <i class="bi bi-geo-alt-fill display-4 text-warning"></i>
+          <h4 class="mt-3">Proximité garantie</h4>
+          <p>Trouvez tout ce que vous cherchez — produits, services ou lieux — directement autour de votre position. Vos
+            résultats sont toujours les plus proches de vous.</p>
         </div>
       </div>
+
       <div class="col-lg-4">
-        <div class="mb-4">
-          <i class="bi bi-lightning-charge display-4 text-primary"></i>
-          <h4 class="mt-3">Ultra Rapide</h4>
-          <p>Des résultats instantanés et pertinents à vos recherches.</p>
+        <div class="mb-4 p-4 shadow rounded bg-light">
+          <i class="bi bi-map-fill display-4 text-primary"></i>
+          <h4 class="mt-3">Résultats 100% locaux et fiables</h4>
+          <p>Nous recherchons uniquement en Côte d’Ivoire, ce qui vous assure des informations précises, vraies et
+            vérifiées, avec des localisations exactes.</p>
         </div>
       </div>
+
       <div class="col-lg-4">
-        <div class="mb-4">
-          <i class="bi bi-stars display-4 text-success"></i>
-          <h4 class="mt-3">Simple & Intuitif</h4>
-          <p>Une interface agréable et facile à utiliser pour tous.</p>
+        <div class="mb-4 p-4 shadow rounded bg-light">
+          <i class="bi bi-clock-history display-4 text-success"></i>
+          <h4 class="mt-3">Mises à jour régulières</h4>
+          <p>Parce que le local évolue vite, nos résultats sont actualisés tous les 3 mois pour rester pertinents et
+            vous offrir la meilleure expérience possible.</p>
         </div>
       </div>
+
     </div>
   </div>
+
+
 </section>
 <button *ngIf="deferredPrompt" (click)="addToHomeScreen()" class="btn btn-primary appli">
   Ajouter à l'écran d'accueil

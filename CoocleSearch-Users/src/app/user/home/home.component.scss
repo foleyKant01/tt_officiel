@@ -104,7 +104,7 @@ a{
   .div_header {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
-    margin-top: -8rem!important;
+    margin-top: -10rem!important;
 }
 }
 
@@ -116,7 +116,7 @@ a{
   .div_header {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
-    margin-top: -8rem!important;
+    margin-top: -10rem!important;
   }
 
   .search-btn-inside {
@@ -477,5 +477,12 @@ img{
     opacity: 0.5;
     pointer-events: none;
   }
+  .masthead{
+    height: 220px!important;
+  }
+
+  .div_header {
+    margin-top: -12rem!important;
+}
 }
 
