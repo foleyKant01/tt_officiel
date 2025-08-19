@@ -92,6 +92,530 @@ def CreateBusiness():
     return response
 
 
+    def InsertAllBusiness():
+    response = {}
+    business_data = [
+        {
+            "name":"Pharmacie BERACA",
+            "description":"Pharmacie à Yopougon camp militaire petit toit rouge.",
+            "city":"Yopougon, Abidjan",
+            "address":"camp militaire petit toit rouge",
+            "phone":"0709264899",
+            "latitude":"5.3185692037751515",
+            "longitude":"-4.064772275183709"
+        },
+        {
+            "name":"Pharmacie d'Azito",
+            "description":"Pharmacie à Yopougon Niangon Sud.",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon Sud",
+            "phone":"",
+            "latitude":"5.309766171932483",
+            "longitude":"-4.087227882712183"
+        },
+        {
+            "name":"Pharmacie Jean-Pierre",
+            "description":"Pharmacie à Yopougon Niangon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon à droite",
+            "phone":"2723463003",
+            "latitude":"5.322044320521317",
+            "longitude":"-4.103301775183712"
+        },
+        {
+            "name":"Pharmacie Artémia",
+            "description":"Pharmacie à Yopougon sideci vers le palais de justice.",
+            "city":"Yopougon, Abidjan",
+            "address":"sideci vers le palais de justice",
+            "phone":"",
+            "latitude":",5.326668819713181",
+            "longitude":"-4.07716151751357"
+        },
+        {
+            "name":"Pharmacie Boissy",
+            "description":"Pharmacie à Yopougon Toits Rouges.",
+            "city":"Yopougon, Abidjan",
+            "address":"En face du Commissariat du 19eme Arrondissement - Toits Rouges",
+            "phone":"",
+            "latitude":"5.327374219589805",
+            "longitude":"-4.051069490523946" 
+        },
+        {
+            "name":"Pharmacie Nouveau Quartier",
+            "description":"Pharmacie à Yopougon (ABOBODOUME/LOCODJORO).",
+            "city":"Yopougon, Abidjan",
+            "address":"Nouveau Quartier après le Restaurant OBV Complexe,",
+            "phone":"0759997081",
+            "latitude":"5.339151108898771",
+            "longitude":"-4.062492481943854"
+        },
+        {
+            "name":"Pharmacie Yasmine Du Nouveau Quartier",
+            "description":"Pharmacie à Yopougon Toit-Rouge.",
+            "city":"Yopougon, Abidjan",
+            "address":"Toit-Rouge,",
+            "phone":"",
+            "latitude":"5.331905699219375",
+            "longitude":"-4.052521366211607"
+        },
+                {
+            "name":"Pharmacie Yasine",
+            "description":"Pharmacie à Yopougon Toit-Rouge.",
+            "city":"Yopougon, Abidjan",
+            "address":"Toit-Rouge,",
+            "phone":"",
+            "latitude":"5.331841028654585", , 
+            "longitude":"-4.055249333214012"
+        },
+        {
+            "name":"Pharmacie Toit-Rouge",
+            "description":"Pharmacie à Yopougon Toit-Rouge.",
+            "city":"Yopougon, Abidjan",
+            "address":"Toit-Rouge,",
+            "phone":"",
+            "latitude":"5.331685819271328",
+            "longitude":"-4.055619557307197"
+        },
+        {
+            "name":"Pharmacie Sainte Rita",
+            "description":"Pharmacie à Yopougon Niangon Nord.",
+            "city":"Yopougon, Abidjan",
+            "address":"T 112 Non loin de l'Eglise Ste Rita de Cascia, Niangon Nord",
+            "phone":"",
+            "latitude":"5.3284358441889115",
+            "longitude":"-4.096425493790921"
+        },
+        {
+            "name":"Pharmacie Beyniouah",
+            "description":"Pharmacie à Yopougon Niangon Nord.",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon Nord pas loin du CENTRE MEDICALE SAINT THEOPHILE D'ESPERANCE",
+            "phone":"",
+            "latitude":"5.323051853870414",
+            "longitude":"-4.093593081333024"
+        },
+        {
+            "name":"Pharmacie Niangon Nord",
+            "description":"Pharmacie à Yopougon Niangon Nord.",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon Nord",
+            "phone":"",
+            "latitude":"5.329538305782463",
+            "longitude":"-4.102396041563789"
+        },
+                {
+            "name":"Pharmacie Esther",
+            "description":"Pharmacie à Yopougon Niangon Nord.",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon Nord",
+            "phone":"",
+            "latitude":"5.326159321549768",
+            "longitude":"-4.105925808265"
+        }, 
+        {
+            "name":"Pharmacie de la cité verte",
+            "description":"Pharmacie à Yopougon cité verte.",
+            "city":"Yopougon, Abidjan",
+            "address":"Cité verte",
+            "phone":"",
+            "latitude":"5.32782784772088",
+            "longitude":"-4.110054547937452"
+        },
+        {
+            "name":"Pharmacie Théodora",
+            "description":"Pharmacie à Yopougon Niangon Sud.",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon Sud non loin de CLINIQUE MEDICALE ELITE",
+            "phone":"",
+            "latitude":"5.31880674123772",
+            "longitude":"-4.094811350342529"
+        },
+        {
+            "name":"Pharmacie des ESPERANCES",
+            "description":"Pharmacie à Yopougon Niangon Sud.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon à droite non loin du carrefour Super Sonia",
+            "phone":"",
+            "latitude":"5.31914392908887",
+            "longitude":"-4.0994704273674"
+        },
+        {   
+            "name":"Pharmacie Le LOTUS",
+            "description":"Pharmacie à Yopougon Niangon Sud.",
+            "city":"Yopougon, Abidjan",
+            "address":"Non loin du carrefour allocodrome de Niangon",
+            "phone":"2723455797",
+            "latitude":"5.317192737877698", 
+            "longitude":"-4.08884491291708"
+        },
+        {
+            "name":"Pharmacie Niangon Lokoa",
+            "description":"Pharmacie à Yopougon Niangon Sud.",
+            "city":"Yopougon, Abidjan",
+            "address":"Non loin du LYCÉE MUNICIPAL SIMONE EHIVET GBAGBO",
+            "phone":"0546406090",
+            "latitude":"5.314795754025947",
+            "longitude":"-4.099958907954671"
+        },
+        {
+            "name":"Pharmacie Santa Caterina",
+            "description":"Pharmacie à Yopougon Sicogi.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon Sicogi",
+            "phone":"0777677980",
+            "latitude":"5.337584875897572",
+            "longitude":"-4.075430338884962"
+        },
+        {
+            "name":"Pharmacie Wakouboué",
+            "description":"Pharmacie à Yopougon score.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon score",
+            "phone":"0102759915",
+            "latitude":"5.339879271504288", , 
+            "longitude":"-4.073674731590526"
+        },
+        {
+            "name":"Pharmacie du 16ème",
+            "description":"Pharmacie à Yopougon 16ème.",
+            "city":"Yopougon, Abidjan",
+            "address":"Non loin du Commissariat du 16ème Arrondissement",
+            "phone":"",
+            "latitude":"5.3374547290430625",
+            "longitude":"-4.0712021270009595"
+        },
+        {
+            "name":"Pharmacie du Marché",
+            "description":"Pharmacie à Yopougon Sicogi marché.",
+            "city":"Yopougon, Abidjan",
+            "address":"Sicogi marché",
+            "phone":"0153507272",
+            "latitude":"5.337421996569971",
+            "longitude":"-4.079113517293957"
+        },
+        {
+            "name":"Pharmacie Saint Raphael",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Après la Cité novalim en allant vers Amondji",
+            "phone":"",
+            "latitude":"5.341550680934795", , 
+            "longitude":"-4.087480291909348"
+        },
+        {
+            "name":"Pharmacie Sainte Aude",
+            "description":"Pharmacie à Yopougon Siporex.",
+            "city":"Yopougon, Abidjan",
+            "address":"Siporex non loin du Collège I.P.E.S Yopougon siporex",
+            "phone":"",
+            "latitude":"5.355570582995303",
+            "longitude":"-4.077459571990685"
+        },
+        {
+            "name":"Pharmacie Notre Dame des Victoires",
+            "description":"Pharmacie à Yopougon Millionnaire.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon Millionnaire,",
+            "phone":"",
+            "latitude":"5.340504988230851",
+            "longitude":"-4.0480040463486"
+        },
+        {
+            "name":"Pharmacie Mère de Grâces",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"",
+            "latitude":"5.355569432644565",
+            "longitude":"-4.0526051905238685"
+        },
+        {
+            "name":"Pharmacie du Millionnaire",
+            "description":"Pharmacie à Yopougon Millionnaire.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon Millionnaire après Institut Des Aveugles,",
+            "phone":"0101999409",
+            "latitude":"5.352282420224109",
+            "longitude":"-4.0587220058082085"
+        },
+        {
+            "name":"Pharmacie d'Abobo-Doumé",
+            "description":"Pharmacie à Yopougon (Abobodoumé).",
+            "city":"Yopougon, Abidjan",
+            "address":"Abobodoumé non loin du Lycée Municipal Attécoubé,",
+            "phone":"0171288572",
+            "latitude":"5.314760621792708",
+            "longitude":"-4.035553132853881"
+        },
+        {
+            "name":"Pharmacie Maison Blanche",
+            "description":"Pharmacie à Yopougon Maison Blanche.",
+            "city":"Yopougon, Abidjan",
+            "address":"Maison Blanche,",
+            "phone":"2723461453",
+            "latitude":"5.347638444605589",
+            "longitude":"-4.082718317513527"
+        },
+        {
+            "name":"Pharmacie Niangon Sud",
+            "description":"Pharmacie à Yopougon Niangon Sud.",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon Sud",
+            "phone":"",
+            "latitude":"5.315909052366288",
+            "longitude":"-4.091707146348606"
+        },
+        {
+            "name":"Pharmacie Che N'Tale",
+            "description":"Pharmacie à Yopougon Annaneraie.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon Annaneraie",
+            "phone":"",
+            "latitude":"5.351123813205555",
+            "longitude":"-4.096807834145619"
+        },
+        {
+            "name":"Pharmacie Forêts",
+            "description":"Pharmacie à l'entré de la CITÉ ADO.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon",
+            "phone":"",
+            "latitude":"5.401466586512199",
+            "longitude":"-4.084942453095683"
+        },
+        {
+            "name":"Pharmacie La Rosée de l'Hermon",
+            "description":"Pharmacie à Yopougon .",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon Sud non de Académie Diop ",
+            "phone":"",
+            "latitude":"5.31645940417997",
+            "longitude":"-4.110178577029194"
+        },
+        {
+            "name":"Pharmacie SIDECI Extension",
+            "description":"Pharmacie à Yopougon (SIDECI).",
+            "city":"Yopougon, Abidjan",
+            "address":"SIDECI Extension, Yopougon,",
+            "phone":"SIDECI Extension, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+
+        {
+            "name":"Pharmacie Christ Roi",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Mariama d'Allokoi",
+            "description":"Pharmacie à Yopougon (Allokoi PK23).",
+            "city":"Yopougon, Abidjan",
+            "address":"Allokoi PK23, Yopougon,",
+            "phone":"Allokoi PK23, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Saint Aubin",
+            "description":"Pharmacie à Yopougon (ABOBODOUME/LOCODJORO).",
+            "city":"Yopougon, Abidjan",
+            "address":"Abobodoumé/Locodjro, Yopougon,",
+            "phone":"Abobodoumé/Locodjro, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie de Locodjro",
+            "description":"Pharmacie à Yopougon (Locodjro).",
+            "city":"Yopougon, Abidjan",
+            "address":"Locodjro, Yopougon,",
+            "phone":"Locodjro, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Saint Martin Faya",
+            "description":"Pharmacie à Yopougon (Faya).",
+            "city":"Yopougon, Abidjan",
+            "address":"Faya, Yopougon,",
+            "phone":"Faya, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie La Vie Yopougon",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Progrès",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Beyniouah",
+            "description":"Pharmacie à Yopougon (Niangon).",
+            "city":"Yopougon, Abidjan",
+            "address":"Niangon, Yopougon,",
+            "phone":"Niangon, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Nouvelle Pharmacie Awalé",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Saint Raphaël",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+
+        {
+            "name":"Pharmacie Carrefour Pompier",
+            "description":"Pharmacie à Yopougon (carrefour pompier).",
+            "city":"Yopougon, Abidjan",
+            "address":"Carrefour Pompier, Yopougon,",
+            "phone":"Carrefour Pompier, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie CELIA",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie RABBI",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Penfina",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Assonvon",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon Assonvon,",
+            "phone":"Yopougon Assonvon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie de la Félicité",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Saint Clément (SARL)",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie W. Ponty (William Ponty)",
+            "description":"Pharmacie à Yopougon (SICOGI, face collège William Ponty).",
+            "city":"Yopougon, Abidjan",
+            "address":"SICOGI, Yopougon,",
+            "phone":"SICOGI, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie Sainte Marie",
+            "description":"Pharmacie à Yopougon.",
+            "city":"Yopougon, Abidjan",
+            "address":"Yopougon,",
+            "phone":"Yopougon,",
+            "latitude":null,
+            "longitude":null
+        },
+
+        {
+            "name":"Nouvelle Pharmacie Principale (Yopougon)",
+            "description":"En face de la place Ficgayo, à côté de COSMOS (Yopougon).",
+            "city":"Yopougon, Abidjan",
+            "address":"Ficgayo, Yopougon, (face COSMOS)",
+            "phone":"Ficgayo, Yopougon, (face COSMOS)",
+            "latitude":null,
+            "longitude":null
+        },
+        {
+            "name":"Pharmacie de la Mairie de Yopougon",
+            "description":"À 200 m de la Mairie, face au maquis Tantie Margot (ligne bus 30 – Selmer).",
+            "city":"Yopougon, Abidjan",
+            "address":"Selmer, Yopougon,",
+            "phone":"Selmer, Yopougon,",
+            "latitude":null,
+            "longitude":null
+        }
+    ]
+
+    for business in business_data:
+    existing = Business.query.filter_by(bu_name=cat["name"]).first()
+    if not existing:
+        db.session.add(Business(
+            bu_categorie='Pharmacie',
+            bu_type=business'physique',
+            bu_name=business["name"],
+            bu_description=business["description"],
+            bu_city=business["city"],
+            bu_address=business["address"],
+            phone=business["phone"],
+            bu_status=Active,
+            latitude=business["latitude"],
+            longitude=business["longitude"],
+            t_uid=request.json.get('t_uid')))
+    
+    db.session.commit()
+    print("Business enregistrées avec succès.")
+    response['status'] = 'Business enregistrées avec succès.'
+    return response
+
 
 def UpdateBusiness():
     response = {}
@@ -248,8 +772,9 @@ def ReadSingleBusiness():
                 'bu_type': single_business.bu_type,
                 'bu_name': single_business.bu_name,
                 'bu_description': single_business.bu_description,
-                'localisation': f"https://www.google.com/maps?q={single_business.latitude},{single_business.longitude}",
-                'bu_city': single_business.bu_city,
+                'localisation': f"https://www.google.com/maps?q={single_business.latitude
+                },{single_business.longitude}",
+                    'bu_city': single_business.bu_city,
                 'bu_website': single_business.bu_website,
                 'bu_address': single_business.bu_address,
                 'phone': single_business.phone,
@@ -435,8 +960,9 @@ def SearchBusinessByCategorie():
                     'bu_name': business.bu_name,
                     'bu_description': business.bu_description[:150]+"..." if len(business.bu_description) > 150 else business.bu_description,
                     'bu_city': business.bu_city,
-                    'localisation': "https://www.google.com/maps?q={business.latitude},{business.longitude}",
-                    'bu_website': business.bu_website,
+                    'localisation': "https://www.google.com/maps?q={business.latitude
+                    },{business.longitude}",
+                        'bu_website': business.bu_website,
                     'phone': business.phone,
                     'bu_address': business.bu_address,
                     # 'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              

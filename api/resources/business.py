@@ -6,9 +6,12 @@ class BusinessApi(Resource):
     def post(self, route):
         if route == "createbusiness":
             return CreateBusiness()
+
+        if route == "insertallbusiness":
+            return InsertAllBusiness()
         
         if route == "readsinglebusiness":
-            return ReadSingleBusiness() 
+            return ReadSingleBusiness()  
         
         if route == "readsinglebusinessbycategories":
             return ReadAllBusinessByCategories() 

@@ -512,7 +512,6 @@ def InsertAllCategories():
 
 
 
-
 def CreateCategories():
     response = {}
     try:
