@@ -12,6 +12,9 @@ from sqlalchemy import or_
 import re
 import unicodedata
 import math
+from flask import Flask
+import requests  # <- il manquait ça
+
 
 
 if not os.path.exists(UPLOAD_FOLDER):
@@ -92,7 +95,7 @@ def CreateBusiness():
     return response
 
 
-    def InsertAllBusiness():
+def InsertAllBusiness():
     response = {}
     business_data = [
         {
@@ -158,13 +161,13 @@ def CreateBusiness():
             "latitude":"5.331905699219375",
             "longitude":"-4.052521366211607"
         },
-                {
+        {
             "name":"Pharmacie Yasine",
             "description":"Pharmacie à Yopougon Toit-Rouge.",
             "city":"Yopougon, Abidjan",
             "address":"Toit-Rouge,",
             "phone":"",
-            "latitude":"5.331841028654585", , 
+            "latitude":"5.331841028654585",
             "longitude":"-4.055249333214012"
         },
         {
@@ -272,7 +275,7 @@ def CreateBusiness():
             "city":"Yopougon, Abidjan",
             "address":"Yopougon score",
             "phone":"0102759915",
-            "latitude":"5.339879271504288", , 
+            "latitude":"5.339879271504288",
             "longitude":"-4.073674731590526"
         },
         {
@@ -299,7 +302,7 @@ def CreateBusiness():
             "city":"Yopougon, Abidjan",
             "address":"Après la Cité novalim en allant vers Amondji",
             "phone":"",
-            "latitude":"5.341550680934795", , 
+            "latitude":"5.341550680934795",
             "longitude":"-4.087480291909348"
         },
         {
@@ -387,7 +390,7 @@ def CreateBusiness():
             "name":"Pharmacie La Rosée de l'Hermon",
             "description":"Pharmacie à Yopougon .",
             "city":"Yopougon, Abidjan",
-            "address":"Niangon Sud non de Académie Diop ",
+            "address":"Niangon Sud non de Académie Diop",
             "phone":"",
             "latitude":"5.31645940417997",
             "longitude":"-4.110178577029194"
@@ -396,47 +399,47 @@ def CreateBusiness():
             "name":"Pharmacie SIDECI Extension",
             "description":"Pharmacie à Yopougon (SIDECI).",
             "city":"Yopougon, Abidjan",
-            "address":"SIDECI Extension, Yopougon,",
-            "phone":"SIDECI Extension, Yopougon,",
-            "latitude":null,
-            "longitude":null
+            "address":"SIDECI Extension",
+            "phone":"0758094604",
+            "latitude":"5.323787085329905",
+            "longitude":"-4.08320927518366"
         },
 
+        {
+            "name":"Pharmacie Christ Roi carrefour Jean Paul 2",
+            "description":"Pharmacie Christ Roi carrefour Jean Paul 2 à Yopougon Toit rouge.",
+            "city":"Yopougon, Abidjan",
+            "address":"Carrefour Jean Paul 2 à Yopougon Toit rouge",
+            "phone":"0789912806",
+            "latitude":"5.330980234560304",
+            "longitude":"-4.047439793754489"
+        },
         {
             "name":"Pharmacie Christ Roi",
             "description":"Pharmacie à Yopougon.",
             "city":"Yopougon, Abidjan",
-            "address":"Yopougon,",
-            "phone":"Yopougon,",
-            "latitude":null,
-            "longitude":null
-        },
-        {
-            "name":"Pharmacie Mariama d'Allokoi",
-            "description":"Pharmacie à Yopougon (Allokoi PK23).",
-            "city":"Yopougon, Abidjan",
-            "address":"Allokoi PK23, Yopougon,",
-            "phone":"Allokoi PK23, Yopougon,",
-            "latitude":null,
-            "longitude":null
+            "address":" Avant le poste De Péage du 4ième Pont Yopougon côté toit rouge,",
+            "phone":"",
+            "latitude":"5.336374837723524",
+            "longitude":"-4.042472343153809"
         },
         {
             "name":"Pharmacie Saint Aubin",
-            "description":"Pharmacie à Yopougon (ABOBODOUME/LOCODJORO).",
+            "description":"Pharmacie Saint Aubin Vers Agbayate 1 au Carrefour mosquée blanche",
             "city":"Yopougon, Abidjan",
-            "address":"Abobodoumé/Locodjro, Yopougon,",
-            "phone":"Abobodoumé/Locodjro, Yopougon,",
-            "latitude":null,
-            "longitude":null
+            "address":"Vers Agbayate 1 au Carrefour mosquée blanche",
+            "phone":"0546053436",
+            "latitude":"5.31404255646737",
+            "longitude":"-4.043811804018835"
         },
         {
             "name":"Pharmacie de Locodjro",
-            "description":"Pharmacie à Yopougon (Locodjro).",
+            "description":"Pharmacie Locodjro à Yopougon (Locodjro).",
             "city":"Yopougon, Abidjan",
             "address":"Locodjro, Yopougon,",
-            "phone":"Locodjro, Yopougon,",
-            "latitude":null,
-            "longitude":null
+            "phone":"L",
+            "latitude":"5.332581041431064",
+            "longitude":"-4.04178014454388"
         },
         {
             "name":"Pharmacie Saint Martin Faya",
@@ -596,21 +599,22 @@ def CreateBusiness():
     ]
 
     for business in business_data:
-    existing = Business.query.filter_by(bu_name=cat["name"]).first()
-    if not existing:
-        db.session.add(Business(
-            bu_categorie='Pharmacie',
-            bu_type=business'physique',
-            bu_name=business["name"],
-            bu_description=business["description"],
-            bu_city=business["city"],
-            bu_address=business["address"],
-            phone=business["phone"],
-            bu_status=Active,
-            latitude=business["latitude"],
-            longitude=business["longitude"],
-            t_uid=request.json.get('t_uid')))
-    
+        existing = Business.query.filter_by(bu_name=business["name"]).first()
+        if not existing:
+            db.session.add(Business(
+                bu_categorie='Pharmacie',
+                bu_type='physique',
+                bu_name=business["name"],
+                bu_description=business["description"],
+                bu_city=business["city"],
+                bu_address=business["address"],
+                phone=business["phone"],
+                bu_status="Active",  # ou Active si c'est une constante
+                latitude=business["latitude"],
+                longitude=business["longitude"],
+                t_uid=request.json.get('t_uid')
+            ))
+
     db.session.commit()
     print("Business enregistrées avec succès.")
     response['status'] = 'Business enregistrées avec succès.'
@@ -772,9 +776,8 @@ def ReadSingleBusiness():
                 'bu_type': single_business.bu_type,
                 'bu_name': single_business.bu_name,
                 'bu_description': single_business.bu_description,
-                'localisation': f"https://www.google.com/maps?q={single_business.latitude
-                },{single_business.longitude}",
-                    'bu_city': single_business.bu_city,
+                'localisation': f"https://www.google.com/maps?q={single_business.latitude},{single_business.longitude}",
+                'bu_city': single_business.bu_city,
                 'bu_website': single_business.bu_website,
                 'bu_address': single_business.bu_address,
                 'phone': single_business.phone,
@@ -892,100 +895,305 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     return R * c  # distance en km
 
 
+# def SearchBusinessByCategorie():
+#     response = {}
+#     try:
+#         data = request.json
+#         user_id = data.get('user_id')
+#         user_latitude = float(data.get('latitude'))
+#         user_longitude = float(data.get('longitude'))
+#         text = data.get('textSearch', '').strip()
+#         print(f"Original text: {text}")
+        
+#         textSearch = remove_accents(text)
+#         print(f"Text after accent removal: {textSearch}") 
+        
+#         page = int(data.get('page', 1))
+#         per_page = int(data.get('per_page', 10))
+
+#         if not textSearch:
+#             return jsonify({'status': 'error', 'error_description': 'textSearch is required'}), 400
+
+#         normalized_search = [w for w in normalize_text(textSearch) if len(w) > 2]
+#         print(f"Normalized search terms (len > 2): {normalized_search}")
+
+#         matched_businesses = []
+#         for word in normalized_search:
+#             word_search = f"%{word}%"
+#             print(f"Recherche de : {word_search}")
+#             all_business = Business.query.filter(
+#                 Business.bu_status == 'active',
+#                 or_(
+#                     Business.bu_categorie.ilike(word_search),
+#                     Business.bu_name.ilike(word_search),
+#                     Business.bu_description.ilike(word_search),
+#                     Business.bu_city.ilike(word_search)
+#                 )
+#             ).all()
+#             print(f"{len(all_business)} résultat(s) pour le mot : {word}")
+#             matched_businesses.extend(all_business)
+
+#         matched_businesses = list({business.bu_uid: business for business in matched_businesses}.values())
+
+#         if matched_businesses:
+#             # Ajouter la distance à chaque business
+#             business_with_distance = []
+#             for business in matched_businesses:
+#                 if business.latitude is not None and business.longitude is not None:
+#                     distance = haversine_distance(user_latitude, user_longitude, business.latitude, business.longitude)
+#                 else:
+#                     distance = 999999.0  # Valeur arbitrairement grande
+#                 business_with_distance.append((business, distance))
+
+#             # Trier par distance croissante
+#             business_with_distance.sort(key=lambda x: x[1])
+#             total = len(business_with_distance)
+#             start = (page - 1) * per_page
+#             end = start + per_page
+#             paginated_businesses = business_with_distance[start:end]
+
+#             business_infos = []
+#             for business, distance in paginated_businesses:
+#                 all_favs = Favoris.query.filter_by(bu_uid=business.bu_uid, u_uid=user_id).first()
+#                 is_favs = 1 if all_favs else 0
+#                 business_infos.append({
+#                     'bu_uid': business.bu_uid,
+#                     'bu_categorie': business.bu_categorie,
+#                     'bu_type': business.bu_type,
+#                     'bu_name': business.bu_name,
+#                     'bu_description': business.bu_description[:150]+"..." if len(business.bu_description) > 150 else business.bu_description,
+#                     'bu_city': business.bu_city,
+#                     'localisation': "https://www.google.com/maps?q={business.latitude},{business.longitude}",
+#                     'bu_website': business.bu_website,
+#                     'phone': business.phone,
+#                     'bu_address': business.bu_address,
+#                     # 'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
+#                     't_uid': business.t_uid,
+#                     'is_favs': is_favs,
+#                     'bu_status': business.bu_status,
+#                     'latitude': business.latitude,
+#                     'longitude': business.longitude,
+#                     'distance_km': round(distance, 2)
+#                 })
+#             response['status'] = 'success'
+#             response['business'] = business_infos
+#             response['textSearch'] = textSearch
+#             response['total'] = total
+#             response['pages'] = (total + per_page - 1) // per_page
+#             response['current_page'] = page
+#         else:
+#             response['status'] = 'Not found'
+#             response['textSearch'] = textSearch
+
+#     except Exception as e:
+#         app.logger.error(f"Error in searchBusinessByCategorie: {str(e)}")
+#         response['status'] = 'error'
+#         response['error_description'] = 'An unexpected error occurred.'
+
+#     return response, 200
+
+
 def SearchBusinessByCategorie():
     response = {}
     try:
         data = request.json
         user_id = data.get('user_id')
-        user_latitude = float(data.get('latitude'))
-        user_longitude = float(data.get('longitude'))
+        user_lat = float(data.get('latitude'))
+        user_lon = float(data.get('longitude'))
         text = data.get('textSearch', '').strip()
-        print(f"Original text: {text}")
-        
-        textSearch = remove_accents(text)
-        print(f"Text after accent removal: {textSearch}") 
-        
+        city = data.get('city')
         page = int(data.get('page', 1))
         per_page = int(data.get('per_page', 10))
 
-        if not textSearch:
+        if not text:
             return jsonify({'status': 'error', 'error_description': 'textSearch is required'}), 400
-
+        print('debut1')
+        textSearch = remove_accents(text)
         normalized_search = [w for w in normalize_text(textSearch) if len(w) > 2]
-        print(f"Normalized search terms (len > 2): {normalized_search}")
 
-        matched_businesses = []
+        combined_results = []
+
+        # ===== 1. Rechercher dans la base interne =====
+        filters = []
         for word in normalized_search:
             word_search = f"%{word}%"
-            print(f"Recherche de : {word_search}")
-            all_business = Business.query.filter(
-                Business.bu_status == 'active',
-                or_(
-                    Business.bu_categorie.ilike(word_search),
-                    Business.bu_name.ilike(word_search),
-                    Business.bu_description.ilike(word_search),
-                    Business.bu_city.ilike(word_search)
-                )
-            ).all()
-            print(f"{len(all_business)} résultat(s) pour le mot : {word}")
-            matched_businesses.extend(all_business)
+            filters.append(Business.bu_categorie.ilike(word_search))
+            filters.append(Business.bu_name.ilike(word_search))
+            filters.append(Business.bu_description.ilike(word_search))
+            filters.append(Business.bu_city.ilike(word_search))
+        # Une seule requête SQL pour tous les mots
+        matched_businesses = Business.query.filter(
+            Business.bu_status == 'active',
+            or_(*filters)
+        ).all()
 
-        matched_businesses = list({business.bu_uid: business for business in matched_businesses}.values())
+        matched_businesses = list({b.bu_uid: b for b in matched_businesses}.values())
 
-        if matched_businesses:
-            # Ajouter la distance à chaque business
-            business_with_distance = []
-            for business in matched_businesses:
-                if business.latitude is not None and business.longitude is not None:
-                    distance = haversine_distance(user_latitude, user_longitude, business.latitude, business.longitude)
-                else:
-                    distance = 999999.0  # Valeur arbitrairement grande
-                business_with_distance.append((business, distance))
+        for business in matched_businesses:
+            if business.latitude is not None and business.longitude is not None:
+                distance = haversine_distance(user_lat, user_lon, business.latitude, business.longitude)
+            else:
+                distance = 999999.0
+            all_favs = Favoris.query.filter_by(bu_uid=business.bu_uid, u_uid=user_id).first()
+            is_favs = 1 if all_favs else 0
+            combined_results.append({
+                'bu_uid': business.bu_uid,
+                'bu_categorie': business.bu_categorie,
+                'bu_type': business.bu_type,
+                'bu_name': business.bu_name,
+                'bu_description': business.bu_description[:150]+"..." if len(business.bu_description) > 150 else business.bu_description,
+                'bu_city': business.bu_city,
+                'localisation': "https://www.google.com/maps?q={business.latitude},{business.longitude}",
+                'bu_website': business.bu_website,
+                'phone': business.phone,
+                'bu_address': business.bu_address,
+                't_uid': business.t_uid,
+                'is_favs': is_favs,
+                'bu_status': business.bu_status,
+                'latitude': business.latitude,
+                'longitude': business.longitude,
+                "source": "internal",
+                'distance_km': round(distance, 2)
+            })
+        print('debut2')
 
-            # Trier par distance croissante
-            business_with_distance.sort(key=lambda x: x[1])
-            total = len(business_with_distance)
-            start = (page - 1) * per_page
-            end = start + per_page
-            paginated_businesses = business_with_distance[start:end]
+        # ===== 2. Rechercher dans OSM via Overpass =====
+        osm_query = build_overpass_query(textSearch, city)
+        url = "https://overpass-api.de/api/interpreter"
+        osm_response = requests.get(url, params={"data": osm_query})
+        osm_data = osm_response.json()
 
-            business_infos = []
-            for business, distance in paginated_businesses:
-                all_favs = Favoris.query.filter_by(bu_uid=business.bu_uid, u_uid=user_id).first()
-                is_favs = 1 if all_favs else 0
-                business_infos.append({
-                    'bu_uid': business.bu_uid,
-                    'bu_categorie': business.bu_categorie,
-                    'bu_type': business.bu_type,
-                    'bu_name': business.bu_name,
-                    'bu_description': business.bu_description[:150]+"..." if len(business.bu_description) > 150 else business.bu_description,
-                    'bu_city': business.bu_city,
-                    'localisation': "https://www.google.com/maps?q={business.latitude
-                    },{business.longitude}",
-                        'bu_website': business.bu_website,
-                    'phone': business.phone,
-                    'bu_address': business.bu_address,
-                    # 'bu_picture': str(IMGHOSTNAME)+str(business.bu_picture),              
-                    't_uid': business.t_uid,
-                    'is_favs': is_favs,
-                    'bu_status': business.bu_status,
-                    'latitude': business.latitude,
-                    'longitude': business.longitude,
-                    'distance_km': round(distance, 2)
-                })
-            response['status'] = 'success'
-            response['business'] = business_infos
-            response['textSearch'] = textSearch
-            response['total'] = total
-            response['pages'] = (total + per_page - 1) // per_page
-            response['current_page'] = page
-        else:
-            response['status'] = 'Not found'
-            response['textSearch'] = textSearch
+        for element in osm_data.get("elements", []):
+            name = element.get("tags", {}).get("name", "Inconnu")
+            city = element.get("tags", {}).get("addr:city")
+            suburb = element.get("tags", {}).get("addr:suburb")
+            lat = element.get("lat")
+            lon = element.get("lon")
+            distance = haversine_distance(user_lat, user_lon, lat, lon)
+            combined_results.append({
+                "bu_name": name,
+                "bu_city": city,
+                "bu_address": suburb,
+                "latitude": lat,
+                "longitude": lon,
+                'localisation': "https://www.google.com/maps?q={lat},{lon}",
+                "source": "osm",
+                "distance_km": round(distance, 2)
+            })
+
+        # ===== 3. Trier par distance =====
+        print('debut3')
+
+        combined_results.sort(key=lambda x: x["distance_km"])
+
+        # ===== 4. Pagination =====
+        total = len(combined_results)
+        start = (page - 1) * per_page
+        end = start + per_page
+        paginated = combined_results[start:end]
+        print('debut4')
+
+        response['status'] = 'success'
+        response['total'] = total
+        response['pages'] = (total + per_page - 1) // per_page
+        response['current_page'] = page
+        response['results'] = paginated
 
     except Exception as e:
-        app.logger.error(f"Error in searchBusinessByCategorie: {str(e)}")
+        app.logger.error(f"Error in combined_search: {str(e)}")
         response['status'] = 'error'
-        response['error_description'] = 'An unexpected error occurred.'
+        response['error_description'] = str(e)
 
-    return response, 200
+    return response
+
+
+
+
+# Fonction qui construit la requête Overpass
+def build_overpass_query(user_input, area):
+    tagMapping = {
+    # Santé
+    "pharmacie": "pharmacy",
+    "pharmacies": "pharmacy",
+    "clinique": "clinic",
+    "hôpital": "hospital",
+    "hopital": "hospital",
+    "centre médical": "clinic",
+    "laboratoire": "laboratory",
+
+    # Alimentation
+    "restaurant": "restaurant",
+    "resto": "restaurant",
+    "fast-food": "fast_food",
+    "supermarché": "supermarket",
+    "supérette": "supermarket",
+    "boulangerie": "bakery",
+    "café": "cafe",
+    "bar": "bar",
+    "glacier": "ice_cream",
+    "boucherie": "butcher",
+
+    # Transports / véhicules
+    "station service": "fuel",
+    "station essence": "fuel",
+    "parking": "parking",
+    "garage": "garage",
+    "taxi": "taxi",
+    "arrêt de bus": "bus_stop",
+
+    # Education
+    "école": "school",
+    "college": "school",
+    "collège": "school",
+    "lycée": "school",
+    "université": "university",
+    "centre de formation": "school",
+
+    # Finance / services
+    "banque": "bank",
+    "caisse": "bank",
+    "guichet": "atm",
+    "bureau de poste": "post_office",
+
+    # Loisirs / tourisme
+    "hôtel": "hotel",
+    "auberge": "hostel",
+    "centre sportif": "sports_centre",
+    "terrain de sport": "pitch",
+    "cinéma": "cinema",
+    "parc": "park",
+    "aire de jeux": "playground",
+    "musée": "museum",
+    "église": "place_of_worship",
+    "mosquée": "place_of_worship",
+    "temple": "place_of_worship",
+
+    # Commerces divers
+    "magasin": "shop",
+    "boutique": "shop",
+    "supermarché": "supermarket",
+    "pharmacie": "pharmacy",
+    "librairie": "books",
+    "coiffeur": "hairdresser",
+    "esthétique": "beauty",
+    "centre commercial": "mall",
+    }
+
+    keyword = user_input.lower()
+
+    if keyword in tagMapping:
+        # Recherche par type connu
+        return f"""
+        [out:json];
+        area["name"="{area}"]->.searchArea;
+        node["amenity"="{tagMapping[keyword]}"](area.searchArea);
+        out;
+        """
+    else:
+        # Recherche libre par nom (regex insensible à la casse)
+        return f"""
+        [out:json];
+        area["name"="{area}"]->.searchArea;
+        node["name"~"{keyword}", i](area.searchArea);
+        out;
+        """

@@ -56,7 +56,8 @@ export class HomeComponent implements OnInit {
       textSearch: searchText,
       user_id: this.user_id,
       latitude: this.coordonne.latitude,
-      longitude: this.coordonne.longitude
+      longitude: this.coordonne.longitude,
+      city: this.localisation.city
     };
 
     this.http.SearchBusinessByCategorie(payload).subscribe({

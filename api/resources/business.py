@@ -9,6 +9,9 @@ class BusinessApi(Resource):
 
         if route == "insertallbusiness":
             return InsertAllBusiness()
+
+        if route == "search":
+            return search()
         
         if route == "readsinglebusiness":
             return ReadSingleBusiness()  
