@@ -14,7 +14,7 @@ import unicodedata
 import math
 from flask import Flask
 import requests
-from config.constant import OVERPASS_URL, NOMINATIM_UA, OPENAI_API_KEY, OPENAI_MODEL
+# from config.constant import OVERPASS_URL, NOMINATIM_UA, OPENAI_API_KEY, OPENAI_MODEL
 
 
 
