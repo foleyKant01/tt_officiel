@@ -1078,6 +1078,7 @@ def SearchBusinessByCategorie():
                 "latitude": lat,
                 "longitude": lon,
                 'localisation': f"https://www.google.com/maps?q={lat},{lon}",
+                "bu_type": "physique",
                 "source": "osm",
                 "distance_km": round(distance, 2)
             })
