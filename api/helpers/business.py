@@ -13,7 +13,7 @@ import re
 import unicodedata
 import math
 from flask import Flask
-import requests  # <- il manquait ça
+import requests
 
 
 
@@ -1097,7 +1097,7 @@ def SearchBusinessByCategorie():
         response['total'] = total
         response['pages'] = (total + per_page - 1) // per_page
         response['current_page'] = page
-        response['results'] = paginated
+        response['business'] = paginated
 
     except Exception as e:
         app.logger.error(f"Error in combined_search: {str(e)}")
