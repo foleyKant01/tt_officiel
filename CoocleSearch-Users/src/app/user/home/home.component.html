@@ -113,8 +113,8 @@
     <div class="col-md-4 col-12" [ngClass]="{ 'tablet-fullwidth': All_business.length === 1 }"
       *ngFor="let business of All_business.slice(0, visibleCount)">
       <div class="card mb-3 position-relative">
-        <button class="btn btn-fav" (click)="toggleFavorite(business)" [ngClass]="{ 'active': isFavorite(business) }"
-          title="Ajouter aux favoris">
+        <button *ngIf="business.source === 'internal'" class="btn btn-fav" (click)="toggleFavorite(business)"
+          [ngClass]="{ 'active': isFavorite(business) }" title="Ajouter aux favoris">
           <i class="fas" [ngClass]="isFavorite(business) ? 'fa-heart' : 'fa-heart-broken'"></i>
         </button>
         <div class="row g-0">
@@ -132,13 +132,18 @@
                 <i class="bi bi-geo-alt-fill text-secondary"></i> {{ business.bu_city }}
               </p>
               <div class="mt-3 text-end">
-                <button type="button" (click)="readSingleBusiness(business.bu_uid)"
+                <button *ngIf="business.source === 'internal'" type="button"
+                  (click)="readSingleBusiness(business.bu_uid)"
                   class="btn btn-sm d-inline-flex align-items-center gap-2 rounded-pill shadow viewbusiness"
                   onmouseover="this.style.background='linear-gradient(135deg, #ffc107, #6d5203)'"
                   onmouseout="this.style.background='linear-gradient(135deg, #6d5203, #ffc107)'">
                   <i class="bi bi-eye-fill" style="font-size: 1rem;"></i>
                   Voir
                 </button>
+                <a *ngIf="business.source === 'osm'" class="btn btn-outline-primary rounded-pill"
+                  [href]="business?.localisation" target="_blank">
+                  <i class="bi bi-geo-alt-fill"></i> Localisation
+                </a>
               </div>
             </div>
           </div>

@@ -1067,8 +1067,9 @@ def SearchBusinessByCategorie():
             name = element.get("tags", {}).get("name", "Inconnu")
             city = element.get("tags", {}).get("addr:city")
             suburb = element.get("tags", {}).get("addr:suburb")
-            lat = element.get("lat")
-            lon = element.get("lon")
+            lat = float(element.get("lat"))
+            lon = float(element.get("lon"))
+            print('lat:', lat, 'lon:', lon)
             distance = haversine_distance(user_lat, user_lon, lat, lon)
             combined_results.append({
                 "bu_name": name,
