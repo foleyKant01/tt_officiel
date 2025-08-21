@@ -1133,7 +1133,7 @@ def SearchBusinessByCategorie():
         response['status'] = 'error'
         response['error_description'] = str(e)
 
-    return osm_data
+    return response
 
 
 # Fonction qui construit la requête Overpass
