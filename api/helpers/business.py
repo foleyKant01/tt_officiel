@@ -1077,7 +1077,7 @@ def SearchBusinessByCategorie():
                 "bu_address": suburb,
                 "latitude": lat,
                 "longitude": lon,
-                'localisation': "https://www.google.com/maps?q={lat},{lon}",
+                'localisation': f"https://www.google.com/maps?q={lat},{lon}"
                 "source": "osm",
                 "distance_km": round(distance, 2)
             })
