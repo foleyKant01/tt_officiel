@@ -14,6 +14,8 @@ import unicodedata
 import math
 from flask import Flask
 import requests
+from config.constant import OVERPASS_URL, NOMINATIM_UA, OPENAI_API_KEY, OPENAI_MODEL
+
 
 
 
@@ -993,7 +995,24 @@ def haversine_distance(lat1, lon1, lat2, lon2):
 #     return response, 200
 
 
+
+def get_location_from_coords(lat, lon, user_agent="CoocleSearch/1.0 (contact@coocle.ci)"):
+    url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom=18&addressdetails=1"
+    try:
+        response = requests.get(url, headers={"User-Agent": user_agent})
+        data = response.json()
+        address = data.get("address", {})
+        city = address.get("city") or address.get("town") or address.get("village") or address.get("state")
+        suburb = address.get("suburb") or address.get("neighbourhood") or address.get("city_district")
+        return city, suburb
+    except Exception as e:
+        print("Erreur géocodage inverse:", e)
+        return None, None
+
+
 def SearchBusinessByCategorie():
+    # headers = {"User-Agent": NOMINATIM_UA}
+
     response = {}
     try:
         data = request.json
@@ -1070,7 +1089,15 @@ def SearchBusinessByCategorie():
             lat = float(element.get("lat"))
             lon = float(element.get("lon"))
             print('lat:', lat, 'lon:', lon)
+
+            # Si city ou suburb est null, on fait un reverse geocoding
+            if not city or not suburb:
+                city_rev, suburb_rev = get_location_from_coords(lat, lon)
+                city = city or city_rev
+                suburb = suburb or suburb_rev
+
             distance = haversine_distance(user_lat, user_lon, lat, lon)
+
             combined_results.append({
                 "bu_name": name,
                 "bu_city": city,
@@ -1106,9 +1133,7 @@ def SearchBusinessByCategorie():
         response['status'] = 'error'
         response['error_description'] = str(e)
 
-    return response
-
-
+    return osm_data
 
 
 # Fonction qui construit la requête Overpass

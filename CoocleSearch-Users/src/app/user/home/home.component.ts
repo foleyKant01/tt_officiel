@@ -186,7 +186,7 @@ export class HomeComponent implements OnInit {
   }
 
   unloadCallback = () => {
-    sessionStorage.removeItem('All_business');
+    // sessionStorage.removeItem('All_business');
     sessionStorage.removeItem('single_business');
     sessionStorage.removeItem('textSearch');
   };
@@ -275,8 +275,8 @@ export class HomeComponent implements OnInit {
       const datatextSearch = JSON.parse(sessionStorage.getItem('textSearch') || 'null');
       const datalocalisation = JSON.parse(sessionStorage.getItem('localisation') || 'null');
       const datacoordonne = JSON.parse(sessionStorage.getItem('coordonne') || 'null');
+      console.log('Business infos trouvé en session:', dataBusiness);
       if (dataBusiness) {
-        console.log('Business infos trouvé en session:', dataBusiness);
         this.All_business = dataBusiness;
       } else {
         console.warn('Aucun Business trouvé dans sessionStorage');
